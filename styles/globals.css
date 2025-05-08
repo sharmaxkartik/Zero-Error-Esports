@@ -89,6 +89,7 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    /* The background is already set in app/globals.css */
   }
 }
