@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,151 +11,137 @@ import {
   Calendar,
   Users,
   ArrowRight,
+  Gamepad2,
+  Zap,
+  Star,
+  Award,
 } from "lucide-react";
 import {
   motion,
   useScroll,
   useTransform,
   AnimatePresence,
+  useSpring,
 } from "framer-motion";
 
-// Component for dynamic background particles
+// Refined particle system with smoother animations
 const ParticlesBackground = () => {
+  const [particles, setParticles] = useState<
+    Array<{
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+      color: string;
+      speed: number;
+      opacity: number;
+    }>
+  >([]);
+
+  useEffect(() => {
+    // Generate particles with more variety but less intensity
+    const newParticles = Array.from({ length: 50 }, (_, i) => {
+      const isRed = Math.random() > 0.6;
+      return {
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 1 + Math.random() * 3,
+        color: isRed
+          ? `rgba(${220 + Math.random() * 35}, ${20 + Math.random() * 30}, ${
+              20 + Math.random() * 30
+            }, ${0.1 + Math.random() * 0.3})`
+          : `rgba(255, 255, 255, ${0.05 + Math.random() * 0.15})`,
+        speed: 25 + Math.random() * 35,
+        opacity: 0.1 + Math.random() * 0.3,
+      };
+    });
+
+    setParticles(newParticles);
+  }, []);
+
   return (
-    <div className="particles-container">
-      {[...Array(50)].map((_, index) => (
+    <div className="particles-container absolute inset-0 overflow-hidden">
+      {particles.map((particle) => (
         <div
-          key={index}
-          className={`particle particle-${index % 5}`}
+          key={particle.id}
+          className="particle absolute rounded-full pointer-events-none"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            width: `${2 + Math.random() * 3}px`, // Smaller size between 2-5px
-            height: `${2 + Math.random() * 3}px`, // Smaller size between 2-5px
-            opacity: 0.1 + Math.random() * 0.4, // Lower opacity
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${20 + Math.random() * 40}s`, // Much slower movement (20-60s)
-            animation: `particle-movement-${index % 4} ${
-              20 + Math.random() * 40
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            backgroundColor: particle.color,
+            opacity: particle.opacity,
+            animation: `float-${particle.id % 5} ${
+              particle.speed
             }s infinite alternate ease-in-out`,
           }}
         />
       ))}
 
-      {/* Define random movement patterns with keyframes in a style tag */}
       <style jsx>{`
-        .particle {
-          position: absolute;
-          border-radius: 50%;
-          background-color: rgba(255, 255, 255, 0.5);
-          pointer-events: none;
-        }
-
-        @keyframes particle-movement-0 {
+        @keyframes float-0 {
           0% {
             transform: translate(0, 0);
-          }
-          25% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
-          }
-          50% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
-          }
-          75% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
           }
           100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        @keyframes particle-movement-1 {
-          0% {
-            transform: translate(0, 0);
-          }
-          33% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
-          }
-          66% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        @keyframes particle-movement-2 {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(
-              ${Math.random() * 100 - 50}px,
-              ${Math.random() * 100 - 50}px
-            );
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        @keyframes particle-movement-3 {
-          0% {
-            transform: translate(0, 0);
-          }
-          25% {
             transform: translate(
               ${Math.random() * 80 - 40}px,
               ${Math.random() * 80 - 40}px
             );
           }
-          75% {
+        }
+        @keyframes float-1 {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
             transform: translate(
               ${Math.random() * 80 - 40}px,
               ${Math.random() * 80 - 40}px
             );
           }
-          100% {
+        }
+        @keyframes float-2 {
+          0% {
             transform: translate(0, 0);
           }
+          100% {
+            transform: translate(
+              ${Math.random() * 80 - 40}px,
+              ${Math.random() * 80 - 40}px
+            );
+          }
         }
-
-        .particle-0 {
-          background-color: rgba(255, 30, 30, 0.2);
+        @keyframes float-3 {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(
+              ${Math.random() * 80 - 40}px,
+              ${Math.random() * 80 - 40}px
+            );
+          }
         }
-        .particle-1 {
-          background-color: rgba(255, 255, 255, 0.15);
-        }
-        .particle-2 {
-          background-color: rgba(255, 50, 50, 0.1);
-        }
-        .particle-3 {
-          background-color: rgba(200, 30, 30, 0.2);
-        }
-        .particle-4 {
-          background-color: rgba(255, 100, 100, 0.15);
+        @keyframes float-4 {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(
+              ${Math.random() * 80 - 40}px,
+              ${Math.random() * 80 - 40}px
+            );
+          }
         }
       `}</style>
     </div>
   );
 };
 
-// Valorant-style loading screen component
+// Refined loading screen with smoother animations
 interface LoadingScreenProps {
   isLoading: boolean;
   onLoadingComplete: () => void;
@@ -165,12 +153,20 @@ const LoadingScreen = ({
 }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
+  const [loadingText, setLoadingText] = useState("INITIALIZING");
+  const loadingTexts = [
+    "INITIALIZING",
+    "LOADING ASSETS",
+    "PREPARING INTERFACE",
+    "ESTABLISHING CONNECTION",
+    "LAUNCHING",
+  ];
 
   useEffect(() => {
     if (!isLoading) return;
 
-    let startTime = Date.now();
-    const duration = 3500; // Extending animation duration for smoother effect
+    const startTime = Date.now();
+    const duration = 4000;
 
     // Easing function for smoother progress
     const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
@@ -178,18 +174,28 @@ const LoadingScreen = ({
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const rawProgress = Math.min(elapsed / duration, 1);
-      // Apply easing for smoother animation
       const easedProgress = easeOutQuart(rawProgress) * 100;
       setProgress(easedProgress);
+
+      // Change loading text at different progress points
+      if (easedProgress > 20 && easedProgress <= 40) {
+        setLoadingText(loadingTexts[1]);
+      } else if (easedProgress > 40 && easedProgress <= 60) {
+        setLoadingText(loadingTexts[2]);
+      } else if (easedProgress > 60 && easedProgress <= 80) {
+        setLoadingText(loadingTexts[3]);
+      } else if (easedProgress > 80) {
+        setLoadingText(loadingTexts[4]);
+      }
 
       if (rawProgress >= 1) {
         clearInterval(interval);
         setFadeOut(true);
         setTimeout(() => {
           onLoadingComplete();
-        }, 1200); // Slightly longer fade out for smoother transition
+        }, 1200);
       }
-    }, 16); // 60fps update rate for smoother animation
+    }, 16);
 
     return () => clearInterval(interval);
   }, [isLoading, onLoadingComplete]);
@@ -204,7 +210,7 @@ const LoadingScreen = ({
           animate={{ opacity: fadeOut ? 0 : 1 }}
           transition={{
             duration: 1.2,
-            ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for smooth fade
+            ease: [0.22, 1, 0.36, 1],
           }}
         >
           <motion.div
@@ -216,140 +222,315 @@ const LoadingScreen = ({
               ease: "easeOut",
             }}
           >
-            {/* Logo */}
+            {/* Logo with smooth animation */}
             <div className="mb-12 relative">
-              <h1 className="text-6xl md:text-7xl font-black uppercase glitch-text text-shadow-lg">
+              <motion.h1
+                className="text-6xl md:text-7xl font-black uppercase text-shadow-lg"
+                initial={{ filter: "blur(10px)", opacity: 0 }}
+                animate={{
+                  filter: "blur(0px)",
+                  opacity: 1,
+                  transition: { duration: 1.5, ease: "easeOut" },
+                }}
+              >
                 <motion.span
-                  className="text-red-600 glow-text"
+                  className="text-red-600 relative inline-block"
                   animate={{
-                    textShadow: [
-                      "0 0 8px rgba(220, 38, 38, 0.6)",
-                      "0 0 16px rgba(220, 38, 38, 0.8)",
-                      "0 0 8px rgba(220, 38, 38, 0.6)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
+                    textShadow: "0 0 10px rgba(220, 38, 38, 0.6)",
                   }}
                 >
                   ZERO
                 </motion.span>{" "}
-                ERROR
-              </h1>
-              <div className="absolute -bottom-4 left-0 right-0 text-center text-sm text-red-600 uppercase tracking-widest font-bold">
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                  ERROR
+                </motion.span>
+              </motion.h1>
+              <motion.div
+                className="absolute -bottom-4 left-0 right-0 text-center text-sm text-red-600 uppercase tracking-widest font-bold"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              >
                 ESPORTS
-              </div>
+              </motion.div>
             </div>
 
-            {/* Progress bar */}
-            <div className="w-64 md:w-96 h-0.5 bg-zinc-800 relative overflow-hidden">
+            {/* Smooth progress bar */}
+            <div className="w-64 md:w-96 h-1 bg-zinc-900 relative overflow-hidden rounded-full">
               <motion.div
-                className="h-full bg-red-600"
+                className="h-full bg-gradient-to-r from-red-700 via-red-500 to-red-700 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{
                   ease: "easeOut",
-                  duration: 0.2, // Shorter duration for more responsive updates
+                  duration: 0.2,
                 }}
               />
             </div>
 
-            {/* Loading text */}
+            {/* Loading text with subtle animation */}
             <div className="mt-4 text-xs text-zinc-500 font-mono">
-              <motion.span
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                LOADING GAME ASSETS... {Math.round(progress)}%
-              </motion.span>
+              <motion.div className="flex items-center">
+                <span className="mr-2 inline-block w-2 h-2 bg-red-600 rounded-full" />
+                {loadingText}... {Math.round(progress)}%
+              </motion.div>
             </div>
 
-            {/* Agent silhouette - just an example */}
-            <div className="absolute bottom-0 right-0 opacity-20 h-96 w-64">
-              <div className="w-full h-full bg-gradient-to-t from-red-600/20 to-transparent" />
-            </div>
-
-            {/* Animated corner elements - Valorant UI style */}
+            {/* Animated corner elements with subtle effects */}
             <motion.div
-              className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-red-600"
+              className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-red-600/50"
               animate={{
-                opacity: [0.7, 1, 0.7],
-                borderColor: [
-                  "rgb(220, 38, 38)",
-                  "rgb(239, 68, 68)",
-                  "rgb(220, 38, 38)",
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
+                opacity: 0.7,
               }}
             />
             <motion.div
-              className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-red-600"
+              className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-red-600/50"
               animate={{
-                opacity: [0.7, 1, 0.7],
-                borderColor: [
-                  "rgb(220, 38, 38)",
-                  "rgb(239, 68, 68)",
-                  "rgb(220, 38, 38)",
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.3,
+                opacity: 0.7,
               }}
             />
             <motion.div
-              className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-red-600"
+              className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-red-600/50"
               animate={{
-                opacity: [0.7, 1, 0.7],
-                borderColor: [
-                  "rgb(220, 38, 38)",
-                  "rgb(239, 68, 68)",
-                  "rgb(220, 38, 38)",
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.6,
+                opacity: 0.7,
               }}
             />
             <motion.div
-              className="absolute bottom-4 right-4 w-16 h-16 border-b-2 border-r-2 border-red-600"
+              className="absolute bottom-4 right-4 w-16 h-16 border-b-2 border-r-2 border-red-600/50"
               animate={{
-                opacity: [0.7, 1, 0.7],
-                borderColor: [
-                  "rgb(220, 38, 38)",
-                  "rgb(239, 68, 68)",
-                  "rgb(220, 38, 38)",
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.9,
+                opacity: 0.7,
               }}
             />
 
-            {/* Scan lines effect */}
+            {/* Subtle scan lines effect */}
             <div className="absolute inset-0 scan-lines opacity-10"></div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
+  );
+};
+
+// Refined background with subtle 3D effect
+const AnimatedBackground = ({
+  mousePosition,
+}: {
+  mousePosition: { x: number; y: number };
+}) => {
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      {/* Dynamic gradient background that moves with mouse */}
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-black/80 via-red-950/20 to-black/80 z-0"
+        style={{
+          backgroundPosition: `${mousePosition.x * 100}% ${
+            mousePosition.y * 100
+          }%`,
+          transition: "background-position 0.8s ease-out",
+        }}
+      />
+
+      {/* Subtle scan lines */}
+      <div className="absolute inset-0 scan-lines opacity-20 z-0"></div>
+
+      {/* Dynamic vignette effect */}
+      <div className="absolute inset-0 bg-radial-gradient z-0"></div>
+
+      {/* Animated particles */}
+      <ParticlesBackground />
+    </div>
+  );
+};
+
+// Refined animated counter with smooth animation
+const AnimatedCounter = ({
+  value,
+  label,
+  icon,
+  delay = 0,
+}: {
+  value: number;
+  label: string;
+  icon: React.ReactNode;
+  delay?: number;
+}) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          let startValue = 0;
+          const duration = 2000; // 2 seconds
+          const startTime = Date.now();
+
+          const timer = setInterval(() => {
+            const elapsedTime = Date.now() - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+
+            // Easing function for smoother animation
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+            startValue = Math.floor(easedProgress * value);
+            setCount(startValue);
+
+            if (progress === 1) {
+              clearInterval(timer);
+            }
+          }, 16);
+
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => {
+      if (countRef.current) {
+        observer.unobserve(countRef.current);
+      }
+    };
+  }, [value]);
+
+  return (
+    <motion.div
+      className="flex flex-col items-center"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, delay }}
+    >
+      <div className="bg-red-600/10 p-4 rounded-full mb-4">{icon}</div>
+      <span ref={countRef} className="text-4xl font-bold text-white">
+        {count}
+        <span className="text-red-500">+</span>
+      </span>
+      <span className="text-zinc-400 mt-2 text-sm uppercase tracking-wider">
+        {label}
+      </span>
+    </motion.div>
+  );
+};
+
+// New component: Featured Game Card
+const GameCard = ({
+  title,
+  image,
+  players,
+  achievements,
+}: {
+  title: string;
+  image: string;
+  players: number;
+  achievements: number;
+}) => {
+  return (
+    <motion.div
+      className="relative overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 group"
+      whileHover={{ y: -10 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      <div className="relative h-48 overflow-hidden">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70" />
+      </div>
+      <div className="p-5">
+        <h3 className="text-xl font-bold mb-3">{title}</h3>
+        <div className="flex justify-between text-sm text-zinc-400">
+          <div className="flex items-center">
+            <Users className="w-4 h-4 mr-2 text-red-500" />
+            <span>{players} Players</span>
+          </div>
+          <div className="flex items-center">
+            <Trophy className="w-4 h-4 mr-2 text-red-500" />
+            <span>{achievements} Achievements</span>
+          </div>
+        </div>
+      </div>
+      <motion.div
+        className="absolute bottom-0 left-0 h-1 bg-red-600"
+        initial={{ width: 0 }}
+        whileInView={{ width: "100%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+      />
+    </motion.div>
+  );
+};
+
+// New component: Team Member Card
+const TeamMemberCard = ({
+  name,
+  role,
+  image,
+  stats,
+  index,
+}: {
+  name: string;
+  role: string;
+  image: string;
+  stats: { label: string; value: string }[];
+  index: number;
+}) => {
+  return (
+    <motion.div
+      className="relative overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 group"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 0.1 * index }}
+      whileHover={{ y: -5 }}
+    >
+      <div className="relative h-64 overflow-hidden">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={name}
+          fill
+          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+
+        <div className="absolute bottom-0 left-0 p-5 w-full">
+          <h3 className="text-xl font-bold">{name}</h3>
+          <p className="text-red-500 text-sm uppercase tracking-wider">
+            {role}
+          </p>
+        </div>
+      </div>
+
+      <div className="p-5 space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-zinc-800/50 p-2 rounded">
+              <p className="text-xs text-zinc-500">{stat.label}</p>
+              <p className="text-lg font-bold">{stat.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <motion.button
+          className="w-full py-2 mt-2 bg-red-600/10 border border-red-600/30 rounded text-red-500 text-sm font-medium transition-colors hover:bg-red-600/20"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          View Profile
+        </motion.button>
+      </div>
+    </motion.div>
   );
 };
 
@@ -361,8 +542,13 @@ export default function Home() {
   const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   const heroTextOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const heroTextY = useTransform(scrollYProgress, [0, 0.15], [0, -40]);
+
   // For dynamic background color effect
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+
+  // For cursor trailer effect
+  const cursorX = useSpring(0, { stiffness: 100, damping: 20 });
+  const cursorY = useSpring(0, { stiffness: 100, damping: 20 });
 
   useEffect(() => {
     if (videoRef.current) {
@@ -377,11 +563,15 @@ export default function Home() {
         x: e.clientX / window.innerWidth,
         y: e.clientY / window.innerHeight,
       });
+
+      // Update cursor trailer position
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [cursorX, cursorY]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -423,28 +613,8 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="w-full"
           >
-            {/* Global dynamic background elements */}
-            <div className="fixed inset-0 z-0">
-              {/* Dynamic gradient background that moves with mouse */}
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-black/50 via-red-950/10 to-black/50 z-0"
-                style={{
-                  backgroundPosition: `${mousePosition.x * 100}% ${
-                    mousePosition.y * 100
-                  }%`,
-                  transition: "background-position 0.5s ease-out",
-                }}
-              />
-
-              {/* Animated scan lines */}
-              <div className="absolute inset-0 scan-lines opacity-20 z-0"></div>
-
-              {/* Dynamic vignette effect */}
-              <div className="absolute inset-0 bg-radial-gradient z-0"></div>
-
-              {/* Animated particles */}
-              <ParticlesBackground />
-            </div>
+            {/* Refined animated background */}
+            <AnimatedBackground mousePosition={mousePosition} />
 
             {/* Hero Section with Video Background */}
             <section className="relative h-screen overflow-hidden">
@@ -460,7 +630,7 @@ export default function Home() {
                 }}
                 transition={{
                   duration: 20,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
               />
@@ -472,32 +642,20 @@ export default function Home() {
                 }}
                 transition={{
                   duration: 18,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.div
-                className="absolute top-[40%] left-[10%] w-[300px] h-[300px] rounded-full bg-blue-600/5 filter blur-[80px] z-10"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
               />
 
-              {/* Video background */}
+              {/* Video background with refined effects */}
               <motion.div
                 className="absolute inset-0 z-0"
                 style={{ opacity, scale }}
               >
-                <div className="absolute inset-0 bg-black/20 z-10"></div>
+                <div className="absolute inset-0 bg-black/30 z-10" />
                 <iframe
                   className="absolute inset-0 w-full h-full opacity-70"
-                  src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ"
+                  src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ&controls=0&showinfo=0&rel=0"
                   title="YouTube video player"
                   frameBorder="0"
                   allow="autoplay; fullscreen"
@@ -508,50 +666,10 @@ export default function Home() {
               {/* Semi-transparent overlay for content readability */}
               <div className="absolute inset-0 bg-black/15 backdrop-blur-[1px] z-10"></div>
 
-              {/* Scan lines effect */}
+              {/* Subtle scan lines effect */}
               <div className="absolute inset-0 z-10 scan-lines opacity-20"></div>
 
-              {/* Dynamic interactive grid */}
-              <div className="absolute inset-0 z-10 opacity-30">
-                <svg
-                  width="100%"
-                  height="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <pattern
-                      id="smallGrid"
-                      width="20"
-                      height="20"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <path
-                        d="M 20 0 L 0 0 0 20"
-                        fill="none"
-                        stroke="rgba(255,0,0,0.2)"
-                        strokeWidth="0.5"
-                      />
-                    </pattern>
-                    <pattern
-                      id="grid"
-                      width="100"
-                      height="100"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <rect width="100" height="100" fill="url(#smallGrid)" />
-                      <path
-                        d="M 100 0 L 0 0 0 100"
-                        fill="none"
-                        stroke="rgba(255,50,50,0.3)"
-                        strokeWidth="1"
-                      />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#grid)" />
-                </svg>
-              </div>
-
-              {/* Hero content */}
+              {/* Hero content with refined animations */}
               <motion.div
                 className="container max-w-5xl mx-auto relative z-30 h-full flex flex-col justify-center px-6"
                 style={{ opacity: heroTextOpacity, y: heroTextY }}
@@ -561,9 +679,9 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                 >
-                  <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl glitch-text text-shadow-lg">
+                  <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
                     <motion.span
-                      className="text-red-600 glow-text inline-block"
+                      className="text-red-600 inline-block"
                       whileHover={{ scale: 1.05 }}
                       transition={{
                         type: "spring",
@@ -576,7 +694,7 @@ export default function Home() {
                     ERROR
                     <br />
                     <motion.span
-                      className="text-red-600 glow-text inline-block"
+                      className="text-red-600 inline-block"
                       whileHover={{ scale: 1.05 }}
                       transition={{
                         type: "spring",
@@ -630,14 +748,14 @@ export default function Home() {
                           opacity: 0.2,
                         }}
                       />
-                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <motion.span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <span className="relative z-10 flex items-center">
                         Meet Our Team
                         <motion.span
                           initial={{ x: 0 }}
                           animate={{ x: [0, 5, 0] }}
                           transition={{
-                            repeat: Infinity,
+                            repeat: Number.POSITIVE_INFINITY,
                             repeatDelay: 2,
                             duration: 1,
                           }}
@@ -684,29 +802,28 @@ export default function Home() {
                 </motion.div>
               </motion.div>
 
-              {/* Animated cursor follower */}
+              {/* Subtle cursor follower */}
               <motion.div
-                className="hidden md:block w-16 h-16 rounded-full pointer-events-none fixed z-50"
+                className="hidden md:block fixed z-50 pointer-events-none"
                 style={{
-                  x: mousePosition.x * window.innerWidth - 32,
-                  y: mousePosition.y * window.innerHeight - 32,
-                  background:
-                    "radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 70%)",
-                  filter: "blur(5px)",
-                  opacity: 0.5,
+                  x: cursorX,
+                  y: cursorY,
+                  width: 0,
+                  height: 0,
                 }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              >
+                <motion.div
+                  className="absolute w-12 h-12 rounded-full -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 70%)",
+                    filter: "blur(5px)",
+                  }}
+                />
+                <motion.div className="absolute w-1 h-1 bg-red-500 rounded-full -translate-x-1/2 -translate-y-1/2" />
+              </motion.div>
 
-              {/* Scroll indicator */}
+              {/* Refined scroll indicator */}
               <motion.div
                 className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20"
                 initial={{ opacity: 0 }}
@@ -714,7 +831,7 @@ export default function Home() {
                 transition={{ delay: 1.2, duration: 1 }}
               >
                 <motion.div
-                  className="w-6 h-10 border-2 border-white rounded-full flex justify-center"
+                  className="w-6 h-10 border-2 border-white rounded-full flex justify-center relative overflow-hidden"
                   animate={{ y: [0, 10, 0] }}
                   transition={{
                     repeat: Number.POSITIVE_INFINITY,
@@ -730,7 +847,137 @@ export default function Home() {
                     }}
                   />
                 </motion.div>
+                <motion.p
+                  className="text-xs text-center mt-2 text-zinc-400"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{
+                    repeat: Number.POSITIVE_INFINITY,
+                    duration: 2,
+                  }}
+                >
+                  SCROLL DOWN
+                </motion.p>
               </motion.div>
+            </section>
+
+            {/* Stats Section */}
+            <section className="relative py-16 bg-black/50 backdrop-blur-sm border-t border-b border-zinc-800/50">
+              <div className="max-w-5xl mx-auto px-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                  <AnimatedCounter
+                    value={50}
+                    label="Tournaments Won"
+                    icon={<Trophy className="w-6 h-6 text-red-500" />}
+                    delay={0}
+                  />
+                  <AnimatedCounter
+                    value={120}
+                    label="Active Players"
+                    icon={<Gamepad2 className="w-6 h-6 text-red-500" />}
+                    delay={0.1}
+                  />
+                  <AnimatedCounter
+                    value={35}
+                    label="Global Events"
+                    icon={<Zap className="w-6 h-6 text-red-500" />}
+                    delay={0.2}
+                  />
+                  <AnimatedCounter
+                    value={10000}
+                    label="Community Members"
+                    icon={<Users className="w-6 h-6 text-red-500" />}
+                    delay={0.3}
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Featured Games Section - New */}
+            <section className="py-24 relative">
+              <div className="max-w-5xl mx-auto px-6 relative">
+                <motion.div
+                  className="mb-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100px" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7 }}
+                    className="h-0.5 bg-red-600 mx-auto mb-4"
+                  />
+                  <h2 className="text-4xl font-bold uppercase mb-4">
+                    FEATURED GAMES
+                  </h2>
+                  <p className="text-zinc-400 max-w-2xl mx-auto">
+                    Our professional teams compete at the highest level across
+                    multiple titles. Check out our featured games and follow our
+                    journey to the top.
+                  </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {[
+                    {
+                      title: "Valorant",
+                      image: "/placeholder.svg?height=200&width=350",
+                      players: 12,
+                      achievements: 8,
+                    },
+                    {
+                      title: "Counter-Strike 2",
+                      image: "/placeholder.svg?height=200&width=350",
+                      players: 15,
+                      achievements: 12,
+                    },
+                    {
+                      title: "League of Legends",
+                      image: "/placeholder.svg?height=200&width=350",
+                      players: 10,
+                      achievements: 6,
+                    },
+                  ].map((game, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: index * 0.1 }}
+                    >
+                      <GameCard
+                        title={game.title}
+                        image={game.image}
+                        players={game.players}
+                        achievements={game.achievements}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div
+                  className="mt-12 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.7 }}
+                >
+                  <Link href="/games">
+                    <motion.button
+                      className="bg-transparent border-2 border-zinc-700 hover:border-red-600 text-white px-8 py-3 rounded-md uppercase tracking-wider font-medium relative overflow-hidden group"
+                      whileHover={{
+                        scale: 1.05,
+                        backgroundColor: "rgba(220,38,38,0.1)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="relative z-10">View All Games</span>
+                    </motion.button>
+                  </Link>
+                </motion.div>
+              </div>
             </section>
 
             {/* Sponsors Section */}
@@ -757,21 +1004,25 @@ export default function Home() {
                     (brand, index) => (
                       <motion.div
                         key={brand}
-                        className="opacity-40 hover:opacity-100 transition-opacity duration-500"
+                        className="opacity-40 hover:opacity-100 transition-opacity duration-500 relative group"
                         variants={itemVariants}
-                        whileHover={{ scale: 1.15, filter: "brightness(1.5)" }}
+                        whileHover={{
+                          scale: 1.15,
+                          filter: "brightness(1.5)",
+                        }}
                         transition={{
                           type: "spring",
                           stiffness: 400,
                           damping: 10,
                         }}
                       >
+                        <motion.div className="absolute -inset-2 bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100" />
                         <Image
-                          src={`/valorant.png?height=40&width=80`}
+                          src={`/placeholder.svg?height=40&width=80`}
                           alt={brand}
                           width={80}
                           height={40}
-                          className="grayscale hover:grayscale-0 transition-all duration-500"
+                          className="grayscale group-hover:grayscale-0 transition-all duration-500 relative z-10"
                         />
                       </motion.div>
                     )
@@ -781,7 +1032,7 @@ export default function Home() {
             </section>
 
             {/* Upcoming Events Section */}
-            <section className="py-24 relative">
+            <section className="py-24 relative bg-zinc-950">
               {/* Subtle diagonal pattern background */}
               <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
 
@@ -795,6 +1046,13 @@ export default function Home() {
                   transition={{ duration: 0.7 }}
                 >
                   <div>
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: "easeOut" }}
+                      className="h-0.5 bg-gradient-to-r from-red-600 to-transparent mb-4 max-w-[200px]"
+                    />
                     <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
                       UPCOMING EVENTS
                     </h2>
@@ -806,7 +1064,10 @@ export default function Home() {
                   <Link href="/events">
                     <motion.div
                       className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 px-5 py-3 mt-4 sm:mt-0 text-sm uppercase font-bold rounded-md transition-colors flex items-center group"
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{
+                        scale: 1.05,
+                        borderColor: "rgb(220, 38, 38)",
+                      }}
                       whileTap={{ scale: 0.97 }}
                     >
                       View All
@@ -814,7 +1075,7 @@ export default function Home() {
                         initial={{ x: 0 }}
                         animate={{ x: 3 }}
                         transition={{
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           repeatType: "reverse",
                           duration: 0.6,
                         }}
@@ -838,7 +1099,7 @@ export default function Home() {
                       title: "Zero Error Championship",
                       date: "June 15-20, 2025",
                       location: "Mumbai, India",
-                      image: "/event.jpg?height=280&width=400",
+                      image: "/placeholder.svg?height=280&width=400",
                       category: "Tournament",
                       icon: <Trophy className="w-4 h-4" />,
                     },
@@ -846,7 +1107,7 @@ export default function Home() {
                       title: "Gaming Bootcamp",
                       date: "July 8-10, 2025",
                       location: "Delhi, India",
-                      image: "/event.jpg?height=280&width=400",
+                      image: "/placeholder.svg?height=280&width=400",
                       category: "Training",
                       icon: <Calendar className="w-4 h-4" />,
                     },
@@ -854,7 +1115,7 @@ export default function Home() {
                       title: "Community Meetup",
                       date: "August 15, 2025",
                       location: "Bangalore, India",
-                      image: "/event.jpg?height=280&width=400",
+                      image: "/placeholder.svg?height=280&width=400",
                       category: "Community",
                       icon: <Users className="w-4 h-4" />,
                     },
@@ -870,19 +1131,22 @@ export default function Home() {
                         damping: 17,
                       }}
                     >
-                      <div className="relative h-[280px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg">
+                      <div className="relative h-[280px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
                         <Image
                           src={event.image || "/placeholder.svg"}
                           alt={event.title}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+                        <motion.div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                         <div className="absolute bottom-0 left-0 p-5 w-full">
                           <div className="flex items-center mb-3">
-                            <span className="bg-red-600 p-1.5 rounded-md mr-2 flex items-center justify-center">
+                            <motion.span
+                              className="bg-red-600 p-1.5 rounded-md mr-2 flex items-center justify-center"
+                              whileHover={{ scale: 1.1 }}
+                            >
                               {event.icon}
-                            </span>
+                            </motion.span>
                             <span className="text-xs uppercase text-white font-bold tracking-wider">
                               {event.category}
                             </span>
@@ -923,7 +1187,10 @@ export default function Home() {
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <motion.div
                             className="bg-red-600/90 backdrop-blur-sm text-white px-5 py-3 rounded-lg font-bold flex items-center space-x-2"
-                            whileHover={{ scale: 1.1 }}
+                            whileHover={{
+                              scale: 1.1,
+                              boxShadow: "0 0 20px rgba(220,38,38,0.5)",
+                            }}
                             whileTap={{ scale: 0.95 }}
                           >
                             <span>Learn More</span>
@@ -945,14 +1212,14 @@ export default function Home() {
                 >
                   <Link href="/events">
                     <motion.button
-                      className="bg-transparent border-2 border-zinc-700 hover:border-red-600 text-white px-8 py-4 rounded-md uppercase tracking-wider font-medium"
+                      className="bg-transparent border-2 border-zinc-700 hover:border-red-600 text-white px-8 py-4 rounded-md uppercase tracking-wider font-medium relative overflow-hidden group"
                       whileHover={{
                         scale: 1.05,
                         backgroundColor: "rgba(220,38,38,0.1)",
                       }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      View All Events
+                      <span className="relative z-10">View All Events</span>
                     </motion.button>
                   </Link>
                 </motion.div>
@@ -961,6 +1228,40 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Global styles for animations */}
+      <style jsx global>{`
+        .scan-lines {
+          background: repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 1px,
+            rgba(255, 255, 255, 0.05) 1px,
+            rgba(255, 255, 255, 0.05) 2px
+          );
+          pointer-events: none;
+        }
+
+        .bg-radial-gradient {
+          background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.7) 100%
+          );
+        }
+
+        .text-shadow {
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-shadow-lg {
+          text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+      `}</style>
     </div>
   );
 }

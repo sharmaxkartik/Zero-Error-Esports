@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-zinc-950 py-16 border-t border-zinc-800">
+    <footer className="relative z-50 bg-zinc-950 py-16 border-t border-zinc-800">
       <div className="container mx-auto px-6">
         {/* Social Media Icons */}
         <div className="flex flex-wrap justify-center gap-8 mb-12">
@@ -89,7 +89,10 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-zinc-500 text-sm">
-          <p>© {new Date().getFullYear()} FasterUI. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Zero Error Esports. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>
