@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 // Navigation links data
 const navLinks = [
@@ -15,18 +16,14 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  // State for mobile menu toggle
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -34,15 +31,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/90 backdrop-blur-sm" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-5xl mx-auto py-3 px-4">
-        <div className="flex justify-between items-center">
+    <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-6 px-4">
+      <header
+        className={`rounded-full backdrop-blur-md shadow-lg py-3 px-6 w-auto max-w-4xl transition-all duration-500 ${
+          scrolled
+            ? "bg-black/90 border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.1)]"
+            : "bg-black/40 border border-purple-500/10"
+        }`}
+      >
+        <div className="flex items-center justify-between gap-6">
           {/* Logo */}
-          <Link href="/" className="relative z-50">
+          <Link href="/" className="flex items-center gap-2">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,14 +52,15 @@ export default function Navbar() {
                 alt="Zero Error Esports"
                 width={80}
                 height={40}
-                className="mr-4"
+                className="rounded-full"
+                priority
               />
             </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
           <motion.nav
-            className="hidden md:flex space-x-6"
+            className="hidden md:flex items-center space-x-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -71,13 +71,22 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1 * index }}
+                className="group relative"
               >
                 <Link
                   href={link.path}
-                  className="text-sm uppercase tracking-wider hover:text-red-600 transition-colors font-medium relative group"
+                  className={`relative px-1 py-1 text-sm font-medium transition-colors hover:text-purple-400 ${
+                    pathname === link.path ? "text-purple-400" : "text-gray-300"
+                  }`}
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span
+                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full transform origin-left transition-transform duration-300 ease-out ${
+                      pathname === link.path
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
                 </Link>
               </motion.div>
             ))}
@@ -89,10 +98,11 @@ export default function Navbar() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
+              className="hidden md:block transition-transform duration-300 hover:scale-105"
             >
               <Link
                 href="/login"
-                className="text-xs uppercase font-medium hover:text-red-600 transition-colors hidden md:inline-block mr-2"
+                className="px-5 py-2 rounded-full bg-transparent border border-purple-500/50 text-purple-400 text-sm font-medium hover:bg-purple-500/10 hover:border-purple-400 transition-all"
               >
                 Login
               </Link>
@@ -102,91 +112,81 @@ export default function Navbar() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="hidden md:block transition-transform duration-300 hover:scale-105"
             >
               <Link
                 href="/signup"
-                className="bg-red-600 text-white px-4 py-1.5 text-xs uppercase font-bold hover:bg-red-700 transition-colors"
+                className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all"
               >
                 Sign Up
               </Link>
             </motion.div>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Button */}
             <motion.button
-              className="md:hidden relative z-50 ml-2"
+              className="md:hidden flex items-center text-purple-400 transition-transform duration-300 active:scale-90"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black z-40 md:hidden"
-          initial={{ opacity: 0, x: "100%" }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: "100%" }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="flex flex-col items-center justify-center h-full">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-              >
-                <Link
-                  href={link.path}
-                  className="text-2xl uppercase tracking-wider py-4 hover:text-red-600 transition-colors font-bold"
-                  onClick={() => setIsMenuOpen(false)}
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden mt-4 pt-4 border-t border-purple-500/20"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <nav className="flex flex-col space-y-3">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 * index }}
                 >
-                  {link.name}
-                </Link>
-              </motion.div>
-            ))}
-            <div className="mt-8 flex flex-col gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
-              >
+                  <Link
+                    href={link.path}
+                    className={`block px-3 py-2 rounded-md text-sm font-medium hover:text-purple-400 hover:bg-purple-500/10 transition-colors ${
+                      pathname === link.path
+                        ? "text-purple-400"
+                        : "text-gray-300"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+              <div className="pt-2">
                 <Link
                   href="/login"
-                  className="block text-center bg-transparent border border-red-600 text-white px-8 py-2 text-sm uppercase font-bold hover:bg-red-600/20 transition-colors"
+                  className="block w-full text-center px-3 py-2 rounded-full bg-transparent border border-purple-500/50 text-purple-400 text-sm font-medium hover:bg-purple-500/10 hover:border-purple-400 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.6 }}
-              >
+              </div>
+              <div>
                 <Link
                   href="/signup"
-                  className="block text-center bg-red-600 text-white px-8 py-2 text-sm uppercase font-bold hover:bg-red-700 transition-colors"
+                  className="block w-full text-center px-3 py-2 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up
                 </Link>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </header>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </header>
+    </div>
   );
 }
