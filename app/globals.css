@@ -246,6 +246,29 @@ body {
   z-index: 1;
 }
 
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .scan-lines {
+    opacity: 0.1 !important; /* Reduce scan lines on mobile */
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Less intense shadow on mobile */
+  }
+
+  /* Reduce particle count on mobile */
+  .particles-container .particle:nth-child(odd) {
+    display: none;
+  }
+
+  /* Adjust glass card effect for mobile */
+  .glass-card {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
 /* Dynamic Particles Container */
 .particles-container {
   position: absolute;

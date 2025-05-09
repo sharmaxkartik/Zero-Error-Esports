@@ -638,12 +638,6 @@ export default function Home() {
     const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.error("Video autoplay failed:", error);
-      });
-    }
   }, []);
 
   useEffect(() => {
