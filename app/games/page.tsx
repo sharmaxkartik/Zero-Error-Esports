@@ -328,7 +328,7 @@ export default function GamesPage() {
           >
             <div className="flex items-center mb-8">
               <h2 className="text-2xl font-bold font-orbitron">
-                <span className="text-red-600">ALL</span> GAMES
+                <span className="text-red-600">Featured</span> GAMES
               </h2>
               <div className="ml-4 h-px bg-gradient-to-r from-red-600 to-transparent flex-grow"></div>
             </div>
@@ -384,9 +384,6 @@ export default function GamesPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }
