@@ -7,11 +7,12 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-// Navigation links data
+// Updated navigation links data to include Games
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Events", path: "/events" },
+  { name: "Games", path: "/games" },
   { name: "Teams", path: "/teams" },
 ];
 
@@ -33,24 +34,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-  // Animation variants
   const headerVariants = {
     expanded: {
       maxWidth: "90%",
       padding: "0.75rem 3rem",
       background:
-        "linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(75,0,0,0.6) 50%, rgba(0,0,0,0.6) 100%)",
-      boxShadow: "0 8px 32px rgba(255, 0, 0, 0.15)",
-      borderColor: "rgba(255, 0, 0, 0.15)",
+        "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(75,0,0,0.8) 50%, rgba(0,0,0,0.8) 100%)",
+      boxShadow: "0 8px 32px rgba(255, 0, 0, 0.25)",
+      borderColor: "rgba(255, 0, 0, 0.25)",
       transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] },
     },
     collapsed: {
       maxWidth: "80%",
       padding: "0.75rem 1.5rem",
       background:
-        "linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(75,0,0,0.8) 50%, rgba(0,0,0,0.9) 100%)",
-      boxShadow: "0 4px 20px rgba(255, 0, 0, 0.25)",
-      borderColor: "rgba(255, 0, 0, 0.3)",
+        "linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(75,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%)",
+      boxShadow: "0 4px 20px rgba(255, 0, 0, 0.35)",
+      borderColor: "rgba(255, 0, 0, 0.4)",
       transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] },
     },
   };
@@ -76,7 +76,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-6 px-4">
+    <div className="fixed top-0 left-0 right-0 flex justify-center z-[100] pt-6 px-4">
       <motion.header
         className="rounded-full backdrop-blur-md border w-auto"
         variants={headerVariants}
