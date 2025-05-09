@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  Instagram,
-  Twitter,
-  Linkedin,
-  MessageSquare,
-  Send,
-} from "lucide-react";
+import { SocialIcon } from "react-social-icons";
 
 export default function Footer() {
   return (
@@ -14,64 +8,88 @@ export default function Footer() {
         {/* Social Media Icons */}
         <div className="flex flex-wrap justify-center gap-8 mb-12">
           {/* Instagram */}
-          <Link
-            href="https://instagram.com"
-            target="_blank"
-            className="group"
-            aria-label="Instagram"
-          >
-            <div className="bg-zinc-900 p-5 rounded-full group-hover:bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 transition-colors duration-300">
-              <Instagram className="h-8 w-8" />
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#E1306C]">
+              <SocialIcon
+                url="https://www.instagram.com/teamzer0error_es"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="Instagram"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
             </div>
-          </Link>
+          </div>
 
-          {/* Twitter/X */}
-          <Link
-            href="https://twitter.com"
-            target="_blank"
-            className="group"
-            aria-label="Twitter"
-          >
-            <div className="bg-zinc-900 p-5 rounded-full group-hover:bg-black transition-colors duration-300">
-              <Twitter className="h-8 w-8" />
+          {/* Twitter */}
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#42444b]">
+              <SocialIcon
+                url="https://x.com/ZeroErrorES"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="Twitter"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
             </div>
-          </Link>
+          </div>
 
           {/* LinkedIn */}
-          <Link
-            href="https://linkedin.com"
-            target="_blank"
-            className="group"
-            aria-label="LinkedIn"
-          >
-            <div className="bg-zinc-900 p-5 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
-              <Linkedin className="h-8 w-8" />
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#0077B5]">
+              <SocialIcon
+                url="https://www.linkedin.com/company/zero-error-esports"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="LinkedIn"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
             </div>
-          </Link>
+          </div>
 
           {/* Discord */}
-          <Link
-            href="https://discord.com"
-            target="_blank"
-            className="group"
-            aria-label="Discord"
-          >
-            <div className="bg-zinc-900 p-5 rounded-full group-hover:bg-indigo-600 transition-colors duration-300">
-              <MessageSquare className="h-8 w-8" />
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#5865F2]">
+              <SocialIcon
+                url="https://discord.com/invite/7MHYMrsZyv"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="Discord"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
             </div>
-          </Link>
+          </div>
 
           {/* WhatsApp */}
-          <Link
-            href="https://whatsapp.com"
-            target="_blank"
-            className="group"
-            aria-label="WhatsApp"
-          >
-            <div className="bg-zinc-900 p-5 rounded-full group-hover:bg-green-600 transition-colors duration-300">
-              <Send className="h-8 w-8" />
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#25D366]">
+              <SocialIcon
+                url="https://chat.whatsapp.com/HURrtawhPH4C1eQEdKLNpk"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="WhatsApp"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
             </div>
-          </Link>
+          </div>
+
+          {/* YouTube */}
+          <div className="group">
+            <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#FF0000]">
+              <SocialIcon
+                url="https://www.youtube.com/@ZeroErrorEsports/videos"
+                target="_blank"
+                className="transition-transform duration-300 hover:scale-125"
+                aria-label="YouTube"
+                bgColor="transparent"
+                style={{ height: 60, width: 60 }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Email */}
@@ -80,10 +98,10 @@ export default function Footer() {
             Contact Us
           </p>
           <a
-            href="mailto:contact@fasterui.com"
+            href="mailto:zeroerroresports@gmail.com"
             className="text-xl md:text-2xl font-bold hover:text-red-600 transition-colors"
           >
-            contact@fasterui.com
+            zeroerroresports@gmail.com
           </a>
         </div>
 
