@@ -39,21 +39,21 @@ const ParticlesBackground = () => {
   >([]);
 
   useEffect(() => {
-    // Generate particles with more variety but less intensity
-    const newParticles = Array.from({ length: 50 }, (_, i) => {
+    // Reduce particle count for better performance
+    const newParticles = Array.from({ length: 30 }, (_, i) => {
       const isRed = Math.random() > 0.6;
       return {
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: 1 + Math.random() * 3,
+        size: 1 + Math.random() * 2.5, // Slightly smaller particles
         color: isRed
           ? `rgba(${220 + Math.random() * 35}, ${20 + Math.random() * 30}, ${
               20 + Math.random() * 30
-            }, ${0.1 + Math.random() * 0.3})`
-          : `rgba(255, 255, 255, ${0.05 + Math.random() * 0.15})`,
-        speed: 25 + Math.random() * 35,
-        opacity: 0.1 + Math.random() * 0.3,
+            }, ${0.1 + Math.random() * 0.2})`
+          : `rgba(255, 255, 255, ${0.05 + Math.random() * 0.1})`,
+        speed: 30 + Math.random() * 30, // Slightly faster for more dynamic feel
+        opacity: 0.1 + Math.random() * 0.2,
       };
     });
 
@@ -141,7 +141,7 @@ const ParticlesBackground = () => {
   );
 };
 
-// Refined loading screen with smoother animations
+// Refined loading screen with smoother animations and optimized performance
 interface LoadingScreenProps {
   isLoading: boolean;
   onLoadingComplete: () => void;
@@ -165,8 +165,12 @@ const LoadingScreen = ({
   useEffect(() => {
     if (!isLoading) return;
 
+    // Use sessionStorage to remember if we've shown the loader before
+    const hasLoadedBefore = sessionStorage.getItem("hasLoadedSite");
+
+    // If we've loaded before, make the progress faster (1.5s instead of 4s)
     const startTime = Date.now();
-    const duration = 4000;
+    const duration = hasLoadedBefore ? 1500 : 4000;
 
     // Easing function for smoother progress
     const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
@@ -192,6 +196,8 @@ const LoadingScreen = ({
         clearInterval(interval);
         setFadeOut(true);
         setTimeout(() => {
+          // Save that we've loaded the site before
+          sessionStorage.setItem("hasLoadedSite", "true");
           onLoadingComplete();
         }, 1200);
       }
@@ -259,15 +265,35 @@ const LoadingScreen = ({
               </motion.div>
             </div>
 
-            {/* Smooth progress bar */}
+            {/* Smoother progress bar with pulsing effect */}
             <div className="w-64 md:w-96 h-1 bg-zinc-900 relative overflow-hidden rounded-full">
               <motion.div
-                className="h-full bg-gradient-to-r from-red-700 via-red-500 to-red-700 rounded-full"
+                className="h-full rounded-full"
                 initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
+                animate={{
+                  width: `${progress}%`,
+                  background: [
+                    "linear-gradient(90deg, #FF0000 0%, #FF4C4C 100%)",
+                    "linear-gradient(90deg, #FF4C4C 0%, #FF0000 100%)",
+                    "linear-gradient(90deg, #FF0000 0%, #FF4C4C 100%)",
+                  ],
+                  boxShadow: [
+                    "0 0 5px rgba(220, 38, 38, 0.6)",
+                    "0 0 15px rgba(220, 38, 38, 0.8)",
+                    "0 0 5px rgba(220, 38, 38, 0.6)",
+                  ],
+                }}
                 transition={{
                   ease: "easeOut",
                   duration: 0.2,
+                  background: {
+                    repeat: Infinity,
+                    duration: 2,
+                  },
+                  boxShadow: {
+                    repeat: Infinity,
+                    duration: 1.5,
+                  },
                 }}
               />
             </div>
@@ -275,7 +301,18 @@ const LoadingScreen = ({
             {/* Loading text with subtle animation */}
             <div className="mt-4 text-xs text-zinc-500 font-mono">
               <motion.div className="flex items-center">
-                <span className="mr-2 inline-block w-2 h-2 bg-red-600 rounded-full" />
+                <motion.span
+                  className="mr-2 inline-block w-2 h-2 bg-red-600 rounded-full"
+                  animate={{
+                    opacity: [0.5, 1, 0.5],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1.5,
+                    ease: "easeInOut",
+                  }}
+                />
                 {loadingText}... {Math.round(progress)}%
               </motion.div>
             </div>
@@ -284,25 +321,44 @@ const LoadingScreen = ({
             <motion.div
               className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-red-600/50"
               animate={{
-                opacity: 0.7,
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
               }}
             />
             <motion.div
               className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-red-600/50"
               animate={{
-                opacity: 0.7,
+                opacity: [0.5, 0.9, 0.5],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                delay: 0.5,
               }}
             />
             <motion.div
               className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-red-600/50"
               animate={{
-                opacity: 0.7,
+                opacity: [0.4, 0.8, 0.4],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                delay: 1,
               }}
             />
             <motion.div
               className="absolute bottom-4 right-4 w-16 h-16 border-b-2 border-r-2 border-red-600/50"
               animate={{
-                opacity: 0.7,
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                delay: 1.5,
               }}
             />
 
@@ -321,6 +377,8 @@ const AnimatedBackground = ({
 }: {
   mousePosition: { x: number; y: number };
 }) => {
+  const { scrollYProgress } = useScroll();
+
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
       {/* Dynamic gradient background that moves with mouse */}
@@ -331,6 +389,16 @@ const AnimatedBackground = ({
             mousePosition.y * 100
           }%`,
           transition: "background-position 0.8s ease-out",
+        }}
+      />
+
+      {/* New: Dynamic content blur under text for improved readability */}
+      <div
+        className="absolute inset-0 z-1 pointer-events-none"
+        style={{
+          backdropFilter: "blur(2px)",
+          opacity: scrollYProgress.get() > 0.05 ? 0.2 : 0,
+          transition: "opacity 0.3s ease",
         }}
       />
 
@@ -435,9 +503,16 @@ const GameCard = ({
 }) => {
   return (
     <motion.div
-      className="relative overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 group"
-      whileHover={{ y: -10 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      className="relative overflow-hidden rounded-xl border border-zinc-800/60 group"
+      style={{
+        background: "rgba(24, 24, 27, 0.7)",
+        backdropFilter: "blur(10px)",
+        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+      }}
+      whileHover={{
+        y: -10,
+        transition: { type: "spring", stiffness: 300, damping: 20 },
+      }}
     >
       <div className="relative h-48 overflow-hidden">
         <Image
@@ -535,13 +610,18 @@ const TeamMemberCard = ({
 };
 
 export default function Home() {
+  // Add a state for reduced motion preference
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
-  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const heroTextY = useTransform(scrollYProgress, [0, 0.15], [0, -40]);
+  // Fix: Create transform variables for all useTransform calls
+  const translateY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const contentTranslateY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   // For dynamic background color effect
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
@@ -551,12 +631,22 @@ export default function Home() {
   const cursorY = useSpring(0, { stiffness: 100, damping: 20 });
 
   useEffect(() => {
+    // Check user's motion preference
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+
     if (videoRef.current) {
       videoRef.current.play().catch((error) => {
         console.error("Video autoplay failed:", error);
       });
     }
+  }, []);
 
+  useEffect(() => {
     // Track mouse movement for dynamic effects
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -618,39 +708,14 @@ export default function Home() {
 
             {/* Hero Section with Video Background */}
             <section className="relative h-screen overflow-hidden">
-              {/* Background grid effect */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.5)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.5)_2px,transparent_2px)] bg-[size:40px_40px] opacity-30 z-10"></div>
-
-              {/* Floating circles with blur effect */}
-              <motion.div
-                className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-red-600/10 filter blur-[150px] z-10"
-                animate={{
-                  x: [0, 50, 0],
-                  y: [0, 30, 0],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.div
-                className="absolute bottom-[-30%] left-[-20%] w-[700px] h-[700px] rounded-full bg-red-600/5 filter blur-[120px] z-10"
-                animate={{
-                  x: [0, -50, 0],
-                  y: [0, -30, 0],
-                }}
-                transition={{
-                  duration: 18,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* Video background with refined effects */}
+              {/* Background layer with parallax effect */}
               <motion.div
                 className="absolute inset-0 z-0"
-                style={{ opacity, scale }}
+                style={{
+                  scale,
+                  opacity,
+                  y: translateY, // Fix: Use the pre-defined transform variable
+                }}
               >
                 <div className="absolute inset-0 bg-black/30 z-10" />
                 <iframe
@@ -663,16 +728,13 @@ export default function Home() {
                 ></iframe>
               </motion.div>
 
-              {/* Semi-transparent overlay for content readability */}
-              <div className="absolute inset-0 bg-black/15 backdrop-blur-[1px] z-10"></div>
-
-              {/* Subtle scan lines effect */}
-              <div className="absolute inset-0 z-10 scan-lines opacity-20"></div>
-
-              {/* Hero content with refined animations */}
+              {/* Content with opposite parallax movement */}
               <motion.div
                 className="container max-w-5xl mx-auto relative z-30 h-full flex flex-col justify-center px-6"
-                style={{ opacity: heroTextOpacity, y: heroTextY }}
+                style={{
+                  y: contentTranslateY, // Fix: Use the pre-defined transform variable
+                  opacity: contentOpacity, // Fix: Use the pre-defined transform variable
+                }}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -727,35 +789,33 @@ export default function Home() {
                     <motion.div
                       className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 uppercase font-bold text-sm rounded-md flex items-center shadow-[0_0_15px_rgba(150,0,0,0.3)] relative overflow-hidden group"
                       whileHover={{
-                        scale: 1.05,
+                        scale: 1.03,
                         boxShadow: "0 0 25px rgba(220,0,0,0.4)",
+                        transition: { duration: 0.2 },
                       }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 15,
-                      }}
+                      whileTap={{ scale: 0.97 }}
                     >
                       <motion.span
-                        className="absolute inset-0 w-full h-full"
-                        style={{
-                          background: `radial-gradient(circle at ${
-                            mousePosition.x * 100
-                          }% ${
-                            mousePosition.y * 100
-                          }%, rgba(255,50,50,0.7) 0%, transparent 70%)`,
-                          opacity: 0.2,
+                        className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        animate={{
+                          x: ["-100%", "100%"],
+                          opacity: [0.4, 0],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          duration: 1.5,
+                          ease: "linear",
                         }}
                       />
-                      <motion.span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <span className="relative z-10 flex items-center">
                         Meet Our Team
                         <motion.span
                           animate={{ x: [0, 5, 0] }}
                           transition={{
-                            repeat: Number.POSITIVE_INFINITY,
-                            duration: 1,
+                            repeat: Infinity,
+                            duration: 1.5,
+                            ease: "easeInOut",
                           }}
                         >
                           <ChevronRight className="ml-2 h-4 w-4" />
@@ -1030,7 +1090,7 @@ export default function Home() {
             </section>
 
             {/* Upcoming Events Section */}
-            <section className="py-24 relative bg-zinc-950">
+            <section className="py-24 relative bg-transparent">
               {/* Subtle diagonal pattern background */}
               <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
 
