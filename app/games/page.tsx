@@ -21,7 +21,7 @@ const games = [
     id: 1,
     title: "Valorant",
     category: "FPS",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/valorantgame.jpeg?height=400&width=600",
     players: 12,
     achievements: 24,
     description:
@@ -30,9 +30,9 @@ const games = [
   },
   {
     id: 2,
-    title: "Counter-Strike 2",
+    title: "BGMI",
     category: "FPS",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/bgmi.avif?height=400&width=600",
     players: 15,
     achievements: 36,
     description:
@@ -362,12 +362,11 @@ export default function GamesPage() {
             className="mt-24 text-center bg-gradient-to-r from-red-900/20 via-black to-red-900/20 rounded-2xl p-12 border border-red-900/20"
           >
             <h2 className="text-3xl font-bold mb-4 font-orbitron">
-              WANT TO <span className="text-red-600">JOIN OUR TEAM</span>?
+              JOIN THE <span className="text-red-600">BATTLE!</span>
             </h2>
             <p className="text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
-              We're always looking for talented players to join our competitive
-              rosters. Show us your skills and become part of Zero Error
-              Esports.
+              Whether you're here to win or just for the thrill, this is your
+              chance to play. Join the event — let the fun begin!
             </p>
             <Link href="/signup">
               <motion.button
