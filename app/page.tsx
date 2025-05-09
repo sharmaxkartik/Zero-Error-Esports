@@ -441,7 +441,7 @@ const GameCard = ({
     >
       <div className="relative h-48 overflow-hidden">
         <Image
-          src={image || "/placeholder.svg"}
+          src={image || "/event.jpg"}
           alt={title}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -752,11 +752,9 @@ export default function Home() {
                       <span className="relative z-10 flex items-center">
                         Meet Our Team
                         <motion.span
-                          initial={{ x: 0 }}
                           animate={{ x: [0, 5, 0] }}
                           transition={{
                             repeat: Number.POSITIVE_INFINITY,
-                            repeatDelay: 2,
                             duration: 1,
                           }}
                         >
@@ -923,19 +921,19 @@ export default function Home() {
                   {[
                     {
                       title: "Valorant",
-                      image: "/placeholder.svg?height=200&width=350",
+                      image: "/event.jpg?height=200&width=350",
                       players: 12,
                       achievements: 8,
                     },
                     {
                       title: "Counter-Strike 2",
-                      image: "/placeholder.svg?height=200&width=350",
+                      image: "/event.jpg?height=200&width=350",
                       players: 15,
                       achievements: 12,
                     },
                     {
                       title: "League of Legends",
-                      image: "/placeholder.svg?height=200&width=350",
+                      image: "/event.jpg?height=200&width=350",
                       players: 10,
                       achievements: 6,
                     },
@@ -1018,7 +1016,7 @@ export default function Home() {
                       >
                         <motion.div className="absolute -inset-2 bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100" />
                         <Image
-                          src={`/placeholder.svg?height=40&width=80`}
+                          src={`/valorant.png?height=40&width=80`}
                           alt={brand}
                           width={80}
                           height={40}
@@ -1072,12 +1070,10 @@ export default function Home() {
                     >
                       View All
                       <motion.span
-                        initial={{ x: 0 }}
-                        animate={{ x: 3 }}
+                        animate={{ x: [0, 5, 0] }}
                         transition={{
                           repeat: Number.POSITIVE_INFINITY,
-                          repeatType: "reverse",
-                          duration: 0.6,
+                          duration: 1,
                         }}
                       >
                         <ChevronRight className="ml-1 h-4 w-4 group-hover:text-red-500" />
@@ -1099,7 +1095,7 @@ export default function Home() {
                       title: "Zero Error Championship",
                       date: "June 15-20, 2025",
                       location: "Mumbai, India",
-                      image: "/placeholder.svg?height=280&width=400",
+                      image: "/valorant.png?height=280&width=400",
                       category: "Tournament",
                       icon: <Trophy className="w-4 h-4" />,
                     },
@@ -1107,7 +1103,7 @@ export default function Home() {
                       title: "Gaming Bootcamp",
                       date: "July 8-10, 2025",
                       location: "Delhi, India",
-                      image: "/placeholder.svg?height=280&width=400",
+                      image: "/valorant.png?height=280&width=400",
                       category: "Training",
                       icon: <Calendar className="w-4 h-4" />,
                     },
@@ -1115,7 +1111,7 @@ export default function Home() {
                       title: "Community Meetup",
                       date: "August 15, 2025",
                       location: "Bangalore, India",
-                      image: "/placeholder.svg?height=280&width=400",
+                      image: "/valorant.png?height=280&width=400",
                       category: "Community",
                       icon: <Users className="w-4 h-4" />,
                     },
