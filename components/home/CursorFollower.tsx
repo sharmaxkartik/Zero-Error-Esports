@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useAnimation } from "@/contexts/AnimationContext";
 
 interface CursorFollowerProps {
   cursorX: any;
@@ -8,6 +9,11 @@ interface CursorFollowerProps {
 }
 
 const CursorFollower = ({ cursorX, cursorY }: CursorFollowerProps) => {
+  const { animationEnabled } = useAnimation();
+
+  // Don't render if animations are disabled
+  if (!animationEnabled) return null;
+
   return (
     <motion.div
       className="hidden md:block fixed z-50 pointer-events-none"

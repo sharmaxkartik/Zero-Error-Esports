@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Rajdhani } from "next/font/google";
 import ClientLayout from "@/components/client-layout";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { AnimationProvider } from "@/contexts/AnimationContext";
 import "./globals.css";
 
 // Font configuration - Rajdhani is a good gaming font
@@ -43,11 +44,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={rajdhani.className}>
-        <ErrorBoundary>
-          <ClientLayout>{children}</ClientLayout>
-        </ErrorBoundary>
-      </body>
+      <AnimationProvider>
+        <body className={rajdhani.className}>
+          <ErrorBoundary>
+            <ClientLayout>{children}</ClientLayout>
+          </ErrorBoundary>
+        </body>
+      </AnimationProvider>
     </html>
   );
 }

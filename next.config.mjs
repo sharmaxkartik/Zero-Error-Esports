@@ -7,8 +7,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Remove 'unoptimized: true' to enable optimization
+    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com"], // Add your external domains here
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
