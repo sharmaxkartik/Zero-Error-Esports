@@ -157,10 +157,7 @@ export default function EventsPage() {
             transition={{ duration: 0.7 }}
           >
             {/* Event image */}
-            <Link
-              href="/events/fasterui-championship-2025"
-              className="md:w-1/2 block"
-            >
+            <Link href="/events/gameocon" className="md:w-1/2 block">
               <motion.div
                 className="md:w-full"
                 initial={{ opacity: 0, x: -30 }}
@@ -282,7 +279,7 @@ export default function EventsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <Link href="/events/fasterui-championship-2025">
+                <Link href="/events/gameocon">
                   <motion.div
                     className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 uppercase font-bold text-sm w-fit flex items-center relative overflow-hidden group shadow-[0_0_15px_rgba(150,0,0,0.2)]"
                     whileHover={{
