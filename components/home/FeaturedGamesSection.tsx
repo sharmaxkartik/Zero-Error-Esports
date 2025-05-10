@@ -9,19 +9,19 @@ const FeaturedGamesSection = () => {
   const games = [
     {
       title: "Valorant",
-      image: "/event.jpg?height=200&width=350",
+      image: "/images/event.jpg?height=200&width=350",
       players: 12,
       achievements: 8,
     },
     {
       title: "Counter-Strike 2",
-      image: "/event.jpg?height=200&width=350",
+      image: "/images/event.jpg?height=200&width=350",
       players: 15,
       achievements: 12,
     },
     {
       title: "League of Legends",
-      image: "/event.jpg?height=200&width=350",
+      image: "/images/event.jpg?height=200&width=350",
       players: 10,
       achievements: 6,
     },

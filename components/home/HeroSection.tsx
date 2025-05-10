@@ -57,7 +57,15 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
           <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
             <motion.span
               className="text-red-600 inline-block"
-              whileHover={{ scale: 1.05 }}
+              style={{
+                textShadow:
+                  "0 0 20px rgba(220, 38, 38, 0.7), 0 0 30px rgba(220, 38, 38, 0.4)",
+              }}
+              whileHover={{
+                scale: 1.05,
+                textShadow:
+                  "0 0 25px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.6)",
+              }}
               transition={{
                 type: "spring",
                 stiffness: 400,
@@ -66,11 +74,26 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
             >
               ZERO
             </motion.span>{" "}
-            ERROR
+            <span
+              style={{
+                textShadow:
+                  "0 0 15px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2)",
+              }}
+            >
+              ERROR
+            </span>
             <br />
             <motion.span
               className="text-red-600 inline-block"
-              whileHover={{ scale: 1.05 }}
+              style={{
+                textShadow:
+                  "0 0 20px rgba(220, 38, 38, 0.7), 0 0 30px rgba(220, 38, 38, 0.4)",
+              }}
+              whileHover={{
+                scale: 1.05,
+                textShadow:
+                  "0 0 25px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.6)",
+              }}
               transition={{
                 type: "spring",
                 stiffness: 400,
@@ -171,42 +194,6 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
             </motion.div>
           </Link>
         </motion.div>
-      </motion.div>
-
-      {/* Refined scroll indicator */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-      >
-        <motion.div
-          className="w-6 h-10 border-2 border-white rounded-full flex justify-center relative overflow-hidden"
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            repeat: Number.POSITIVE_INFINITY,
-            duration: 1.5,
-          }}
-        >
-          <motion.div
-            className="w-1 h-2 bg-white rounded-full mt-2"
-            animate={{ y: [0, 6, 0] }}
-            transition={{
-              repeat: Number.POSITIVE_INFINITY,
-              duration: 1.5,
-            }}
-          />
-        </motion.div>
-        <motion.p
-          className="text-xs text-center mt-2 text-zinc-400"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{
-            repeat: Number.POSITIVE_INFINITY,
-            duration: 2,
-          }}
-        >
-          SCROLL DOWN
-        </motion.p>
       </motion.div>
     </section>
   );

@@ -49,7 +49,7 @@ export default function EventsPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/banner.jpg?height=400&width=1200"
+            src="/images/banner.jpg?height=400&width=1200"
             alt="Events Background"
             fill
             className="object-cover"
@@ -150,7 +150,7 @@ export default function EventsPage() {
                 transition={{ duration: 0.5 }}
               >
                 <Image
-                  src="/story.jpg?height=400&width=600"
+                  src="/images/story.jpg?height=400&width=600"
                   alt="Featured Event"
                   fill
                   className="object-cover"

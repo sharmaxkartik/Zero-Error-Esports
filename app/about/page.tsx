@@ -50,7 +50,7 @@ export default function AboutPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/banner.jpg?height=600&width=1200"
+            src="/images/banner.jpg?height=600&width=1200"
             alt="About Us Background"
             fill
             className="object-cover"
@@ -207,7 +207,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <Image
-                src="/story.jpg?height=500&width=600"
+                src="/images/story.jpg?height=500&width=600"
                 alt="Our Story"
                 fill
                 className="object-cover rounded-xl"
@@ -404,7 +404,7 @@ export default function AboutPage() {
               >
                 <div className="relative h-[350px] w-full mb-5 overflow-hidden rounded-xl border border-zinc-800 shadow-lg">
                   <Image
-                    src={`/story.jpg?height=350&width=300`}
+                    src={`/images/story.jpg?height=350&width=300`}
                     alt={member.name}
                     fill
                     className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"

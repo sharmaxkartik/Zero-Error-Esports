@@ -62,7 +62,7 @@ const SponsorsSection = () => {
             >
               <motion.div className="absolute -inset-2 bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100" />
               <Image
-                src={`/valorant.png?height=40&width=80`}
+                src={`/images/valorant.png?height=40&width=80`}
                 alt={brand}
                 width={80}
                 height={40}

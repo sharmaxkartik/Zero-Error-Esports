@@ -21,7 +21,7 @@ const games = [
     id: 1,
     title: "Valorant",
     category: "FPS",
-    image: "/valorantgame.jpeg?height=400&width=600",
+    image: "/images/valorantgame.jpeg?height=400&width=600",
     players: 12,
     achievements: 24,
     description:
@@ -32,7 +32,7 @@ const games = [
     id: 2,
     title: "BGMI",
     category: "FPS",
-    image: "/bgmi.avif?height=400&width=600",
+    image: "/images/bgmi.avif?height=400&width=600",
     players: 15,
     achievements: 36,
     description:

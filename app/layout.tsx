@@ -44,6 +44,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+      </head>
       <AnimationProvider>
         <body className={rajdhani.className}>
           <ErrorBoundary>
