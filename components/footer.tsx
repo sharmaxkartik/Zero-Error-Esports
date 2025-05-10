@@ -3,10 +3,16 @@ import { SocialIcon } from "react-social-icons";
 
 export default function Footer() {
   return (
-    <footer className="relative z-50 bg-zinc-950 py-16 border-t border-zinc-800">
+    <footer
+      className="relative z-50 bg-transparent py-16 border-t border-zinc-800"
+      aria-label="Footer"
+    >
       <div className="container mx-auto px-6">
         {/* Social Media Icons */}
-        <div className="flex flex-wrap justify-center gap-8 mb-12">
+        <div
+          className="flex flex-wrap justify-center gap-8 mb-12"
+          aria-label="Social Media Links"
+        >
           {/* Instagram */}
           <div className="group">
             <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#E1306C]">

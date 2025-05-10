@@ -1,0 +1,215 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, useTransform } from "framer-motion";
+import { ChevronRight, ArrowRight } from "lucide-react";
+
+interface HeroSectionProps {
+  scrollYProgress: any;
+  mousePosition: { x: number; y: number };
+  cursorX: any;
+  cursorY: any;
+}
+
+const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
+  const translateY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const contentTranslateY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
+  return (
+    <section className="relative h-screen overflow-hidden">
+      {/* Background layer with parallax effect */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          scale,
+          opacity,
+          y: translateY,
+        }}
+      >
+        <div className="absolute inset-0 bg-black/30 z-10" />
+        <iframe
+          className="absolute inset-0 w-full h-full opacity-70"
+          src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ&controls=0&showinfo=0&rel=0"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+        ></iframe>
+      </motion.div>
+
+      {/* Content with opposite parallax movement */}
+      <motion.div
+        className="container max-w-5xl mx-auto relative z-30 h-full flex flex-col justify-center px-6"
+        style={{
+          y: contentTranslateY,
+          opacity: contentOpacity,
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        >
+          <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
+            <motion.span
+              className="text-red-600 inline-block"
+              whileHover={{ scale: 1.05 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
+            >
+              ZERO
+            </motion.span>{" "}
+            ERROR
+            <br />
+            <motion.span
+              className="text-red-600 inline-block"
+              whileHover={{ scale: 1.05 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
+            >
+              ESPORTS
+            </motion.span>
+          </h1>
+        </motion.div>
+
+        <motion.p
+          className="text-xl md:text-2xl text-white mt-6 max-w-xl font-light text-shadow"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+        >
+          Where precision meets passion. Join the elite gaming team that accepts
+          nothing less than victory.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+          className="mt-10 flex flex-wrap gap-4"
+        >
+          <Link href="/teams">
+            <motion.div
+              className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 uppercase font-bold text-sm rounded-md flex items-center shadow-[0_0_15px_rgba(150,0,0,0.3)] relative overflow-hidden group"
+              whileHover={{
+                scale: 1.03,
+                boxShadow: "0 0 25px rgba(220,0,0,0.4)",
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <motion.span
+                className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                animate={{
+                  x: ["-100%", "100%"],
+                  opacity: [0.4, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 1.5,
+                  ease: "linear",
+                }}
+              />
+              <span className="relative z-10 flex items-center">
+                Meet Our Team
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1.5,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </motion.span>
+              </span>
+            </motion.div>
+          </Link>
+
+          <Link href="/signup">
+            <motion.div
+              className="border-2 border-zinc-700 hover:border-red-600 text-white bg-zinc-900/50 backdrop-blur-sm px-8 py-4 uppercase font-bold text-sm rounded-md flex items-center transition-colors duration-300 relative overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgba(30,30,30,0.8)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 15,
+              }}
+            >
+              <motion.span
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  background: `radial-gradient(circle at ${
+                    mousePosition.x * 100
+                  }% ${
+                    mousePosition.y * 100
+                  }%, rgba(255,0,0,0.5) 0%, transparent 70%)`,
+                  opacity: 0,
+                  transition: "opacity 0.3s ease",
+                }}
+                whileHover={{ opacity: 0.3 }}
+              />
+              <span className="relative z-10">
+                Join Now
+                <ArrowRight className="ml-2 h-4 w-4 inline-block" />
+              </span>
+            </motion.div>
+          </Link>
+        </motion.div>
+      </motion.div>
+
+      {/* Refined scroll indicator */}
+      <motion.div
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+      >
+        <motion.div
+          className="w-6 h-10 border-2 border-white rounded-full flex justify-center relative overflow-hidden"
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 1.5,
+          }}
+        >
+          <motion.div
+            className="w-1 h-2 bg-white rounded-full mt-2"
+            animate={{ y: [0, 6, 0] }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 1.5,
+            }}
+          />
+        </motion.div>
+        <motion.p
+          className="text-xs text-center mt-2 text-zinc-400"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 2,
+          }}
+        >
+          SCROLL DOWN
+        </motion.p>
+      </motion.div>
+    </section>
+  );
+};
+
+export default HeroSection;
