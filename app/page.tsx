@@ -92,27 +92,21 @@ export default function Home() {
                 mousePosition={mousePosition}
               />
             </div>
-
-            {/* Hero Section with Video Background */}
+            w{/* Hero Section with Video Background */}
             <HeroSection
               scrollYProgress={scrollYProgress}
               mousePosition={mousePosition}
               cursorX={cursorX}
               cursorY={cursorY}
             />
-
             {/* Stats Section */}
             <StatsSection />
-
             {/* Featured Games Section */}
             <FeaturedGamesSection />
-
             {/* Sponsors Section */}
             <SponsorsSection />
-
             {/* Upcoming Events Section */}
             <UpcomingEventsSection />
-
             {/* Cursor Follower */}
             <CursorFollower cursorX={cursorX} cursorY={cursorY} />
           </motion.div>

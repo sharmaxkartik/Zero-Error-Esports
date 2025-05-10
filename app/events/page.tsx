@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,6 +13,17 @@ import {
 import { motion } from "framer-motion";
 
 export default function EventsPage() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,10 +44,18 @@ export default function EventsPage() {
     },
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-[400px] overflow-hidden">
+      <section className="relative h-[400px] overflow-hidden pt-24">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.5)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.5)_2px,transparent_2px)] bg-[size:40px_40px] opacity-30 z-10"></div>
 
@@ -49,7 +69,7 @@ export default function EventsPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/banner.jpg?height=400&width=1200"
+            src="/placeholder.svg?height=400&width=1200"
             alt="Events Background"
             fill
             className="object-cover"
@@ -109,7 +129,7 @@ export default function EventsPage() {
                     initial={{ x: 0 }}
                     animate={{ x: [0, 5, 0] }}
                     transition={{
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       repeatDelay: 2,
                       duration: 1,
                     }}
@@ -137,36 +157,41 @@ export default function EventsPage() {
             transition={{ duration: 0.7 }}
           >
             {/* Event image */}
-            <motion.div
-              className="md:w-1/2"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+            <Link
+              href="/events/fasterui-championship-2025"
+              className="md:w-1/2 block"
             >
               <motion.div
-                className="relative h-[400px] overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.3)]"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5 }}
+                className="md:w-full"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
               >
-                <Image
-                  src="/images/story.jpg?height=400&width=600"
-                  alt="Featured Event"
-                  fill
-                  className="object-cover"
-                />
                 <motion.div
-                  className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 uppercase text-sm font-bold shadow-[0_0_10px_rgba(200,0,0,0.4)]"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
+                  className="relative h-[400px] overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.3)] cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  Featured
+                  <Image
+                    src="/placeholder.svg?height=400&width=600"
+                    alt="Featured Event"
+                    fill
+                    className="object-cover"
+                  />
+                  <motion.div
+                    className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 uppercase text-sm font-bold shadow-[0_0_10px_rgba(200,0,0,0.4)]"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    Featured
+                  </motion.div>
                 </motion.div>
               </motion.div>
-            </motion.div>
+            </Link>
 
             {/* Event details */}
             <motion.div
@@ -257,7 +282,7 @@ export default function EventsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <Link href="#">
+                <Link href="/events/fasterui-championship-2025">
                   <motion.div
                     className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 uppercase font-bold text-sm w-fit flex items-center relative overflow-hidden group shadow-[0_0_15px_rgba(150,0,0,0.2)]"
                     whileHover={{
@@ -273,7 +298,7 @@ export default function EventsPage() {
                         initial={{ x: 0 }}
                         animate={{ x: [0, 5, 0] }}
                         transition={{
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           repeatDelay: 2,
                           duration: 1,
                         }}
@@ -315,6 +340,7 @@ export default function EventsPage() {
             {/* Event cards */}
             {[
               {
+                id: "fasterui-open-tournament",
                 title: "FasterUI Open Tournament",
                 date: "July 8-10, 2025",
                 location: "New York, NY",
@@ -322,6 +348,7 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
               {
+                id: "community-meetup-day",
                 title: "Community Meetup Day",
                 date: "August 15, 2025",
                 location: "Chicago, IL",
@@ -329,6 +356,7 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
               {
+                id: "pro-player-bootcamp",
                 title: "Pro Player Bootcamp",
                 date: "September 5-12, 2025",
                 location: "Seattle, WA",
@@ -336,6 +364,7 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
               {
+                id: "college-invitational",
                 title: "College Invitational",
                 date: "October 22-24, 2025",
                 location: "Austin, TX",
@@ -343,6 +372,7 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
               {
+                id: "winter-showdown",
                 title: "Winter Showdown",
                 date: "December 12-14, 2025",
                 location: "Denver, CO",
@@ -350,6 +380,7 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
               {
+                id: "new-years-gaming-festival",
                 title: "New Year's Gaming Festival",
                 date: "December 30-31, 2025",
                 location: "Las Vegas, NV",
@@ -357,52 +388,51 @@ export default function EventsPage() {
                 image: "/placeholder.svg?height=250&width=400",
               },
             ].map((event, index) => (
-              <motion.div
-                key={index}
-                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.2)]"
-                variants={itemVariants}
-                whileHover={{ y: -10, borderColor: "rgba(220,38,38,0.5)" }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <div className="relative h-[200px] overflow-hidden">
-                  <Image
-                    src={event.image || "/placeholder.svg"}
-                    alt={event.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-                </div>
-                <div className="p-6">
-                  <motion.h3 className="text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
-                    {event.title}
-                  </motion.h3>
+              <Link href={`/events/${event.id}`} key={index} className="block">
+                <motion.div
+                  className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.2)] h-full cursor-pointer"
+                  variants={itemVariants}
+                  whileHover={{ y: -10, borderColor: "rgba(220,38,38,0.5)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <div className="relative h-[200px] overflow-hidden">
+                    <Image
+                      src={event.image || "/placeholder.svg"}
+                      alt={event.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="p-6">
+                    <motion.h3 className="text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
+                      {event.title}
+                    </motion.h3>
 
-                  <motion.div
-                    className="flex items-center gap-2 text-zinc-400 mb-2"
-                    whileHover={{ x: 3 }}
-                  >
-                    <Calendar className="h-4 w-4 text-red-500" />
-                    <span className="text-sm">{event.date}</span>
-                  </motion.div>
+                    <motion.div
+                      className="flex items-center gap-2 text-zinc-400 mb-2"
+                      whileHover={{ x: 3 }}
+                    >
+                      <Calendar className="h-4 w-4 text-red-500" />
+                      <span className="text-sm">{event.date}</span>
+                    </motion.div>
 
-                  <motion.div
-                    className="flex items-center gap-2 text-zinc-400 mb-2"
-                    whileHover={{ x: 3 }}
-                  >
-                    <MapPin className="h-4 w-4 text-red-500" />
-                    <span className="text-sm">{event.location}</span>
-                  </motion.div>
+                    <motion.div
+                      className="flex items-center gap-2 text-zinc-400 mb-2"
+                      whileHover={{ x: 3 }}
+                    >
+                      <MapPin className="h-4 w-4 text-red-500" />
+                      <span className="text-sm">{event.location}</span>
+                    </motion.div>
 
-                  <motion.div
-                    className="flex items-center gap-2 text-zinc-400 mb-4"
-                    whileHover={{ x: 3 }}
-                  >
-                    <Users className="h-4 w-4 text-red-500" />
-                    <span className="text-sm">{event.participants}</span>
-                  </motion.div>
+                    <motion.div
+                      className="flex items-center gap-2 text-zinc-400 mb-4"
+                      whileHover={{ x: 3 }}
+                    >
+                      <Users className="h-4 w-4 text-red-500" />
+                      <span className="text-sm">{event.participants}</span>
+                    </motion.div>
 
-                  <Link href="#">
                     <motion.div
                       className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
                       whileHover={{ x: 5 }}
@@ -412,7 +442,7 @@ export default function EventsPage() {
                         initial={{ x: 0 }}
                         animate={{ x: [0, 3, 0] }}
                         transition={{
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           repeatDelay: 1,
                           duration: 1,
                         }}
@@ -420,9 +450,9 @@ export default function EventsPage() {
                         <ChevronRight className="ml-1 h-3 w-3" />
                       </motion.span>
                     </motion.div>
-                  </Link>
-                </div>
-              </motion.div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>
@@ -453,30 +483,33 @@ export default function EventsPage() {
           >
             {/* Past event cards */}
             {[1, 2, 3, 4].map((item) => (
-              <motion.div
+              <Link
+                href={`/events/past-event-${item}`}
                 key={item}
-                className="relative h-[250px] overflow-hidden rounded-lg group shadow-lg"
-                variants={itemVariants}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 0 20px rgba(150,0,0,0.3)",
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="block"
               >
-                <Image
-                  src={`/placeholder.svg?height=250&width=300`}
-                  alt={`Past Event ${item}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
-
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
+                  className="relative h-[250px] overflow-hidden rounded-lg group shadow-lg cursor-pointer"
+                  variants={itemVariants}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(150,0,0,0.3)",
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <Link href="#">
+                  <Image
+                    src={`/placeholder.svg?height=250&width=300`}
+                    alt={`Past Event ${item}`}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
+
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                  >
                     <motion.div
                       className="bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-3 rounded-md font-bold flex items-center space-x-2 shadow-[0_0_15px_rgba(150,0,0,0.3)]"
                       whileHover={{ scale: 1.1 }}
@@ -485,19 +518,19 @@ export default function EventsPage() {
                       <span>View Gallery</span>
                       <ChevronRight className="ml-1 w-4 h-4" />
                     </motion.div>
-                  </Link>
-                </motion.div>
+                  </motion.div>
 
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 bg-black/80 p-4 border-t border-red-900/30"
-                  initial={{ y: 0 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <h3 className="text-sm font-bold">
-                    FasterUI Tournament {2024 - item}
-                  </h3>
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 bg-black/80 p-4 border-t border-red-900/30"
+                    initial={{ y: 0 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <h3 className="text-sm font-bold">
+                      FasterUI Tournament {2024 - item}
+                    </h3>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </Link>
             ))}
           </motion.div>
 
@@ -508,7 +541,7 @@ export default function EventsPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <Link href="#">
+            <Link href="/events/past">
               <motion.div
                 className="bg-zinc-900 border-2 border-zinc-700 hover:border-red-600 text-white px-6 py-3 rounded-md uppercase tracking-wider font-medium inline-flex items-center"
                 whileHover={{
@@ -521,7 +554,11 @@ export default function EventsPage() {
                 <motion.span
                   initial={{ x: 0 }}
                   animate={{ x: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, repeatDelay: 2, duration: 1 }}
+                  transition={{
+                    repeat: Number.POSITIVE_INFINITY,
+                    repeatDelay: 2,
+                    duration: 1,
+                  }}
                 >
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </motion.span>
