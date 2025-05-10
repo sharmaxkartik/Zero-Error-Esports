@@ -377,52 +377,6 @@ export default function GamesPage() {
             initial="hidden"
             animate="visible"
           >
-            <div className="mb-8">
-              <div className="flex flex-col md:flex-row gap-4 bg-zinc-900/70 backdrop-blur-sm p-4 rounded-xl">
-                <div className="relative flex-grow">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-500 h-5 w-5" />
-                  <input
-                    type="text"
-                    placeholder="Search games..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                  />
-                </div>
-                <div className="relative">
-                  <div className="flex items-center space-x-2">
-                    <Filter className="h-5 w-5 text-zinc-500" />
-                    <span className="text-zinc-400">Filter:</span>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => setSelectedCategory(null)}
-                        className={`px-3 py-1 rounded-full text-sm ${
-                          selectedCategory === null
-                            ? "bg-red-600 text-white"
-                            : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
-                        }`}
-                      >
-                        All
-                      </button>
-                      {categories.map((category) => (
-                        <button
-                          key={category}
-                          onClick={() => setSelectedCategory(category)}
-                          className={`px-3 py-1 rounded-full text-sm ${
-                            selectedCategory === category
-                              ? "bg-red-600 text-white"
-                              : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
-                          }`}
-                        >
-                          {category}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-24">
                 <div className="w-16 h-16 border-4 border-zinc-700 border-t-red-600 rounded-full animate-spin mb-4"></div>
