@@ -12,8 +12,6 @@ import {
   ArrowRight,
   Gamepad2,
 } from "lucide-react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 
 // Game data
 const games = [
@@ -43,7 +41,7 @@ const games = [
     id: 3,
     title: "League of Legends",
     category: "MOBA",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/lol.avif?height=400&width=600",
     players: 10,
     achievements: 18,
     description:
@@ -174,7 +172,7 @@ const GameCard = ({
             {game.description}
           </p>
 
-          <div className="flex flex-wrap gap-4 text-zinc-400 text-sm">
+          <div className="flex flex-wrap gap-4 text-zinc-400 text-sm mb-4">
             <div className="flex items-center">
               <Users className="w-4 h-4 mr-2 text-red-500" />
               <span>{game.players} Players</span>
@@ -184,9 +182,16 @@ const GameCard = ({
               <span>{game.achievements} Achievements</span>
             </div>
           </div>
-        </div>
 
-        {/* View team button */}
+          {/* View game button */}
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Link href={`/games/${game.id}`}>
+              <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md text-sm flex items-center transition-all duration-300">
+                View Teams <ArrowRight className="ml-1 w-4 h-4" />
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -255,46 +260,53 @@ export default function GamesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       {/* Global dynamic background elements */}
       <div className="fixed inset-0 z-0">
         {/* Dynamic gradient background that moves with mouse */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-black/50 via-red-950/10 to-black/50 z-0"
+          className="absolute inset-0 bg-gradient-to-br from-black via-red-950/10 to-black/80 z-0"
           style={{
             backgroundPosition: `${mousePosition.x * 100}% ${
               mousePosition.y * 100
             }%`,
-            transition: "background-position 0.5s ease-out",
+            transition: "background-position 0.8s ease-out",
           }}
         />
 
+        {/* Abstract cyberpunk grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-20 z-0"></div>
+
         {/* Animated scan lines */}
-        <div className="absolute inset-0 scan-lines opacity-20 z-0"></div>
+        <div className="absolute inset-0 scan-lines opacity-8 z-0"></div>
+
+        {/* Particle overlay - use with a custom CSS class */}
+        <div className="absolute inset-0 particle-overlay z-0"></div>
 
         {/* Dynamic vignette effect */}
-        <div className="absolute inset-0 bg-radial-gradient z-0"></div>
+        <div className="absolute inset-0 bg-radial-gradient opacity-70 z-0"></div>
       </div>
-
-      {/* Navbar */}
-      <Navbar />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.5)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.5)_2px,transparent_2px)] bg-[size:40px_40px] opacity-30 z-0"></div>
 
-        {/* Floating circles with blur effect */}
+        {/* Floating orbs with blur effect */}
         <motion.div
           className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-red-600/10 filter blur-[150px] z-0"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-          }}
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.div
+          className="absolute bottom-[-30%] left-[-5%] w-[400px] h-[400px] rounded-full bg-red-800/10 filter blur-[100px] z-0"
+          animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
           transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
+            duration: 15,
+            repeat: Infinity,
             ease: "easeInOut",
+            delay: 2,
           }}
         />
 
@@ -303,18 +315,57 @@ export default function GamesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-orbitron">
-              <span className="text-red-600 glow-text">ZERO ERROR</span> GAMES
-            </h1>
-            <p className="text-xl text-zinc-300 mb-12">
+            <div className="mb-6 relative inline-block">
+              <h1 className="text-5xl md:text-7xl font-bold font-orbitron relative z-10">
+                <span className="text-red-600 glow-text">ZERO ERROR</span>
+              </h1>
+              <motion.div
+                className="absolute -inset-1 bg-red-600/20 rounded-lg blur-xl z-0"
+                animate={{ opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 font-orbitron">
+              GAMES DIVISION
+            </h2>
+
+            <p className="text-xl text-zinc-300 mb-12 leading-relaxed">
               Explore our elite teams across multiple competitive titles. From
               tactical shooters to MOBAs, our professional players compete at
-              the highest level.
+              the highest level with precision and passion.
             </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex flex-wrap justify-center gap-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link href="/teams">
+                    <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium text-lg transition-all duration-300 flex items-center">
+                      Explore Teams <ArrowRight className="ml-2 h-5 w-5" />
+                    </button>
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                ></motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
+
+        {/* Decorative elements */}
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent z-10"></div>
       </section>
 
       {/* Games Grid Section */}
@@ -326,30 +377,97 @@ export default function GamesPage() {
             initial="hidden"
             animate="visible"
           >
-            <div className="flex items-center mb-8">
-              <h2 className="text-2xl font-bold font-orbitron">
-                <span className="text-red-600">Featured</span> GAMES
-              </h2>
-              <div className="ml-4 h-px bg-gradient-to-r from-red-600 to-transparent flex-grow"></div>
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row gap-4 bg-zinc-900/70 backdrop-blur-sm p-4 rounded-xl">
+                <div className="relative flex-grow">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-500 h-5 w-5" />
+                  <input
+                    type="text"
+                    placeholder="Search games..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  />
+                </div>
+                <div className="relative">
+                  <div className="flex items-center space-x-2">
+                    <Filter className="h-5 w-5 text-zinc-500" />
+                    <span className="text-zinc-400">Filter:</span>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setSelectedCategory(null)}
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          selectedCategory === null
+                            ? "bg-red-600 text-white"
+                            : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                        }`}
+                      >
+                        All
+                      </button>
+                      {categories.map((category) => (
+                        <button
+                          key={category}
+                          onClick={() => setSelectedCategory(category)}
+                          className={`px-3 py-1 rounded-full text-sm ${
+                            selectedCategory === category
+                              ? "bg-red-600 text-white"
+                              : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                          }`}
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {filteredGames.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredGames.map((game) => (
-                  <GameCard key={game.id} game={game} />
-                ))}
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-24">
+                <div className="w-16 h-16 border-4 border-zinc-700 border-t-red-600 rounded-full animate-spin mb-4"></div>
+                <p className="text-zinc-400 animate-pulse">Loading games...</p>
               </div>
             ) : (
-              <div className="text-center py-20">
-                <Gamepad2 className="w-16 h-16 mx-auto text-zinc-700 mb-4" />
-                <h3 className="text-2xl font-bold text-zinc-500 mb-2">
-                  No Games Found
-                </h3>
-                <p className="text-zinc-600">
-                  Try adjusting your search or filter to find what you're
-                  looking for.
-                </p>
-              </div>
+              <>
+                {/* Featured Games */}
+                <div className="mb-16">
+                  <div className="flex items-center mb-8">
+                    <h2 className="text-2xl font-bold font-orbitron">
+                      <span className="text-red-600">Featured</span> GAMES
+                    </h2>
+                    <div className="ml-4 h-px bg-gradient-to-r from-red-600 to-transparent flex-grow"></div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {filteredGames
+                      .filter((game) => game.featured)
+                      .map((game) => (
+                        <GameCard key={game.id} game={game} featured={true} />
+                      ))}
+                  </div>
+                </div>
+
+                {/* All Games */}
+                <div>
+                  <div className="flex items-center mb-8">
+                    <h2 className="text-2xl font-bold font-orbitron">
+                      <span className="text-red-600">All</span> GAMES
+                    </h2>
+                    <div className="ml-4 h-px bg-gradient-to-r from-red-600 to-transparent flex-grow"></div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredGames
+                      .filter(
+                        (game) => !game.featured || selectedCategory !== null
+                      )
+                      .map((game) => (
+                        <GameCard key={game.id} game={game} featured={false} />
+                      ))}
+                  </div>
+                </div>
+              </>
             )}
           </motion.div>
 

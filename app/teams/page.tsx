@@ -43,7 +43,7 @@ export default function TeamsPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/banner.jpg?height=400&width=1200"
+            src="/images/banner.jpg?height=400&width=1200"
             alt="Teams Background"
             fill
             className="object-cover"
