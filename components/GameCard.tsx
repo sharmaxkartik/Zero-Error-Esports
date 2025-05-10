@@ -9,16 +9,9 @@ import { Users, Trophy } from "lucide-react";
 interface GameCardProps {
   title: string;
   image: string;
-  players: number;
-  achievements: number;
 }
 
-const GameCard: React.FC<GameCardProps> = ({
-  title,
-  image,
-  players,
-  achievements,
-}) => {
+const GameCard: React.FC<GameCardProps> = ({ title, image }) => {
   return (
     <motion.div
       className="relative overflow-hidden rounded-xl border border-zinc-800/60 group"
@@ -43,16 +36,7 @@ const GameCard: React.FC<GameCardProps> = ({
       </div>
       <div className="p-5">
         <h3 className="text-xl font-bold mb-3">{title}</h3>
-        <div className="flex justify-between text-sm text-zinc-400">
-          <div className="flex items-center">
-            <Users className="w-4 h-4 mr-2 text-red-500" />
-            <span>{players} Players</span>
-          </div>
-          <div className="flex items-center">
-            <Trophy className="w-4 h-4 mr-2 text-red-500" />
-            <span>{achievements} Achievements</span>
-          </div>
-        </div>
+        <div className="flex justify-between text-sm text-zinc-400"></div>
       </div>
       <motion.div
         className="absolute bottom-0 left-0 h-1 bg-red-600"

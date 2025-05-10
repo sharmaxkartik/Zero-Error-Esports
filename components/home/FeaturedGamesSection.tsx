@@ -8,22 +8,16 @@ import GameCard from "../GameCard";
 const FeaturedGamesSection = () => {
   const games = [
     {
-      title: "Valorant",
+      title: "Gaming Tournaments & Events",
       image: "/images/event.jpg?height=200&width=350",
-      players: 12,
-      achievements: 8,
     },
     {
-      title: "Counter-Strike 2",
+      title: "Talent Management",
       image: "/images/event.jpg?height=200&width=350",
-      players: 15,
-      achievements: 12,
     },
     {
-      title: "League of Legends",
+      title: "Brand Activations",
       image: "/images/event.jpg?height=200&width=350",
-      players: 10,
-      achievements: 6,
     },
   ];
 
@@ -44,7 +38,9 @@ const FeaturedGamesSection = () => {
             transition={{ duration: 0.7 }}
             className="h-0.5 bg-red-600 mx-auto mb-4"
           />
-          <h2 className="text-4xl font-bold uppercase mb-4">FEATURED GAMES</h2>
+          <h2 className="text-4xl font-bold uppercase mb-4">
+            Featured Services
+          </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Our professional teams compete at the highest level across multiple
             titles. Check out our featured games and follow our journey to the
@@ -61,12 +57,7 @@ const FeaturedGamesSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
             >
-              <GameCard
-                title={game.title}
-                image={game.image}
-                players={game.players}
-                achievements={game.achievements}
-              />
+              <GameCard title={game.title} image={game.image} />
             </motion.div>
           ))}
         </div>

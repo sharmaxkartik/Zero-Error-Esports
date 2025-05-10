@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronRight, Trophy, Calendar, Users } from "lucide-react";
+import { ChevronRight, Calendar } from "lucide-react";
 
 const UpcomingEventsSection = () => {
   const containerVariants = {
@@ -27,28 +27,12 @@ const UpcomingEventsSection = () => {
 
   const events = [
     {
-      title: "Zero Error Championship",
-      date: "June 15-20, 2025",
-      location: "Mumbai, India",
-      image: "/images/valorant.png?height=280&width=400",
-      category: "Tournament",
-      icon: <Trophy className="w-4 h-4" />,
-    },
-    {
-      title: "Gaming Bootcamp",
+      title: "GAME’O’CON 25",
       date: "July 8-10, 2025",
-      location: "Delhi, India",
-      image: "/images/valorant.png?height=280&width=400",
-      category: "Training",
+      location: "Gwalior, Madhya Pradesh",
+      image: "/images/valorant.png", // Ensure this path is correct
+      category: "Event",
       icon: <Calendar className="w-4 h-4" />,
-    },
-    {
-      title: "Community Meetup",
-      date: "August 15, 2025",
-      location: "Bangalore, India",
-      image: "/images/valorant.png?height=280&width=400",
-      category: "Community",
-      icon: <Users className="w-4 h-4" />,
     },
   ];
 
@@ -57,10 +41,10 @@ const UpcomingEventsSection = () => {
       {/* Subtle diagonal pattern background */}
       <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
 
-      <div className="max-w-5xl mx-auto px-6 relative">
-        {/* Section header with navigation */}
+      <div className="max-w-5xl mx-auto px-6 relative flex flex-col items-center">
+        {/* Section header */}
         <motion.div
-          className="flex flex-wrap justify-between items-center mb-16"
+          className="flex flex-wrap justify-center items-center mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -72,7 +56,7 @@ const UpcomingEventsSection = () => {
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="h-0.5 bg-gradient-to-r from-red-600 to-transparent mb-4 max-w-[200px]"
+              className="h-0.5 bg-gradient-to-r from-red-600 to-transparent mb-4 max-w-[200px] mx-auto"
             />
             <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
               UPCOMING EVENTS
@@ -81,33 +65,11 @@ const UpcomingEventsSection = () => {
               Don't miss our exciting upcoming tournaments and events
             </p>
           </div>
-
-          <Link href="/events">
-            <motion.div
-              className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 px-5 py-3 mt-4 sm:mt-0 text-sm uppercase font-bold rounded-md transition-colors flex items-center group"
-              whileHover={{
-                scale: 1.05,
-                borderColor: "rgb(220, 38, 38)",
-              }}
-              whileTap={{ scale: 0.97 }}
-            >
-              View All
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 1,
-                }}
-              >
-                <ChevronRight className="ml-1 h-4 w-4 group-hover:text-red-500" />
-              </motion.span>
-            </motion.div>
-          </Link>
         </motion.div>
 
         {/* Events cards grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-8 justify-items-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -125,7 +87,7 @@ const UpcomingEventsSection = () => {
                 damping: 17,
               }}
             >
-              <div className="relative h-[280px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
+              <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
                 <Image
                   src={event.image || "/placeholder.svg"}
                   alt={event.title}
@@ -176,46 +138,9 @@ const UpcomingEventsSection = () => {
                     </motion.span>
                   </div>
                 </div>
-
-                {/* Overlay button that appears on hover */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <motion.div
-                    className="bg-red-600/90 backdrop-blur-sm text-white px-5 py-3 rounded-lg font-bold flex items-center space-x-2"
-                    whileHover={{
-                      scale: 1.1,
-                      boxShadow: "0 0 20px rgba(220,38,38,0.5)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span>Learn More</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </motion.div>
-                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-        >
-          <Link href="/events">
-            <motion.button
-              className="bg-transparent border-2 border-zinc-700 hover:border-red-600 text-white px-8 py-4 rounded-md uppercase tracking-wider font-medium relative overflow-hidden group"
-              whileHover={{
-                scale: 1.05,
-                backgroundColor: "rgba(220,38,38,0.1)",
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="relative z-10">View All Events</span>
-            </motion.button>
-          </Link>
         </motion.div>
       </div>
     </section>

@@ -69,7 +69,7 @@ export default function EventsPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=400&width=1200"
+            src="/images/banner.jpg?height=400&width=1200"
             alt="Events Background"
             fill
             className="object-cover"
@@ -408,35 +408,15 @@ export default function EventsPage() {
                     <motion.h3 className="text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
                       {event.title}
                     </motion.h3>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-2"
-                      whileHover={{ x: 3 }}
-                    >
+                    <motion.div className="flex items-center gap-2 text-zinc-400 mb-2">
                       <Calendar className="h-4 w-4 text-red-500" />
                       <span className="text-sm">{event.date}</span>
                     </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-2"
-                      whileHover={{ x: 3 }}
-                    >
+                    <motion.div className="flex items-center gap-2 text-zinc-400 mb-2">
                       <MapPin className="h-4 w-4 text-red-500" />
                       <span className="text-sm">{event.location}</span>
                     </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-4"
-                      whileHover={{ x: 3 }}
-                    >
-                      <Users className="h-4 w-4 text-red-500" />
-                      <span className="text-sm">{event.participants}</span>
-                    </motion.div>
-
-                    <motion.div
-                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
-                      whileHover={{ x: 5 }}
-                    >
+                    <motion.div className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors">
                       Learn More
                       <motion.span
                         initial={{ x: 0 }}

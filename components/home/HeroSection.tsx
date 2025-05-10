@@ -57,14 +57,8 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
           <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
             <motion.span
               className="text-red-600 inline-block"
-              style={{
-                textShadow:
-                  "0 0 20px rgba(220, 38, 38, 0.7), 0 0 30px rgba(220, 38, 38, 0.4)",
-              }}
               whileHover={{
                 scale: 1.05,
-                textShadow:
-                  "0 0 25px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.6)",
               }}
               transition={{
                 type: "spring",
@@ -72,27 +66,14 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
                 damping: 10,
               }}
             >
-              ZERO
+              THE
             </motion.span>{" "}
-            <span
-              style={{
-                textShadow:
-                  "0 0 15px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2)",
-              }}
-            >
-              ERROR
-            </span>
+            <span>HOME OF</span>
             <br />
             <motion.span
               className="text-red-600 inline-block"
-              style={{
-                textShadow:
-                  "0 0 20px rgba(220, 38, 38, 0.7), 0 0 30px rgba(220, 38, 38, 0.4)",
-              }}
               whileHover={{
                 scale: 1.05,
-                textShadow:
-                  "0 0 25px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.6)",
               }}
               transition={{
                 type: "spring",
@@ -100,7 +81,7 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
                 damping: 10,
               }}
             >
-              ESPORTS
+              RISING GAMERS!
             </motion.span>
           </h1>
         </motion.div>
@@ -111,8 +92,8 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         >
-          Where precision meets passion. Join the elite gaming team that accepts
-          nothing less than victory.
+          Zero Error Esports: Gwalior’s first esports hub, nurturing talent and
+          pro gaming in MP.
         </motion.p>
 
         <motion.div
