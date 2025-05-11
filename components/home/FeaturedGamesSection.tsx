@@ -69,7 +69,7 @@ const FeaturedGamesSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          <Link href="/games">
+          <Link href="/services">
             <motion.button
               className="bg-transparent border-2 border-zinc-700 hover:border-red-600 text-white px-8 py-3 rounded-md uppercase tracking-wider font-medium relative overflow-hidden group"
               whileHover={{
@@ -78,7 +78,7 @@ const FeaturedGamesSection = () => {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">View All Games</span>
+              <span className="relative z-10">View All Services</span>
             </motion.button>
           </Link>
         </motion.div>
