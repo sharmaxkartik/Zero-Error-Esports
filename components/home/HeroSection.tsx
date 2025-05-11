@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useTransform } from "framer-motion";
 import { ChevronRight, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 interface HeroSectionProps {
   scrollYProgress: any;
@@ -18,6 +19,23 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
   const translateY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const contentTranslateY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check on initial render
+    checkIsMobile();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -31,14 +49,30 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
         }}
       >
         <div className="absolute inset-0 bg-black/30 z-10" />
-        <iframe
-          className="absolute inset-0 w-full h-full opacity-70"
-          src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ&controls=0&showinfo=0&rel=0"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        ></iframe>
+
+        {/* Conditional rendering based on device type */}
+        {isMobile ? (
+          // Static image for mobile
+          <div className="absolute inset-0">
+            <Image
+              src="/images/hero-background.jpg" // Add your mobile background image path here
+              alt="Zero Error Esports"
+              fill
+              className="object-cover opacity-70"
+              priority
+            />
+          </div>
+        ) : (
+          // Video for desktop/laptop
+          <iframe
+            className="absolute inset-0 w-full h-full opacity-70"
+            src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ&controls=0&showinfo=0&rel=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          ></iframe>
+        )}
       </motion.div>
 
       {/* Content with opposite parallax movement */}
