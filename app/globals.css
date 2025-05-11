@@ -233,6 +233,16 @@ body {
   );
   background-size: 100% 4px;
   pointer-events: none;
+  animation: scan-line-scroll 10s linear infinite;
+}
+
+@keyframes scan-line-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100px;
+  }
 }
 
 /* Mobile-specific optimizations */
@@ -414,6 +424,7 @@ body {
   text-shadow: 0 0 15px rgba(220, 38, 38, 0.7);
 }
 
+/* Particle Overlay Animation */
 .particle-overlay {
   background-image: radial-gradient(
       circle,
@@ -427,10 +438,10 @@ body {
 
 @keyframes particle-animation {
   0% {
-    transform: translateY(0);
+    background-position: 0 0;
   }
   100% {
-    transform: translateY(-100vh);
+    background-position: 1000px 1000px; /* Large value to ensure smooth looping */
   }
 }
 
@@ -466,6 +477,20 @@ body {
   }
   100% {
     transform: translateY(100%);
+  }
+}
+
+/* For grid effects in BackgroundEffects.tsx */
+.infinite-grid {
+  animation: grid-scroll 30s linear infinite;
+}
+
+@keyframes grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 70px 70px; /* Match the grid size */
   }
 }
 

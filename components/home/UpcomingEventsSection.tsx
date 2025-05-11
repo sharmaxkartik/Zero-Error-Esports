@@ -30,7 +30,7 @@ const UpcomingEventsSection = () => {
       title: "GAME’O’CON 25",
       date: "July 8-10, 2025",
       location: "Gwalior, Madhya Pradesh",
-      image: "/images/valorant.png", // Ensure this path is correct
+      image: "/images/gamocon.png", // Ensure this path is correct
       category: "Event",
       icon: <Calendar className="w-4 h-4" />,
     },

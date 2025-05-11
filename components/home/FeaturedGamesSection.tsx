@@ -9,15 +9,15 @@ const FeaturedGamesSection = () => {
   const games = [
     {
       title: "Gaming Tournaments & Events",
-      image: "/images/event.jpg?height=200&width=350",
+      image: "/images/minecraft.jpeg?height=200&width=350",
     },
     {
       title: "Talent Management",
-      image: "/images/event.jpg?height=200&width=350",
+      image: "/images/valorantgame.jpeg?height=200&width=350",
     },
     {
       title: "Brand Activations",
-      image: "/images/event.jpg?height=200&width=350",
+      image: "/images/gow.jpg?height=200&width=350",
     },
   ];
 

@@ -31,8 +31,8 @@ export default function BackgroundEffects() {
         }}
       />
 
-      {/* Abstract cyberpunk grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-20 z-0"></div>
+      {/* Abstract cyberpunk grid - add infinite-grid class */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-20 z-0 infinite-grid"></div>
 
       {/* Animated scan lines */}
       <div className="absolute inset-0 scan-lines opacity-8 z-0"></div>
