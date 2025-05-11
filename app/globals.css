@@ -6,6 +6,15 @@ body {
   @apply text-white;
   background: linear-gradient(135deg, #000000 0%, #3d0000 50%, #000000 100%);
   background-attachment: fixed;
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
 }
 
 @layer utilities {
