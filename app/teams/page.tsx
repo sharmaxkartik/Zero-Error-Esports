@@ -117,12 +117,6 @@ export default function TeamsPage() {
         fallbackImage: "/images/minecraft.jpeg",
       },
       {
-        name: "Vedant Pisal",
-        role: "Team Member",
-        image: "/images/team/vedant.jpg", // Replace with actual image path
-        fallbackImage: "/images/gow.jpg",
-      },
-      {
         name: "Sarthak",
         role: "Team Member",
         image: "/images/team/sarthak.jpg", // Replace with actual image path

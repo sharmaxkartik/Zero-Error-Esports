@@ -87,58 +87,70 @@ const UpcomingEventsSection = () => {
                 damping: 17,
               }}
             >
-              <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
-                <Image
-                  src={event.image || "/placeholder.svg"}
-                  alt={event.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                />
-                <motion.div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 p-5 w-full">
-                  <div className="flex items-center mb-3">
-                    <motion.span
-                      className="bg-red-600 p-1.5 rounded-md mr-2 flex items-center justify-center"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      {event.icon}
-                    </motion.span>
-                    <span className="text-xs uppercase text-white font-bold tracking-wider">
-                      {event.category}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-red-400 transition-colors duration-300">
-                    {event.title}
-                  </h3>
-                  <div className="flex flex-col text-zinc-400 text-sm space-y-1">
-                    <motion.span
-                      initial={{ x: 0 }}
-                      whileHover={{ x: 3 }}
-                      className="flex items-center"
-                    >
-                      <Calendar className="w-3 h-3 mr-2 text-zinc-500" />{" "}
-                      {event.date}
-                    </motion.span>
-                    <motion.span
-                      initial={{ x: 0 }}
-                      whileHover={{ x: 3 }}
-                      className="flex items-center"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="w-3 h-3 mr-2 text-zinc-500"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
+              <Link
+                href={`/events/${event.title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+                className="block"
+              >
+                <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
+                  <Image
+                    src={event.image || "/placeholder.svg"}
+                    alt={event.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                  />
+                  <motion.div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 p-5 w-full">
+                    <div className="flex items-center mb-3">
+                      <motion.span
+                        className="bg-red-600 p-1.5 rounded-md mr-2 flex items-center justify-center"
+                        whileHover={{ scale: 1.1 }}
                       >
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>
-                      {event.location}
-                    </motion.span>
+                        {event.icon}
+                      </motion.span>
+                      <span className="text-xs uppercase text-white font-bold tracking-wider">
+                        {event.category}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-red-400 transition-colors duration-300">
+                      {event.title}
+                    </h3>
+                    <div className="flex flex-col text-zinc-400 text-sm space-y-1">
+                      <motion.span
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 3 }}
+                        className="flex items-center"
+                      >
+                        <Calendar className="w-3 h-3 mr-2 text-zinc-500" />{" "}
+                        {event.date}
+                      </motion.span>
+                      <motion.span
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 3 }}
+                        className="flex items-center"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="w-3 h-3 mr-2 text-zinc-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        {event.location}
+                      </motion.span>
+                    </div>
+
+                    <div className="mt-4 flex items-center text-red-500 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>View details</span>
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
