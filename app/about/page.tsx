@@ -12,6 +12,7 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 export default function AboutPage() {
   const containerVariants = {
@@ -83,8 +84,9 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            The premier esports organization dedicated to excellence and
-            innovation in competitive gaming
+            We’re igniting a competitive gaming revolution from the heart of
+            Gwalior. Whether you're a player, content creator, or fan – Zero
+            Error is your new arena.
           </motion.p>
 
           <motion.div
@@ -139,11 +141,11 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                  Founded in 2013, Zero Error Esports has grown from a small
-                  group of passionate gamers to one of the most recognized names
-                  in esports. Our journey began with a simple mission: to create
-                  a platform where talented players could showcase their skills
-                  and compete at the highest level.
+                  Zero Error Esports was born in Gwalior, Madhya Pradesh, with
+                  one goal: to provide a professional platform for gaming talent
+                  across the heart of India. We are MP’s first full-stack
+                  esports organization – building players, creating events, and
+                  launching careers.
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -151,23 +153,10 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  Over the years, we've expanded our reach across multiple game
-                  titles, built state-of-the-art training facilities, and
-                  developed a comprehensive support system for our athletes. Our
-                  teams have competed in major tournaments worldwide, bringing
-                  home numerous championships and establishing Zero Error as a
-                  dominant force in competitive gaming.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  Today, we continue to push the boundaries of what's possible
-                  in esports, investing in emerging talent, innovative
-                  technologies, and community engagement initiatives that bring
-                  fans closer to the action than ever before.
+                  Started by passionate gamers and creators, Zero Error isn’t
+                  just about competition — it’s about community, opportunity,
+                  and expression. We’re nurturing local talent and giving them
+                  the resources to shine on national and international stages.
                 </motion.p>
               </div>
 
@@ -198,54 +187,50 @@ export default function AboutPage() {
               </motion.div>
             </motion.div>
 
-            {/* Image */}
             <motion.div
-              className="relative h-[500px] overflow-hidden rounded-xl shadow-[0_0_25px_rgba(0,0,0,0.3)] border border-zinc-800/50"
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <Image
-                src="/images/story.jpg?height=500&width=600"
-                alt="Our Story"
-                fill
-                className="object-cover rounded-xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              <h2 className="text-4xl font-bold uppercase mb-8">
+                OUR{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
+                  VISION
+                </span>
+              </h2>
+              <div className="space-y-6 text-zinc-300 text-lg">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  To teach gaming and esports in every city of India and in
+                  underserved countries across the globe.
+                </motion.p>
+              </div>
+
               <motion.div
-                className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent"
+                className="mt-10"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <div className="flex items-center space-x-2 text-red-500 mb-3">
-                  <Trophy className="w-5 h-5" />
-                  <span className="text-sm font-semibold uppercase">
-                    Est. 2013
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  From Passion to Champions
-                </h3>
-                <p className="text-zinc-300 text-sm">
-                  Our journey through the competitive gaming landscape
-                </p>
-              </motion.div>
+                transition={{ duration: 0.6, delay: 0.4 }}
+              ></motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Our Values Section */}
-      <section className="py-24 bg-zinc-950/70 relative">
-        {/* Background grid effect */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.8)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.8)_2px,transparent_2px)] bg-[size:40px_40px] opacity-20"></div>
+      {/* Our Mission Section - Fixed for mobile and icon visibility */}
+      <section className="py-24 relative">
+        {/* Transparent diagonal pattern background */}
+        <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#fff,#fff_1px,transparent_1px,transparent_10px)]"></div>
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 sm:px-6 relative">
           <motion.h2
-            className="text-4xl font-bold uppercase mb-16 text-center"
+            className="text-3xl sm:text-4xl font-bold uppercase mb-8 sm:mb-16 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -253,92 +238,74 @@ export default function AboutPage() {
           >
             OUR{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
-              VALUES
+              MISSION
             </span>
           </motion.h2>
 
           <motion.div
-            className="grid md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {/* Excellence */}
-            <motion.div
-              className="bg-zinc-900/80 backdrop-blur-sm p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{
-                y: -10,
-                boxShadow:
-                  "0 20px 25px -5px rgba(220, 38, 38, 0.1), 0 10px 10px -5px rgba(220, 38, 38, 0.04)",
-              }}
-            >
+            {[
+              {
+                title: "Build Learning Hubs",
+                description:
+                  "Establish esports hubs in Tier-2 & Tier-3 cities to nurture talent.",
+                icon: Map,
+              },
+              {
+                title: "Educate & Train",
+                description:
+                  "Provide training for players, creators, casters, and team managers.",
+                icon: Users,
+              },
+              {
+                title: "Career Opportunities",
+                description:
+                  "Offer career paths in gaming beyond just playing professionally.",
+                icon: TrendingUp,
+              },
+              {
+                title: "Inclusive Events",
+                description:
+                  "Host skill-based events in India and abroad for all levels.",
+                icon: Trophy,
+              },
+              {
+                title: "Esports Awareness",
+                description:
+                  "Promote esports in schools, colleges, and communities.",
+                icon: MessageSquare,
+              },
+            ].map((mission, index) => (
               <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg"
-                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                key={index}
+                className="bg-zinc-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
+                variants={itemVariants}
+                whileHover={{
+                  y: -10,
+                  boxShadow:
+                    "0 20px 25px -5px rgba(220, 38, 38, 0.1), 0 10px 10px -5px rgba(220, 38, 38, 0.04)",
+                }}
               >
-                <Trophy className="w-8 h-8 text-white" />
+                <div className="flex flex-col sm:flex-row sm:items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center shadow-lg mb-3 sm:mb-0">
+                    {React.createElement(mission.icon, {
+                      className: "w-6 h-6 text-white",
+                    })}
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold sm:ml-4">
+                    {mission.title}
+                  </h3>
+                </div>
+                <p className="text-zinc-400 leading-relaxed">
+                  {mission.description}
+                </p>
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4">EXCELLENCE</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                We strive for excellence in everything we do, from competition
-                and training to content creation and fan engagement. Our
-                commitment to perfection is what separates us from the
-                competition.
-              </p>
-            </motion.div>
-
-            {/* Innovation */}
-            <motion.div
-              className="bg-zinc-900/80 backdrop-blur-sm p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{
-                y: -10,
-                boxShadow:
-                  "0 20px 25px -5px rgba(220, 38, 38, 0.1), 0 10px 10px -5px rgba(220, 38, 38, 0.04)",
-              }}
-            >
-              <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg"
-                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <TrendingUp className="w-8 h-8 text-white" />
-              </motion.div>
-              <h3 className="text-2xl font-bold mb-4">INNOVATION</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                We embrace new technologies and approaches, constantly seeking
-                better ways to train, compete, and connect with our community.
-                Innovation is at the heart of everything we do.
-              </p>
-            </motion.div>
-
-            {/* Community */}
-            <motion.div
-              className="bg-zinc-900/80 backdrop-blur-sm p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{
-                y: -10,
-                boxShadow:
-                  "0 20px 25px -5px rgba(220, 38, 38, 0.1), 0 10px 10px -5px rgba(220, 38, 38, 0.04)",
-              }}
-            >
-              <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg"
-                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Users className="w-8 h-8 text-white" />
-              </motion.div>
-              <h3 className="text-2xl font-bold mb-4">COMMUNITY</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                We believe in the power of community and work to create
-                inclusive spaces where all gamers feel welcome and valued. Our
-                fans are the foundation of everything we build.
-              </p>
-            </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -363,7 +330,7 @@ export default function AboutPage() {
           </motion.h2>
 
           <motion.div
-            className="grid md:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -372,28 +339,22 @@ export default function AboutPage() {
             {/* Team members */}
             {[
               {
-                name: "Alex Johnson",
+                name: "Aazam Khan",
                 role: "Founder & CEO",
                 icon: <Zap className="w-4 h-4" />,
-                bio: "Former pro gamer turned entrepreneur with a vision to revolutionize esports",
+                bio: "",
               },
               {
-                name: "Sarah Chen",
-                role: "Chief Operating Officer",
+                name: "Priyesh Kekan",
+                role: "Co-founder",
                 icon: <TrendingUp className="w-4 h-4" />,
-                bio: "Strategic leader with experience scaling esports organizations globally",
+                bio: "",
               },
               {
-                name: "Marcus Williams",
-                role: "Head Coach",
+                name: "Deepanshu Savita",
+                role: "Co-founder",
                 icon: <Trophy className="w-4 h-4" />,
-                bio: "Championship-winning coach with expertise in multiple game titles",
-              },
-              {
-                name: "Elena Rodriguez",
-                role: "Technical Director",
-                icon: <MessageSquare className="w-4 h-4" />,
-                bio: "Tech innovator dedicated to giving our players the competitive edge",
+                bio: "",
               },
             ].map((member, index) => (
               <motion.div

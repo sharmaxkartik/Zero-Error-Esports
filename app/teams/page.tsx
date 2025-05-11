@@ -2,7 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Trophy, ArrowRight, Users } from "lucide-react";
+import {
+  ChevronRight,
+  ArrowRight,
+  Users,
+  User2,
+  Briefcase,
+  PenTool,
+  Film,
+  BarChart4,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function TeamsPage() {
@@ -26,8 +35,214 @@ export default function TeamsPage() {
     },
   };
 
+  // Team members data organized by departments
+  const teamMembers = {
+    leadership: [
+      {
+        name: "Aazam Khan",
+        role: "Founder, CEO",
+        image: "/images/team/aazam.jpg", // Replace with actual image path
+        fallbackImage: "/images/minecraft.jpeg",
+      },
+      {
+        name: "Priyesh Kekan",
+        role: "Co-Founder",
+        image: "/images/team/priyesh.jpg", // Replace with actual image path
+        fallbackImage: "/images/bgmi.avif",
+      },
+      {
+        name: "Deepanshu Savita",
+        role: "Co-Founder",
+        image: "/images/team/deepanshu.jpg", // Replace with actual image path
+        fallbackImage: "/images/gow.jpg",
+      },
+    ],
+    executives: [
+      {
+        name: "Adarsh Dubey",
+        role: "Chief Creative Officer (CCO)",
+        image: "/images/team/adarsh.jpg", // Replace with actual image path
+        fallbackImage: "/images/valorantgame.jpeg",
+      },
+      {
+        name: "Harshit Soni",
+        role: "Chief Financial Officer (CFO)",
+        image: "/images/team/harshit.jpg", // Replace with actual image path
+        fallbackImage: "/images/lol.avif",
+      },
+      {
+        name: "Vaishnavi Bhadauriya",
+        role: "Director of External Affairs",
+        image: "/images/team/vaishnavi.jpg", // Replace with actual image path
+        fallbackImage: "/images/gamocon.png",
+      },
+      {
+        name: "Aryaman Bhatnagar",
+        role: "Chief Technology Officer (CTO)",
+        image: "/images/team/aryaman.jpg", // Replace with actual image path
+        fallbackImage: "/images/minecraft.jpeg",
+      },
+    ],
+    content: [
+      {
+        name: "Prakrat Singh Sengar",
+        role: "Content Writer",
+        image: "/images/team/prakrat.jpg", // Replace with actual image path
+        fallbackImage: "/images/valorantgame.jpeg",
+      },
+      {
+        name: "Prajjwal Singh Chauhan",
+        role: "Content Lead",
+        image: "/images/team/prajjwal.jpg", // Replace with actual image path
+        fallbackImage: "/images/bgmi.avif",
+      },
+      {
+        name: "Kundan Singh",
+        role: "Video Editor",
+        image: "/images/team/kundan.jpg", // Replace with actual image path
+        fallbackImage: "/images/lol.avif",
+      },
+    ],
+    operations: [
+      {
+        name: "Aditya Sharma",
+        role: "Operations Team",
+        image: "/images/team/aditya.jpg", // Replace with actual image path
+        fallbackImage: "/images/gamocon.png",
+      },
+      {
+        name: "Dhruv Sharma",
+        role: "Operations Team",
+        image: "/images/team/dhruv.jpg", // Replace with actual image path
+        fallbackImage: "/images/minecraft.jpeg",
+      },
+      {
+        name: "Vedant Pisal",
+        role: "Team Member",
+        image: "/images/team/vedant.jpg", // Replace with actual image path
+        fallbackImage: "/images/gow.jpg",
+      },
+      {
+        name: "Sarthak",
+        role: "Team Member",
+        image: "/images/team/sarthak.jpg", // Replace with actual image path
+        fallbackImage: "/images/lol.avif",
+      },
+      {
+        name: "Raj Chaurasiya",
+        role: "Analyst",
+        image: "/images/team/raj.jpg", // Replace with actual image path
+        fallbackImage: "/images/valorantgame.jpeg",
+      },
+    ],
+  };
+
+  // Icon mapping for each department
+  const departmentIcons = {
+    leadership: <Briefcase className="w-5 h-5 mr-2" />,
+    executives: <User2 className="w-5 h-5 mr-2" />,
+    content: <PenTool className="w-5 h-5 mr-2" />,
+    operations: <BarChart4 className="w-5 h-5 mr-2" />,
+  };
+
+  // Department titles
+  const departmentTitles = {
+    leadership: "Leadership",
+    executives: "Executives",
+    content: "Content Team",
+    operations: "Operations & Analysis",
+  };
+
+  // Helper function to render team member cards
+  const renderTeamCards = (members, department) => (
+    <div className="mb-16">
+      <motion.div
+        className="flex items-center mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <div className="bg-red-600/20 p-3 rounded-lg mr-3">
+          {departmentIcons[department]}
+        </div>
+        <h3 className="text-2xl font-bold">{departmentTitles[department]}</h3>
+      </motion.div>
+
+      <motion.div
+        className="grid md:grid-cols-3 gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        {members.map((member, index) => (
+          <motion.div
+            key={index}
+            className="bg-zinc-900/40 backdrop-blur-sm rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.3)]"
+            variants={itemVariants}
+            whileHover={{ y: -10, borderColor: "rgba(220,38,38,0.5)" }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <div className="relative h-[280px] overflow-hidden">
+              <Image
+                src={member.image || member.fallbackImage}
+                alt={member.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  // Fallback if the image fails to load
+                  e.currentTarget.src = member.fallbackImage;
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-70 group-hover:opacity-85 transition-opacity duration-300"></div>
+
+              <div className="absolute bottom-0 left-0 w-full p-6">
+                <motion.h3
+                  className="text-xl font-bold mb-1 group-hover:text-red-500 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  {member.name}
+                </motion.h3>
+
+                <motion.div
+                  className="flex items-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <div className="h-0.5 w-10 bg-red-600 mr-2"></div>
+                  <p className="text-zinc-300 text-sm">{member.role}</p>
+                </motion.div>
+              </div>
+            </div>
+
+            <div className="p-4 flex justify-between items-center border-t border-zinc-800/50">
+              <Link href="#">
+                <motion.div
+                  className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
+                  whileHover={{ x: 5 }}
+                >
+                  Profile
+                  <ChevronRight className="ml-1 h-3 w-3" />
+                </motion.div>
+              </Link>
+
+              <div className="flex space-x-2">
+                {/* Social media icons would go here */}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen text-white overflow-hidden">
       {/* Hero Section */}
       <section className="relative h-[400px] overflow-hidden">
         {/* Background grid effect */}
@@ -69,7 +284,7 @@ export default function TeamsPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ scale: 1.05 }}
             >
-              TEAMS
+              TEAM
             </motion.span>
           </motion.h1>
           <motion.p
@@ -78,8 +293,8 @@ export default function TeamsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Meet the elite players who represent Zero Error Esports in
-            competitions worldwide
+            Meet the talented individuals behind Zero Error Esports who make
+            excellence happen every day
           </motion.p>
 
           <motion.div
@@ -88,7 +303,7 @@ export default function TeamsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Link href="#featured">
+            <Link href="#team-members">
               <motion.button
                 className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-md flex items-center shadow-[0_0_15px_rgba(150,0,0,0.3)] relative overflow-hidden group"
                 whileHover={{
@@ -99,7 +314,7 @@ export default function TeamsPage() {
               >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative z-10 flex items-center font-bold">
-                  MEET OUR PLAYERS
+                  MEET THE TEAM
                   <motion.span
                     initial={{ x: 0 }}
                     animate={{ x: [0, 5, 0] }}
@@ -118,296 +333,33 @@ export default function TeamsPage() {
         </div>
       </section>
 
-      {/* Featured Team */}
-      <section id="featured" className="py-16 bg-zinc-950 relative">
-        {/* Subtle diagonal pattern background */}
-        <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
-
-        <div className="container mx-auto px-6 relative">
-          <motion.div
-            className="flex flex-col md:flex-row gap-12"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-          >
-            {/* Team image */}
-            <motion.div
-              className="md:w-1/2"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <motion.div
-                className="relative h-[400px] overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.3)]"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Featured Team"
-                  fill
-                  className="object-cover"
-                />
-                <motion.div
-                  className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 uppercase text-sm font-bold shadow-[0_0_10px_rgba(200,0,0,0.4)]"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  Featured
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-            {/* Team details */}
-            <motion.div
-              className="md:w-1/2 flex flex-col justify-center"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <motion.h2
-                className="text-3xl font-bold uppercase mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                Zero Error Apex
-              </motion.h2>
-
-              <motion.p
-                className="text-zinc-300 mb-6"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                Our flagship team competing in the world's most prestigious FPS
-                tournaments. With multiple championship titles and a reputation
-                for innovative strategies, Team Apex continues to dominate the
-                competitive scene.
-              </motion.p>
-
-              <motion.div
-                className="flex items-center gap-2 mb-6"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ x: 5 }}
-              >
-                <Trophy className="h-5 w-5 text-yellow-500" />
-                <span className="text-zinc-300">3x World Champions</span>
-              </motion.div>
-
-              <motion.div
-                className="grid grid-cols-2 gap-4 mb-8"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {[
-                  { label: "Founded", value: "2018" },
-                  { label: "Game", value: "Tactical Shooter" },
-                  { label: "Region", value: "North America" },
-                  { label: "Coach", value: "Marcus Williams" },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    className="bg-zinc-900 p-4 rounded-lg border border-zinc-800"
-                    variants={itemVariants}
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "rgba(220,38,38,0.1)",
-                      borderColor: "rgba(220,38,38,0.3)",
-                    }}
-                  >
-                    <p className="text-sm text-zinc-400">{item.label}</p>
-                    <p className="font-bold">{item.value}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <Link href="#">
-                  <motion.div
-                    className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 uppercase font-bold text-sm w-fit flex items-center relative overflow-hidden group shadow-[0_0_15px_rgba(150,0,0,0.2)]"
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 0 20px rgba(220,0,0,0.3)",
-                    }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    <span className="relative z-10 flex items-center">
-                      Team Profile
-                      <motion.span
-                        initial={{ x: 0 }}
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{
-                          repeat: Infinity,
-                          repeatDelay: 2,
-                          duration: 1,
-                        }}
-                      >
-                        <ChevronRight className="ml-2 h-4 w-4" />
-                      </motion.span>
-                    </span>
-                  </motion.div>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* All Teams */}
-      <section className="py-16 relative">
+      {/* Team Members Section */}
+      <section id="team-members" className="py-16 relative">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(20,20,20,0.3)_1px,transparent_1px)] bg-[size:60px_60px] opacity-20"></div>
 
         <div className="container mx-auto px-6 relative">
           <motion.h2
-            className="text-3xl font-bold uppercase mb-12"
+            className="text-3xl font-bold uppercase mb-12 flex items-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            OUR <span className="text-red-600">TEAMS</span>
+            <Users className="mr-3 text-red-600" />
+            MEET <span className="text-red-600 ml-2">OUR TEAM</span>
           </motion.h2>
 
-          <motion.div
-            className="grid md:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {/* Team cards */}
-            {[
-              {
-                name: "Zero Error Apex",
-                game: "Tactical Shooter",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-              {
-                name: "Zero Error Legends",
-                game: "MOBA",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-              {
-                name: "Zero Error Royale",
-                game: "Battle Royale",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-              {
-                name: "Zero Error Fighters",
-                game: "Fighting Games",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-              {
-                name: "Zero Error Strategy",
-                game: "RTS",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-              {
-                name: "Zero Error Academy",
-                game: "Multi-Game",
-                image: "/placeholder.svg?height=250&width=400",
-              },
-            ].map((team, index) => (
-              <motion.div
-                key={index}
-                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.2)]"
-                variants={itemVariants}
-                whileHover={{ y: -10, borderColor: "rgba(220,38,38,0.5)" }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <div className="relative h-[200px] overflow-hidden">
-                  <Image
-                    src={team.image || "/placeholder.svg"}
-                    alt={team.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-                </div>
-                <div className="p-6">
-                  <motion.h3 className="text-xl font-bold mb-2 group-hover:text-red-500 transition-colors duration-300">
-                    {team.name}
-                  </motion.h3>
-
-                  <motion.p className="text-zinc-400 mb-4">
-                    {team.game}
-                  </motion.p>
-
-                  <motion.div
-                    className="grid grid-cols-5 gap-2 mb-6"
-                    initial={{ opacity: 0.7 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    {[1, 2, 3, 4, 5].map((player) => (
-                      <motion.div
-                        key={player}
-                        className="relative h-12 w-12 rounded-full overflow-hidden border-2 border-transparent hover:border-red-600 transition-colors duration-300"
-                        whileHover={{ scale: 1.15, y: -3 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 10,
-                        }}
-                      >
-                        <Image
-                          src={`/placeholder.svg?height=48&width=48`}
-                          alt={`Player ${player}`}
-                          fill
-                          className="object-cover"
-                        />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-
-                  <Link href="#">
-                    <motion.div
-                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
-                      whileHover={{ x: 5 }}
-                    >
-                      Team Details
-                      <motion.span
-                        initial={{ x: 0 }}
-                        animate={{ x: [0, 3, 0] }}
-                        transition={{
-                          repeat: Infinity,
-                          repeatDelay: 1,
-                          duration: 1,
-                        }}
-                      >
-                        <ChevronRight className="ml-1 h-3 w-3" />
-                      </motion.span>
-                    </motion.div>
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Render each department's members */}
+          {renderTeamCards(teamMembers.leadership, "leadership")}
+          {renderTeamCards(teamMembers.executives, "executives")}
+          {renderTeamCards(teamMembers.content, "content")}
+          {renderTeamCards(teamMembers.operations, "operations")}
         </div>
       </section>
 
       {/* Join Our Teams */}
-      <section className="py-16 bg-zinc-950 relative">
+      <section className="py-16 relative">
         {/* Subtle diagonal pattern background */}
         <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
 
@@ -429,7 +381,7 @@ export default function TeamsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              JOIN OUR <span className="text-red-600">TEAMS</span>
+              JOIN OUR <span className="text-red-600">TEAM</span>
             </motion.h2>
 
             <motion.p
@@ -439,9 +391,9 @@ export default function TeamsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              Zero Error Esports is always looking for talented players to join
-              our competitive teams. If you have what it takes to compete at the
-              highest level, we want to hear from you.
+              Zero Error Esports is always looking for talented individuals to
+              join our team. If you have a passion for esports and want to be
+              part of our growing organization, we want to hear from you.
             </motion.p>
 
             <motion.div
@@ -450,7 +402,7 @@ export default function TeamsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <Link href="/signup">
+              <Link href="/careers">
                 <motion.div
                   className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-md uppercase font-bold text-sm inline-flex items-center relative overflow-hidden group shadow-[0_0_15px_rgba(150,0,0,0.3)]"
                   whileHover={{
@@ -461,7 +413,7 @@ export default function TeamsPage() {
                 >
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                   <span className="relative z-10 flex items-center">
-                    Apply Now
+                    View Open Positions
                     <motion.span
                       initial={{ x: 0 }}
                       animate={{ x: [0, 5, 0] }}

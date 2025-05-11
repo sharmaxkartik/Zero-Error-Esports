@@ -171,10 +171,10 @@ export default function EventsPage() {
                   transition={{ duration: 0.5 }}
                 >
                   <Image
-                    src="/placeholder.svg?height=400&width=600"
+                    src="/images/gamocon.png?height=200&width=200"
                     alt="Featured Event"
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                   <motion.div
                     className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 uppercase text-sm font-bold shadow-[0_0_10px_rgba(200,0,0,0.4)]"
@@ -205,7 +205,7 @@ export default function EventsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                FasterUI Championship Series 2025
+                GAME’O’CON 25
               </motion.h2>
 
               <motion.div

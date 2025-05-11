@@ -13,8 +13,6 @@ import {
   ArrowLeft,
   Clock,
 } from "lucide-react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { useParams } from "next/navigation";
 
 // Game O Con sub-events data
@@ -225,9 +223,6 @@ export default function GameOConPage() {
         <div className="absolute inset-0 bg-radial-gradient z-0"></div>
       </div>
 
-      {/* Navbar */}
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         {/* Background grid effect */}
@@ -261,19 +256,23 @@ export default function GameOConPage() {
             className="text-center max-w-3xl mx-auto mb-12"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-orbitron">
-              <span className="text-red-600 glow-text">GAME O CON</span>
+              <span className="text-red-600 glow-text">GAME'O'CON 25</span>
             </h1>
             <p className="text-xl text-zinc-300 mb-6">
               The premier gaming event of the FasterUI Championship Series 2025
             </p>
-            <div className="flex items-center justify-center gap-6 text-zinc-400 mb-8">
-              <div className="flex items-center">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-zinc-400 mb-8">
+              <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <Calendar className="h-5 w-5 mr-2 text-red-500" />
                 <span>June 15-20, 2025</span>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <MapPin className="h-5 w-5 mr-2 text-red-500" />
                 <span>Los Angeles Convention Center</span>
+              </div>
+              <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
+                <Users className="h-5 w-5 mr-2 text-red-500" />
+                <span>10,000+ Attendees</span>
               </div>
             </div>
           </motion.div>
@@ -323,19 +322,23 @@ export default function GameOConPage() {
                 className="block"
               >
                 <motion.div
-                  className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.2)] h-full cursor-pointer"
+                  className="bg-zinc-900/80 rounded-xl overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] h-full cursor-pointer relative"
                   variants={itemVariants}
-                  whileHover={{ y: -10, borderColor: "rgba(220,38,38,0.5)" }}
+                  whileHover={{
+                    y: -10,
+                    borderColor: "rgba(220,38,38,0.5)",
+                    boxShadow: "0 0 30px rgba(220,38,38,0.3)",
+                  }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <div className="relative h-[200px] overflow-hidden">
+                  <div className="relative h-[220px] overflow-hidden">
                     <Image
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
 
                     {/* Category badge */}
                     <div className="absolute top-4 left-4 z-10">
@@ -343,11 +346,24 @@ export default function GameOConPage() {
                         {event.category}
                       </span>
                     </div>
+
+                    {/* Prize pool badge for tournaments */}
+                    {event.prizePool !== "N/A" && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <span className="bg-amber-500/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
+                          {event.prizePool}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
                     <motion.h3 className="text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
                       {event.title}
                     </motion.h3>
+
+                    <div className="mb-4 text-sm text-zinc-400 line-clamp-2">
+                      {event.description}
+                    </div>
 
                     <motion.div
                       className="flex items-center gap-2 text-zinc-400 mb-2"
@@ -370,7 +386,7 @@ export default function GameOConPage() {
                       whileHover={{ x: 3 }}
                     >
                       <MapPin className="h-4 w-4 text-red-500" />
-                      <span className="text-sm">{event.location}</span>
+                      <span className="text-sm truncate">{event.location}</span>
                     </motion.div>
 
                     <motion.div
@@ -382,7 +398,7 @@ export default function GameOConPage() {
                     </motion.div>
 
                     <motion.div
-                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
+                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors mt-4 pt-3 border-t border-zinc-800"
                       whileHover={{ x: 5 }}
                     >
                       View Details
@@ -422,7 +438,7 @@ export default function GameOConPage() {
           </motion.h2>
 
           <motion.div
-            className="bg-zinc-900/80 backdrop-blur-md rounded-xl p-8 border border-zinc-800"
+            className="bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 backdrop-blur-md rounded-xl p-8 border border-zinc-800 shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -430,86 +446,107 @@ export default function GameOConPage() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Day 1 */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Calendar className="mr-2 h-5 w-5 text-red-500" />
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+              >
+                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                  <Calendar className="mr-2 h-5 w-5" />
                   Day 1 (June 15)
                 </h3>
                 <ul className="space-y-4">
-                  <li className="border-l-2 border-red-600 pl-4 py-1">
+                  <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
                     <span className="text-red-500 font-medium">10:00 AM</span>
                     <p className="font-bold">Opening Ceremony</p>
                     <p className="text-sm text-zinc-400">Main Stage</p>
                   </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">12:00 PM</span>
                     <p className="font-bold">Valorant Tournament Begins</p>
                     <p className="text-sm text-zinc-400">Main Stage</p>
                   </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">2:00 PM</span>
                     <p className="font-bold">Indie Games Showcase Opens</p>
                     <p className="text-sm text-zinc-400">Innovation Hall</p>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
 
               {/* Day 3 */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Calendar className="mr-2 h-5 w-5 text-red-500" />
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+              >
+                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                  <Calendar className="mr-2 h-5 w-5" />
                   Day 3 (June 17)
                 </h3>
                 <ul className="space-y-4">
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">10:00 AM</span>
                     <p className="font-bold">Fighting Games Showdown Begins</p>
                     <p className="text-sm text-zinc-400">East Hall</p>
                   </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">1:00 PM</span>
                     <p className="font-bold">Pro Player Meet & Greet</p>
                     <p className="text-sm text-zinc-400">Fan Zone</p>
                   </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">4:00 PM</span>
                     <p className="font-bold">CS2 Semifinals</p>
                     <p className="text-sm text-zinc-400">West Hall</p>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
 
               {/* Day 6 */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <Calendar className="mr-2 h-5 w-5 text-red-500" />
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+              >
+                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                  <Calendar className="mr-2 h-5 w-5" />
                   Day 6 (June 20)
                 </h3>
                 <ul className="space-y-4">
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">12:00 PM</span>
                     <p className="font-bold">League of Legends Finals</p>
                     <p className="text-sm text-zinc-400">South Hall</p>
                   </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1">
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">4:00 PM</span>
                     <p className="font-bold">Championship Finals</p>
                     <p className="text-sm text-zinc-400">Main Arena</p>
                   </li>
-                  <li className="border-l-2 border-red-600 pl-4 py-1">
+                  <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
                     <span className="text-red-500 font-medium">9:00 PM</span>
                     <p className="font-bold">Closing Ceremony</p>
                     <p className="text-sm text-zinc-400">Main Arena</p>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="mt-8 text-center">
+            <div className="mt-10 text-center">
               <Link href="/events/gameocon/schedule">
                 <motion.button
-                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-md inline-flex items-center"
-                  whileHover={{ scale: 1.05 }}
+                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md inline-flex items-center shadow-lg"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(220,38,38,0.3)",
+                  }}
                   whileTap={{ scale: 0.95 }}
                 >
                   View Full Schedule
@@ -561,16 +598,24 @@ export default function GameOConPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }
 
 export function EventDetailPage() {
   const { id } = useParams();
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState<{
+    id: string;
+    title: string;
+    date: string;
+    time: string;
+    location: string;
+    participants: string;
+    image: string;
+    category: string;
+    description: string;
+    prizePool: string;
+  } | null>(null);
 
   useEffect(() => {
     const foundEvent = gameOConEvents.find((e) => e.id === id);
