@@ -35,7 +35,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen bg-transparent text-white overflow-hidden">
       {/* Hero Section */}
       <section className="relative h-[500px] md:h-[600px] overflow-hidden">
         {/* Background grid effect */}
@@ -283,7 +283,7 @@ export default function AboutPage() {
             ].map((mission, index) => (
               <motion.div
                 key={index}
-                className="bg-zinc-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
+                className="bg-transparent backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-zinc-800/50 shadow-lg hover:shadow-red-900/20 transition-all duration-300"
                 variants={itemVariants}
                 whileHover={{
                   y: -10,
@@ -336,25 +336,27 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {/* Team members */}
             {[
               {
                 name: "Aazam Khan",
                 role: "Founder & CEO",
                 icon: <Zap className="w-4 h-4" />,
                 bio: "",
+                image: "/images/minecraft.jpeg",
               },
               {
                 name: "Priyesh Kekan",
                 role: "Co-founder",
                 icon: <TrendingUp className="w-4 h-4" />,
                 bio: "",
+                image: "/images/gow.jpg",
               },
               {
                 name: "Deepanshu Savita",
                 role: "Co-founder",
                 icon: <Trophy className="w-4 h-4" />,
                 bio: "",
+                image: "/images/lol.avif",
               },
             ].map((member, index) => (
               <motion.div
@@ -365,7 +367,7 @@ export default function AboutPage() {
               >
                 <div className="relative h-[350px] w-full mb-5 overflow-hidden rounded-xl border border-zinc-800 shadow-lg">
                   <Image
-                    src={`/images/story.jpg?height=350&width=300`}
+                    src={member.image}
                     alt={member.name}
                     fill
                     className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
