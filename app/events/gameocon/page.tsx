@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
   ChevronRight,
@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ArrowLeft,
   Clock,
+  X,
   Trophy,
 } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -30,6 +31,14 @@ const gameOConEvents = [
     description:
       "Central India's biggest BGMI tournament featuring 128 teams competing for glory and impressive prize pool.",
     prizePool: "₹2,00,000",
+    coordinator: "Sarah Chen",
+    coordinatorRole: "Tournament Director",
+    bulletPoints: [
+      "128 teams from across Central India",
+      "One-day tournament with group stages and playoffs",
+      "Professional commentary and production",
+      "Meet and greet with pro players",
+    ],
   },
   {
     id: "valorant-championship",
@@ -43,6 +52,14 @@ const gameOConEvents = [
     description:
       "Two-day Valorant tournament featuring the top 32 teams from Central India competing for an impressive prize pool.",
     prizePool: "₹1,00,000",
+    coordinator: "Sarah Chen",
+    coordinatorRole: "Tournament Director",
+    bulletPoints: [
+      "32 teams from around the region",
+      "Two-day tournament with group stages and playoffs",
+      "Professional commentary and production",
+      "Meet and greet with pro players",
+    ],
   },
   {
     id: "cosplay-competition",
@@ -56,6 +73,14 @@ const gameOConEvents = [
     description:
       "Showcase your best gaming character cosplay and compete for amazing prizes and recognition.",
     prizePool: "₹50,000",
+    coordinator: "Mia Johnson",
+    coordinatorRole: "Cosplay Director",
+    bulletPoints: [
+      "50+ cosplayers showcasing their creativity",
+      "Multiple categories for all skill levels",
+      "Professional cosplay judges",
+      "Photography area with professional lighting",
+    ],
   },
   {
     id: "gaming-expo",
@@ -69,6 +94,14 @@ const gameOConEvents = [
     description:
       "Explore the latest gaming gear, merchandise, and innovations from top brands and local creators.",
     prizePool: "N/A",
+    coordinator: "Alex Rivera",
+    coordinatorRole: "Expo Manager",
+    bulletPoints: [
+      "30+ exhibitors showcasing gaming gear",
+      "Exclusive discounts on gaming merchandise",
+      "Hands-on demos with the latest tech",
+      "Networking opportunities with industry leaders",
+    ],
   },
 ];
 
@@ -76,6 +109,9 @@ export default function GameOConPage() {
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [selectedEvent, setSelectedEvent] = useState<
+    (typeof gameOConEvents)[0] | null
+  >(null);
 
   // Get unique categories
   const categories = Array.from(
@@ -126,6 +162,19 @@ export default function GameOConPage() {
       y: 0,
       opacity: 1,
       transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
+    },
+  };
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.9,
+      transition: { duration: 0.2, ease: "easeIn" },
     },
   };
 
@@ -275,7 +324,7 @@ export default function GameOConPage() {
                   </div>
                 </div>
 
-                <Link href="/events/carnival">
+                <Link href="/events/gameocon/bgmi-tournament">
                   <motion.button
                     className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
                     whileHover={{
@@ -332,289 +381,198 @@ export default function GameOConPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {filteredEvents.map((event, index) => (
-              <Link
-                href={`/events/gameocon/${event.id}`}
+            {filteredEvents.map((event) => (
+              <motion.div
                 key={event.id}
-                className="block"
+                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(220,0,0,0.2)] h-full cursor-pointer relative"
+                onClick={() => setSelectedEvent(event)}
               >
-                <motion.div
-                  className="bg-zinc-900/80 rounded-xl overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] h-full cursor-pointer relative"
-                  variants={itemVariants}
-                  whileHover={{
-                    y: -10,
-                    borderColor: "rgba(220,38,38,0.5)",
-                    boxShadow: "0 0 30px rgba(220,38,38,0.3)",
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <div className="relative h-[220px] overflow-hidden">
-                    <Image
-                      src={event.image || "/placeholder.svg"}
-                      alt={event.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
+                {/* Event Image */}
+                <div className="relative h-[200px] overflow-hidden">
+                  <Image
+                    src={event.image || "/placeholder.svg"}
+                    alt={event.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
 
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
-                        {event.category}
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
+                      {event.category}
+                    </span>
+                  </div>
+
+                  {/* Prize Pool Badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="bg-yellow-500/90 backdrop-blur-sm text-black text-xs px-3 py-1 rounded-full font-medium">
+                      {event.prizePool}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Event Details */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-4 text-white">
+                    {event.title}
+                  </h3>
+                  <p className="text-sm text-zinc-400 mb-6">
+                    {event.description}
+                  </p>
+
+                  {/* Event Info */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-5 w-5 text-red-500" />
+                      <span className="text-sm text-zinc-400">
+                        {event.date}
                       </span>
                     </div>
-
-                    {/* Prize pool badge for tournaments */}
-                    {event.prizePool !== "N/A" && (
-                      <div className="absolute top-4 right-4 z-10">
-                        <span className="bg-amber-500/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
-                          {event.prizePool}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <motion.h3 className="text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
-                      {event.title}
-                    </motion.h3>
-
-                    <div className="mb-4 text-sm text-zinc-400 line-clamp-2">
-                      {event.description}
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-5 w-5 text-red-500" />
+                      <span className="text-sm text-zinc-400">
+                        {event.time}
+                      </span>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-5 w-5 text-red-500" />
+                      <span className="text-sm text-zinc-400">
+                        {event.location}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="h-5 w-5 text-red-500" />
+                      <span className="text-sm text-zinc-400">
+                        {event.participants}
+                      </span>
+                    </div>
+                  </div>
 
+                  {/* View Details Button */}
+                  <div className="mt-6">
                     <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-2"
-                      whileHover={{ x: 3 }}
-                    >
-                      <Calendar className="h-4 w-4 text-red-500" />
-                      <span className="text-sm">{event.date}</span>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-2"
-                      whileHover={{ x: 3 }}
-                    >
-                      <Clock className="h-4 w-4 text-red-500" />
-                      <span className="text-sm">{event.time}</span>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-2"
-                      whileHover={{ x: 3 }}
-                    >
-                      <MapPin className="h-4 w-4 text-red-500" />
-                      <span className="text-sm truncate">{event.location}</span>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-2 text-zinc-400 mb-4"
-                      whileHover={{ x: 3 }}
-                    >
-                      <Users className="h-4 w-4 text-red-500" />
-                      <span className="text-sm">{event.participants}</span>
-                    </motion.div>
-
-                    <motion.div
-                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors mt-4 pt-3 border-t border-zinc-800"
+                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
                       whileHover={{ x: 5 }}
                     >
                       View Details
-                      <motion.span
-                        initial={{ x: 0 }}
-                        animate={{ x: [0, 3, 0] }}
-                        transition={{
-                          repeat: Number.POSITIVE_INFINITY,
-                          repeatDelay: 1,
-                          duration: 1,
-                        }}
-                      >
-                        <ChevronRight className="ml-1 h-3 w-3" />
-                      </motion.span>
+                      <ChevronRight className="ml-1 h-3 w-3" />
                     </motion.div>
                   </div>
-                </motion.div>
-              </Link>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Schedule Overview */}
-      <section className="py-16 relative bg-zinc-950/50">
-        <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.h2
-            className="text-3xl font-bold uppercase mb-12 font-orbitron text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            EVENT <span className="text-red-600">SCHEDULE</span>
-          </motion.h2>
-
+      {/* Event Detail Modal */}
+      <AnimatePresence>
+        {selectedEvent && (
           <motion.div
-            className="bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 backdrop-blur-md rounded-xl p-8 border border-zinc-800 shadow-lg"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Morning Schedule */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
-              >
-                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Morning (May 24)
-                </h3>
-                <ul className="space-y-4">
-                  <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
-                    <span className="text-red-500 font-medium">9:00 AM</span>
-                    <p className="font-bold">Registration Opens</p>
-                    <p className="text-sm text-zinc-400">Main Entrance</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">10:00 AM</span>
-                    <p className="font-bold">Opening Ceremony</p>
-                    <p className="text-sm text-zinc-400">Main Stage</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">11:00 AM</span>
-                    <p className="font-bold">BGMI Tournament Group Stage</p>
-                    <p className="text-sm text-zinc-400">Main Arena</p>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Afternoon Schedule */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
-              >
-                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Afternoon (May 24)
-                </h3>
-                <ul className="space-y-4">
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">1:00 PM</span>
-                    <p className="font-bold">Valorant Tournament Begins</p>
-                    <p className="text-sm text-zinc-400">Esports Arena</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">2:00 PM</span>
-                    <p className="font-bold">Cosplay Competition</p>
-                    <p className="text-sm text-zinc-400">Center Stage</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">3:30 PM</span>
-                    <p className="font-bold">Gaming Industry Panel</p>
-                    <p className="text-sm text-zinc-400">Conference Hall</p>
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Evening Schedule */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
-              >
-                <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Evening (May 24)
-                </h3>
-                <ul className="space-y-4">
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">5:00 PM</span>
-                    <p className="font-bold">BGMI Tournament Quarterfinals</p>
-                    <p className="text-sm text-zinc-400">Main Arena</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">6:30 PM</span>
-                    <p className="font-bold">BGMI Tournament Finals</p>
-                    <p className="text-sm text-zinc-400">Main Arena</p>
-                  </li>
-                  <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
-                    <span className="text-red-500 font-medium">8:00 PM</span>
-                    <p className="font-bold">Award Ceremony & Closing</p>
-                    <p className="text-sm text-zinc-400">Main Stage</p>
-                  </li>
-                </ul>
-              </motion.div>
-            </div>
-
-            <div className="mt-10 text-center">
-              <Link href="/events/gameocon/schedule">
-                <motion.button
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md inline-flex items-center shadow-lg"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 0 20px rgba(220,38,38,0.3)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  View Full Schedule
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 relative">
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="bg-gradient-to-r from-red-900/20 via-black to-red-900/20 rounded-xl p-12 border border-red-900/20 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedEvent(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-zinc-900 to-black border border-red-900/30 rounded-xl shadow-[0_0_25px_rgba(220,0,0,0.2)]"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">
-                GET YOUR <span className="text-red-600">TICKETS</span> NOW
-              </h2>
-              <p className="text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
-                Don't miss out on the gaming event of the year. Secure your spot
-                at Game O Con before tickets sell out!
-              </p>
-              <Link href="/signup">
-                <motion.button
-                  className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center mx-auto"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 0 20px rgba(220, 38, 38, 0.5)",
-                  }}
-                  whileTap={{ scale: 0.98 }}
+              {/* Modal Header Image */}
+              <div className="relative h-[200px] md:h-[300px] w-full overflow-hidden">
+                <Image
+                  src={selectedEvent.image || "/placeholder.svg"}
+                  alt={selectedEvent.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+                <button
+                  className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-red-900/50 transition-colors z-10"
+                  onClick={() => setSelectedEvent(null)}
                 >
-                  Register Now
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </motion.button>
-              </Link>
+                  <X className="h-5 w-5" />
+                </button>
+                <div className="absolute bottom-0 left-0 w-full p-6">
+                  <h2 className="text-3xl md:text-4xl font-bold font-orbitron">
+                    {selectedEvent.title}
+                  </h2>
+                  <p className="text-red-500 uppercase tracking-wider">
+                    {selectedEvent.date}
+                  </p>
+                </div>
+              </div>
+
+              {/* Modal Content */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                {/* Coordinator Section */}
+                <div className="bg-black/50 border border-red-900/20 rounded-lg p-6">
+                  <h3 className="text-xl font-bold uppercase text-center mb-4 text-red-500">
+                    COORDINATOR
+                  </h3>
+                  <div className="flex flex-col items-center">
+                    <div className="w-32 h-32 rounded-full bg-zinc-800 border-2 border-red-600 mb-4 overflow-hidden relative">
+                      <Image
+                        src="/placeholder.svg?height=128&width=128"
+                        alt={selectedEvent.coordinator}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <h4 className="text-xl font-bold text-center">
+                      {selectedEvent.coordinator}
+                    </h4>
+                    <p className="text-zinc-400 text-center">
+                      {selectedEvent.coordinatorRole}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Event Details Section */}
+                <div className="md:col-span-2">
+                  <h3 className="text-2xl font-bold uppercase mb-4 text-red-500">
+                    EVENT DETAILS
+                  </h3>
+
+                  <div className="flex items-start gap-2 mb-4">
+                    <Trophy className="text-yellow-500 h-5 w-5 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="font-bold text-lg">
+                        {selectedEvent.title} | ZERO ERROR 2025
+                      </p>
+                      <p className="text-zinc-300">
+                        {selectedEvent.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3 mt-6">
+                    {selectedEvent.bulletPoints.map((point, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-red-500 font-bold">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8 flex items-center gap-2">
+                    <div className="bg-red-900/30 p-2 rounded-full">
+                      <Users className="h-5 w-5 text-red-500" />
+                    </div>
+                    <p className="text-red-400">Limited slots available!</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
