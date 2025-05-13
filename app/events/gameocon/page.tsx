@@ -324,7 +324,7 @@ export default function GameOConPage() {
                   </div>
                 </div>
 
-                <Link href="/events/gameocon/bgmi-tournament">
+                <Link href="/events/carnival">
                   <motion.button
                     className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
                     whileHover={{
@@ -463,6 +463,116 @@ export default function GameOConPage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Event Schedule Section */}
+      <section id="schedule" className="py-16 relative bg-zinc-950">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.h2
+            className="text-3xl font-bold uppercase mb-12 font-orbitron text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            EVENT <span className="text-red-600">SCHEDULE</span>
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Morning Schedule */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+            >
+              <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                <Calendar className="mr-2 h-5 w-5" />
+                Morning (May 24)
+              </h3>
+              <ul className="space-y-4">
+                <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
+                  <span className="text-red-500 font-medium">9:00 AM</span>
+                  <p className="font-bold">Registration Opens</p>
+                  <p className="text-sm text-zinc-400">Main Entrance</p>
+                </li>
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">10:00 AM</span>
+                  <p className="font-bold">Opening Ceremony</p>
+                  <p className="text-sm text-zinc-400">Main Stage</p>
+                </li>
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">11:00 AM</span>
+                  <p className="font-bold">BGMI Tournament Group Stage</p>
+                  <p className="text-sm text-zinc-400">Main Arena</p>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Afternoon Schedule */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+            >
+              <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                <Calendar className="mr-2 h-5 w-5" />
+                Afternoon (May 24)
+              </h3>
+              <ul className="space-y-4">
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">1:00 PM</span>
+                  <p className="font-bold">Valorant Tournament Begins</p>
+                  <p className="text-sm text-zinc-400">Esports Arena</p>
+                </li>
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">2:00 PM</span>
+                  <p className="font-bold">Cosplay Competition</p>
+                  <p className="text-sm text-zinc-400">Center Stage</p>
+                </li>
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">3:30 PM</span>
+                  <p className="font-bold">Gaming Industry Panel</p>
+                  <p className="text-sm text-zinc-400">Conference Hall</p>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Evening Schedule */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800/50"
+            >
+              <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
+                <Calendar className="mr-2 h-5 w-5" />
+                Evening (May 24)
+              </h3>
+              <ul className="space-y-4">
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">5:00 PM</span>
+                  <p className="font-bold">BGMI Tournament Quarterfinals</p>
+                  <p className="text-sm text-zinc-400">Main Arena</p>
+                </li>
+                <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                  <span className="text-red-500 font-medium">6:30 PM</span>
+                  <p className="font-bold">BGMI Tournament Finals</p>
+                  <p className="text-sm text-zinc-400">Main Arena</p>
+                </li>
+                <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
+                  <span className="text-red-500 font-medium">8:00 PM</span>
+                  <p className="font-bold">Award Ceremony & Closing</p>
+                  <p className="text-sm text-zinc-400">Main Stage</p>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
         </div>
       </section>
 
