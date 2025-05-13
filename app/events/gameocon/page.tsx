@@ -275,7 +275,7 @@ export default function GameOConPage() {
                   </div>
                 </div>
 
-                <Link href="/events/gameocon/bgmi-tournament">
+                <Link href="/events/carnival">
                   <motion.button
                     className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
                     whileHover={{
