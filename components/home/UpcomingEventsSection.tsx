@@ -27,10 +27,15 @@ const UpcomingEventsSection = () => {
 
   const events = [
     {
-      title: "GAME’O’CON 25",
-      date: "July 8-10, 2025",
+      title: "GAME'O'CON 25",
+      date: "24th May, 2025",
       location: "Gwalior, Madhya Pradesh",
-      image: "/images/gamocon.png", // Ensure this path is correct
+      image: {
+        src: "/images/gamocon.png",
+        width: 800,
+        height: 600,
+        alt: "GAME'O'CON 25 Event",
+      },
       category: "Event",
       icon: <Calendar className="w-4 h-4" />,
     },
@@ -95,10 +100,10 @@ const UpcomingEventsSection = () => {
               >
                 <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
                   <Image
-                    src={event.image || "/placeholder.svg"}
-                    alt={event.title}
+                    src={event.image.src || "/images/gameocon.png"}
+                    alt={event.image.alt || event.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                    className="object-contain group-hover:scale-110 transition-transform duration-700 ease-in-out"
                   />
                   <motion.div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                   <div className="absolute bottom-0 left-0 p-5 w-full">
