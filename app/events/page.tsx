@@ -217,7 +217,7 @@ export default function EventsPage() {
                 whileHover={{ x: 5 }}
               >
                 <Calendar className="h-5 w-5 text-red-500" />
-                <span>June 15-20, 2025</span>
+                <span>24th May, 2025</span>
               </motion.div>
 
               <motion.div
@@ -229,7 +229,7 @@ export default function EventsPage() {
                 whileHover={{ x: 5 }}
               >
                 <MapPin className="h-5 w-5 text-red-500" />
-                <span>Los Angeles Convention Center, CA</span>
+                <span>ITM Gwalior</span>
               </motion.div>
 
               <motion.p
@@ -239,10 +239,7 @@ export default function EventsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                The premier esports event of the year returns with an expanded
-                format, featuring competitions across multiple game titles,
-                meet-and-greets with pro players, exclusive merchandise, and
-                more. Don't miss the biggest FasterUI event of the year!
+                Central India’s Biggest Gaming & Esports Carnival!
               </motion.p>
 
               <motion.div

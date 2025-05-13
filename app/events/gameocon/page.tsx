@@ -12,127 +12,63 @@ import {
   ArrowRight,
   ArrowLeft,
   Clock,
+  Trophy,
 } from "lucide-react";
 import { useParams } from "next/navigation";
 
 // Game O Con sub-events data
 const gameOConEvents = [
   {
+    id: "bgmi-tournament",
+    title: "BGMI Tournament",
+    date: "May 24, 2025",
+    time: "10:00 AM - 8:00 PM",
+    location: "Main Arena, ITM Gwalior",
+    participants: "128 Teams",
+    image: "/images/bgmi.avif?height=300&width=500",
+    category: "Tournament",
+    description:
+      "Central India's biggest BGMI tournament featuring 128 teams competing for glory and impressive prize pool.",
+    prizePool: "₹2,00,000",
+  },
+  {
     id: "valorant-championship",
     title: "Valorant Championship",
-    date: "June 15-17, 2025",
-    time: "10:00 AM - 8:00 PM",
-    location: "Main Stage, Los Angeles Convention Center",
+    date: "May 24-25, 2025",
+    time: "11:00 AM - 6:00 PM",
+    location: "Esports Arena, ITM Gwalior",
     participants: "32 Teams",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
     description:
-      "The premier Valorant tournament featuring the top 32 teams from around the world competing for a $200,000 prize pool.",
-    prizePool: "$200,000",
-  },
-  {
-    id: "cs2-invitational",
-    title: "Counter-Strike 2 Invitational",
-    date: "June 16-18, 2025",
-    time: "11:00 AM - 9:00 PM",
-    location: "West Hall, Los Angeles Convention Center",
-    participants: "16 Teams",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Tournament",
-    description:
-      "Sixteen of the world's best CS2 teams battle it out in this high-stakes tournament with a $150,000 prize pool.",
-    prizePool: "$150,000",
-  },
-  {
-    id: "league-of-legends-cup",
-    title: "League of Legends Cup",
-    date: "June 18-20, 2025",
-    time: "12:00 PM - 10:00 PM",
-    location: "South Hall, Los Angeles Convention Center",
-    participants: "12 Teams",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Tournament",
-    description:
-      "The most prestigious LoL tournament of the year featuring the top teams from all major regions.",
-    prizePool: "$175,000",
-  },
-  {
-    id: "fighting-games-showdown",
-    title: "Fighting Games Showdown",
-    date: "June 17-19, 2025",
-    time: "10:00 AM - 7:00 PM",
-    location: "East Hall, Los Angeles Convention Center",
-    participants: "Open Registration",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Tournament",
-    description:
-      "Multiple fighting game tournaments including Street Fighter 6, Tekken 8, and Mortal Kombat 1.",
-    prizePool: "$100,000",
+      "Two-day Valorant tournament featuring the top 32 teams from Central India competing for an impressive prize pool.",
+    prizePool: "₹1,00,000",
   },
   {
     id: "cosplay-competition",
-    title: "Cosplay Championship",
-    date: "June 19, 2025",
-    time: "2:00 PM - 6:00 PM",
-    location: "Center Stage, Los Angeles Convention Center",
-    participants: "Open Registration",
+    title: "Cosplay Competition",
+    date: "May 24, 2025",
+    time: "2:00 PM - 5:00 PM",
+    location: "Center Stage, ITM Gwalior",
+    participants: "50+ Cosplayers",
     image: "/placeholder.svg?height=300&width=500",
     category: "Competition",
     description:
-      "Show off your best gaming-inspired cosplay and compete for prizes in multiple categories.",
-    prizePool: "$10,000",
+      "Showcase your best gaming character cosplay and compete for amazing prizes and recognition.",
+    prizePool: "₹50,000",
   },
   {
-    id: "indie-showcase",
-    title: "Indie Games Showcase",
-    date: "June 15-20, 2025",
-    time: "10:00 AM - 6:00 PM",
-    location: "Innovation Hall, Los Angeles Convention Center",
-    participants: "50+ Developers",
+    id: "gaming-expo",
+    title: "Gaming Expo & Marketplace",
+    date: "May 24, 2025",
+    time: "9:00 AM - 8:00 PM",
+    location: "Exhibition Hall, ITM Gwalior",
+    participants: "30+ Exhibitors",
     image: "/placeholder.svg?height=300&width=500",
-    category: "Exhibition",
+    category: "Expo",
     description:
-      "Discover the next big indie games and meet the developers behind them in this week-long showcase.",
+      "Explore the latest gaming gear, merchandise, and innovations from top brands and local creators.",
     prizePool: "N/A",
-  },
-  {
-    id: "pro-player-meet-greet",
-    title: "Pro Player Meet & Greet",
-    date: "June 16-19, 2025",
-    time: "1:00 PM - 4:00 PM",
-    location: "Fan Zone, Los Angeles Convention Center",
-    participants: "30+ Pro Players",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Fan Event",
-    description:
-      "Meet your favorite pro players, get autographs, and take photos in this special fan event.",
-    prizePool: "N/A",
-  },
-  {
-    id: "hardware-expo",
-    title: "Gaming Hardware Expo",
-    date: "June 15-20, 2025",
-    time: "10:00 AM - 7:00 PM",
-    location: "Tech Pavilion, Los Angeles Convention Center",
-    participants: "20+ Vendors",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Exhibition",
-    description:
-      "Check out the latest gaming hardware, peripherals, and tech from leading manufacturers.",
-    prizePool: "N/A",
-  },
-  {
-    id: "championship-finals",
-    title: "Championship Finals",
-    date: "June 20, 2025",
-    time: "4:00 PM - 10:00 PM",
-    location: "Main Arena, Los Angeles Convention Center",
-    participants: "Finalist Teams",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Tournament",
-    description:
-      "The epic conclusion to Game O Con featuring the finals of all major tournaments and a special closing ceremony.",
-    prizePool: "Grand Finals",
   },
 ];
 
@@ -259,20 +195,20 @@ export default function GameOConPage() {
               <span className="text-red-600 glow-text">GAME'O'CON 25</span>
             </h1>
             <p className="text-xl text-zinc-300 mb-6">
-              The premier gaming event of the FasterUI Championship Series 2025
+              Central India's Biggest Gaming & Esports Carnival
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 text-zinc-400 mb-8">
               <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <Calendar className="h-5 w-5 mr-2 text-red-500" />
-                <span>June 15-20, 2025</span>
+                <span>24th May, 2025</span>
               </div>
               <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <MapPin className="h-5 w-5 mr-2 text-red-500" />
-                <span>Los Angeles Convention Center</span>
+                <span>ITM Gwalior</span>
               </div>
               <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <Users className="h-5 w-5 mr-2 text-red-500" />
-                <span>10,000+ Attendees</span>
+                <span>8,000+ Attendees</span>
               </div>
             </div>
           </motion.div>
@@ -284,6 +220,103 @@ export default function GameOConPage() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mb-16"
           ></motion.div>
+        </div>
+      </section>
+
+      {/* BGMI Tournament Spotlight */}
+      <section className="py-16 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="bg-gradient-to-r from-red-900/20 via-zinc-900/80 to-red-900/20 rounded-xl overflow-hidden border border-red-900/30"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-8 lg:p-12">
+                <div className="inline-flex items-center bg-red-600/20 text-red-500 px-3 py-1 rounded-full text-sm font-medium mb-6">
+                  <Trophy className="h-4 w-4 mr-2" />
+                  Flagship Tournament
+                </div>
+
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">
+                  BGMI <span className="text-red-600">TOURNAMENT</span>
+                </h2>
+
+                <p className="text-lg text-zinc-300 mb-6">
+                  Central India's biggest BGMI tournament featuring 128 teams
+                  competing for glory and an impressive prize pool of ₹2,00,000.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-red-900/30 p-2 rounded-full">
+                      <Users className="h-5 w-5 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium">128 Teams</p>
+                      <p className="text-sm text-zinc-400">
+                        From across Central India
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="bg-red-900/30 p-2 rounded-full">
+                      <Calendar className="h-5 w-5 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium">May 24, 2025</p>
+                      <p className="text-sm text-zinc-400">
+                        Group stage starts at 11:00 AM
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="bg-red-900/30 p-2 rounded-full">
+                      <Trophy className="h-5 w-5 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium">₹2,00,000 Prize Pool</p>
+                      <p className="text-sm text-zinc-400">
+                        For winners and runners-up
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <Link href="/events/gameocon/bgmi-tournament">
+                  <motion.button
+                    className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 0 15px rgba(220,38,38,0.4)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Tournament Details
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </motion.button>
+                </Link>
+              </div>
+
+              <div className="relative h-[400px] lg:h-auto">
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent z-10 lg:bg-gradient-to-l"></div>
+                <Image
+                  src="/images/bgmi.avif?height=600&width=800"
+                  alt="BGMI Tournament"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-8 right-8 z-20 bg-red-600/90 backdrop-blur-sm text-white px-4 py-6 rounded-lg shadow-lg">
+                  <p className="text-2xl font-bold">₹2,00,000</p>
+                  <p className="text-sm">Prize Pool</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -444,8 +477,8 @@ export default function GameOConPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Day 1 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Morning Schedule */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -455,28 +488,28 @@ export default function GameOConPage() {
               >
                 <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Day 1 (June 15)
+                  Morning (May 24)
                 </h3>
                 <ul className="space-y-4">
                   <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
+                    <span className="text-red-500 font-medium">9:00 AM</span>
+                    <p className="font-bold">Registration Opens</p>
+                    <p className="text-sm text-zinc-400">Main Entrance</p>
+                  </li>
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">10:00 AM</span>
                     <p className="font-bold">Opening Ceremony</p>
                     <p className="text-sm text-zinc-400">Main Stage</p>
                   </li>
                   <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">12:00 PM</span>
-                    <p className="font-bold">Valorant Tournament Begins</p>
-                    <p className="text-sm text-zinc-400">Main Stage</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">2:00 PM</span>
-                    <p className="font-bold">Indie Games Showcase Opens</p>
-                    <p className="text-sm text-zinc-400">Innovation Hall</p>
+                    <span className="text-red-500 font-medium">11:00 AM</span>
+                    <p className="font-bold">BGMI Tournament Group Stage</p>
+                    <p className="text-sm text-zinc-400">Main Arena</p>
                   </li>
                 </ul>
               </motion.div>
 
-              {/* Day 3 */}
+              {/* Afternoon Schedule */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -486,28 +519,28 @@ export default function GameOConPage() {
               >
                 <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Day 3 (June 17)
+                  Afternoon (May 24)
                 </h3>
                 <ul className="space-y-4">
                   <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">10:00 AM</span>
-                    <p className="font-bold">Fighting Games Showdown Begins</p>
-                    <p className="text-sm text-zinc-400">East Hall</p>
-                  </li>
-                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                     <span className="text-red-500 font-medium">1:00 PM</span>
-                    <p className="font-bold">Pro Player Meet & Greet</p>
-                    <p className="text-sm text-zinc-400">Fan Zone</p>
+                    <p className="font-bold">Valorant Tournament Begins</p>
+                    <p className="text-sm text-zinc-400">Esports Arena</p>
                   </li>
                   <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">4:00 PM</span>
-                    <p className="font-bold">CS2 Semifinals</p>
-                    <p className="text-sm text-zinc-400">West Hall</p>
+                    <span className="text-red-500 font-medium">2:00 PM</span>
+                    <p className="font-bold">Cosplay Competition</p>
+                    <p className="text-sm text-zinc-400">Center Stage</p>
+                  </li>
+                  <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
+                    <span className="text-red-500 font-medium">3:30 PM</span>
+                    <p className="font-bold">Gaming Industry Panel</p>
+                    <p className="text-sm text-zinc-400">Conference Hall</p>
                   </li>
                 </ul>
               </motion.div>
 
-              {/* Day 6 */}
+              {/* Evening Schedule */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -517,23 +550,23 @@ export default function GameOConPage() {
               >
                 <h3 className="text-xl font-bold mb-4 flex items-center text-red-500">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Day 6 (June 20)
+                  Evening (May 24)
                 </h3>
                 <ul className="space-y-4">
                   <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">12:00 PM</span>
-                    <p className="font-bold">League of Legends Finals</p>
-                    <p className="text-sm text-zinc-400">South Hall</p>
+                    <span className="text-red-500 font-medium">5:00 PM</span>
+                    <p className="font-bold">BGMI Tournament Quarterfinals</p>
+                    <p className="text-sm text-zinc-400">Main Arena</p>
                   </li>
                   <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
-                    <span className="text-red-500 font-medium">4:00 PM</span>
-                    <p className="font-bold">Championship Finals</p>
+                    <span className="text-red-500 font-medium">6:30 PM</span>
+                    <p className="font-bold">BGMI Tournament Finals</p>
                     <p className="text-sm text-zinc-400">Main Arena</p>
                   </li>
                   <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
-                    <span className="text-red-500 font-medium">9:00 PM</span>
-                    <p className="font-bold">Closing Ceremony</p>
-                    <p className="text-sm text-zinc-400">Main Arena</p>
+                    <span className="text-red-500 font-medium">8:00 PM</span>
+                    <p className="font-bold">Award Ceremony & Closing</p>
+                    <p className="text-sm text-zinc-400">Main Stage</p>
                   </li>
                 </ul>
               </motion.div>

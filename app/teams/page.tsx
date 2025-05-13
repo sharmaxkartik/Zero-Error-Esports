@@ -41,8 +41,8 @@ export default function TeamsPage() {
       {
         name: "Aazam Khan",
         role: "Founder, CEO",
-        image: "/images/team/aazam.jpg", // Replace with actual image path
-        fallbackImage: "/images/minecraft.jpeg",
+        image: "/images/team/aazam Khan.jpg", // Replace with actual image path
+        fallbackImage: "/images/team/Aazam Khan.jpg",
       },
       {
         name: "Priyesh Kekan",
@@ -53,7 +53,7 @@ export default function TeamsPage() {
       {
         name: "Deepanshu Savita",
         role: "Co-Founder",
-        image: "/images/team/deepanshu.jpg", // Replace with actual image path
+        image: "/images/team/Deepanshu Savita.jpg", // Replace with actual image path
         fallbackImage: "/images/gow.jpg",
       },
     ],
@@ -61,7 +61,7 @@ export default function TeamsPage() {
       {
         name: "Adarsh Dubey",
         role: "Chief Creative Officer (CCO)",
-        image: "/images/team/adarsh.jpg", // Replace with actual image path
+        image: "/images/team/Adarsh Dubey.jpg", // Replace with actual image path
         fallbackImage: "/images/valorantgame.jpeg",
       },
       {
@@ -73,13 +73,13 @@ export default function TeamsPage() {
       {
         name: "Vaishnavi Bhadauriya",
         role: "Director of External Affairs",
-        image: "/images/team/vaishnavi.jpg", // Replace with actual image path
+        image: "/images/team/Vaishnavi Bhadauriya.jpg", // Replace with actual image path
         fallbackImage: "/images/gamocon.png",
       },
       {
         name: "Aryaman Bhatnagar",
         role: "Chief Technology Officer (CTO)",
-        image: "/images/team/aryaman.jpg", // Replace with actual image path
+        image: "/images/team/Aryaman Bhatnagar.jpg", // Replace with actual image path
         fallbackImage: "/images/minecraft.jpeg",
       },
     ],
@@ -93,7 +93,7 @@ export default function TeamsPage() {
       {
         name: "Prajjwal Singh Chauhan",
         role: "Content Lead",
-        image: "/images/team/prajjwal.jpg", // Replace with actual image path
+        image: "/images/team/Prajjawal singh chauhan.jpg", // Replace with actual image path
         fallbackImage: "/images/bgmi.avif",
       },
       {
@@ -107,25 +107,31 @@ export default function TeamsPage() {
       {
         name: "Aditya Sharma",
         role: "Operations Team",
-        image: "/images/team/aditya.jpg", // Replace with actual image path
+        image: "/images/team/Aditya Sharma .jpg", // Replace with actual image path
         fallbackImage: "/images/gamocon.png",
       },
       {
         name: "Dhruv Sharma",
         role: "Operations Team",
-        image: "/images/team/dhruv.jpg", // Replace with actual image path
+        image: "/images/team/Dhruv Sharma.jpg", // Replace with actual image path
         fallbackImage: "/images/minecraft.jpeg",
       },
       {
-        name: "Sarthak",
-        role: "Team Member",
-        image: "/images/team/sarthak.jpg", // Replace with actual image path
-        fallbackImage: "/images/lol.avif",
+        name: "Ayushmaan Johri",
+        role: "Operations Team",
+        image: "/images/team/Ayushmaan Johri.jpg", // Replace with actual image path
+        fallbackImage: "/images/valorantgame.jpeg",
+      },
+      {
+        name: "Rishabh Shukla",
+        role: "Operations Team",
+        image: "/images/team/Rishabh Shukla.jpg", // Replace with actual image path
+        fallbackImage: "/images/bgmi.avif",
       },
       {
         name: "Raj Chaurasiya",
         role: "Analyst",
-        image: "/images/team/raj.jpg", // Replace with actual image path
+        image: "/images/team/Raj Chaurasiya.png", // Replace with actual image path
         fallbackImage: "/images/valorantgame.jpeg",
       },
     ],
