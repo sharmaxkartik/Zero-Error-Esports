@@ -138,12 +138,12 @@ export default function GameOConPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Global dynamic background elements */}
+    <div className="min-h-screen bg-transparent text-white">
+      {/* Global dynamic background elements - removed or made transparent */}
       <div className="fixed inset-0 z-0">
-        {/* Dynamic gradient background that moves with mouse */}
+        {/* Dynamic gradient background made transparent */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-black/50 via-red-950/10 to-black/50 z-0"
+          className="absolute inset-0 bg-gradient-to-br from-transparent via-red-950/10 to-transparent z-0"
           style={{
             backgroundPosition: `${mousePosition.x * 100}% ${
               mousePosition.y * 100
@@ -152,11 +152,11 @@ export default function GameOConPage() {
           }}
         />
 
-        {/* Animated scan lines */}
-        <div className="absolute inset-0 scan-lines opacity-20 z-0"></div>
+        {/* Animated scan lines with reduced opacity */}
+        <div className="absolute inset-0 scan-lines opacity-10 z-0"></div>
 
-        {/* Dynamic vignette effect */}
-        <div className="absolute inset-0 bg-radial-gradient z-0"></div>
+        {/* Dynamic vignette effect made more transparent */}
+        <div className="absolute inset-0 bg-radial-gradient opacity-50 z-0"></div>
       </div>
 
       {/* Hero Section */}
@@ -241,7 +241,7 @@ export default function GameOConPage() {
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">
-                  BGMI <span className="text-red-600">TOURNAMENT</span>
+                  CARNIVAL <span className="text-red-600">SHOW</span>
                 </h2>
 
                 <p className="text-lg text-zinc-300 mb-6">
@@ -273,18 +273,6 @@ export default function GameOConPage() {
                       </p>
                     </div>
                   </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="bg-red-900/30 p-2 rounded-full">
-                      <Trophy className="h-5 w-5 text-red-500" />
-                    </div>
-                    <div>
-                      <p className="font-medium">₹2,00,000 Prize Pool</p>
-                      <p className="text-sm text-zinc-400">
-                        For winners and runners-up
-                      </p>
-                    </div>
-                  </div>
                 </div>
 
                 <Link href="/events/gameocon/bgmi-tournament">
@@ -296,7 +284,7 @@ export default function GameOConPage() {
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Tournament Details
+                    Carnival Details
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </motion.button>
                 </Link>
@@ -305,15 +293,11 @@ export default function GameOConPage() {
               <div className="relative h-[400px] lg:h-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent z-10 lg:bg-gradient-to-l"></div>
                 <Image
-                  src="/images/bgmi.avif?height=600&width=800"
+                  src="/images/carnival.webp?height=600&width=800"
                   alt="BGMI Tournament"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute bottom-8 right-8 z-20 bg-red-600/90 backdrop-blur-sm text-white px-4 py-6 rounded-lg shadow-lg">
-                  <p className="text-2xl font-bold">₹2,00,000</p>
-                  <p className="text-sm">Prize Pool</p>
-                </div>
               </div>
             </div>
           </motion.div>
