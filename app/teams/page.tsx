@@ -219,22 +219,6 @@ export default function TeamsPage() {
                 </motion.div>
               </div>
             </div>
-
-            <div className="p-4 flex justify-between items-center border-t border-zinc-800/50">
-              <Link href="#">
-                <motion.div
-                  className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
-                  whileHover={{ x: 5 }}
-                >
-                  Profile
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </motion.div>
-              </Link>
-
-              <div className="flex space-x-2">
-                {/* Social media icons would go here */}
-              </div>
-            </div>
           </motion.div>
         ))}
       </motion.div>
