@@ -22,15 +22,15 @@ const gameOConEvents = [
   {
     id: "game-jam",
     title: "Game Jam Hackathon",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
+    date: "May 24-25, 2025",
+    time: "10:00 AM - 10:00 PM",
     location: "Innovation Hub, ITM Gwalior",
     participants: "50 Teams",
     image: "/placeholder.svg?height=300&width=500",
     category: "Hackathon",
     description:
-      "A 48-hour game development challenge where teams create innovative games based on a surprise theme.",
-   
+      "A 24-hour game development challenge where teams create innovative games based on a surprise theme.",
+    prizePool: "₹1,50,000",
     coordinator: "Alex Rivera",
     coordinatorRole: "Hackathon Director",
     bulletPoints: [
@@ -44,14 +44,14 @@ const gameOConEvents = [
     id: "bgmi-tournament",
     title: "BGMI Tournament",
     date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
+    time: "10:00 AM - 8:00 PM",
     location: "Main Arena, ITM Gwalior",
     participants: "128 Teams",
     image: "/images/bgmi.avif?height=300&width=500",
     category: "Tournament",
     description:
-      "Central India's biggest BGMI tournament featuring 128 teams competing for glory and an impressive prize pool.",
-    
+      "Central India's biggest BGMI tournament featuring 128 teams competing for glory and impressive prize pool.",
+    prizePool: "₹2,00,000",
     coordinator: "Sarah Chen",
     coordinatorRole: "Tournament Director",
     bulletPoints: [
@@ -64,15 +64,15 @@ const gameOConEvents = [
   {
     id: "valorant-championship",
     title: "Valorant Championship",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
+    date: "May 24-25, 2025",
+    time: "11:00 AM - 6:00 PM",
     location: "Esports Arena, ITM Gwalior",
-    participants: "50 Teams",
+    participants: "32 Teams",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
     description:
       "Two-day Valorant tournament featuring the top 32 teams from Central India competing for an impressive prize pool.",
-    
+    prizePool: "₹1,00,000",
     coordinator: "Sarah Chen",
     coordinatorRole: "Tournament Director",
     bulletPoints: [
@@ -85,15 +85,15 @@ const gameOConEvents = [
   {
     id: "ea-sports-fc-25",
     title: "EA Sports FC 25 Tournament",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
+    date: "May 25, 2025",
+    time: "12:00 PM - 8:00 PM",
     location: "Gaming Lounge, ITM Gwalior",
-    participants: "100 Players",
+    participants: "64 Players",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
     description:
       "Compete in the ultimate football gaming experience with the latest EA Sports FC 25 title.",
-    
+    prizePool: "₹75,000",
     coordinator: "Mark Johnson",
     coordinatorRole: "Sports Gaming Director",
     bulletPoints: [
@@ -104,17 +104,17 @@ const gameOConEvents = [
     ],
   },
   {
-    id: "Tekken 8",
-    title: "Tekken 8",
+    id: "retro-gaming",
+    title: "Retro Gaming Tournament",
     date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
+    time: "1:00 PM - 7:00 PM",
     location: "Nostalgia Zone, ITM Gwalior",
     participants: "100 Players",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
     description:
       "Step back in time with classic games from the 80s and 90s in this nostalgic gaming tournament.",
-    
+    prizePool: "₹50,000",
     coordinator: "James Wilson",
     coordinatorRole: "Retro Gaming Specialist",
     bulletPoints: [
@@ -279,7 +279,7 @@ export default function GameOConPage() {
               </div>
               <div className="flex items-center bg-zinc-900/80 px-4 py-2 rounded-full backdrop-blur-sm">
                 <Users className="h-5 w-5 mr-2 text-red-500" />
-                <span>5,000+ Attendees</span>
+                <span>8,000+ Attendees</span>
               </div>
             </div>
           </motion.div>
@@ -327,7 +327,7 @@ export default function GameOConPage() {
                       <Users className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-medium">5,000+ Attendees</p>
+                      <p className="font-medium">8,000+ Attendees</p>
                       <p className="text-sm text-zinc-400">
                         From across Central India
                       </p>
@@ -341,7 +341,7 @@ export default function GameOConPage() {
                     <div>
                       <p className="font-medium">May 24-25, 2025</p>
                       <p className="text-sm text-zinc-400">
-                        Doors open at 3:00 PM
+                        Doors open at 9:00 AM
                       </p>
                     </div>
                   </div>
@@ -429,7 +429,7 @@ export default function GameOConPage() {
                   {/* Prize Pool Badge */}
                   <div className="absolute top-4 right-4 z-10">
                     <span className="bg-yellow-500/90 backdrop-blur-sm text-black text-xs px-3 py-1 rounded-full font-medium">
-                      
+                      {event.prizePool}
                     </span>
                   </div>
                 </div>
