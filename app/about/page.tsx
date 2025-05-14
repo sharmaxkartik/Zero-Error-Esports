@@ -342,7 +342,7 @@ export default function AboutPage() {
                 role: "Founder & CEO",
                 icon: <Zap className="w-4 h-4" />,
                 bio: "",
-                image: "/images/minecraft.jpeg",
+                image: "/images/team/Aazam Khan.jpg",
               },
               {
                 name: "Priyesh Kekan",
@@ -356,7 +356,7 @@ export default function AboutPage() {
                 role: "Co-founder",
                 icon: <Trophy className="w-4 h-4" />,
                 bio: "",
-                image: "/images/lol.avif",
+                image: "/images/team/Deepanshu Savita.jpg",
               },
             ].map((member, index) => (
               <motion.div

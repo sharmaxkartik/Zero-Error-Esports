@@ -41,7 +41,7 @@ export default function TeamsPage() {
       {
         name: "Aazam Khan",
         role: "Founder, CEO",
-        image: "/images/team/aazam Khan.jpg", // Replace with actual image path
+        image: "/images/team/Aazam Khan.jpg", // Replace with actual image path
         fallbackImage: "/images/team/Aazam Khan.jpg",
       },
       {
@@ -119,7 +119,7 @@ export default function TeamsPage() {
       {
         name: "Ayushmaan Johri",
         role: "Operations Team",
-        image: "/images/team/Ayushmaan Johri.jpg", // Replace with actual image path
+        image: "/images/team/Ayushmaan Johri .jpg", // Replace with actual image path
         fallbackImage: "/images/valorantgame.jpeg",
       },
       {
