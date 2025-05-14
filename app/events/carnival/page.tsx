@@ -16,96 +16,38 @@ import {
   Star,
   Zap,
   Shield,
-  PieChart,
 } from "lucide-react";
 
-// Team data
-const featuredTeams = [
+// Carnival attractions
+const carnivalAttractions = [
   {
-    name: "Velocity Vipers",
-    logo: "/placeholder.svg?height=100&width=100",
-    players: 5,
-    region: "North India",
-    achievements: "3x Regional Champions",
-  },
-  {
-    name: "Nexus Titans",
-    logo: "/placeholder.svg?height=100&width=100",
-    players: 5,
-    region: "Central India",
-    achievements: "BGMI Pro Series Winner",
-  },
-  {
-    name: "Phoenix Squadron",
-    logo: "/placeholder.svg?height=100&width=100",
-    players: 5,
-    region: "South India",
-    achievements: "Rising Stars Cup Winner",
-  },
-  {
-    name: "Eclipse Gaming",
-    logo: "/placeholder.svg?height=100&width=100",
-    players: 5,
-    region: "East India",
-    achievements: "2x Finalists",
-  },
-];
-
-// Tournament phases
-const tournamentPhases = [
-  {
-    name: "Registration",
-    date: "April 15 - May 15, 2025",
+    name: "Gaming Booths",
+    date: "May 24, 2025 (All Day)",
     description:
-      "Open registration for all teams that meet the eligibility criteria.",
+      "Explore 50+ gaming booths featuring the latest titles, VR experiences, and retro classics.",
     icon: <Shield className="h-8 w-8" />,
   },
   {
-    name: "Qualifiers",
-    date: "May 16 - May 20, 2025",
-    description:
-      "Online qualifiers to determine the top 64 teams advancing to the Group Stage.",
-    icon: <PieChart className="h-8 w-8" />,
-  },
-  {
-    name: "Group Stage",
-    date: "May 24, 2025 (Morning)",
-    description:
-      "128 teams compete in 8 groups of 16 teams each. Top 4 teams from each group advance.",
-    icon: <Users className="h-8 w-8" />,
-  },
-  {
-    name: "Finals",
+    name: "Tournament Finals",
     date: "May 24, 2025 (Evening)",
     description:
-      "The top 32 teams battle in an intense finale to determine the champion.",
+      "Watch the thrilling finals of multiple esports tournaments live on the main stage.",
     icon: <Trophy className="h-8 w-8" />,
   },
-];
-
-// Prize distribution
-const prizeDistribution = [
   {
-    position: "1st Place",
-    prize: "₹1,00,000",
-    color: "from-amber-500 to-yellow-500",
+    name: "Special Exhibitions",
+    date: "May 24, 2025 (Afternoon)",
+    description:
+      "Experience exclusive game reveals and special exhibitions from top game developers.",
+    icon: <Star className="h-8 w-8" />,
   },
   {
-    position: "2nd Place",
-    prize: "₹50,000",
-    color: "from-slate-300 to-slate-400",
+    name: "Cosplay & Activities",
+    date: "May 24, 2025 (All Day)",
+    description:
+      "Join cosplay contests, attend workshops, and participate in fun gaming activities.",
+    icon: <Users className="h-8 w-8" />,
   },
-  {
-    position: "3rd Place",
-    prize: "₹25,000",
-    color: "from-amber-700 to-amber-800",
-  },
-  {
-    position: "4th Place",
-    prize: "₹10,000",
-    color: "from-zinc-600 to-zinc-700",
-  },
-  { position: "5th-10th", prize: "₹3,000", color: "from-zinc-700 to-zinc-800" },
 ];
 
 export default function CarnivalShowPage() {
@@ -189,7 +131,7 @@ export default function CarnivalShowPage() {
         >
           <div className="w-20 h-20 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
           <div className="absolute inset-0 flex items-center justify-center text-red-600 font-bold text-lg">
-            BGMI
+            Carnival
           </div>
         </motion.div>
       </div>
@@ -224,7 +166,7 @@ export default function CarnivalShowPage() {
         <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
           <Image
             src="/images/carnival.webp?height=1200&width=1800"
-            alt="BGMI Tournament"
+            alt="Gaming Carnival"
             fill
             className="object-cover object-center"
             priority
@@ -256,8 +198,8 @@ export default function CarnivalShowPage() {
             </motion.div>
 
             <div className="mb-4 inline-flex items-center gap-2 bg-red-600/20 text-red-500 px-3 py-1 rounded-full text-sm font-bold backdrop-blur-md border border-red-600/30">
-              <Trophy className="h-4 w-4" />
-              <span>FLAGSHIP TOURNAMENT</span>
+              <Star className="h-4 w-4" />
+              <span>FEATURED EVENT</span>
             </div>
 
             <motion.h1
@@ -279,8 +221,9 @@ export default function CarnivalShowPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Central India's most prestigious BGMI tournament featuring 128
-              elite teams competing for glory and a ₹2,00,000 prize pool.
+              The ultimate gaming extravaganza featuring exhibitions,
+              tournaments, cosplay contests, and interactive experiences for all
+              gaming enthusiasts.
             </motion.p>
 
             <motion.div
@@ -299,11 +242,11 @@ export default function CarnivalShowPage() {
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <Users className="h-5 w-5 text-red-500" />
-                <span>128 Teams</span>
+                <span>All Ages Welcome</span>
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
-                <Zap className="h-5 w-5 text-amber-500" />
-                <span>₹2,00,000 Prize Pool</span>
+                <Clock className="h-5 w-5 text-amber-500" />
+                <span>10:00 AM - 10:00 PM</span>
               </div>
             </motion.div>
 
@@ -344,13 +287,13 @@ export default function CarnivalShowPage() {
                   />
 
                   <span className="relative z-10 flex items-center">
-                    Register Your Team
+                    Get Your Tickets
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </span>
                 </motion.div>
               </Link>
 
-              <Link href="#tournament-format">
+              <Link href="#carnival-attractions">
                 <motion.button
                   className="border-2 border-zinc-700 hover:border-red-600 text-white bg-zinc-900/50 backdrop-blur-sm px-6 py-4 text-lg rounded-md flex items-center transition-colors duration-300"
                   whileHover={{
@@ -360,7 +303,7 @@ export default function CarnivalShowPage() {
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Tournament Details
+                  Explore Attractions
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </motion.button>
               </Link>
@@ -413,8 +356,8 @@ export default function CarnivalShowPage() {
         </motion.div>
       </section>
 
-      {/* Tournament Format Section */}
-      <section id="tournament-format" className="py-24 relative">
+      {/* Carnival Attractions Section */}
+      <section id="carnival-attractions" className="py-24 relative">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -426,7 +369,7 @@ export default function CarnivalShowPage() {
           >
             <div className="mb-4 inline-flex items-center gap-2 bg-red-600/20 text-red-500 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-md border border-red-600/30">
               <Star className="h-4 w-4" />
-              <span>TOURNAMENT FORMAT</span>
+              <span>CARNIVAL ATTRACTIONS</span>
             </div>
 
             <motion.h2
@@ -436,7 +379,7 @@ export default function CarnivalShowPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              THE <span className="text-red-600">BATTLEFIELD</span> AWAITS
+              EXPLORE THE <span className="text-red-600">CARNIVAL</span>
             </motion.h2>
 
             <motion.p
@@ -446,9 +389,8 @@ export default function CarnivalShowPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Experience the most competitive BGMI tournament structure designed
-              to identify the truly elite teams through multiple challenging
-              phases.
+              Discover all the exciting attractions waiting for you at the
+              Carnival Show.
             </motion.p>
           </motion.div>
 
@@ -459,9 +401,9 @@ export default function CarnivalShowPage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {tournamentPhases.map((phase, index) => (
+            {carnivalAttractions.map((attraction, index) => (
               <motion.div
-                key={phase.name}
+                key={attraction.name}
                 variants={itemVariants}
                 className="bg-gradient-to-b from-zinc-900/90 to-zinc-950/90 rounded-xl p-6 border border-zinc-800/50 backdrop-blur-sm hover:border-red-600/50 transition-colors duration-300 relative overflow-hidden group"
                 whileHover={{ y: -5 }}
@@ -469,186 +411,31 @@ export default function CarnivalShowPage() {
                 <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-red-600/5 filter blur-xl group-hover:bg-red-600/10 transition-colors duration-300"></div>
 
                 <div className="mb-4 bg-zinc-800/50 text-red-500 p-4 rounded-lg inline-flex items-center justify-center">
-                  {phase.icon}
+                  {attraction.icon}
                 </div>
 
                 <h3 className="text-xl font-bold mb-1 group-hover:text-red-500 transition-colors duration-300">
-                  {phase.name}
+                  {attraction.name}
                 </h3>
 
                 <div className="text-sm text-red-500 font-medium mb-3">
-                  {phase.date}
+                  {attraction.date}
                 </div>
 
-                <p className="text-zinc-400 text-sm">{phase.description}</p>
-
-                <div className="absolute bottom-3 right-3 opacity-10 text-4xl font-bold group-hover:opacity-15 transition-opacity duration-300">
-                  {index + 1}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Prize Pool Section */}
-      <section className="py-24 relative bg-zinc-950">
-        <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <div className="mb-4 inline-flex items-center gap-2 bg-amber-600/20 text-amber-500 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-md border border-amber-600/30">
-              <Trophy className="h-4 w-4" />
-              <span>PRIZE POOL</span>
-            </div>
-
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6 font-orbitron"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              ₹<span className="text-amber-500">2,00,000</span> PRIZE POOL
-            </motion.h2>
-
-            <motion.p
-              className="text-lg text-zinc-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              Compete for glory and substantial rewards at Central India's
-              richest BGMI tournament.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6"
-          >
-            {prizeDistribution.map((prize, index) => (
-              <motion.div
-                key={prize.position}
-                variants={itemVariants}
-                className={`bg-gradient-to-b ${prize.color} rounded-xl p-6 text-center backdrop-blur-sm border border-zinc-800/50 relative overflow-hidden group`}
-                whileHover={{ y: -8, scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              >
-                <motion.div
-                  className="text-6xl md:text-8xl font-bold text-white/10 absolute -top-2 -left-2"
-                  initial={{ opacity: 0.1 }}
-                  whileInView={{ opacity: 0.1 }}
-                  whileHover={{ scale: 1.2, opacity: 0.15 }}
-                >
-                  {index + 1}
-                </motion.div>
-
-                <h3 className="text-xl font-bold mb-2 relative z-10">
-                  {prize.position}
-                </h3>
-                <p className="text-2xl md:text-3xl font-bold relative z-10">
-                  {prize.prize}
+                <p className="text-zinc-400 text-sm mb-4">
+                  {attraction.description}
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Featured Teams Section */}
-      <section className="py-24 relative">
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <div className="mb-4 inline-flex items-center gap-2 bg-red-600/20 text-red-500 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-md border border-red-600/30">
-              <Shield className="h-4 w-4" />
-              <span>ELITE CONTENDERS</span>
-            </div>
-
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6 font-orbitron"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              FEATURED <span className="text-red-600">TEAMS</span>
-            </motion.h2>
-
-            <motion.p
-              className="text-lg text-zinc-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              Some of the top contenders ready to compete for the championship
-              title.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {featuredTeams.map((team) => (
-              <motion.div
-                key={team.name}
-                variants={itemVariants}
-                className="bg-gradient-to-b from-zinc-900/90 to-zinc-950/90 rounded-xl overflow-hidden border border-zinc-800/50 backdrop-blur-sm hover:border-red-600/50 transition-colors duration-300 group"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 0 20px rgba(220,38,38,0.2)",
-                }}
-              >
-                <div className="p-8 flex flex-col items-center text-center">
-                  <div className="w-20 h-20 mb-4 rounded-full bg-red-900/20 p-1 relative">
-                    <Image
-                      src={team.logo}
-                      alt={team.name}
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-1 group-hover:text-red-500 transition-colors duration-300">
-                    {team.name}
-                  </h3>
-
-                  <p className="text-red-500 text-sm font-medium mb-4">
-                    {team.achievements}
-                  </p>
-
-                  <div className="w-full grid grid-cols-2 gap-4 text-sm">
-                    <div className="bg-zinc-800/50 py-2 px-3 rounded-lg">
-                      <p className="text-zinc-500">Players</p>
-                      <p className="font-medium">{team.players}</p>
-                    </div>
-                    <div className="bg-zinc-800/50 py-2 px-3 rounded-lg">
-                      <p className="text-zinc-500">Region</p>
-                      <p className="font-medium">{team.region}</p>
-                    </div>
-                  </div>
-                </div>
+                <Link href="/signup">
+                  <motion.button
+                    className="w-full bg-red-600/20 hover:bg-red-600/40 text-red-500 py-2 px-4 text-sm rounded-md flex items-center justify-center transition-colors duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Register Now
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </motion.button>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -680,7 +467,7 @@ export default function CarnivalShowPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              READY TO <span className="text-red-600">BATTLE?</span>
+              JOIN THE <span className="text-red-600">CELEBRATION</span>
             </motion.h2>
 
             <motion.p
@@ -690,9 +477,8 @@ export default function CarnivalShowPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Registration closes on May 15, 2025. Secure your team's spot in
-              Central India's most prestigious BGMI tournament before it's too
-              late.
+              Don't miss out on the biggest gaming carnival of the year. Get
+              your tickets now for an unforgettable experience!
             </motion.p>
 
             <Link href="/signup">
@@ -730,7 +516,7 @@ export default function CarnivalShowPage() {
                 />
 
                 <span className="relative z-10 flex items-center">
-                  Register Now
+                  Get Your Tickets
                   <ArrowRight className="ml-2 h-6 w-6" />
                 </span>
               </motion.div>

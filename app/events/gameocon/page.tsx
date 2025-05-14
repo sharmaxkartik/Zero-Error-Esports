@@ -15,10 +15,31 @@ import {
   X,
   Trophy,
 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation"; // Added useRouter import
 
 // Game O Con sub-events data
 const gameOConEvents = [
+  {
+    id: "game-jam",
+    title: "Game Jam Hackathon",
+    date: "May 24-25, 2025",
+    time: "10:00 AM - 10:00 PM",
+    location: "Innovation Hub, ITM Gwalior",
+    participants: "50 Teams",
+    image: "/placeholder.svg?height=300&width=500",
+    category: "Hackathon",
+    description:
+      "A 24-hour game development challenge where teams create innovative games based on a surprise theme.",
+    prizePool: "₹1,50,000",
+    coordinator: "Alex Rivera",
+    coordinatorRole: "Hackathon Director",
+    bulletPoints: [
+      "24-hour continuous development marathon",
+      "Surprise theme revealed at start",
+      "Expert mentors and industry judges",
+      "Showcase your creativity and technical skills",
+    ],
+  },
   {
     id: "bgmi-tournament",
     title: "BGMI Tournament",
@@ -62,45 +83,45 @@ const gameOConEvents = [
     ],
   },
   {
-    id: "cosplay-competition",
-    title: "Cosplay Competition",
-    date: "May 24, 2025",
-    time: "2:00 PM - 5:00 PM",
-    location: "Center Stage, ITM Gwalior",
-    participants: "50+ Cosplayers",
+    id: "ea-sports-fc-25",
+    title: "EA Sports FC 25 Tournament",
+    date: "May 25, 2025",
+    time: "12:00 PM - 8:00 PM",
+    location: "Gaming Lounge, ITM Gwalior",
+    participants: "64 Players",
     image: "/placeholder.svg?height=300&width=500",
-    category: "Competition",
+    category: "Tournament",
     description:
-      "Showcase your best gaming character cosplay and compete for amazing prizes and recognition.",
-    prizePool: "₹50,000",
-    coordinator: "Mia Johnson",
-    coordinatorRole: "Cosplay Director",
+      "Compete in the ultimate football gaming experience with the latest EA Sports FC 25 title.",
+    prizePool: "₹75,000",
+    coordinator: "Mark Johnson",
+    coordinatorRole: "Sports Gaming Director",
     bulletPoints: [
-      "50+ cosplayers showcasing their creativity",
-      "Multiple categories for all skill levels",
-      "Professional cosplay judges",
-      "Photography area with professional lighting",
+      "64 players in single-elimination format",
+      "Play on the latest gaming consoles",
+      "Live commentary and audience viewing",
+      "Chance to win exclusive EA Sports merchandise",
     ],
   },
   {
-    id: "gaming-expo",
-    title: "Gaming Expo & Marketplace",
+    id: "retro-gaming",
+    title: "Retro Gaming Tournament",
     date: "May 24, 2025",
-    time: "9:00 AM - 8:00 PM",
-    location: "Exhibition Hall, ITM Gwalior",
-    participants: "30+ Exhibitors",
+    time: "1:00 PM - 7:00 PM",
+    location: "Nostalgia Zone, ITM Gwalior",
+    participants: "100 Players",
     image: "/placeholder.svg?height=300&width=500",
-    category: "Expo",
+    category: "Tournament",
     description:
-      "Explore the latest gaming gear, merchandise, and innovations from top brands and local creators.",
-    prizePool: "N/A",
-    coordinator: "Alex Rivera",
-    coordinatorRole: "Expo Manager",
+      "Step back in time with classic games from the 80s and 90s in this nostalgic gaming tournament.",
+    prizePool: "₹50,000",
+    coordinator: "James Wilson",
+    coordinatorRole: "Retro Gaming Specialist",
     bulletPoints: [
-      "30+ exhibitors showcasing gaming gear",
-      "Exclusive discounts on gaming merchandise",
-      "Hands-on demos with the latest tech",
-      "Networking opportunities with industry leaders",
+      "Multiple classic games including Pac-Man, Mario, and Tetris",
+      "Original arcade cabinets and consoles",
+      "Open to all ages and experience levels",
+      "Special prizes for costume and cosplay",
     ],
   },
 ];
@@ -112,6 +133,7 @@ export default function GameOConPage() {
   const [selectedEvent, setSelectedEvent] = useState<
     (typeof gameOConEvents)[0] | null
   >(null);
+  const router = useRouter(); // Added useRouter hook
 
   // Get unique categories
   const categories = Array.from(
@@ -272,7 +294,7 @@ export default function GameOConPage() {
         </div>
       </section>
 
-      {/* BGMI Tournament Spotlight */}
+      {/* Carnival Card Spotlight */}
       <section className="py-16 relative">
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -286,16 +308,17 @@ export default function GameOConPage() {
               <div className="p-8 lg:p-12">
                 <div className="inline-flex items-center bg-red-600/20 text-red-500 px-3 py-1 rounded-full text-sm font-medium mb-6">
                   <Trophy className="h-4 w-4 mr-2" />
-                  Flagship Tournament
+                  Main Event
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">
-                  CARNIVAL <span className="text-red-600">SHOW</span>
+                  <span className="text-red-600">CARNIVAL</span> SHOWCASE
                 </h2>
 
                 <p className="text-lg text-zinc-300 mb-6">
-                  Central India's biggest BGMI tournament featuring 128 teams
-                  competing for glory and an impressive prize pool of ₹2,00,000.
+                  The main gaming festival combining all events into one epic
+                  day of gaming, competitions, exhibitions and entertainment for
+                  gamers of all ages and interests.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -304,7 +327,7 @@ export default function GameOConPage() {
                       <Users className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-medium">128 Teams</p>
+                      <p className="font-medium">8,000+ Attendees</p>
                       <p className="text-sm text-zinc-400">
                         From across Central India
                       </p>
@@ -316,34 +339,33 @@ export default function GameOConPage() {
                       <Calendar className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-medium">May 24, 2025</p>
+                      <p className="font-medium">May 24-25, 2025</p>
                       <p className="text-sm text-zinc-400">
-                        Group stage starts at 11:00 AM
+                        Doors open at 9:00 AM
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <Link href="/events/carnival">
-                  <motion.button
-                    className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 0 15px rgba(220,38,38,0.4)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Carnival Details
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </motion.button>
-                </Link>
+                <motion.button
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 15px rgba(220,38,38,0.4)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => router.push("/events/carnival")} // Updated button implementation
+                >
+                  Register Now
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </motion.button>
               </div>
 
               <div className="relative h-[400px] lg:h-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent z-10 lg:bg-gradient-to-l"></div>
                 <Image
                   src="/images/carnival.webp?height=600&width=800"
-                  alt="BGMI Tournament"
+                  alt="Gaming Carnival"
                   fill
                   className="object-cover"
                 />
@@ -384,8 +406,8 @@ export default function GameOConPage() {
             {filteredEvents.map((event) => (
               <motion.div
                 key={event.id}
-                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(220,0,0,0.2)] h-full cursor-pointer relative"
-                onClick={() => setSelectedEvent(event)}
+                variants={itemVariants}
+                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(220,0,0,0.2)] h-full"
               >
                 {/* Event Image */}
                 <div className="relative h-[200px] overflow-hidden">
@@ -422,7 +444,7 @@ export default function GameOConPage() {
                   </p>
 
                   {/* Event Info */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 mb-6">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-5 w-5 text-red-500" />
                       <span className="text-sm text-zinc-400">
@@ -449,13 +471,26 @@ export default function GameOConPage() {
                     </div>
                   </div>
 
-                  {/* View Details Button */}
-                  <div className="mt-6">
-                    <motion.div
-                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors"
-                      whileHover={{ x: 5 }}
+                  <div className="flex justify-between items-center">
+                    {/* Register Button */}
+                    <motion.button
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 0 10px rgba(220,38,38,0.3)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      View Details
+                      Register Now
+                    </motion.button>
+
+                    {/* View Details Button */}
+                    <motion.div
+                      className="text-red-600 flex items-center text-sm uppercase font-bold hover:text-red-500 transition-colors cursor-pointer"
+                      whileHover={{ x: 5 }}
+                      onClick={() => setSelectedEvent(event)}
+                    >
+                      Details
                       <ChevronRight className="ml-1 h-3 w-3" />
                     </motion.div>
                   </div>
@@ -531,13 +566,13 @@ export default function GameOConPage() {
                 </li>
                 <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                   <span className="text-red-500 font-medium">2:00 PM</span>
-                  <p className="font-bold">Cosplay Competition</p>
-                  <p className="text-sm text-zinc-400">Center Stage</p>
+                  <p className="font-bold">EA Sports FC 25 Tournament</p>
+                  <p className="text-sm text-zinc-400">Gaming Lounge</p>
                 </li>
                 <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                   <span className="text-red-500 font-medium">3:30 PM</span>
-                  <p className="font-bold">Gaming Industry Panel</p>
-                  <p className="text-sm text-zinc-400">Conference Hall</p>
+                  <p className="font-bold">Game Jam Kickoff</p>
+                  <p className="text-sm text-zinc-400">Innovation Hub</p>
                 </li>
               </ul>
             </motion.div>
@@ -562,12 +597,12 @@ export default function GameOConPage() {
                 </li>
                 <li className="border-l-2 border-zinc-700 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors hover:border-l-red-600">
                   <span className="text-red-500 font-medium">6:30 PM</span>
-                  <p className="font-bold">BGMI Tournament Finals</p>
-                  <p className="text-sm text-zinc-400">Main Arena</p>
+                  <p className="font-bold">Retro Gaming Finals</p>
+                  <p className="text-sm text-zinc-400">Nostalgia Zone</p>
                 </li>
                 <li className="border-l-2 border-red-600 pl-4 py-1 hover:bg-zinc-800/30 rounded-r-lg transition-colors">
                   <span className="text-red-500 font-medium">8:00 PM</span>
-                  <p className="font-bold">Award Ceremony & Closing</p>
+                  <p className="font-bold">Day 1 Closing Ceremony</p>
                   <p className="text-sm text-zinc-400">Main Stage</p>
                 </li>
               </ul>
@@ -671,11 +706,25 @@ export default function GameOConPage() {
                     ))}
                   </ul>
 
-                  <div className="mt-8 flex items-center gap-2">
-                    <div className="bg-red-900/30 p-2 rounded-full">
-                      <Users className="h-5 w-5 text-red-500" />
+                  <div className="mt-8 flex items-center gap-4 justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="bg-red-900/30 p-2 rounded-full">
+                        <Users className="h-5 w-5 text-red-500" />
+                      </div>
+                      <p className="text-red-400">Limited slots available!</p>
                     </div>
-                    <p className="text-red-400">Limited slots available!</p>
+
+                    <motion.button
+                      className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 0 15px rgba(220,38,38,0.4)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Register Now
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -683,95 +732,6 @@ export default function GameOConPage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-}
-
-export function EventDetailPage() {
-  const { id } = useParams();
-  const [event, setEvent] = useState<{
-    id: string;
-    title: string;
-    date: string;
-    time: string;
-    location: string;
-    participants: string;
-    image: string;
-    category: string;
-    description: string;
-    prizePool: string;
-  } | null>(null);
-
-  useEffect(() => {
-    const foundEvent = gameOConEvents.find((e) => e.id === id);
-    setEvent(foundEvent);
-  }, [id]);
-
-  if (!event) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <p>Event not found.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="container mx-auto px-6 py-16">
-        <Link href="/events/gameocon">
-          <motion.button
-            className="flex items-center text-zinc-400 hover:text-white transition-colors mb-8"
-            whileHover={{ x: -5 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            <span>Back to Events</span>
-          </motion.button>
-        </Link>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <motion.div
-            className="relative h-[400px] overflow-hidden rounded-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Image
-              src={event.image}
-              alt={event.title}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <h1 className="text-4xl font-bold mb-4">{event.title}</h1>
-            <p className="text-zinc-300 mb-6">{event.description}</p>
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-red-500" />
-                <span>{event.date}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-red-500" />
-                <span>{event.time}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-red-500" />
-                <span>{event.location}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-red-500" />
-                <span>{event.participants}</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
     </div>
   );
 }
