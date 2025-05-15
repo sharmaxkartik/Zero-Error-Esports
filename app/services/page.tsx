@@ -22,7 +22,7 @@ const services = [
     id: 1,
     title: "Gaming Tournaments & Events",
     category: "Events",
-    image: "/images/valorantgame.jpeg?height=400&width=600",
+    image: "/images/GamingTournament&Events.png?height=400&width=600",
     description:
       "We host online & offline competitions – from small scrims to mega arena-level events.",
     featured: true,
@@ -38,7 +38,7 @@ const services = [
     id: 2,
     title: "Talent Management & Team Building",
     category: "Talent",
-    image: "/images/bgmi.avif?height=400&width=600",
+    image: "/images/TalentManagement.png?height=400&width=600",
     description:
       "We scout and train passionate players and help them grow as professionals.",
     featured: true,
@@ -54,7 +54,7 @@ const services = [
     id: 3,
     title: "Content Creation & Streaming Collabs",
     category: "Content",
-    image: "/images/lol.avif?height=400&width=600",
+    image: "/images/BrandActivation.png?height=400&width=600",
     description:
       "Support for streamers, casters, and editors – we help you build your content brand.",
     featured: true,

@@ -22,106 +22,122 @@ const gameOConEvents = [
   {
     id: "game-jam",
     title: "Game Jam Hackathon",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
-    location: "Innovation Hub, ITM Gwalior",
+    date: "May 19-20-21, 2025",
+    rewards: "Tickets to IGDC 25",
     participants: "50 Teams",
     image: "/placeholder.svg?height=300&width=500",
-    category: "Hackathon",
+    category: "Game Jam",
     description:
-      "A 24-hour game development challenge where teams create innovative games based on a surprise theme.",
-   
-    coordinator: "Alex Rivera",
-    coordinatorRole: "Hackathon Director",
+      "A 3-day challenge to build a game from scratch. Create. Collaborate. Compete.",
+    coordinator: "Naman Verma",
+    coordinatorRole: "Game Jam Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSd8ULGFrvnDUWovnmEl2rL_h6i0FEQHTCtgreDHgeCkiYZ2Vw/viewform?usp=sharing&ouid=109369219745032650857",
     bulletPoints: [
-      "24-hour continuous development marathon",
-      "Surprise theme revealed at start",
-      "Expert mentors and industry judges",
-      "Showcase your creativity and technical skills",
+      "3-day game development challenge",
+      "Prizes & Goodies",
+      "Certification for All Participants from GDAI",
+      "Mentorship from Industry Experts",
+      "Showcase Your Game to a Live Audience",
     ],
   },
   {
     id: "bgmi-tournament",
     title: "BGMI Tournament",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
-    location: "Main Arena, ITM Gwalior",
+    date: "May 20-24, 2025",
+    location: "ITM Gwalior",
     participants: "128 Teams",
     image: "/images/bgmi.avif?height=300&width=500",
     category: "Tournament",
     description:
-      "Central India's biggest BGMI tournament featuring 128 teams competing for glory and impressive prize pool.",
-    
-    coordinator: "Sarah Chen",
-    coordinatorRole: "Tournament Director",
+      "Get ready for the ultimate BGMI showdown! From intense online battles to a high-octane LAN finale in Gwalior, this is the event you don't want to miss.",
+    coordinator: "Priyesh Kekan",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeiaPe8AC_wL5ErSHITNliiR4IIWleXRzC4EGOfDW7ygbmsGA/viewform?usp=sharing&ouid=109369219745032650857",
     bulletPoints: [
-      "128 teams from across Central India",
-      "One-day tournament with group stages and playoffs",
-      "Professional commentary and production",
-      "Meet and greet with pro players",
+      "Registrations are free",
+      "Live LAN Finale in Gwalior",
+      "Epic Cash Prizes",
+    ],
+  },
+  {
+    id: "free-fire-max-tournament",
+    title: "Free Fire MAX Tournament",
+    date: "May 20-24, 2025",
+    location: "ITM Gwalior",
+    participants: "60 Teams",
+    image: "/placeholder.svg?height=300&width=500",
+    category: "Tournament",
+    description:
+      "Ready to prove your squad is the best in India? Step into Gwalior's biggest-ever Free Fire MAX tournament and compete with 60 elite teams in a heart-pounding survival showdown for glory, fame, and bragging rights.",
+    coordinator: "Tournament Director",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSf7awOZIJQ-emXZ6n98VeoA1mmBY66K6Y_iRkQwHIXjQi35Mg/viewform?usp=sharing&ouid=109369219745032650857",
+    bulletPoints: [
+      "Registrations are free",
+      "Live LAN Finale in Gwalior",
+      "Epic Cash Prizes",
     ],
   },
   {
     id: "valorant-championship",
-    title: "Valorant Championship",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
-    location: "Esports Arena, ITM Gwalior",
+    title: "Valorant Tournament",
+    date: "May 20-24, 2025",
+    location: "ITM Gwalior",
     participants: "50 Teams",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
-    description:
-      "Two-day Valorant tournament featuring the top 32 teams from Central India competing for an impressive prize pool.",
-    
-    coordinator: "Sarah Chen",
-    coordinatorRole: "Tournament Director",
+    description: "Gear up for Gwalior's most electrifying Valorant tournament!",
+    coordinator: "Tournament Director",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSd9ZMmBeqVb3ltZpe_UQ9k5Jg2fZ1AbAbrEJPuq3eKfA0LUvA/viewform?usp=sharing&ouid=109369219745032650857",
     bulletPoints: [
-      "32 teams from around the region",
-      "Two-day tournament with group stages and playoffs",
-      "Professional commentary and production",
-      "Meet and greet with pro players",
+      "Epic Online Knockouts",
+      "LAN Finals in Gwalior",
+      "EPIC CASH PRIZES",
+    ],
+  },
+  {
+    id: "tekken-8",
+    title: "Tekken 8 Tournament",
+    date: "May 20-24, 2025",
+    location: "ITM Gwalior",
+    participants: "100 Players",
+    image: "/placeholder.svg?height=300&width=500",
+    category: "Tournament",
+    description:
+      "Think you've got what it takes to be India's best Tekken fighter? Step into the ring and battle your way to glory at the Tekken 8 Tournament in Gwalior!",
+    coordinator: "Tournament Director",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfTfCy6pcvouZCxiegO66bH0RkeX89_cH9O2aukmw7Ooqjc2A/viewform?usp=sharing&ouid=109369219745032650857",
+    bulletPoints: [
+      "Gaming Cafe Qualifiers",
+      "LIVE LAN FINALS",
+      "Experience the thrill of live commentary, stage action, and crowd energy!",
     ],
   },
   {
     id: "ea-sports-fc-25",
-    title: "EA Sports FC 25 Tournament",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
-    location: "Gaming Lounge, ITM Gwalior",
+    title: "EAFC 25 Tournament",
+    date: "May 20-24, 2025",
+    location: "ITM Gwalior",
     participants: "100 Players",
     image: "/placeholder.svg?height=300&width=500",
     category: "Tournament",
     description:
-      "Compete in the ultimate football gaming experience with the latest EA Sports FC 25 title.",
-    
-    coordinator: "Mark Johnson",
-    coordinatorRole: "Sports Gaming Director",
+      "Get ready for an action-packed FIFA showdown! From intense knockout rounds to a live LAN finale in Gwalior, this is your chance to compete on India's biggest FIFA stage.",
+    coordinator: "Tournament Director",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSdxPZB4VYZSoW1DT_5l_BCUBYs3x4lxwGbF16xQeLJ8dg53yg/viewform?usp=sharing&ouid=109369219745032650857",
     bulletPoints: [
-      "64 players in single-elimination format",
-      "Play on the latest gaming consoles",
-      "Live commentary and audience viewing",
-      "Chance to win exclusive EA Sports merchandise",
-    ],
-  },
-  {
-    id: "Tekken 8",
-    title: "Tekken 8",
-    date: "May 24, 2025",
-    time: "3:00 PM - 9:00 PM",
-    location: "Nostalgia Zone, ITM Gwalior",
-    participants: "100 Players",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Tournament",
-    description:
-      "Step back in time with classic games from the 80s and 90s in this nostalgic gaming tournament.",
-    
-    coordinator: "James Wilson",
-    coordinatorRole: "Retro Gaming Specialist",
-    bulletPoints: [
-      "Multiple classic games including Pac-Man, Mario, and Tetris",
-      "Original arcade cabinets and consoles",
-      "Open to all ages and experience levels",
-      "Special prizes for costume and cosplay",
+      "Gaming Cafe Qualifiers",
+      "LIVE LAN FINALS",
+      "Experience the thrill of live commentary, stage action, and crowd energy!",
     ],
   },
 ];
@@ -312,7 +328,7 @@ export default function GameOConPage() {
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">
-                  <span className="text-red-600">CARNIVAL</span> SHOWCASE
+                  <span className="text-red-600">GAMING</span> CARNIVAL
                 </h2>
 
                 <p className="text-lg text-zinc-300 mb-6">
@@ -339,7 +355,7 @@ export default function GameOConPage() {
                       <Calendar className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-medium">May 24-25, 2025</p>
+                      <p className="font-medium">May 24, 2025</p>
                       <p className="text-sm text-zinc-400">
                         Doors open at 3:00 PM
                       </p>
@@ -428,9 +444,7 @@ export default function GameOConPage() {
 
                   {/* Prize Pool Badge */}
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-yellow-500/90 backdrop-blur-sm text-black text-xs px-3 py-1 rounded-full font-medium">
-                      
-                    </span>
+                    <span className="bg-yellow-500/90 backdrop-blur-sm text-black text-xs px-3 py-1 rounded-full font-medium"></span>
                   </div>
                 </div>
 
@@ -451,30 +465,39 @@ export default function GameOConPage() {
                         {event.date}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-5 w-5 text-red-500" />
-                      <span className="text-sm text-zinc-400">
-                        {event.time}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-5 w-5 text-red-500" />
-                      <span className="text-sm text-zinc-400">
-                        {event.location}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="h-5 w-5 text-red-500" />
-                      <span className="text-sm text-zinc-400">
-                        {event.participants}
-                      </span>
-                    </div>
+                    {event.location && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-5 w-5 text-red-500" />
+                        <span className="text-sm text-zinc-400">
+                          {event.location}
+                        </span>
+                      </div>
+                    )}
+                    {event.rewards && (
+                      <div className="flex items-center gap-2">
+                        <Trophy className="h-5 w-5 text-red-500" />
+                        <span className="text-sm text-zinc-400">
+                          {event.rewards}
+                        </span>
+                      </div>
+                    )}
+                    {event.participants && (
+                      <div className="flex items-center gap-2">
+                        <Users className="h-5 w-5 text-red-500" />
+                        <span className="text-sm text-zinc-400">
+                          {event.participants}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex justify-between items-center">
                     {/* Register Button */}
-                    <motion.button
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                    <motion.a
+                      href={event.registrationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center"
                       whileHover={{
                         scale: 1.05,
                         boxShadow: "0 0 10px rgba(220,38,38,0.3)",
@@ -482,7 +505,8 @@ export default function GameOConPage() {
                       whileTap={{ scale: 0.95 }}
                     >
                       Register Now
-                    </motion.button>
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </motion.a>
 
                     {/* View Details Button */}
                     <motion.div
@@ -714,7 +738,10 @@ export default function GameOConPage() {
                       <p className="text-red-400">Limited slots available!</p>
                     </div>
 
-                    <motion.button
+                    <motion.a
+                      href={selectedEvent.registrationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg inline-flex items-center"
                       whileHover={{
                         scale: 1.05,
@@ -723,8 +750,8 @@ export default function GameOConPage() {
                       whileTap={{ scale: 0.95 }}
                     >
                       Register Now
-                      <ChevronRight className="ml-2 h-4 w-4" />
-                    </motion.button>
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </motion.a>
                   </div>
                 </div>
               </div>

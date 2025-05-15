@@ -250,10 +250,10 @@ export default function EventsPage() {
                 viewport={{ once: true }}
               >
                 {[
-                  "FPS Tournament",
-                  "MOBA Championship",
-                  "Fighting Games",
-                  "Fan Activities",
+                  "Esports Competitions",
+                  "Game Jam",
+                  "Game Zones",
+                  "Music & Entertainment",
                 ].map((tag, i) => (
                   <motion.span
                     key={tag}
