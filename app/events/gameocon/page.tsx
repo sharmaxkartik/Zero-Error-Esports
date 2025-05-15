@@ -441,11 +441,6 @@ export default function GameOConPage() {
                       {event.category}
                     </span>
                   </div>
-
-                  {/* Prize Pool Badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-yellow-500/90 backdrop-blur-sm text-black text-xs px-3 py-1 rounded-full font-medium"></span>
-                  </div>
                 </div>
 
                 {/* Event Details */}
