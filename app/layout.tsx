@@ -48,14 +48,14 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
       </head>
-      <AnimationProvider>
-        <body className={rajdhani.className}>
-          <ErrorBoundary>
+      <body className={rajdhani.className}>
+        <ErrorBoundary>
+          <AnimationProvider>
             <BackgroundEffects />
             <ClientLayout>{children}</ClientLayout>
-          </ErrorBoundary>
-        </body>
-      </AnimationProvider>
+          </AnimationProvider>
+        </ErrorBoundary>
+      </body>
     </html>
   );
 }

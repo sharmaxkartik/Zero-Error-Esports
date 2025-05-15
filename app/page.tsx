@@ -92,7 +92,7 @@ export default function Home() {
                 mousePosition={mousePosition}
               />
             </div>
-            w{/* Hero Section with Video Background */}
+            {/* Hero Section with Video Background */}
             <HeroSection
               scrollYProgress={scrollYProgress}
               mousePosition={mousePosition}
