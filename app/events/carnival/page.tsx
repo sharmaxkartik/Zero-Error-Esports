@@ -29,14 +29,14 @@ const carnivalAttractions = [
     image: "/images/Carnival/Booths.png?height=300&width=500",
     category: "Exhibition",
     description:
-      "Explore 50+ gaming booths featuring the latest titles, VR experiences, and retro classics.",
+      "Explore 10+ gaming booths featuring the challenges, casual playing zones & retro classics.",
     coordinator: "Exhibition Director",
     coordinatorRole: "Exhibition Coordinator",
     registrationLink: "/signup",
     bulletPoints: [
-      "50+ Gaming Booths",
-      "Latest AAA Titles",
-      "VR Experiences",
+      "10+ Gaming Booths",
+      "Gaming Challenges",
+      "Casual Playing Zones",
       "Retro Gaming Zone",
     ],
   },
@@ -44,7 +44,7 @@ const carnivalAttractions = [
     id: "tournament-finals",
     title: "Tournament Finals",
     date: "May 24, 2025 (Evening)",
-    location: "Main Arena",
+    location: "ITM Gwalior",
     participants: "Qualified Teams",
     image: "/images/Carnival/FINALS.png?height=300&width=500",
     category: "Tournament",
@@ -62,9 +62,9 @@ const carnivalAttractions = [
   },
   {
     id: "special-exhibitions",
-    title: "Special Exhibitions",
+    title: "Game Dev Exhibition",
     date: "May 24, 2025 (Afternoon)",
-    location: "Exhibition Hall",
+    location: "ITM Gwalior",
     participants: "All Attendees",
     image: "/images/Carnival/GameDevExhibition.png?height=300&width=500",
     category: "Exhibition",
@@ -82,21 +82,21 @@ const carnivalAttractions = [
   },
   {
     id: "cosplay-activities",
-    title: "Cosplay & Activities",
+    title: "Influencer's Interaction & Stage Performances",
     date: "May 24, 2025 (All Day)",
-    location: "Activity Zone",
+    location: "ITM Gwalior",
     participants: "All Attendees",
     image: "/images/Carnival/Stage performances.jpg?height=300&width=500",
     category: "Activity",
     description:
-      "Join cosplay contests, attend workshops, and participate in fun gaming activities.",
+      "Meet your favorite gaming influencers and enjoy exciting stage performances.",
     coordinator: "Activity Director",
     coordinatorRole: "Activity Coordinator",
     registrationLink: "/signup",
     bulletPoints: [
-      "Cosplay Contest",
-      "Gaming Workshops",
-      "Interactive Activities",
+      "Influencer Meet & Greet",
+      "Stage Performances",
+      "Interactive Sessions",
       "Photo Opportunities",
     ],
   },
@@ -290,7 +290,7 @@ export default function CarnivalShowPage() {
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <MapPin className="h-5 w-5 text-red-500" />
-                <span>Main Arena, ITM Gwalior</span>
+                <span>ITM Gwalior</span>
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <Users className="h-5 w-5 text-red-500" />
@@ -298,7 +298,7 @@ export default function CarnivalShowPage() {
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <Clock className="h-5 w-5 text-amber-500" />
-                <span>10:00 AM - 10:00 PM</span>
+                <span>3:00 PM - 9:00 PM</span>
               </div>
             </motion.div>
 
@@ -510,22 +510,6 @@ export default function CarnivalShowPage() {
                         </span>
                       </div>
                     )}
-                  </div>
-
-                  <div className="flex items-center">
-                    {/* Register Button */}
-                    <motion.a
-                      href={attraction.registrationLink}
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center"
-                      whileHover={{
-                        scale: 1.05,
-                        boxShadow: "0 0 10px rgba(220,38,38,0.3)",
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Register Now
-                      <ArrowRight className="ml-1 h-4 w-4" />
-                    </motion.a>
                   </div>
                 </div>
               </motion.div>
