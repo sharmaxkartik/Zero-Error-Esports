@@ -70,7 +70,7 @@ const services = [
     id: 4,
     title: "Campus & Café Esports Integration",
     category: "Integration",
-    image: "/images/minecraft.jpeg?height=400&width=600",
+    image: "/images/Campus&CafeIntegration.png?height=400&width=600",
     description:
       "Bring Zero Error to your college or gaming zone with custom events, workshops & leagues.",
     featured: false,
@@ -86,7 +86,8 @@ const services = [
     id: 5,
     title: "Brand Partnerships & Sponsorship Activation",
     category: "Partnerships",
-    image: "/images/gow.jpg?height=400&width=600",
+    image:
+      "/images/BrandPartnership&SponserActivation.png?height=400&width=600",
     description:
       "We connect youth audiences with aligned brands through esports narratives.",
     featured: false,
