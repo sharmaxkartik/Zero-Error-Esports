@@ -25,7 +25,7 @@ const gameOConEvents = [
     date: "May 19-20-21, 2025",
     rewards: "Tickets to IGDC 25",
     participants: "50 Teams",
-    image: "/images/gamejam.jpg?height=300&width=500",
+    image: "/images/GameJamHackathon.png?height=300&width=500",
     category: "Game Jam",
     description:
       "A 3-day challenge to build a game from scratch. Create. Collaborate. Compete.",
@@ -87,7 +87,7 @@ const gameOConEvents = [
     date: "May 20-24, 2025",
     location: "ITM Gwalior",
     participants: "50 Teams",
-    image: "/images/valorantgame.jpeg?height=300&width=500",
+    image: "/images/ValorantCover.jpg?height=300&width=500",
     category: "Tournament",
     description: "Gear up for Gwalior's most electrifying Valorant tournament!",
     coordinator: "Tournament Director",
@@ -106,7 +106,7 @@ const gameOConEvents = [
     date: "May 20-24, 2025",
     location: "ITM Gwalior",
     participants: "100 Players",
-    image: "/images/tekken8.jpg?height=300&width=500",
+    image: "/images/Tekken8Cover.jpg?height=300&width=500",
     category: "Tournament",
     description:
       "Think you've got what it takes to be India's best Tekken fighter? Step into the ring and battle your way to glory at the Tekken 8 Tournament in Gwalior!",
@@ -126,7 +126,7 @@ const gameOConEvents = [
     date: "May 20-24, 2025",
     location: "ITM Gwalior",
     participants: "100 Players",
-    image: "/images/fc25.webp?height=300&width=500",
+    image: "/images/EAFC 25.jpg?height=300&width=500",
     category: "Tournament",
     description:
       "Get ready for an action-packed FIFA showdown! From intense knockout rounds to a live LAN finale in Gwalior, this is your chance to compete on India's biggest FIFA stage.",

@@ -21,32 +21,84 @@ import {
 // Carnival attractions
 const carnivalAttractions = [
   {
-    name: "Gaming Booths",
+    id: "gaming-booths",
+    title: "Gaming Booths",
     date: "May 24, 2025 (All Day)",
+    location: "ITM Gwalior",
+    participants: "Unlimited",
+    image: "/images/Carnival/Booths.png?height=300&width=500",
+    category: "Exhibition",
     description:
       "Explore 50+ gaming booths featuring the latest titles, VR experiences, and retro classics.",
-    icon: <Shield className="h-8 w-8" />,
+    coordinator: "Exhibition Director",
+    coordinatorRole: "Exhibition Coordinator",
+    registrationLink: "/signup",
+    bulletPoints: [
+      "50+ Gaming Booths",
+      "Latest AAA Titles",
+      "VR Experiences",
+      "Retro Gaming Zone",
+    ],
   },
   {
-    name: "Tournament Finals",
+    id: "tournament-finals",
+    title: "Tournament Finals",
     date: "May 24, 2025 (Evening)",
+    location: "Main Arena",
+    participants: "Qualified Teams",
+    image: "/images/Carnival/FINALS.png?height=300&width=500",
+    category: "Tournament",
     description:
       "Watch the thrilling finals of multiple esports tournaments live on the main stage.",
-    icon: <Trophy className="h-8 w-8" />,
+    coordinator: "Tournament Director",
+    coordinatorRole: "Tournament Coordinator",
+    registrationLink: "/signup",
+    bulletPoints: [
+      "Valorant Finals",
+      "BGMI Championship",
+      "Tekken 8 Showdown",
+      "Live Commentary",
+    ],
   },
   {
-    name: "Special Exhibitions",
+    id: "special-exhibitions",
+    title: "Special Exhibitions",
     date: "May 24, 2025 (Afternoon)",
+    location: "Exhibition Hall",
+    participants: "All Attendees",
+    image: "/images/Carnival/GameDevExhibition.png?height=300&width=500",
+    category: "Exhibition",
     description:
       "Experience exclusive game reveals and special exhibitions from top game developers.",
-    icon: <Star className="h-8 w-8" />,
+    coordinator: "Exhibition Director",
+    coordinatorRole: "Exhibition Coordinator",
+    registrationLink: "/signup",
+    bulletPoints: [
+      "Game Reveals",
+      "Developer Showcases",
+      "Exclusive Previews",
+      "Industry Insights",
+    ],
   },
   {
-    name: "Cosplay & Activities",
+    id: "cosplay-activities",
+    title: "Cosplay & Activities",
     date: "May 24, 2025 (All Day)",
+    location: "Activity Zone",
+    participants: "All Attendees",
+    image: "/images/Carnival/Stage performances.jpg?height=300&width=500",
+    category: "Activity",
     description:
       "Join cosplay contests, attend workshops, and participate in fun gaming activities.",
-    icon: <Users className="h-8 w-8" />,
+    coordinator: "Activity Director",
+    coordinatorRole: "Activity Coordinator",
+    registrationLink: "/signup",
+    bulletPoints: [
+      "Cosplay Contest",
+      "Gaming Workshops",
+      "Interactive Activities",
+      "Photo Opportunities",
+    ],
   },
 ];
 
@@ -395,47 +447,87 @@ export default function CarnivalShowPage() {
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {carnivalAttractions.map((attraction, index) => (
+            {carnivalAttractions.map((attraction) => (
               <motion.div
-                key={attraction.name}
+                key={attraction.id}
                 variants={itemVariants}
-                className="bg-gradient-to-b from-zinc-900/90 to-zinc-950/90 rounded-xl p-6 border border-zinc-800/50 backdrop-blur-sm hover:border-red-600/50 transition-colors duration-300 relative overflow-hidden group"
-                whileHover={{ y: -5 }}
+                className="bg-zinc-900/80 rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(220,0,0,0.2)] h-full"
               >
-                <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-red-600/5 filter blur-xl group-hover:bg-red-600/10 transition-colors duration-300"></div>
+                {/* Event Image */}
+                <div className="relative h-[200px] overflow-hidden">
+                  <Image
+                    src={attraction.image || "/placeholder.svg"}
+                    alt={attraction.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
 
-                <div className="mb-4 bg-zinc-800/50 text-red-500 p-4 rounded-lg inline-flex items-center justify-center">
-                  {attraction.icon}
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
+                      {attraction.category}
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="text-xl font-bold mb-1 group-hover:text-red-500 transition-colors duration-300">
-                  {attraction.name}
-                </h3>
+                {/* Event Details */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-4 text-white">
+                    {attraction.title}
+                  </h3>
+                  <p className="text-sm text-zinc-400 mb-6">
+                    {attraction.description}
+                  </p>
 
-                <div className="text-sm text-red-500 font-medium mb-3">
-                  {attraction.date}
+                  {/* Event Info */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-5 w-5 text-red-500" />
+                      <span className="text-sm text-zinc-400">
+                        {attraction.date}
+                      </span>
+                    </div>
+                    {attraction.location && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-5 w-5 text-red-500" />
+                        <span className="text-sm text-zinc-400">
+                          {attraction.location}
+                        </span>
+                      </div>
+                    )}
+                    {attraction.participants && (
+                      <div className="flex items-center gap-2">
+                        <Users className="h-5 w-5 text-red-500" />
+                        <span className="text-sm text-zinc-400">
+                          {attraction.participants}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex items-center">
+                    {/* Register Button */}
+                    <motion.a
+                      href={attraction.registrationLink}
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center"
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 0 10px rgba(220,38,38,0.3)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Register Now
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </motion.a>
+                  </div>
                 </div>
-
-                <p className="text-zinc-400 text-sm mb-4">
-                  {attraction.description}
-                </p>
-
-                <Link href="/signup">
-                  <motion.button
-                    className="w-full bg-red-600/20 hover:bg-red-600/40 text-red-500 py-2 px-4 text-sm rounded-md flex items-center justify-center transition-colors duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Register Now
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </motion.button>
-                </Link>
               </motion.div>
             ))}
           </motion.div>
