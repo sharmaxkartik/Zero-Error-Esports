@@ -22,7 +22,7 @@ const gameOConEvents = [
   {
     id: "game-jam",
     title: "Game Jam Hackathon",
-    date: "May 19-20-21, 2025",
+    date: "30th May - 10th June, 2025",
     rewards: "Tickets to IGDC 25",
     participants: "50 Teams",
     image: "/images/GameJamHackathon.png?height=300&width=500",
@@ -44,7 +44,7 @@ const gameOConEvents = [
   {
     id: "bgmi-tournament",
     title: "BGMI Tournament",
-    date: "May 20-24, 2025",
+    date: "June 10-21, 2025",
     location: "ITM Gwalior",
     participants: "128 Teams",
     image: "/images/bgmi.avif?height=300&width=500",
@@ -64,7 +64,7 @@ const gameOConEvents = [
   {
     id: "free-fire-max-tournament",
     title: "Free Fire MAX Tournament",
-    date: "May 20-24, 2025",
+    date: "June 10-21, 2025",
     location: "ITM Gwalior",
     participants: "60 Teams",
     image: "/images/freefire.webp?height=300&width=500",
@@ -84,7 +84,7 @@ const gameOConEvents = [
   {
     id: "valorant-championship",
     title: "Valorant Tournament",
-    date: "May 20-24, 2025",
+    date: "June 10-21, 2025",
     location: "ITM Gwalior",
     participants: "50 Teams",
     image: "/images/ValorantCover.jpg?height=300&width=500",
@@ -103,7 +103,7 @@ const gameOConEvents = [
   {
     id: "tekken-8",
     title: "Tekken 8 Tournament",
-    date: "May 20-24, 2025",
+    date: "June 10-21, 2025",
     location: "ITM Gwalior",
     participants: "100 Players",
     image: "/images/Tekken8Cover.jpg?height=300&width=500",
@@ -123,7 +123,7 @@ const gameOConEvents = [
   {
     id: "ea-sports-fc-25",
     title: "EAFC 25 Tournament",
-    date: "May 20-24, 2025",
+    date: "June 10-21, 2025",
     location: "ITM Gwalior",
     participants: "100 Players",
     image: "/images/EAFC 25.jpg?height=300&width=500",
@@ -355,7 +355,7 @@ export default function GameOConPage() {
                       <Calendar className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-medium">May 24, 2025</p>
+                      <p className="font-medium">June 21, 2025</p>
                       <p className="text-sm text-zinc-400">
                         Doors open at 3:00 PM
                       </p>

@@ -23,7 +23,7 @@ const carnivalAttractions = [
   {
     id: "gaming-booths",
     title: "Gaming Booths",
-    date: "May 24, 2025 (All Day)",
+    date: "June 21, 2025 (All Day)",
     location: "ITM Gwalior",
     participants: "Unlimited",
     image: "/images/Carnival/Booths.png?height=300&width=500",
@@ -43,7 +43,7 @@ const carnivalAttractions = [
   {
     id: "tournament-finals",
     title: "Tournament Finals",
-    date: "May 24, 2025 (Evening)",
+    date: "June 21, 2025 (Evening)",
     location: "ITM Gwalior",
     participants: "Qualified Teams",
     image: "/images/Carnival/FINALS.png?height=300&width=500",
@@ -63,7 +63,7 @@ const carnivalAttractions = [
   {
     id: "special-exhibitions",
     title: "Game Dev Exhibition",
-    date: "May 24, 2025 (Afternoon)",
+    date: "June 21, 2025 (Afternoon)",
     location: "ITM Gwalior",
     participants: "All Attendees",
     image: "/images/Carnival/GameDevExhibition.png?height=300&width=500",
@@ -83,7 +83,7 @@ const carnivalAttractions = [
   {
     id: "cosplay-activities",
     title: "Influencer's Interaction & Stage Performances",
-    date: "May 24, 2025 (All Day)",
+    date: "June 21, 2025 (All Day)",
     location: "ITM Gwalior",
     participants: "All Attendees",
     image: "/images/Carnival/Stage performances.jpg?height=300&width=500",
@@ -286,7 +286,7 @@ export default function CarnivalShowPage() {
             >
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <Calendar className="h-5 w-5 text-red-500" />
-                <span>May 24, 2025</span>
+                <span>June 21, 2025</span>
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/70 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50">
                 <MapPin className="h-5 w-5 text-red-500" />
