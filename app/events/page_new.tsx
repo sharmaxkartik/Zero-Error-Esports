@@ -189,7 +189,7 @@ export default function EventsPage() {
 
           {/* Events Grid */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -197,212 +197,176 @@ export default function EventsPage() {
           >
             {/* ZE FACEOFF Invitational */}
             <motion.div
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden group hover:border-red-500/50 transition-all duration-300"
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
             >
-              {/* Event Cover Image */}
-              <div className="relative w-full aspect-square overflow-hidden max-h-80">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-                <Image
-                  src="/images/ZE_faceoff.png"
-                  alt="ZE FACEOFF Invitational"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <iframe
+                  src="https://drive.google.com/file/d/1UWUIMaUei-KCQPISlmRwN5fRUircYA1q/preview"
+                  className="w-full h-full object-cover"
+                  allowFullScreen
                 />
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-red-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-700 px-3 py-1 rounded-full text-sm font-bold z-20">
                   BGMI
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
-                    ZE FACEOFF Invitational
-                  </h3>
-                </div>
               </div>
-
-              {/* Event Details */}
-              <div className="p-4 space-y-3">
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
+              <div className="p-6">
+                <h3 className="text-xl font-bold uppercase mb-2 text-white group-hover:text-red-400 transition-colors">
+                  ZE FACEOFF Invitational
+                </h3>
+                <div className="flex items-center gap-4 text-sm text-zinc-400 mb-3">
                   <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3 text-red-500" />
+                    <Users className="h-4 w-4 text-red-500" />
                     1v1 TDM Invitational
                   </span>
                   <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 text-red-500" />
+                    <MapPin className="h-4 w-4 text-red-500" />
                     Online
                   </span>
                 </div>
-                <div className="border-t border-zinc-800 pt-3">
-                  <span className="text-green-400 font-semibold text-sm">
-                    Winner:{" "}
-                  </span>
-                  <span className="text-white font-bold text-sm">
-                    Zoldyck Playz
-                  </span>
+                <div className="mb-4">
+                  <span className="text-green-400 font-semibold">Winner: </span>
+                  <span className="text-white">Zoldyck Playz</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="bg-zinc-800 px-2 py-1 rounded-full text-xs text-zinc-300">
+                  <span className="bg-zinc-800 px-3 py-1 rounded-full text-sm text-zinc-300">
                     Battle Royale
                   </span>
-                  <ChevronRight className="h-4 w-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="h-5 w-5 text-red-500 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>
 
             {/* EAFC SHOWDOWN */}
             <motion.div
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden group hover:border-red-500/50 transition-all duration-300"
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
             >
-              {/* Event Cover Image */}
-              <div className="relative w-full aspect-square overflow-hidden max-h-80">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-                <Image
-                  src="/images/EAFC_showdown.png"
-                  alt="EAFC SHOWDOWN"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <iframe
+                  src="https://drive.google.com/file/d/1CdvzYvT56N2xC_pOZrrQzjeVKwgvv9Ez/preview"
+                  className="w-full h-full object-cover"
+                  allowFullScreen
                 />
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-600 to-blue-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-700 px-3 py-1 rounded-full text-sm font-bold z-20">
                   EAFC 25
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
-                    EAFC SHOWDOWN
-                  </h3>
-                </div>
               </div>
-
-              {/* Event Details */}
-              <div className="p-4 space-y-3">
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
+              <div className="p-6">
+                <h3 className="text-xl font-bold uppercase mb-2 text-white group-hover:text-red-400 transition-colors">
+                  EAFC SHOWDOWN
+                </h3>
+                <div className="flex items-center gap-4 text-sm text-zinc-400 mb-3">
                   <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3 text-red-500" />
+                    <Users className="h-4 w-4 text-red-500" />
                     1v1
                   </span>
                   <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 text-red-500" />
+                    <MapPin className="h-4 w-4 text-red-500" />
                     Offline LAN
                   </span>
                 </div>
-                <div className="border-t border-zinc-800 pt-3">
-                  <span className="text-green-400 font-semibold text-sm">
-                    Winner:{" "}
-                  </span>
-                  <span className="text-white font-bold text-sm">Harshit</span>
+                <div className="mb-4">
+                  <span className="text-green-400 font-semibold">Winner: </span>
+                  <span className="text-white">Harshit</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="bg-zinc-800 px-2 py-1 rounded-full text-xs text-zinc-300">
+                  <span className="bg-zinc-800 px-3 py-1 rounded-full text-sm text-zinc-300">
                     Football
                   </span>
-                  <ChevronRight className="h-4 w-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="h-5 w-5 text-red-500 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>
 
             {/* ZE SLAMMANIA */}
             <motion.div
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden group hover:border-red-500/50 transition-all duration-300"
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
             >
-              {/* Event Cover Image */}
-              <div className="relative w-full aspect-square overflow-hidden max-h-80">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-                <Image
-                  src="/images/ZE_slammania.png"
-                  alt="ZE SLAMMANIA"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <iframe
+                  src="https://drive.google.com/file/d/1yjc5k3j16EviDnng7_EeIxTjRVkjwDUe/preview"
+                  className="w-full h-full object-cover"
+                  allowFullScreen
                 />
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-yellow-600 to-yellow-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-600 to-yellow-700 px-3 py-1 rounded-full text-sm font-bold z-20">
                   WWE 2K25
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
-                    ZE SLAMMANIA
-                  </h3>
-                </div>
               </div>
-
-              {/* Event Details */}
-              <div className="p-4 space-y-3">
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
+              <div className="p-6">
+                <h3 className="text-xl font-bold uppercase mb-2 text-white group-hover:text-red-400 transition-colors">
+                  ZE SLAMMANIA
+                </h3>
+                <div className="flex items-center gap-4 text-sm text-zinc-400 mb-3">
                   <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3 text-red-500" />
+                    <Users className="h-4 w-4 text-red-500" />
                     1v1
                   </span>
                   <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 text-red-500" />
+                    <MapPin className="h-4 w-4 text-red-500" />
                     Offline LAN
                   </span>
                 </div>
-                <div className="border-t border-zinc-800 pt-3">
-                  <span className="text-green-400 font-semibold text-sm">
-                    Winner:{" "}
-                  </span>
-                  <span className="text-white font-bold text-sm">Aniraj</span>
+                <div className="mb-4">
+                  <span className="text-green-400 font-semibold">Winner: </span>
+                  <span className="text-white">Aniraj</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="bg-zinc-800 px-2 py-1 rounded-full text-xs text-zinc-300">
+                  <span className="bg-zinc-800 px-3 py-1 rounded-full text-sm text-zinc-300">
                     Wrestling
                   </span>
-                  <ChevronRight className="h-4 w-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="h-5 w-5 text-red-500 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>
 
             {/* ZE FFM SHOWDOWN */}
             <motion.div
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden group hover:border-red-500/50 transition-all duration-300"
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
             >
-              {/* Event Cover Image */}
-              <div className="relative w-full aspect-square overflow-hidden max-h-80">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-                <Image
-                  src="/images/ZE_FFM_Showdown.png"
-                  alt="ZE FFM SHOWDOWN"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <iframe
+                  src="https://drive.google.com/file/d/1bLa3pMgTrj0_LW5sfVbrAUhLbzmjF9pm/preview"
+                  className="w-full h-full object-cover"
+                  allowFullScreen
                 />
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-orange-600 to-orange-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-600 to-orange-700 px-3 py-1 rounded-full text-sm font-bold z-20">
                   Free Fire Max
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
-                    ZE FFM SHOWDOWN
-                  </h3>
-                </div>
               </div>
-
-              {/* Event Details */}
-              <div className="p-4 space-y-3">
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
+              <div className="p-6">
+                <h3 className="text-xl font-bold uppercase mb-2 text-white group-hover:text-red-400 transition-colors">
+                  ZE FFM SHOWDOWN
+                </h3>
+                <div className="flex items-center gap-4 text-sm text-zinc-400 mb-3">
                   <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3 text-red-500" />
+                    <Users className="h-4 w-4 text-red-500" />
                     4v4 Squad Battle Royale
                   </span>
                   <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 text-red-500" />
+                    <MapPin className="h-4 w-4 text-red-500" />
                     Online
                   </span>
                 </div>
-                <div className="border-t border-zinc-800 pt-3">
-                  <span className="text-green-400 font-semibold text-sm">
-                    Winner:{" "}
-                  </span>
-                  <span className="text-white font-bold text-sm">
-                    Team Tag Elite
-                  </span>
+                <div className="mb-4">
+                  <span className="text-green-400 font-semibold">Winner: </span>
+                  <span className="text-white">Team Tag Elite</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="bg-zinc-800 px-2 py-1 rounded-full text-xs text-zinc-300">
+                  <span className="bg-zinc-800 px-3 py-1 rounded-full text-sm text-zinc-300">
                     Battle Royale
                   </span>
-                  <ChevronRight className="h-4 w-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="h-5 w-5 text-red-500 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>

@@ -125,7 +125,7 @@ export default function Navbar() {
                 }}
               >
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DXgshYlxQfx725QpTWbB89j5xicbzE.png"
+                  src="/images/favicon.png"
                   alt="Zero Error Esports"
                   width={60}
                   height={30}
@@ -241,7 +241,7 @@ export default function Navbar() {
               transition={{ duration: 0.2 }}
             >
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DXgshYlxQfx725QpTWbB89j5xicbzE.png"
+                src="/images/favicon.png"
                 alt="Zero Error Esports"
                 width={50}
                 height={25}

@@ -65,7 +65,7 @@ export default function SignupPage() {
             transition={{ delay: 0.1, duration: 0.5 }}
           >
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DXgshYlxQfx725QpTWbB89j5xicbzE.png"
+              src="/images/favicon.png"
               alt="Zero Error Esports"
               width={100}
               height={50}
