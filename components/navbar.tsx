@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Events", path: "/events" },
+  { name: "ZE Club", path: "/ze-club" },
   { name: "Services", path: "/services" },
   { name: "Teams", path: "/teams" },
 ];
