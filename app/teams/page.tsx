@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ChevronRight,
-  ArrowRight,
-  Users,
-  User2,
-  Briefcase,
-  PenTool,
-  Film,
-  BarChart4,
-} from "lucide-react";
+import { ChevronRight, ArrowRight, Users, Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function TeamsPage() {
@@ -40,98 +31,26 @@ export default function TeamsPage() {
     leadership: [
       {
         name: "Aazam Khan",
-        role: "Founder, CEO",
-        image: "/images/team/Aazam Khan.jpg", // Replace with actual image path
+        role: "Founder & CEO",
+        image: "/images/team/Aazam Khan.jpg",
         fallbackImage: "/images/team/Aazam Khan.jpg",
-      },
-      {
-        name: "Priyesh Kekan",
-        role: "Co-Founder",
-        image: "/images/team/priyesh.jpg", // Replace with actual image path
-        fallbackImage: "/images/bgmi.avif",
       },
       {
         name: "Deepanshu Savita",
         role: "Co-Founder",
-        image: "/images/team/Deepanshu Savita.jpg", // Replace with actual image path
+        image: "/images/team/Deepanshu Savita.jpg",
         fallbackImage: "/images/gow.jpg",
       },
-    ],
-    executives: [
       {
-        name: "Adarsh Dubey",
-        role: "Chief Creative Officer (CCO)",
-        image: "/images/team/Adarsh Dubey.jpg", // Replace with actual image path
-        fallbackImage: "/images/valorantgame.jpeg",
-      },
-      {
-        name: "Harshit Soni",
-        role: "Chief Financial Officer (CFO)",
-        image: "/images/team/harshit.jpg", // Replace with actual image path
-        fallbackImage: "/images/lol.avif",
-      },
-      {
-        name: "Vaishnavi Bhadauriya",
-        role: "Director of External Affairs",
-        image: "/images/team/Vaishnavi Bhadauriya.jpg", // Replace with actual image path
-        fallbackImage: "/images/gamocon.png",
-      },
-      {
-        name: "Aryaman Bhatnagar",
-        role: "Chief Technology Officer (CTO)",
-        image: "/images/team/Aryaman Bhatnagar.jpg", // Replace with actual image path
-        fallbackImage: "/images/minecraft.jpeg",
-      },
-    ],
-    content: [
-      {
-        name: "Prakrat Singh Sengar",
-        role: "Content Writer",
-        image: "/images/team/prakrat.jpg", // Replace with actual image path
-        fallbackImage: "/images/valorantgame.jpeg",
-      },
-      {
-        name: "Prajjwal Singh Chauhan",
-        role: "Content Lead",
-        image: "/images/team/Prajjawal singh chauhan.jpg", // Replace with actual image path
+        name: "Priyesh Kekan",
+        role: "Co-Founder",
+        image: "/images/team/priyesh.jpg",
         fallbackImage: "/images/bgmi.avif",
       },
       {
-        name: "Kundan Singh",
-        role: "Video Editor",
-        image: "/images/team/kundan.jpg", // Replace with actual image path
-        fallbackImage: "/images/lol.avif",
-      },
-    ],
-    operations: [
-      {
-        name: "Aditya Sharma",
-        role: "Operations Team",
-        image: "/images/team/Aditya Sharma .jpg", // Replace with actual image path
-        fallbackImage: "/images/gamocon.png",
-      },
-      {
-        name: "Dhruv Sharma",
-        role: "Operations Team",
-        image: "/images/team/Dhruv Sharma.jpg", // Replace with actual image path
-        fallbackImage: "/images/minecraft.jpeg",
-      },
-      {
-        name: "Ayushmaan Johri",
-        role: "Operations Team",
-        image: "/images/team/Ayushmaan Johri .jpg", // Replace with actual image path
-        fallbackImage: "/images/valorantgame.jpeg",
-      },
-      {
-        name: "Rishabh Shukla",
-        role: "Operations Team",
-        image: "/images/team/Rishabh Shukla.jpg", // Replace with actual image path
-        fallbackImage: "/images/bgmi.avif",
-      },
-      {
-        name: "Raj Chaurasiya",
-        role: "Analyst",
-        image: "/images/team/Raj Chaurasiya.png", // Replace with actual image path
+        name: "Avinash Sharma",
+        role: "CFO",
+        image: "/images/team/Avinash Sharma.jpg",
         fallbackImage: "/images/valorantgame.jpeg",
       },
     ],
@@ -140,21 +59,18 @@ export default function TeamsPage() {
   // Icon mapping for each department
   const departmentIcons = {
     leadership: <Briefcase className="w-5 h-5 mr-2" />,
-    executives: <User2 className="w-5 h-5 mr-2" />,
-    content: <PenTool className="w-5 h-5 mr-2" />,
-    operations: <BarChart4 className="w-5 h-5 mr-2" />,
   };
 
   // Department titles
   const departmentTitles = {
-    leadership: "Leadership",
-    executives: "Executives",
-    content: "Content Team",
-    operations: "Operations & Analysis",
+    leadership: "Leadership Team",
   };
 
   // Helper function to render team member cards
-  const renderTeamCards = (members, department) => (
+  const renderTeamCards = (
+    members: any[],
+    department: keyof typeof departmentIcons
+  ) => (
     <div className="mb-16">
       <motion.div
         className="flex items-center mb-8"
@@ -170,13 +86,13 @@ export default function TeamsPage() {
       </motion.div>
 
       <motion.div
-        className="grid md:grid-cols-3 gap-8"
+        className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {members.map((member, index) => (
+        {members.map((member: any, index: number) => (
           <motion.div
             key={index}
             className="bg-zinc-900/40 backdrop-blur-sm rounded-lg overflow-hidden group border border-zinc-800 shadow-lg hover:shadow-[0_0_20px_rgba(150,0,0,0.3)]"
@@ -334,11 +250,8 @@ export default function TeamsPage() {
             MEET <span className="text-red-600 ml-2">OUR TEAM</span>
           </motion.h2>
 
-          {/* Render each department's members */}
+          {/* Render leadership team members */}
           {renderTeamCards(teamMembers.leadership, "leadership")}
-          {renderTeamCards(teamMembers.executives, "executives")}
-          {renderTeamCards(teamMembers.content, "content")}
-          {renderTeamCards(teamMembers.operations, "operations")}
         </div>
       </section>
 

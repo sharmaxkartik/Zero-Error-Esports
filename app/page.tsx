@@ -17,7 +17,7 @@ import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import FeaturedGamesSection from "@/components/home/FeaturedGamesSection";
 import SponsorsSection from "@/components/home/SponsorsSection";
-import UpcomingEventsSection from "@/components/home/UpcomingEventsSection";
+import PastEventsSection from "@/components/home/PastEventsSection";
 import CursorFollower from "@/components/home/CursorFollower";
 
 export default function Home() {
@@ -103,10 +103,10 @@ export default function Home() {
             <StatsSection />
             {/* Featured Games Section */}
             <FeaturedGamesSection />
-            {/* Sponsors Section */}
-            <SponsorsSection />
-            {/* Upcoming Events Section */}
-            <UpcomingEventsSection />
+            {/* Sponsors Section - Hidden */}
+            {/* <SponsorsSection /> */}
+            {/* Past Events Section */}
+            <PastEventsSection />
             {/* Cursor Follower */}
             <CursorFollower cursorX={cursorX} cursorY={cursorY} />
           </motion.div>

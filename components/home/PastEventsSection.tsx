@@ -27,11 +27,11 @@ const PastEventsSection = () => {
 
   const events = [
     {
-      title: "GAME'O'CON 25",
-      date: "24th May, 2025",
+      title: "Past Events",
+      date: "24th May, 2024",
       location: "Gwalior, Madhya Pradesh",
       image: {
-        src: "/images/gamocon.png",
+        src: "/images/ZE_faceoff.png",
         width: 800,
         height: 600,
         alt: "GAME'O'CON 25 Event",
