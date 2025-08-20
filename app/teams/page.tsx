@@ -203,7 +203,7 @@ export default function TeamsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Link href="#team-members">
+            <a href="#team-members" target="_blank" rel="noopener noreferrer">
               <motion.button
                 className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-md flex items-center shadow-[0_0_15px_rgba(150,0,0,0.3)] relative overflow-hidden group"
                 whileHover={{
@@ -228,7 +228,7 @@ export default function TeamsPage() {
                   </motion.span>
                 </span>
               </motion.button>
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -299,7 +299,7 @@ export default function TeamsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <Link href="/careers">
+              <Link href="/contact">
                 <motion.div
                   className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-md uppercase font-bold text-sm inline-flex items-center relative overflow-hidden group shadow-[0_0_15px_rgba(150,0,0,0.3)]"
                   whileHover={{

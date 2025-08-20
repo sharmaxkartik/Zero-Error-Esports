@@ -179,9 +179,14 @@ export default function ZEClubPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <button className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-12 py-4 rounded-full text-xl font-bold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-12 py-4 rounded-full text-xl font-bold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105"
+            >
               Join ZE Club Now
-            </button>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -306,9 +311,14 @@ export default function ZEClubPage() {
               community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105"
+              >
                 Join ZE Club
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>

@@ -15,6 +15,7 @@ const navLinks = [
   { name: "ZE Club", path: "/ze-club" },
   { name: "Services", path: "/services" },
   { name: "Teams", path: "/teams" },
+  { name: "Contact Us", path: "/contact" },
 ];
 
 export default function Navbar() {

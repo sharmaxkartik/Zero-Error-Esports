@@ -497,8 +497,38 @@ export default function ServicesPage() {
             </motion.div>
           </div>
         </div>
+        {/* Contact CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-24 text-center bg-gradient-to-r from-red-900/20 via-black to-red-900/20 rounded-2xl p-12 border border-red-900/20"
+        >
+          <h2 className="text-3xl font-bold mb-4 font-orbitron">
+            READY TO <span className="text-red-600">LEVEL UP</span> YOUR ESPORTS
+            JOURNEY?
+          </h2>
+          <p className="text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
+            Whether you're looking to organize a tournament, develop talent, or
+            build your brand through esports, Zero Error is your trusted
+            partner. Let's collaborate to create exceptional gaming experiences!
+          </p>
+          <Link href="/contact">
+            <motion.button
+              className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center mx-auto"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(220, 38, 38, 0.5)",
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get Started Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </motion.button>
+          </Link>
+        </motion.div>
       </section>
-      <ContactForm />
     </div>
   );
 }
