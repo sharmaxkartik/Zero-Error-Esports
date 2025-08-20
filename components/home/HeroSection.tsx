@@ -174,40 +174,6 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
               </span>
             </motion.div>
           </Link>
-
-          <Link href="/signup">
-            <motion.div
-              className="border-2 border-zinc-700 hover:border-red-600 text-white bg-zinc-900/50 backdrop-blur-sm px-8 py-4 uppercase font-bold text-sm rounded-md flex items-center transition-colors duration-300 relative overflow-hidden"
-              whileHover={{
-                scale: 1.05,
-                backgroundColor: "rgba(30,30,30,0.8)",
-              }}
-              whileTap={{ scale: 0.98 }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 15,
-              }}
-            >
-              <motion.span
-                className="absolute inset-0 w-full h-full"
-                style={{
-                  background: `radial-gradient(circle at ${
-                    mousePosition.x * 100
-                  }% ${
-                    mousePosition.y * 100
-                  }%, rgba(255,0,0,0.5) 0%, transparent 70%)`,
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                }}
-                whileHover={{ opacity: 0.3 }}
-              />
-              <span className="relative z-10">
-                Join Now
-                <ArrowRight className="ml-2 h-4 w-4 inline-block" />
-              </span>
-            </motion.div>
-          </Link>
         </motion.div>
       </motion.div>
     </section>

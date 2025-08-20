@@ -197,37 +197,37 @@ export default function ZEClubPage() {
           >
             <FeatureCard
               icon={Gamepad2}
-              title="🎮 Gaming Opportunities"
+              title="Gaming Opportunities"
               features={gamingFeatures}
             />
 
             <FeatureCard
               icon={Trophy}
-              title="🏆 Recognition & Rewards"
+              title="Recognition & Rewards"
               features={recognitionFeatures}
             />
 
             <FeatureCard
               icon={Video}
-              title="📹 Content Exposure"
+              title="Content Exposure"
               features={contentFeatures}
             />
 
             <FeatureCard
               icon={Flame}
-              title="🔥 Experiences & Events"
+              title="Experiences & Events"
               features={experienceFeatures}
             />
 
             <FeatureCard
               icon={Briefcase}
-              title="💼 Opportunities"
+              title="Opportunities"
               features={opportunityFeatures}
             />
 
             <FeatureCard
               icon={Handshake}
-              title="🤝 Community & Belonging"
+              title="Community & Belonging"
               features={communityFeatures}
             />
           </motion.div>
@@ -236,7 +236,7 @@ export default function ZEClubPage() {
           <motion.div {...fadeInUp} className="mt-8">
             <FeatureCard
               icon={DollarSign}
-              title="💰 Deals & Discounts"
+              title="Deals & Discounts"
               features={dealFeatures}
             />
           </motion.div>
@@ -307,10 +307,7 @@ export default function ZEClubPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105">
-                Join ZE Club - ₹499/month
-              </button>
-              <button className="border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-4 rounded-full text-lg font-bold transition-all duration-300">
-                Learn More
+                Join ZE Club
               </button>
             </div>
           </motion.div>

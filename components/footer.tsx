@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="group">
             <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#E1306C]">
               <SocialIcon
-                url="https://www.instagram.com/teamzer0error_es"
+                url="https://www.instagram.com/zero_error_esports?igsh=NHMyYXNtZWZ4cXg="
                 target="_blank"
                 className="transition-transform duration-300 hover:scale-125"
                 aria-label="Instagram"
@@ -59,7 +59,7 @@ export default function Footer() {
           <div className="group">
             <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#5865F2]">
               <SocialIcon
-                url="https://discord.com/invite/7MHYMrsZyv"
+                url="https://discord.gg/zJfncArJMT"
                 target="_blank"
                 className="transition-transform duration-300 hover:scale-125"
                 aria-label="Discord"
@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="group">
             <div className="bg-black p-2 rounded-full transition-colors duration-300 group-hover:bg-[#25D366]">
               <SocialIcon
-                url="https://chat.whatsapp.com/HURrtawhPH4C1eQEdKLNpk"
+                url="https://chat.whatsapp.com/JizYMt07dikCGwgqwlMGH2?mode=ac_t"
                 target="_blank"
                 className="transition-transform duration-300 hover:scale-125"
                 aria-label="WhatsApp"

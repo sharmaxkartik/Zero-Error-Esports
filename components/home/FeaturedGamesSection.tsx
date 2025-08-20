@@ -42,9 +42,7 @@ const FeaturedGamesSection = () => {
             Featured Services
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Our professional teams compete at the highest level across multiple
-            titles. Check out our featured games and follow our journey to the
-            top.
+            Here are some featured Services.
           </p>
         </motion.div>
 

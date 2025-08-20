@@ -64,7 +64,7 @@ const PastEventsSection = () => {
               className="h-0.5 bg-gradient-to-r from-red-600 to-transparent mb-4 max-w-[200px] mx-auto"
             />
             <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-              JOIN THE CLUB
+              PAST EVENTS
             </h2>
             <p className="text-zinc-500 mt-2">
               Check out our previous successful tournaments and events

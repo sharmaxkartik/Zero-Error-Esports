@@ -193,13 +193,12 @@ export default function Navbar() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 0 15px rgba(255, 0, 0, 0.5)",
                   transition: { duration: 0.2 },
                 }}
               >
                 <Link
                   href="/signup"
-                  className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all ${
+                  className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-red-500/30 ${
                     scrolled ? "text-xs" : "text-sm"
                   }`}
                 >

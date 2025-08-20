@@ -22,7 +22,7 @@ const services = [
     id: 1,
     title: "Gaming Tournaments & Events",
     category: "Events",
-    image: "/images/GamingTournament&Events.png?height=400&width=600",
+    image: "/images/PlainBackgroungImage.png?height=400&width=600",
     description:
       "We host online & offline competitions – from small scrims to mega arena-level events.",
     featured: true,
@@ -38,7 +38,7 @@ const services = [
     id: 2,
     title: "Talent Management & Team Building",
     category: "Talent",
-    image: "/images/TalentManagement.png?height=400&width=600",
+    image: "/images/PlainBackgroungImage.png?height=400&width=600",
     description:
       "We scout and train passionate players and help them grow as professionals.",
     featured: true,
@@ -54,7 +54,7 @@ const services = [
     id: 3,
     title: "Content Creation & Streaming Collabs",
     category: "Content",
-    image: "/images/BrandActivation.png?height=400&width=600",
+    image: "/images/PlainBackgroungImage.png?height=400&width=600",
     description:
       "Support for streamers, casters, and editors – we help you build your content brand.",
     featured: true,
@@ -70,7 +70,7 @@ const services = [
     id: 4,
     title: "Campus & Café Esports Integration",
     category: "Integration",
-    image: "/images/Campus&CafeIntegration.png?height=400&width=600",
+    image: "/images/PlainBackgroungImage.png?height=400&width=600",
     description:
       "Bring Zero Error to your college or gaming zone with custom events, workshops & leagues.",
     featured: false,
@@ -86,8 +86,7 @@ const services = [
     id: 5,
     title: "Brand Partnerships & Sponsorship Activation",
     category: "Partnerships",
-    image:
-      "/images/BrandPartnership&SponserActivation.png?height=400&width=600",
+    image: "/images/PlainBackgroungImage.png?height=400&width=800",
     description:
       "We connect youth audiences with aligned brands through esports narratives.",
     featured: false,
@@ -126,7 +125,7 @@ const ServiceCard = ({
             src={service.image || "/placeholder.svg"}
             alt={service.title}
             fill
-            className="object-cover opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:opacity-50"
+            className="object-contain opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
 
@@ -397,7 +396,7 @@ export default function ServicesPage() {
                           src={service.image || "/placeholder.svg"}
                           alt={service.title}
                           fill
-                          className="object-cover opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:opacity-50"
+                          className="object-contain opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-50"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
 
