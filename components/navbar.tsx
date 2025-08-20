@@ -197,10 +197,12 @@ export default function Navbar() {
                 }}
               >
                 <Link
-                  href="/signup"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
                   className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-red-500/30 ${
                     scrolled ? "text-xs" : "text-sm"
                   }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Join Club
                 </Link>
