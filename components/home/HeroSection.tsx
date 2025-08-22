@@ -63,15 +63,25 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
             />
           </div>
         ) : (
-          // Video for desktop/laptop
-          <iframe
-            className="absolute inset-0 w-full h-full opacity-70"
-            src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=1&mute=1&loop=1&playlist=e_E9W2vsRbQ&controls=0&showinfo=0&rel=0"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            allowFullScreen
-          ></iframe>
+          // Local video for desktop/laptop
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src="/images/background.mp4" type="video/mp4" />
+            {/* Fallback image if video fails to load */}
+            <Image
+              src="/images/hero-background.jpg"
+              alt="Zero Error Esports"
+              fill
+              className="object-cover opacity-70"
+              priority
+            />
+          </video>
         )}
       </motion.div>
 
