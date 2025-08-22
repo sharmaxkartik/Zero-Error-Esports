@@ -331,27 +331,14 @@ export default function Navbar() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.5 }}
-                  >
-                    <Link
-                      href="/login"
-                      className="block w-full text-center px-6 py-3 rounded-md bg-black/40 border border-red-500/40 text-red-400 text-lg font-medium"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Login
-                    </Link>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
                   >
                     <Link
-                      href="/signup"
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
                       className="block w-full text-center px-6 py-3 rounded-md bg-gradient-to-r from-red-700 to-red-500 text-white text-lg font-medium shadow-lg shadow-red-900/30"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Sign Up
+                      Join Club
                     </Link>
                   </motion.div>
                 </div>
