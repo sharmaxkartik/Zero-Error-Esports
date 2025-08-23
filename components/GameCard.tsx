@@ -25,7 +25,7 @@ const GameCard: React.FC<GameCardProps> = ({ title, image }) => {
         transition: { type: "spring", stiffness: 300, damping: 20 },
       }}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
         <Image
           src={image || "/event.jpg"}
           alt={title}

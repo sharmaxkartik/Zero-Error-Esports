@@ -120,22 +120,21 @@ const ServiceCard = ({
       transition={{ duration: 0.5 }}
       whileHover={{ y: -5 }}
     >
-      <div className="group h-full relative overflow-hidden rounded-xl border border-zinc-800/50 bg-gradient-to-b from-zinc-900/80 to-black shadow-lg hover:shadow-red-900/20 transition-all duration-500">
+      <div className="group h-full min-h-[480px] relative overflow-hidden rounded-xl border border-zinc-800/50 bg-gradient-to-b from-zinc-900/80 to-black shadow-lg hover:shadow-red-900/20 transition-all duration-500">
         <div className="absolute inset-0 overflow-hidden">
           <Image
             src={service.image || "/placeholder.svg"}
             alt={service.title}
             fill
-            className="object-contain opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-50"
+            className="object-cover opacity-80 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
 
           {/* Dynamic accent light */}
           <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-red-600/20 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
         </div>
 
-        <div className="relative z-10 p-6 h-full flex flex-col">
-          <div className="mb-2">
+        <div className="relative z-10 p-8 h-full flex flex-col">
+          <div className="mb-4">
             <span className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
               {service.category}
             </span>
@@ -147,42 +146,45 @@ const ServiceCard = ({
             )}
           </div>
 
-          <div className="mt-3 flex items-center">
-            <div className="p-2.5 bg-red-600/10 rounded-lg mr-3">
-              <Icon className="w-5 h-5 text-red-500" />
+          <div className="mt-4 flex items-start">
+            <div className="p-3 bg-red-600/10 rounded-lg mr-4 flex-shrink-0">
+              <Icon className="w-6 h-6 text-red-500" />
             </div>
-            <h3 className="text-xl font-bold group-hover:text-red-400 transition-colors duration-300 font-orbitron">
+            <h3 className="text-xl font-bold group-hover:text-red-400 transition-colors duration-300 font-orbitron leading-tight">
               {service.title}
             </h3>
           </div>
 
-          <p className="text-zinc-300 text-sm mt-3 mb-4">
+          <p className="text-zinc-300 text-sm mt-6 mb-6 leading-relaxed">
             {service.description}
           </p>
 
           <div className="mt-auto">
-            <h4 className="text-xs font-semibold text-zinc-200 mb-2">
+            <h4 className="text-xs font-semibold text-zinc-200 mb-3">
               KEY FEATURES
             </h4>
-            <ul className="text-zinc-300 text-xs space-y-2 mb-4">
+            <ul className="text-zinc-300 text-xs space-y-2 mb-6">
               {service.details.map((detail, idx) => (
                 <li key={idx} className="flex items-start">
-                  <span className="text-red-500 mr-1.5 mt-0.5">•</span>
+                  <span className="text-red-500 mr-2 mt-0.5">•</span>
                   <span>{detail}</span>
                 </li>
               ))}
             </ul>
 
-            <Link href={`/services/${service.id}`} className="inline-block">
-              <button className="text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 px-4 py-2 rounded-md transition-all duration-300 flex items-center">
-                Learn more <ArrowRight className="ml-1 w-3 h-3" />
+            <Link
+              href={`/services/${service.id}`}
+              className="inline-block w-full"
+            >
+              <button className="w-full text-sm font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 px-4 py-3 rounded-md transition-all duration-300 flex items-center justify-center">
+                Learn more <ArrowRight className="ml-2 w-4 h-4" />
               </button>
             </Link>
           </div>
         </div>
 
         {/* Corner accent */}
-        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-red-600/20 to-transparent"></div>
+        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-red-600/20 to-transparent"></div>
       </div>
     </motion.div>
   );
@@ -362,7 +364,7 @@ export default function ServicesPage() {
             </motion.div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -376,22 +378,21 @@ export default function ServicesPage() {
                     variants={itemVariants}
                     className="h-full"
                   >
-                    <div className="group h-full relative overflow-hidden rounded-xl border border-zinc-800/50 bg-gradient-to-b from-zinc-900/80 to-black shadow-lg hover:shadow-red-900/20 transition-all duration-500">
+                    <div className="group h-full min-h-[480px] relative overflow-hidden rounded-xl border border-zinc-800/50 bg-gradient-to-b from-zinc-900/80 to-black shadow-lg hover:shadow-red-900/20 transition-all duration-500">
                       <div className="absolute inset-0 overflow-hidden">
                         <Image
                           src={service.image || "/placeholder.svg"}
                           alt={service.title}
                           fill
-                          className="object-contain opacity-40 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-50"
+                          className="object-cover opacity-80 transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:opacity-90"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
 
                         {/* Dynamic accent light */}
                         <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-red-600/20 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
                       </div>
 
-                      <div className="relative z-10 p-6 h-full flex flex-col">
-                        <div className="mb-2">
+                      <div className="relative z-10 p-8 h-full flex flex-col">
+                        <div className="mb-4">
                           <span className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
                             {service.category}
                           </span>
@@ -403,28 +404,28 @@ export default function ServicesPage() {
                           )}
                         </div>
 
-                        <div className="mt-3 flex items-center">
-                          <div className="p-2.5 bg-red-600/10 rounded-lg mr-3">
-                            <service.icon className="w-5 h-5 text-red-500" />
+                        <div className="mt-4 flex items-start">
+                          <div className="p-3 bg-red-600/10 rounded-lg mr-4 flex-shrink-0">
+                            <service.icon className="w-6 h-6 text-red-500" />
                           </div>
-                          <h3 className="text-xl font-bold group-hover:text-red-400 transition-colors duration-300 font-orbitron">
+                          <h3 className="text-xl font-bold group-hover:text-red-400 transition-colors duration-300 font-orbitron leading-tight">
                             {service.title}
                           </h3>
                         </div>
 
-                        <p className="text-zinc-300 text-sm mt-3 mb-4">
+                        <p className="text-zinc-300 text-sm mt-6 mb-6 leading-relaxed">
                           {service.description}
                         </p>
 
                         <div className="mt-auto">
-                          <h4 className="text-xs font-semibold text-zinc-200 mb-2">
+                          <h4 className="text-xs font-semibold text-zinc-200 mb-3">
                             KEY FEATURES
                           </h4>
-                          <ul className="text-zinc-300 text-xs space-y-2 mb-4">
+                          <ul className="text-zinc-300 text-xs space-y-2 mb-6">
                             {service.details
                               .map((detail, idx) => (
                                 <li key={idx} className="flex items-start">
-                                  <span className="text-red-500 mr-1.5 mt-0.5">
+                                  <span className="text-red-500 mr-2 mt-0.5">
                                     •
                                   </span>
                                   <span>{detail}</span>
@@ -435,13 +436,17 @@ export default function ServicesPage() {
 
                           <Link
                             href={`/services/${service.id}`}
-                            className="inline-block"
-                          ></Link>
+                            className="inline-block w-full"
+                          >
+                            <button className="w-full text-sm font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 px-4 py-3 rounded-md transition-all duration-300 flex items-center justify-center">
+                              Learn more <ArrowRight className="ml-2 w-4 h-4" />
+                            </button>
+                          </Link>
                         </div>
                       </div>
 
                       {/* Corner accent */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-red-600/20 to-transparent"></div>
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-red-600/20 to-transparent"></div>
                     </div>
                   </motion.div>
                 ))}
@@ -458,7 +463,7 @@ export default function ServicesPage() {
             </div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
