@@ -349,7 +349,7 @@ export default function AboutPage() {
                 role: "Co-founder",
                 icon: <TrendingUp className="w-4 h-4" />,
                 bio: "",
-                image: "/images/gow.jpg",
+                image: "/images/team/Priyesh Kekan.jpg",
               },
               {
                 name: "Deepanshu Savita",

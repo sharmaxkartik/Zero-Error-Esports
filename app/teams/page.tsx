@@ -44,7 +44,7 @@ export default function TeamsPage() {
       {
         name: "Priyesh Kekan",
         role: "Co-Founder",
-        image: "/images/team/priyesh.jpg",
+        image: "/images/team/Priyesh Kekan.jpg",
         fallbackImage: "/images/bgmi.avif",
       },
       {
