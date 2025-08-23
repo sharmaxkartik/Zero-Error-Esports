@@ -151,7 +151,7 @@ export default function ContactUs({
             {/* Social Media Links */}
             <div className="space-y-6">
               <motion.a
-                href="https://discord.gg/zeroerror"
+                href="https://discord.gg/zJfncArJMT"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 group"
@@ -176,7 +176,7 @@ export default function ContactUs({
               </motion.a>
 
               <motion.a
-                href="https://twitter.com/zeroerroesports"
+                href="https://x.com/ZeroErrorES"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 group"
@@ -201,7 +201,7 @@ export default function ContactUs({
               </motion.a>
 
               <motion.a
-                href="https://instagram.com/zeroerroesports"
+                href="https://www.instagram.com/zero_error_esports?igsh=NHMyYXNtZWZ4cXg="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 group"
@@ -226,7 +226,7 @@ export default function ContactUs({
               </motion.a>
 
               <motion.a
-                href="https://wa.me/15551234567"
+                href="https://chat.whatsapp.com/JizYMt07dikCGwgqwlMGH2?mode=ac_t"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 group"
@@ -251,7 +251,7 @@ export default function ContactUs({
               </motion.a>
 
               <motion.a
-                href="https://youtube.com/@zeroerroesports"
+                href="https://www.youtube.com/@ZeroErrorEsports/videos"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 group"
