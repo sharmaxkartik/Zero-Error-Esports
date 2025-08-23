@@ -328,7 +328,7 @@ export default function ServicesPage() {
             transition={{ delay: 0.5 }}
             className="mt-6"
           >
-            <Link href="/about">
+            <Link href="/contact">
               <motion.button
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium text-lg transition-all duration-300 flex items-center"
                 whileHover={{ scale: 1.05 }}
