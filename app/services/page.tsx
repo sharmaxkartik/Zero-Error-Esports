@@ -190,7 +190,6 @@ const ServiceCard = ({
 
 export default function ServicesPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [loading, setLoading] = useState(true);
 
   // Handle mouse movement for dynamic effects
   useEffect(() => {
@@ -203,14 +202,8 @@ export default function ServicesPage() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 800);
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -233,14 +226,6 @@ export default function ServicesPage() {
       transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] },
     },
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen text-white overflow-hidden">

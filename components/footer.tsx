@@ -112,12 +112,6 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-zinc-500 text-sm">
-          <p>
-            © {new Date().getFullYear()} Zero Error Esports. All rights
-            reserved.
-          </p>
-        </div>
       </div>
     </footer>
   );

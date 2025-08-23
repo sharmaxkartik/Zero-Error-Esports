@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,17 +12,6 @@ import {
 import { motion } from "framer-motion";
 
 export default function EventsPage() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,14 +31,6 @@ export default function EventsPage() {
       transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] },
     },
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
