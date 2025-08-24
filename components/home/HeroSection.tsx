@@ -72,7 +72,7 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
             playsInline
             preload="auto"
           >
-            <source src="/images/background.mp4" type="video/mp4" />
+            <source src="/images/background.webm" type="video/mp4" />
             {/* Fallback image if video fails to load */}
             <Image
               src="/images/hero-background.jpg"
