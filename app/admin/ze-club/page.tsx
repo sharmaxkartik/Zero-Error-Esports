@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import SubmissionVerifier from '@/components/admin/SubmissionVerifier'
 import { motion } from 'framer-motion'
+import { Shield, Zap } from 'lucide-react'
 
 export default function AdminZEClubPage() {
   const router = useRouter()
@@ -31,10 +32,15 @@ export default function AdminZEClubPage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">Loading...</p>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex flex-col items-center gap-4"
+        >
+          <Zap className="h-12 w-12 text-red-500 animate-pulse" />
+          <p className="text-lg text-gray-400">Loading admin panel...</p>
+        </motion.div>
       </div>
     )
   }
@@ -44,21 +50,31 @@ export default function AdminZEClubPage() {
   }
 
   return (
-    <motion.div 
-      className="container mx-auto py-4 md:py-8 px-4"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <motion.h1 
-        className="text-2xl md:text-3xl font-bold mb-4"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Admin - ZE Club Mission Verification
-      </motion.h1>
-      <SubmissionVerifier />
-    </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+      <div className="container mx-auto py-8 px-4 max-w-7xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-4 mb-3">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
+              <Shield className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                Admin Dashboard
+              </h1>
+              <p className="text-gray-400 text-sm md:text-base">ZE Club Mission Verification Center</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Main Content */}
+        <SubmissionVerifier />
+      </div>
+    </div>
   )
 }

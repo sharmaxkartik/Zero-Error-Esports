@@ -12,8 +12,25 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
+import { CheckCircle2, XCircle, Eye, Search, Filter, TrendingUp, Users, Clock, Image as ImageIcon } from 'lucide-react'
 
 interface Submission {
   _id: string
@@ -27,11 +44,17 @@ interface Submission {
   }
   proof: string
   status: string
+  createdAt?: string
 }
 
 export default function SubmissionVerifier() {
   const [submissions, setSubmissions] = useState<Submission[]>([])
+  const [filteredSubmissions, setFilteredSubmissions] = useState<Submission[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [previewOpen, setPreviewOpen] = useState(false)
 
   async function fetchSubmissions() {
     try {
@@ -39,6 +62,7 @@ export default function SubmissionVerifier() {
       if (res.ok) {
         const data = await res.json()
         setSubmissions(data)
+        setFilteredSubmissions(data)
       } else {
         toast.error('Failed to fetch submissions')
       }
@@ -53,6 +77,27 @@ export default function SubmissionVerifier() {
     fetchSubmissions()
   }, [])
 
+  useEffect(() => {
+    let filtered = submissions
+
+    // Search filter
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (sub) =>
+          sub.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          sub.user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          sub.mission.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
+
+    // Status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter((sub) => sub.status === statusFilter)
+    }
+
+    setFilteredSubmissions(filtered)
+  }, [searchQuery, statusFilter, submissions])
+
   async function handleVerification(submissionId: string, status: 'approved' | 'rejected') {
     try {
       const res = await fetch('/api/admin/submissions/verify', {
@@ -62,7 +107,9 @@ export default function SubmissionVerifier() {
       })
 
       if (res.ok) {
-        toast.success(`Submission ${status}`)
+        toast.success(`Submission ${status}`, {
+          description: `The submission has been ${status} successfully.`,
+        })
         fetchSubmissions() // Refresh the list
       } else {
         const errorData = await res.json()
@@ -73,88 +120,284 @@ export default function SubmissionVerifier() {
     }
   }
 
+  const handlePreview = (url: string) => {
+    setPreviewUrl(url)
+    setPreviewOpen(true)
+  }
+
+  const stats = {
+    total: submissions.length,
+    pending: submissions.filter((s) => s.status === 'pending').length,
+    approved: submissions.filter((s) => s.status === 'approved').length,
+    rejected: submissions.filter((s) => s.status === 'rejected').length,
+  }
+
   if (loading) {
-    return <div>Loading submissions...</div>
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex items-center justify-center h-64"
+      >
+        <div className="text-lg text-gray-400 flex items-center gap-3">
+          <Clock className="h-6 w-6 animate-spin text-red-500" />
+          Loading submissions...
+        </div>
+      </motion.div>
+    )
   }
 
   return (
-    <motion.div 
-      className="rounded-md border overflow-x-auto"
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className="space-y-6"
     >
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="min-w-[150px]">User</TableHead>
-            <TableHead className="min-w-[120px]">Mission</TableHead>
-            <TableHead className="min-w-[80px]">Proof</TableHead>
-            <TableHead className="min-w-[80px]">Status</TableHead>
-            <TableHead className="min-w-[180px]">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {submissions.length > 0 ? (
-            submissions.map((submission, index) => (
-              <motion.tr
-                key={submission._id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
-              >
-                <TableCell>
-                  <div className="font-medium text-sm">{submission.user.name}</div>
-                  <div className="text-xs text-muted-foreground break-all">{submission.user.email}</div>
-                </TableCell>
-                <TableCell className="text-sm">{submission.mission.name}</TableCell>
-                <TableCell>
-                  <a
-                    href={submission.proof}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline text-sm"
-                  >
-                    View
-                  </a>
-                </TableCell>
-                <TableCell>
-                  <Badge variant={submission.status === 'pending' ? 'secondary' : 'default'} className="text-xs">
-                    {submission.status}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleVerification(submission._id, 'approved')}
-                      className="text-xs"
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/30">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Total Submissions</p>
+                <p className="text-3xl font-bold text-blue-400">{stats.total}</p>
+              </div>
+              <Users className="h-10 w-10 text-blue-400 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-yellow-500/30">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Pending</p>
+                <p className="text-3xl font-bold text-yellow-400">{stats.pending}</p>
+              </div>
+              <Clock className="h-10 w-10 text-yellow-400 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-green-500/10 to-green-600/10 border-green-500/30">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Approved</p>
+                <p className="text-3xl font-bold text-green-400">{stats.approved}</p>
+              </div>
+              <CheckCircle2 className="h-10 w-10 text-green-400 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-red-500/10 to-red-600/10 border-red-500/30">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Rejected</p>
+                <p className="text-3xl font-bold text-red-400">{stats.rejected}</p>
+              </div>
+              <XCircle className="h-10 w-10 text-red-400 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Filters */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                placeholder="Search by user, email, or mission..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <div className="flex gap-2">
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-[180px]">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Submissions Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5" />
+            Submission Review ({filteredSubmissions.length})
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-md border overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="min-w-[180px]">User</TableHead>
+                  <TableHead className="min-w-[150px]">Mission</TableHead>
+                  <TableHead className="min-w-[100px]">Points</TableHead>
+                  <TableHead className="min-w-[100px]">Proof</TableHead>
+                  <TableHead className="min-w-[100px]">Status</TableHead>
+                  <TableHead className="min-w-[200px]">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredSubmissions.length > 0 ? (
+                  filteredSubmissions.map((submission, index) => (
+                    <motion.tr
+                      key={submission._id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="border-b transition-colors hover:bg-muted/50"
                     >
-                      Approve
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => handleVerification(submission._id, 'rejected')}
-                      className="text-xs"
-                    >
-                      Reject
-                    </Button>
-                  </div>
-                </TableCell>
-              </motion.tr>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={5} className="text-center text-sm">
-                No pending submissions.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div className="font-medium text-sm">{submission.user.name}</div>
+                          <div className="text-xs text-muted-foreground break-all">
+                            {submission.user.email}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-sm font-medium">
+                        {submission.mission.name}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="secondary" className="bg-red-600/20 text-red-400">
+                          +{submission.mission.points}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handlePreview(submission.proof)}
+                          className="gap-2"
+                        >
+                          <Eye className="h-4 w-4" />
+                          View
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            submission.status === 'pending'
+                              ? 'secondary'
+                              : submission.status === 'approved'
+                              ? 'default'
+                              : 'destructive'
+                          }
+                          className={
+                            submission.status === 'pending'
+                              ? 'bg-yellow-600/20 text-yellow-400'
+                              : submission.status === 'approved'
+                              ? 'bg-green-600/20 text-green-400'
+                              : ''
+                          }
+                        >
+                          {submission.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        {submission.status === 'pending' && (
+                          <div className="flex flex-col sm:flex-row gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleVerification(submission._id, 'approved')}
+                              className="gap-1 border-green-500/50 text-green-400 hover:bg-green-500/20"
+                            >
+                              <CheckCircle2 className="h-4 w-4" />
+                              Approve
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleVerification(submission._id, 'rejected')}
+                              className="gap-1 border-red-500/50 text-red-400 hover:bg-red-500/20"
+                            >
+                              <XCircle className="h-4 w-4" />
+                              Reject
+                            </Button>
+                          </div>
+                        )}
+                      </TableCell>
+                    </motion.tr>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center text-sm py-8">
+                      <div className="flex flex-col items-center gap-2">
+                        <TrendingUp className="h-12 w-12 text-gray-400" />
+                        <p className="text-gray-500">No submissions found.</p>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Preview Dialog */}
+      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <ImageIcon className="h-5 w-5" />
+              Proof Preview
+            </DialogTitle>
+            <DialogDescription>
+              Review the submitted proof before verification
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            {previewUrl && (
+              <div className="rounded-lg overflow-hidden bg-gray-100">
+                {previewUrl.endsWith('.mp4') ? (
+                  <video controls className="w-full max-h-[70vh]">
+                    <source src={previewUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={previewUrl}
+                    alt="Proof"
+                    className="w-full max-h-[70vh] object-contain"
+                  />
+                )}
+              </div>
+            )}
+            <div className="mt-4 flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setPreviewOpen(false)}>
+                Close
+              </Button>
+              <Button asChild>
+                <a href={previewUrl || '#'} target="_blank" rel="noopener noreferrer">
+                  Open in New Tab
+                </a>
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   )
 }

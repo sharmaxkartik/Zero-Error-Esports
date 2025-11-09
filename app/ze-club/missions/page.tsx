@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import ClientMissionsWrapper from '@/components/ze-club/ClientMissionsWrapper'
+import ZEClubLayout from '@/components/ze-club/ZEClubLayout'
 
 interface PopulatedSubmission {
   _id: string
@@ -30,13 +30,13 @@ interface PopulatedSubmission {
 async function UserSubmissions() {
   const session = await auth()
   if (!session?.user?.email) {
-    return <p>Please log in to see your submissions.</p>
+    return <p className="text-gray-400">Please log in to see your submissions.</p>
   }
 
   await dbConnect()
   const user = await User.findOne({ email: session.user.email })
   if (!user) {
-    return <p>User not found.</p>
+    return <p className="text-gray-400">User not found.</p>
   }
 
   const submissions: PopulatedSubmission[] = await MissionSubmission.find({
@@ -46,46 +46,71 @@ async function UserSubmissions() {
     .sort({ submittedAt: -1 })
 
   if (submissions.length === 0) {
-    return <p>You have no submissions yet.</p>
+    return (
+      <div className="text-center py-12">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/50 mb-4">
+          <span className="text-3xl">📋</span>
+        </div>
+        <p className="text-gray-400 text-lg">You have no submissions yet.</p>
+        <p className="text-gray-500 text-sm mt-2">Complete missions above to get started!</p>
+      </div>
+    )
   }
 
   return (
     <div className="space-y-4">
       {submissions.map((submission) => (
-        <Card key={submission._id}>
+        <Card key={submission._id} className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white hover:border-gray-600/50 transition-all">
           <CardHeader>
-            <CardTitle>{submission.mission.name}</CardTitle>
-            <CardDescription>
-              Submitted on:{' '}
-              {new Date(submission.submittedAt).toLocaleDateString()}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center">
-              <a
-                href={submission.proof}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                View Submission
-              </a>
+            <div className="flex items-start justify-between">
+              <div>
+                <CardTitle className="text-white text-lg">{submission.mission.name}</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Submitted on {new Date(submission.submittedAt).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </CardDescription>
+              </div>
               <Badge
                 variant={
                   submission.status === 'approved'
                     ? 'default'
                     : submission.status === 'rejected'
                     ? 'destructive'
-                    : 'outline'
+                    : 'secondary'
+                }
+                className={
+                  submission.status === 'approved'
+                    ? 'bg-green-600/20 text-green-400 border-green-500/50'
+                    : submission.status === 'rejected'
+                    ? 'bg-red-600/20 text-red-400 border-red-500/50'
+                    : 'bg-yellow-600/20 text-yellow-400 border-yellow-500/50'
                 }
               >
                 {submission.status}
               </Badge>
             </div>
+          </CardHeader>
+          <CardContent>
+            <a
+              href={submission.proof}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+            >
+              <span>View Submission</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
             {submission.remarks && (
-              <p className="text-sm text-gray-500 mt-2">
-                Remarks: {submission.remarks}
-              </p>
+              <div className="mt-4 p-3 rounded-lg bg-gray-800/50 border border-gray-700/50">
+                <p className="text-sm text-gray-300">
+                  <span className="font-semibold text-gray-200">Admin Remarks:</span> {submission.remarks}
+                </p>
+              </div>
             )}
           </CardContent>
         </Card>
@@ -96,22 +121,27 @@ async function UserSubmissions() {
 
 export default function MissionsPage() {
   return (
-    <ClientMissionsWrapper>
-      <div className="container mx-auto py-4 md:py-8 px-0">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">Missions</h1>
-        <div className="mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">Upload Mission</h2>
-          <Suspense fallback={<div>Loading uploader...</div>}>
+    <ZEClubLayout>
+      <div className="text-white">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
+          🎯 Missions
+        </h1>
+        <p className="text-gray-400 text-lg mb-8">Complete missions to earn points and rewards</p>
+        
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">Upload Mission Proof</h2>
+          <Suspense fallback={<div className="text-gray-400">Loading uploader...</div>}>
             <MissionUploader />
           </Suspense>
         </div>
+        
         <div>
-          <h2 className="text-xl md:text-2xl font-bold mb-4">My Submissions</h2>
-          <Suspense fallback={<div>Loading submissions...</div>}>
+          <h2 className="text-2xl font-bold mb-4 text-white">My Submissions</h2>
+          <Suspense fallback={<div className="text-gray-400">Loading submissions...</div>}>
             <UserSubmissions />
           </Suspense>
         </div>
       </div>
-    </ClientMissionsWrapper>
+    </ZEClubLayout>
   )
 }

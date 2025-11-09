@@ -10,13 +10,19 @@ import {
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { Upload, FileImage, FileVideo, X, CheckCircle2, Target, Loader2, AlertCircle } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 interface Mission {
   _id: string
   title: string
+  description?: string
+  points: number
 }
 
 /**
@@ -28,7 +34,10 @@ export default function MissionUploader() {
   const [missions, setMissions] = useState<Mission[]>([])
   const [selectedMission, setSelectedMission] = useState('')
   const [file, setFile] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(null)
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [dragActive, setDragActive] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -48,6 +57,66 @@ export default function MissionUploader() {
     }
     fetchMissions()
   }, [])
+
+  useEffect(() => {
+    // Cleanup preview URL
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview)
+      }
+    }
+  }, [preview])
+
+  const handleFileChange = (selectedFile: File | null) => {
+    if (!selectedFile) return
+
+    // Validate file size (50MB)
+    if (selectedFile.size > 50 * 1024 * 1024) {
+      alert('File size must be less than 50MB')
+      return
+    }
+
+    // Validate file type
+    const validTypes = ['image/jpeg', 'image/png', 'video/mp4']
+    if (!validTypes.includes(selectedFile.type)) {
+      alert('Only JPG, PNG, and MP4 files are allowed')
+      return
+    }
+
+    setFile(selectedFile)
+    setUploadSuccess(false)
+
+    // Create preview
+    if (selectedFile.type.startsWith('image/')) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result as string)
+      }
+      reader.readAsDataURL(selectedFile)
+    } else {
+      setPreview(null)
+    }
+  }
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true)
+    } else if (e.type === 'dragleave') {
+      setDragActive(false)
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileChange(e.dataTransfer.files[0])
+    }
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -81,12 +150,16 @@ export default function MissionUploader() {
       })
 
       if (response.ok) {
-        alert('File uploaded successfully!')
-        // Reset form state
-        setSelectedMission('')
-        setFile(null)
-        // Refresh the page to show the new submission
-        router.refresh()
+        setUploadSuccess(true)
+        setTimeout(() => {
+          // Reset form state
+          setSelectedMission('')
+          setFile(null)
+          setPreview(null)
+          setUploadSuccess(false)
+          // Refresh the page to show the new submission
+          router.refresh()
+        }, 2000)
       } else {
         const errorData = await response.json()
         alert(`Upload failed: ${errorData.error}`)
@@ -99,60 +172,201 @@ export default function MissionUploader() {
     }
   }
 
+  const selectedMissionData = missions.find(m => m._id === selectedMission)
+
   return (
-    <motion.form 
-      onSubmit={handleSubmit} 
-      className="space-y-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-      >
-        <Label htmlFor="mission">Select Mission</Label>
-        <Select
-          value={selectedMission}
-          onValueChange={setSelectedMission}
-          required
-        >
-          <SelectTrigger id="mission">
-            <SelectValue placeholder="Select a mission" />
-          </SelectTrigger>
-          <SelectContent>
-            {missions.map((mission) => (
-              <SelectItem key={mission._id} value={mission._id}>
-                {mission.title}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
-      >
-        <Label htmlFor="file">Upload Proof (JPG, PNG, MP4 - max 50MB)</Label>
-        <Input
-          id="file"
-          type="file"
-          accept="image/jpeg,image/png,video/mp4"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
-          required
-        />
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.3 }}
-      >
-        <Button type="submit" disabled={isUploading}>
-          {isUploading ? 'Uploading...' : 'Submit Mission'}
-        </Button>
-      </motion.div>
-    </motion.form>
+      <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white">
+        <CardHeader>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600">
+              <Upload className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl text-white">Submit Mission Proof</CardTitle>
+              <CardDescription className="text-gray-400">
+                Upload your proof to earn points
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Mission Selection */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              <Label htmlFor="mission" className="text-white text-base mb-2 block">
+                Select Mission
+              </Label>
+              <Select
+                value={selectedMission}
+                onValueChange={setSelectedMission}
+                required
+              >
+                <SelectTrigger id="mission" className="bg-gray-800/50 border-gray-700 text-white">
+                  <SelectValue placeholder="Choose a mission to complete" />
+                </SelectTrigger>
+                <SelectContent>
+                  {missions.map((mission) => (
+                    <SelectItem key={mission._id} value={mission._id}>
+                      <div className="flex items-center justify-between w-full gap-4">
+                        <span>{mission.title}</span>
+                        <Badge variant="secondary" className="bg-red-600/20 text-red-400">
+                          {mission.points} pts
+                        </Badge>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              {selectedMissionData && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="mt-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/30"
+                >
+                  <div className="flex items-start gap-3">
+                    <Target className="h-5 w-5 text-blue-400 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium text-blue-300">Mission Details</p>
+                      {selectedMissionData.description && (
+                        <p className="text-xs text-gray-400 mt-1">{selectedMissionData.description}</p>
+                      )}
+                      <p className="text-sm text-blue-400 mt-2 font-semibold">
+                        Reward: {selectedMissionData.points} points
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
+
+            {/* File Upload */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <Label className="text-white text-base mb-2 block">
+                Upload Proof
+              </Label>
+              <div
+                className={`relative border-2 border-dashed rounded-xl p-8 transition-all ${
+                  dragActive
+                    ? 'border-red-500 bg-red-500/10'
+                    : 'border-gray-700 hover:border-gray-600 bg-gray-800/30'
+                }`}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+              >
+                <Input
+                  id="file"
+                  type="file"
+                  accept="image/jpeg,image/png,video/mp4"
+                  onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                />
+                
+                {!file ? (
+                  <div className="text-center">
+                    <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-300 mb-2">
+                      <span className="font-semibold text-red-400">Click to upload</span> or drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      JPG, PNG, or MP4 (max 50MB)
+                    </p>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute -top-4 -right-4 z-20 bg-red-600 hover:bg-red-700 text-white rounded-full"
+                      onClick={() => {
+                        setFile(null)
+                        setPreview(null)
+                      }}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                    
+                    {preview ? (
+                      <div className="relative rounded-lg overflow-hidden">
+                        <img
+                          src={preview}
+                          alt="Preview"
+                          className="max-h-64 mx-auto rounded-lg"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3 p-4 bg-gray-800/50 rounded-lg">
+                        <FileVideo className="h-10 w-10 text-purple-400" />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-white">{file.name}</p>
+                          <p className="text-xs text-gray-400">
+                            {(file.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Info Alert */}
+            <Alert className="bg-yellow-500/10 border-yellow-500/30">
+              <AlertCircle className="h-4 w-4 text-yellow-400" />
+              <AlertDescription className="text-yellow-200 text-sm">
+                Make sure your proof clearly shows completion of the mission. Submissions are reviewed by admins.
+              </AlertDescription>
+            </Alert>
+
+            {/* Submit Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
+              <Button 
+                type="submit" 
+                disabled={isUploading || !file || !selectedMission}
+                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-6 text-lg shadow-lg hover:shadow-red-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isUploading ? (
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Uploading...
+                  </span>
+                ) : uploadSuccess ? (
+                  <span className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5" />
+                    Submitted Successfully!
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Upload className="h-5 w-5" />
+                    Submit Mission
+                  </span>
+                )}
+              </Button>
+            </motion.div>
+          </form>
+        </CardContent>
+      </Card>
+    </motion.div>
   )
 }

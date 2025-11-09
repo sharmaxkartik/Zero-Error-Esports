@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import { Progress } from "@/components/ui/progress"
 import { motion } from "framer-motion"
+import { TrendingUp, Award, Star, Zap, Target, Clock, Trophy, Medal } from "lucide-react"
+import { Card } from "@/components/ui/card"
 
 interface UserDashboard {
   totalPoints: number
@@ -74,85 +76,189 @@ function Dashboard() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-xl text-gray-400">Loading...</div>
+        <motion.div 
+          className="text-xl text-gray-400 flex items-center gap-3"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <Zap className="h-6 w-6 text-red-500" />
+          Loading your stats...
+        </motion.div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="bg-red-900/20 border border-red-500 rounded p-4">
-        <div className="text-red-400">Error: {error}</div>
-      </div>
+      <motion.div 
+        className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-500/50 rounded-xl p-6 backdrop-blur-sm"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+      >
+        <div className="text-red-400 flex items-center gap-2">
+          <span className="text-2xl">⚠️</span>
+          <span>Error: {error}</span>
+        </div>
+      </motion.div>
     )
   }
 
   if (!dashboardData) {
     return (
-      <div className="bg-gray-800/50 rounded p-4">
+      <div className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm">
         <div className="text-gray-400">No data available.</div>
       </div>
     )
   }
 
+  const achievements = [
+    { icon: Trophy, label: "Total Points", value: dashboardData.totalPoints, gradient: "from-yellow-500 to-orange-600" },
+    { icon: Medal, label: "Current Rank", value: dashboardData.rank, gradient: "from-purple-500 to-pink-600" },
+    { icon: Star, label: "Badge", value: dashboardData.badge, gradient: "from-blue-500 to-cyan-600" },
+  ]
+
   return (
     <motion.div 
-      className="relative z-10"
+      className="relative z-10 text-white"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.h1 
-        className="text-3xl md:text-4xl font-bold mb-6 text-red-500"
+      {/* Header */}
+      <motion.div 
+        className="mb-8"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        Dashboard
-      </motion.h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        <motion.div 
-          className="bg-gray-800/80 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-red-900/20 hover:border-red-500/50 transition-all"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          whileHover={{ scale: 1.02, y: -5 }}
-        >
-          <h2 className="text-base md:text-lg font-semibold text-gray-300 mb-2">Total ZE Points</h2>
-          <div className="text-3xl md:text-4xl font-bold text-red-500">
-            <SimpleCounter value={dashboardData.totalPoints} />
-          </div>
-        </motion.div>
-        <motion.div 
-          className="bg-gray-800/80 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-red-900/20 hover:border-red-500/50 transition-all"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          whileHover={{ scale: 1.02, y: -5 }}
-        >
-          <h2 className="text-base md:text-lg font-semibold text-gray-300 mb-2">Current Rank</h2>
-          <p className="text-xl md:text-2xl font-bold text-white">{dashboardData.rank}</p>
-        </motion.div>
-        <motion.div 
-          className="bg-gray-800/80 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-red-900/20 hover:border-red-500/50 transition-all sm:col-span-2 lg:col-span-1"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          whileHover={{ scale: 1.02, y: -5 }}
-        >
-          <h2 className="text-base md:text-lg font-semibold text-gray-300 mb-2">Badge</h2>
-          <p className="text-xl md:text-2xl font-bold text-white">{dashboardData.badge}</p>
-        </motion.div>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+          Welcome Back, Champion! 🎮
+        </h1>
+        <p className="text-gray-400 text-lg">Here's your gaming performance overview</p>
+      </motion.div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {achievements.map((stat, index) => {
+          const Icon = stat.icon
+          return (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              className="relative group"
+            >
+              <Card className="relative overflow-hidden bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl hover:shadow-red-500/20 transition-all duration-300">
+                {/* Gradient overlay */}
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.gradient} opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity`} />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg`}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <TrendingUp className="h-5 w-5 text-green-400" />
+                  </div>
+                  
+                  <h3 className="text-sm font-medium text-gray-400 mb-2">{stat.label}</h3>
+                  <div className="text-3xl md:text-4xl font-bold text-white">
+                    {typeof stat.value === 'number' ? (
+                      <SimpleCounter value={stat.value} />
+                    ) : (
+                      stat.value
+                    )}
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          )
+        })}
       </div>
+
+      {/* Progress Section */}
       <motion.div 
-        className="mt-6 md:mt-8 bg-gray-800/80 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-red-900/20"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        <h2 className="text-base md:text-lg font-semibold text-gray-300 mb-4">Progress to Next Rank</h2>
-        <Progress value={dashboardData.progress} className="w-full h-2 md:h-3" />
-        <p className="text-xs md:text-sm text-gray-400 mt-3">{dashboardData.progress}% to the next rank</p>
+        {/* Rank Progress */}
+        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600">
+              <Target className="h-5 w-5 text-white" />
+            </div>
+            <h2 className="text-xl font-bold text-white">Progress to Next Rank</h2>
+          </div>
+          
+          <div className="space-y-3">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-400">Current: {dashboardData.rank}</span>
+              <span className="text-red-400 font-semibold">{dashboardData.progress}%</span>
+            </div>
+            
+            <div className="relative">
+              <Progress 
+                value={dashboardData.progress} 
+                className="h-4 bg-gray-700/50"
+              />
+              <motion.div
+                className="absolute inset-0 h-4 rounded-full bg-gradient-to-r from-red-500 via-orange-500 to-red-600 opacity-50 blur-sm"
+                initial={{ width: "0%" }}
+                animate={{ width: `${dashboardData.progress}%` }}
+                transition={{ duration: 1.5, delay: 0.8 }}
+              />
+            </div>
+            
+            <p className="text-xs text-gray-500 mt-2">
+              Keep completing missions to level up! 🚀
+            </p>
+          </div>
+        </Card>
+
+        {/* Quick Stats */}
+        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
+              <Clock className="h-5 w-5 text-white" />
+            </div>
+            <h2 className="text-xl font-bold text-white">Recent Activity</h2>
+          </div>
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+              <div className="p-2 rounded-full bg-green-500/20">
+                <Zap className="h-4 w-4 text-green-400" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-white font-medium">Mission Completed</p>
+                <p className="text-xs text-gray-400">+50 points earned</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+              <div className="p-2 rounded-full bg-blue-500/20">
+                <Award className="h-4 w-4 text-blue-400" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-white font-medium">Rank Updated</p>
+                <p className="text-xs text-gray-400">You're climbing!</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+              <div className="p-2 rounded-full bg-yellow-500/20">
+                <Star className="h-4 w-4 text-yellow-400" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-white font-medium">New Rewards Available</p>
+                <p className="text-xs text-gray-400">Check rewards tab</p>
+              </div>
+            </div>
+          </div>
+        </Card>
       </motion.div>
     </motion.div>
   )
