@@ -9,6 +9,8 @@ export interface IUser extends Document {
   zeClubId: string
   points: number
   rank: string
+  badge: string
+  progress: number
   roles: string[]
 }
 
@@ -19,8 +21,10 @@ const UserSchema: Schema = new Schema({
   emailVerified: { type: Date },
   discordId: { type: String, unique: true, sparse: true },
   zeClubId: { type: String, unique: true, sparse: true },
-  points: { type: Number, default: 100 },
+  points: { type: Number, default: 0 },
   rank: { type: String, default: 'Rookie' },
+  badge: { type: String, default: '🥉' },
+  progress: { type: Number, default: 0 },
   roles: { type: [String], default: ['user'] },
 })
 

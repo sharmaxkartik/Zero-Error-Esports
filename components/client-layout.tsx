@@ -41,9 +41,7 @@ export default function ClientLayout({
   return (
     <SessionProvider>
       {!isLoading && <Navbar />}
-      <AnimatePresence mode="wait" initial={true}>
-        <PageTransition key={pathname}>{children}</PageTransition>
-      </AnimatePresence>
+      {children}
       <Footer />
     </SessionProvider>
   );

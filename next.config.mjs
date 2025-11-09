@@ -7,8 +7,14 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // Remove 'unoptimized: true' to enable optimization
-    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com"], // Add your external domains here
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
