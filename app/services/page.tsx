@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/contact-form"; // Adjust the import path as needed
@@ -191,24 +190,6 @@ const ServiceCard = ({
 };
 
 export default function ServicesPage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  // Handle mouse movement for dynamic effects
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -231,32 +212,6 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen text-white overflow-hidden">
-      {/* Global dynamic background elements */}
-      <div className="fixed inset-0 z-0">
-        {/* Dynamic gradient background that moves with mouse */}
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-black via-red-950/10 to-black/80 z-0"
-          style={{
-            backgroundPosition: `${mousePosition.x * 100}% ${
-              mousePosition.y * 100
-            }%`,
-            transition: "background-position 0.8s ease-out",
-          }}
-        />
-
-        {/* Abstract cyberpunk grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-20 z-0"></div>
-
-        {/* Animated scan lines */}
-        <div className="absolute inset-0 scan-lines opacity-8 z-0"></div>
-
-        {/* Particle overlay - use with a custom CSS class */}
-        <div className="absolute inset-0 particle-overlay z-0"></div>
-
-        {/* Dynamic vignette effect */}
-        <div className="absolute inset-0 bg-radial-gradient opacity-70 z-0"></div>
-      </div>
-
       {/* Hero Section - Using new design */}
       <section className="relative h-[400px] overflow-hidden pt-24">
         {/* Background grid effect */}

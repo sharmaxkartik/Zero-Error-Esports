@@ -86,29 +86,9 @@ const ParticlesBackground: React.FC = () => {
             height: `${particle.size}px`,
             backgroundColor: particle.color,
             opacity: particle.opacity,
-            animation: `float-${particle.id % 5} ${
-              particle.speed
-            }s infinite alternate ease-in-out`,
           }}
         />
       ))}
-
-      <style jsx>{`
-        ${animationValues
-          .map(
-            (val, i) => `
-          @keyframes float-${i} {
-            0% {
-              transform: translate(0, 0);
-            }
-            100% {
-              transform: translate(${val.x}px, ${val.y}px);
-            }
-          }
-        `
-          )
-          .join("\n")}
-      `}</style>
     </div>
   );
 };

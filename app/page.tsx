@@ -87,10 +87,7 @@ export default function Home() {
               <AnimatedBackground mousePosition={mousePosition} />
 
               {/* Particle effects layer */}
-              <ParticlesBackground
-                reducedMotion={prefersReducedMotion}
-                mousePosition={mousePosition}
-              />
+              <ParticlesBackground />
             </div>
             {/* Hero Section with Video Background */}
             <HeroSection
