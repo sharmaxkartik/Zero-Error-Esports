@@ -3,9 +3,19 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useSession, signIn, signOut } from "next-auth/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Navigation links data
 const navLinks = [
@@ -22,6 +32,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   // Handle scroll effect with smoother detection
   useEffect(() => {
@@ -97,6 +108,104 @@ export default function Navbar() {
         ease: "easeOut",
       },
     },
+  };
+
+  const AuthButton = () => {
+    if (status === "loading") {
+      return (
+        <div className="w-24 h-10 rounded-full bg-gray-700 animate-pulse" />
+      );
+    }
+
+    if (session) {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="cursor-pointer"
+            >
+              <Avatar>
+                <AvatarImage src={session.user?.image ?? undefined} alt={session.user?.name ?? "User"} />
+                <AvatarFallback>
+                  {session.user?.name?.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </motion.div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56 bg-black/80 border-red-500/30 text-white">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-red-500/30" />
+            <DropdownMenuItem onSelect={() => signOut()}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    }
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        whileHover={{
+          scale: 1.05,
+          transition: { duration: 0.2 },
+        }}
+      >
+        <Link
+          href="/join-us"
+          className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-red-500/30 ${
+            scrolled ? "text-xs" : "text-sm"
+          }`}
+        >
+          Join Us
+        </Link>
+      </motion.div>
+    );
+  };
+
+  const MobileAuthButton = () => {
+    if (status === "loading") {
+      return (
+        <div className="w-full h-12 rounded-md bg-gray-700 animate-pulse" />
+      );
+    }
+
+    if (session) {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
+        >
+          <button
+            onClick={() => signOut()}
+            className="block w-full text-center px-6 py-3 rounded-md bg-gradient-to-r from-red-700 to-red-500 text-white text-lg font-medium shadow-lg shadow-red-900/30"
+          >
+            Logout
+          </button>
+        </motion.div>
+      );
+    }
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.6 }}
+      >
+        <Link
+          href="/join-us"
+          className="block w-full text-center px-6 py-3 rounded-md bg-gradient-to-r from-red-700 to-red-500 text-white text-lg font-medium shadow-lg shadow-red-900/30"
+        >
+          Join Us
+        </Link>
+      </motion.div>
+    );
   };
 
   return (
@@ -188,26 +297,7 @@ export default function Navbar() {
                 transition: { duration: 0.6, ease: "easeInOut" },
               }}
             >
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.2 },
-                }}
-              >
-                <Link
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
-                  className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-red-500/30 ${
-                    scrolled ? "text-xs" : "text-sm"
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Join Club
-                </Link>
-              </motion.div>
+              <AuthButton />
             </motion.div>
           </div>
         </motion.header>
@@ -328,19 +418,7 @@ export default function Navbar() {
 
                 {/* Auth buttons */}
                 <div className="mt-auto space-y-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.6 }}
-                  >
-                    <Link
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSfNRqOlaidZAyxlxKswBa9zf4Blbbg1Hk_iQwbB7ywrrNWFsQ/viewform"
-                      className="block w-full text-center px-6 py-3 rounded-md bg-gradient-to-r from-red-700 to-red-500 text-white text-lg font-medium shadow-lg shadow-red-900/30"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Join Club
-                    </Link>
-                  </motion.div>
+                  <MobileAuthButton />
                 </div>
               </div>
             </motion.div>

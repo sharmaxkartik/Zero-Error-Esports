@@ -7,6 +7,8 @@ import PageTransition from "@/components/page-transition";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
+import { SessionProvider } from "next-auth/react";
+
 export default function ClientLayout({
   children,
 }: {
@@ -22,6 +24,7 @@ export default function ClientLayout({
       setIsLoading(false);
     } else {
       const timer = setTimeout(() => setIsLoading(false), 3000);
+      sessionStorage.setItem("hasLoadedSite", "true");
       return () => clearTimeout(timer);
     }
   }, []);
@@ -36,12 +39,12 @@ export default function ClientLayout({
   }, [pathname]);
 
   return (
-    <>
+    <SessionProvider>
       {!isLoading && <Navbar />}
       <AnimatePresence mode="wait" initial={true}>
         <PageTransition key={pathname}>{children}</PageTransition>
       </AnimatePresence>
       <Footer />
-    </>
+    </SessionProvider>
   );
 }
