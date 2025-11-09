@@ -20,14 +20,14 @@ This document outlines the phased implementation plan for integrating the ZE Clu
     3.  Implement the API endpoint (`GET /api/ze-club/user/dashboard`) to fetch this data securely.
     4.  Design and implement a sidebar or navigation menu for the ZE Club area.
 
-### Phase 3: Leaderboard & Rewards System
+### Phase 3: Leaderboard & Rewards System (Completed)
 
 *   **Goal:** Implement the public-facing ranking and reward redemption systems.
 *   **Key Tasks:**
-    1.  Create the `/ze-club/leaderboard` page to display user rankings.
-    2.  Implement the API endpoint (`GET /api/ze-club/leaderboard`) to provide sorted and filtered user data.
-    3.  Create the `/ze-club/rewards` page to display a catalog of redeemable rewards.
-    4.  Implement API endpoints to fetch rewards (`GET /api/ze-club/rewards`) and to process redemptions (`POST /api/ze-club/rewards/redeem`).
+    1.  [x] Create the `/ze-club/leaderboard` page to display user rankings.
+    2.  [x] Implement the API endpoint (`GET /api/ze-club/leaderboard`) to provide sorted and filtered user data.
+    3.  [x] Create the `/ze-club/rewards` page to display a catalog of redeemable rewards.
+    4.  [x] Implement API endpoints to fetch rewards (`GET /api/ze-club/rewards`) and to process redemptions (`POST /api/ze-club/rewards/redeem`).
 
 ### Phase 4: Mission Upload Center
 

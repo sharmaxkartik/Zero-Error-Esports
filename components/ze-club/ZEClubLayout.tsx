@@ -41,7 +41,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
           </ul>
         </nav>
       </aside>
-      <main className="flex-1 ml-64 p-8 relative">
+      <main className="flex-1 ml-64 p-8 relative z-10">
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={pathname}>{children}</PageTransition>
         </AnimatePresence>
