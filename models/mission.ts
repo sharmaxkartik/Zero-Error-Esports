@@ -1,7 +1,7 @@
 import { Schema, model, models } from 'mongoose'
 
 const MissionSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },

@@ -1,7 +1,7 @@
 import { Schema, model, models } from 'mongoose'
 
 const MissionSubmissionSchema = new Schema({
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -11,14 +11,14 @@ const MissionSubmissionSchema = new Schema({
     ref: 'Mission',
     required: true,
   },
-  fileURL: {
+  proof: {
     type: String,
     required: true,
   },
   status: {
     type: String,
-    enum: ['Pending', 'Approved', 'Rejected'],
-    default: 'Pending',
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending',
   },
   submittedAt: {
     type: Date,

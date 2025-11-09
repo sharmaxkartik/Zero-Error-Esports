@@ -1,7 +1,6 @@
 import MissionUploader from '@/components/ze-club/MissionUploader'
 import { Suspense } from 'react'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { auth } from '@/app/api/auth/[...nextauth]/route'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/user'
 import MissionSubmission from '@/models/missionSubmission'
@@ -14,21 +13,22 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import ClientMissionsWrapper from '@/components/ze-club/ClientMissionsWrapper'
 
 interface PopulatedSubmission {
   _id: string
   mission: {
     _id: string
-    title: string
+    name: string
   }
-  fileURL: string
+  proof: string
   status: string
   submittedAt: Date
   remarks?: string
 }
 
 async function UserSubmissions() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   if (!session?.user?.email) {
     return <p>Please log in to see your submissions.</p>
   }
@@ -40,9 +40,9 @@ async function UserSubmissions() {
   }
 
   const submissions: PopulatedSubmission[] = await MissionSubmission.find({
-    userId: user._id,
+    user: user._id,
   })
-    .populate({ path: 'mission', model: Mission, select: 'title' })
+    .populate({ path: 'mission', model: Mission, select: 'name' })
     .sort({ submittedAt: -1 })
 
   if (submissions.length === 0) {
@@ -54,7 +54,7 @@ async function UserSubmissions() {
       {submissions.map((submission) => (
         <Card key={submission._id}>
           <CardHeader>
-            <CardTitle>{submission.mission.title}</CardTitle>
+            <CardTitle>{submission.mission.name}</CardTitle>
             <CardDescription>
               Submitted on:{' '}
               {new Date(submission.submittedAt).toLocaleDateString()}
@@ -63,7 +63,7 @@ async function UserSubmissions() {
           <CardContent>
             <div className="flex justify-between items-center">
               <a
-                href={submission.fileURL}
+                href={submission.proof}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
@@ -72,9 +72,9 @@ async function UserSubmissions() {
               </a>
               <Badge
                 variant={
-                  submission.status === 'Approved'
+                  submission.status === 'approved'
                     ? 'default'
-                    : submission.status === 'Rejected'
+                    : submission.status === 'rejected'
                     ? 'destructive'
                     : 'outline'
                 }
@@ -96,20 +96,22 @@ async function UserSubmissions() {
 
 export default function MissionsPage() {
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-4">Missions</h1>
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Upload Mission</h2>
-        <Suspense fallback={<div>Loading uploader...</div>}>
-          <MissionUploader />
-        </Suspense>
+    <ClientMissionsWrapper>
+      <div className="container mx-auto py-4 md:py-8 px-0">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">Missions</h1>
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-bold mb-4">Upload Mission</h2>
+          <Suspense fallback={<div>Loading uploader...</div>}>
+            <MissionUploader />
+          </Suspense>
+        </div>
+        <div>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">My Submissions</h2>
+          <Suspense fallback={<div>Loading submissions...</div>}>
+            <UserSubmissions />
+          </Suspense>
+        </div>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold mb-4">My Submissions</h2>
-        <Suspense fallback={<div>Loading submissions...</div>}>
-          <UserSubmissions />
-        </Suspense>
-      </div>
-    </div>
+    </ClientMissionsWrapper>
   )
 }

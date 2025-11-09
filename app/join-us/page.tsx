@@ -60,7 +60,7 @@ export default function JoinUsPage() {
             </motion.p>
 
             <motion.button
-              onClick={() => signIn("discord")}
+              onClick={() => signIn("discord", { callbackUrl: "/ze-club" })}
               className="w-full mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-4 rounded-lg font-bold uppercase hover:from-blue-600 hover:to-indigo-700 relative overflow-hidden group shadow-[0_0_10px_rgba(80,80,200,0.3)]"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

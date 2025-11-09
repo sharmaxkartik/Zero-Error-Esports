@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions } from 'next-auth'
+import NextAuth from 'next-auth'
 import DiscordProvider from 'next-auth/providers/discord'
 import { MongoDBAdapter } from '@auth/mongodb-adapter'
 import { clientPromise } from '@/lib/mongodb'
@@ -6,12 +6,20 @@ import dbConnect from '@/lib/mongodb'
 import User from '@/models/user'
 import { nanoid } from 'nanoid'
 
-export const authOptions: AuthOptions = {
+// @ts-ignore - Type mismatch between NextAuth v5 beta and adapter versions
+const { handlers, auth, signIn, signOut } = NextAuth({
+  // @ts-ignore - MongoDBAdapter type compatibility
   adapter: MongoDBAdapter(clientPromise),
   providers: [
+    // @ts-ignore - Provider type compatibility
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: 'identify email guilds',
+        },
+      },
     }),
   ],
   session: {
@@ -20,11 +28,25 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/join-us',
   },
+  trustHost: true,
+  debug: process.env.NODE_ENV === 'development',
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // Allow sign in
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      // Redirect to ze-club after sign in
+      if (url.startsWith(baseUrl)) {
+        return url
+      }
+      // Default redirect to ze-club
+      return `${baseUrl}/ze-club`
+    },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string
-        session.user.roles = token.roles as string[]
+        session.user.roles = (token.roles as string)?.split(',') || ['user']
         session.user.points = token.points as number
         session.user.rank = token.rank as string
         session.user.zeClubId = token.zeClubId as string
@@ -45,7 +67,7 @@ export const authOptions: AuthOptions = {
             await dbUser.save()
           }
           token.id = dbUser._id.toString()
-          token.roles = dbUser.roles
+          token.roles = dbUser.roles.join(',') // Convert array to string
           token.points = dbUser.points
           token.rank = dbUser.rank
           token.zeClubId = dbUser.zeClubId
@@ -70,8 +92,7 @@ export const authOptions: AuthOptions = {
       }
     },
   },
-}
+})
 
-const handler = NextAuth(authOptions)
-
-export { handler as GET, handler as POST }
+export { auth, signIn, signOut }
+export const { GET, POST } = handlers

@@ -12,12 +12,18 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 interface Mission {
   _id: string
   title: string
 }
 
+/**
+ * MissionUploader Component
+ * Allows users to upload proof for completed missions.
+ * Handles file validation, S3 upload via API, and submission tracking.
+ */
 export default function MissionUploader() {
   const [missions, setMissions] = useState<Mission[]>([])
   const [selectedMission, setSelectedMission] = useState('')
@@ -26,6 +32,7 @@ export default function MissionUploader() {
   const router = useRouter()
 
   useEffect(() => {
+    // Fetch available missions on component mount
     async function fetchMissions() {
       try {
         const response = await fetch('/api/ze-club/missions')
@@ -44,6 +51,8 @@ export default function MissionUploader() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    
+    // Validate form inputs
     if (!file || !selectedMission) {
       alert('Please select a mission and a file.')
       return
@@ -51,6 +60,8 @@ export default function MissionUploader() {
 
     setIsUploading(true)
     const formData = new FormData()
+    
+    // Find selected mission details
     const mission = missions.find(m => m._id === selectedMission)
     if (!mission) {
         alert('Selected mission not found.')
@@ -58,10 +69,12 @@ export default function MissionUploader() {
         return
     }
 
+    // Prepare form data for upload
     formData.append('mission', mission._id)
     formData.append('file', file)
 
     try {
+      // Upload to API endpoint (handles S3 upload and DB record)
       const response = await fetch('/api/ze-club/missions/upload', {
         method: 'POST',
         body: formData,
@@ -69,7 +82,7 @@ export default function MissionUploader() {
 
       if (response.ok) {
         alert('File uploaded successfully!')
-        // Reset form
+        // Reset form state
         setSelectedMission('')
         setFile(null)
         // Refresh the page to show the new submission
@@ -87,8 +100,18 @@ export default function MissionUploader() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+    <motion.form 
+      onSubmit={handleSubmit} 
+      className="space-y-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+      >
         <Label htmlFor="mission">Select Mission</Label>
         <Select
           value={selectedMission}
@@ -106,8 +129,12 @@ export default function MissionUploader() {
             ))}
           </SelectContent>
         </Select>
-      </div>
-      <div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
+      >
         <Label htmlFor="file">Upload Proof (JPG, PNG, MP4 - max 50MB)</Label>
         <Input
           id="file"
@@ -116,10 +143,16 @@ export default function MissionUploader() {
           onChange={(e) => setFile(e.target.files?.[0] || null)}
           required
         />
-      </div>
-      <Button type="submit" disabled={isUploading}>
-        {isUploading ? 'Uploading...' : 'Submit Mission'}
-      </Button>
-    </form>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.3 }}
+      >
+        <Button type="submit" disabled={isUploading}>
+          {isUploading ? 'Uploading...' : 'Submit Mission'}
+        </Button>
+      </motion.div>
+    </motion.form>
   )
 }
