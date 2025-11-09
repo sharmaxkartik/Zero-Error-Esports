@@ -1,0 +1,20 @@
+import { Schema, model, models } from 'mongoose'
+
+const MissionSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  points: {
+    type: Number,
+    required: true,
+  },
+})
+
+const Mission = models.Mission || model('Mission', MissionSchema)
+
+export default Mission
