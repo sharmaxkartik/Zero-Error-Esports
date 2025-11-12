@@ -185,21 +185,21 @@ export default function Leaderboard() {
                     transition={{ delay: 0.3 }}
                     className="md:order-1"
                   >
-                    <Card className="bg-gradient-to-br from-gray-400/10 to-gray-500/10 border-gray-400/30 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-400 to-gray-500 opacity-10 blur-3xl" />
+                    <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-gray-400/50 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-400 to-gray-500 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
-                            <div className="p-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-500 shadow-xl">
+                            <div className="p-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-500 shadow-xl shadow-gray-400/30">
                               <Medal className="h-10 w-10 text-white" />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-gray-400">
+                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-gray-400 text-gray-200">
                               2nd
                             </div>
                           </div>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{topThree[1].name}</h3>
-                        <p className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
+                        <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{topThree[1].name}</h3>
+                        <p className="text-2xl font-bold text-gray-200 drop-shadow-md">
                           {topThree[1].points} pts
                         </p>
                       </div>
@@ -215,21 +215,21 @@ export default function Leaderboard() {
                     transition={{ delay: 0.4 }}
                     className="md:order-2"
                   >
-                    <Card className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border-yellow-500/50 backdrop-blur-xl text-center p-6 md:scale-110 h-full relative overflow-hidden">
+                    <Card className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 border-yellow-500/60 backdrop-blur-xl text-center p-6 md:scale-110 h-full relative overflow-hidden shadow-2xl shadow-yellow-500/20">
                       <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400 to-orange-500 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
                             <div className="p-5 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl shadow-yellow-500/50 animate-pulse">
-                              <Crown className="h-12 w-12 text-white" />
+                              <Crown className="h-12 w-12 text-white drop-shadow-lg" />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-sm font-bold border-2 border-yellow-400">
+                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-sm font-bold border-2 border-yellow-400 text-yellow-300">
                               1st
                             </div>
                           </div>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">{topThree[0].name}</h3>
-                        <p className="text-3xl font-bold bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
+                        <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">{topThree[0].name}</h3>
+                        <p className="text-3xl font-bold text-yellow-400 drop-shadow-md">
                           {topThree[0].points} pts
                         </p>
                       </div>
@@ -245,21 +245,21 @@ export default function Leaderboard() {
                     transition={{ delay: 0.5 }}
                     className="md:order-3"
                   >
-                    <Card className="bg-gradient-to-br from-orange-600/10 to-orange-700/10 border-orange-600/30 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500 to-orange-600 opacity-10 blur-3xl" />
+                    <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-orange-600/50 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500 to-orange-600 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
-                            <div className="p-4 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 shadow-xl">
+                            <div className="p-4 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 shadow-xl shadow-orange-500/30">
                               <Medal className="h-10 w-10 text-white" />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-orange-600">
+                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-orange-600 text-orange-300">
                               3rd
                             </div>
                           </div>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{topThree[2].name}</h3>
-                        <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent">
+                        <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{topThree[2].name}</h3>
+                        <p className="text-2xl font-bold text-orange-400 drop-shadow-md">
                           {topThree[2].points} pts
                         </p>
                       </div>

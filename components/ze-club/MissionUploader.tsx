@@ -8,15 +8,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Upload, FileImage, FileVideo, X, CheckCircle2, Target, Loader2, AlertCircle } from 'lucide-react'
+import { Upload, FileVideo, X, CheckCircle2, Target, Loader2, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useUploadThing } from '@/lib/uploadthing'
 
 interface Mission {
   _id: string
@@ -28,7 +28,7 @@ interface Mission {
 /**
  * MissionUploader Component
  * Allows users to upload proof for completed missions.
- * Handles file validation, S3 upload via API, and submission tracking.
+ * Handles file validation, UploadThing upload, and submission tracking.
  */
 export default function MissionUploader() {
   const [missions, setMissions] = useState<Mission[]>([])
@@ -39,6 +39,9 @@ export default function MissionUploader() {
   const [uploadSuccess, setUploadSuccess] = useState(false)
   const [dragActive, setDragActive] = useState(false)
   const router = useRouter()
+
+  // UploadThing hook
+  const { startUpload } = useUploadThing("missionProofUploader")
 
   useEffect(() => {
     // Fetch available missions on component mount
@@ -70,9 +73,9 @@ export default function MissionUploader() {
   const handleFileChange = (selectedFile: File | null) => {
     if (!selectedFile) return
 
-    // Validate file size (50MB)
-    if (selectedFile.size > 50 * 1024 * 1024) {
-      alert('File size must be less than 50MB')
+    // Validate file size (64MB for UploadThing free tier)
+    if (selectedFile.size > 64 * 1024 * 1024) {
+      alert('File size must be less than 64MB')
       return
     }
 
@@ -86,7 +89,7 @@ export default function MissionUploader() {
     setFile(selectedFile)
     setUploadSuccess(false)
 
-    // Create preview
+    // Create preview for images
     if (selectedFile.type.startsWith('image/')) {
       const reader = new FileReader()
       reader.onloadend = () => {
@@ -128,25 +131,27 @@ export default function MissionUploader() {
     }
 
     setIsUploading(true)
-    const formData = new FormData()
-    
-    // Find selected mission details
-    const mission = missions.find(m => m._id === selectedMission)
-    if (!mission) {
-        alert('Selected mission not found.')
-        setIsUploading(false)
-        return
-    }
-
-    // Prepare form data for upload
-    formData.append('mission', mission._id)
-    formData.append('file', file)
 
     try {
-      // Upload to API endpoint (handles S3 upload and DB record)
+      // Step 1: Upload file to UploadThing
+      const uploadedFiles = await startUpload([file])
+      
+      if (!uploadedFiles || uploadedFiles.length === 0) {
+        throw new Error('File upload failed')
+      }
+
+      const fileUrl = uploadedFiles[0].url
+
+      // Step 2: Save submission to database
       const response = await fetch('/api/ze-club/missions/upload', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          missionId: selectedMission,
+          fileUrl: fileUrl,
+        }),
       })
 
       if (response.ok) {
@@ -162,7 +167,7 @@ export default function MissionUploader() {
         }, 2000)
       } else {
         const errorData = await response.json()
-        alert(`Upload failed: ${errorData.error}`)
+        alert(`Submission failed: ${errorData.error}`)
       }
     } catch (error) {
       console.error('Upload error:', error)
@@ -270,11 +275,11 @@ export default function MissionUploader() {
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
               >
-                <Input
+                <input
                   id="file"
                   type="file"
                   accept="image/jpeg,image/png,video/mp4"
-                  onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e.target.files?.[0] || null)}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                 />
                 
@@ -285,7 +290,7 @@ export default function MissionUploader() {
                       <span className="font-semibold text-red-400">Click to upload</span> or drag and drop
                     </p>
                     <p className="text-xs text-gray-500">
-                      JPG, PNG, or MP4 (max 50MB)
+                      JPG, PNG, or MP4 (max 64MB)
                     </p>
                   </div>
                 ) : (
