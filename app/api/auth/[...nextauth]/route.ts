@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import DiscordProvider from 'next-auth/providers/discord'
+import GoogleProvider from 'next-auth/providers/google'
 import { MongoDBAdapter } from '@auth/mongodb-adapter'
 import { clientPromise } from '@/lib/mongodb'
 import dbConnect from '@/lib/mongodb'
@@ -21,12 +22,17 @@ const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
     }),
+    // @ts-ignore - Provider type compatibility
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   session: {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/join-us',
+    signIn: '/login',
   },
   trustHost: true,
   debug: process.env.NODE_ENV === 'development',
@@ -58,8 +64,13 @@ const { handlers, auth, signIn, signOut } = NextAuth({
         await dbConnect()
         const dbUser = await User.findOne({ email: user.email })
         if (dbUser) {
+          // Update provider ID if not set
           if (!dbUser.discordId && account?.provider === 'discord') {
             dbUser.discordId = account.providerAccountId
+            await dbUser.save()
+          }
+          // Initialize ZE Club data if new user
+          if (!dbUser.zeClubId) {
             dbUser.zeClubId = `ZE-${nanoid(8)}`
             dbUser.points = 100
             dbUser.rank = 'Rookie'
@@ -81,12 +92,18 @@ const { handlers, auth, signIn, signOut } = NextAuth({
       if (message.isNewUser) {
         await dbConnect()
         const user = await User.findOne({ email: message.user.email })
-        if (user && message.account?.provider === 'discord') {
-          user.discordId = message.account.providerAccountId
-          user.zeClubId = `ZE-${nanoid(8)}`
-          user.points = 100
-          user.rank = 'Rookie'
-          user.roles = ['user']
+        if (user) {
+          // Set provider ID
+          if (message.account?.provider === 'discord') {
+            user.discordId = message.account.providerAccountId
+          }
+          // Initialize ZE Club data for new users
+          if (!user.zeClubId) {
+            user.zeClubId = `ZE-${nanoid(8)}`
+            user.points = 100
+            user.rank = 'Rookie'
+            user.roles = ['user']
+          }
           await user.save()
         }
       }

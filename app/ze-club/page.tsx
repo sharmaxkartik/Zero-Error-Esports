@@ -7,7 +7,7 @@ export default async function ZEClubPage() {
   const session = await auth()
 
   if (!session) {
-    redirect("/join-us")
+    redirect("/login")
   }
 
   return (
