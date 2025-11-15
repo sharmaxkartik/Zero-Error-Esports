@@ -20,11 +20,22 @@ import SponsorsSection from "@/components/home/SponsorsSection";
 import PastEventsSection from "@/components/home/PastEventsSection";
 import CursorFollower from "@/components/home/CursorFollower";
 
-export default function Home() {
+interface HomeClientProps {
+  heroVideoUrl?: string
+  heroPosterUrl?: string
+}
+
+export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
   // Add a state for reduced motion preference
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [loading, setLoading] = useState(true);
   const { scrollYProgress } = useScroll();
+
+  // Hero media settings
+  const [heroMedia, setHeroMedia] = useState({
+    videoUrl: heroVideoUrl || "",
+    posterUrl: heroPosterUrl || "",
+  })
 
   // For dynamic background color effect
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
@@ -32,6 +43,26 @@ export default function Home() {
   // For cursor trailer effect
   const cursorX = useSpring(0, { stiffness: 100, damping: 20 });
   const cursorY = useSpring(0, { stiffness: 100, damping: 20 });
+
+  useEffect(() => {
+    // Fetch hero media settings
+    async function fetchHeroMedia() {
+      try {
+        const response = await fetch("/api/admin/marketing/hero")
+        if (response.ok) {
+          const data = await response.json()
+          setHeroMedia({
+            videoUrl: data.heroVideoUrl || "",
+            posterUrl: data.heroPosterUrl || "",
+          })
+        }
+      } catch (error) {
+        console.error("Failed to fetch hero media:", error)
+      }
+    }
+    
+    fetchHeroMedia()
+  }, [])
 
   useEffect(() => {
     // Check user's motion preference
@@ -95,6 +126,8 @@ export default function Home() {
               mousePosition={mousePosition}
               cursorX={cursorX}
               cursorY={cursorY}
+              heroVideoUrl={heroMedia.videoUrl}
+              heroPosterUrl={heroMedia.posterUrl}
             />
             {/* Stats Section */}
             <StatsSection />

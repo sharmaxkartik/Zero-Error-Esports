@@ -11,15 +11,26 @@ interface HeroSectionProps {
   mousePosition: { x: number; y: number };
   cursorX: any;
   cursorY: any;
+  heroVideoUrl?: string;
+  heroPosterUrl?: string;
 }
 
-const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
+const HeroSection = ({ 
+  scrollYProgress, 
+  mousePosition, 
+  heroVideoUrl, 
+  heroPosterUrl 
+}: HeroSectionProps) => {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   const translateY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const contentTranslateY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Use admin-provided URLs or fallback to defaults
+  const videoSrc = heroVideoUrl || "/images/background.webm"
+  const posterSrc = heroPosterUrl || "/images/hero-background.jpg"
 
   // Detect if device is mobile
   useEffect(() => {
@@ -55,7 +66,7 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
           // Static image for mobile
           <div className="absolute inset-0">
             <Image
-              src="/images/hero-background.jpg" // Add your mobile background image path here
+              src={posterSrc}
               alt="Zero Error Esports"
               fill
               className="object-cover opacity-70"
@@ -72,10 +83,10 @@ const HeroSection = ({ scrollYProgress, mousePosition }: HeroSectionProps) => {
             playsInline
             preload="auto"
           >
-            <source src="/images/background.webm" type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
             {/* Fallback image if video fails to load */}
             <Image
-              src="/images/hero-background.jpg"
+              src={posterSrc}
               alt="Zero Error Esports"
               fill
               className="object-cover opacity-70"

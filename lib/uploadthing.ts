@@ -1,4 +1,4 @@
-import { generateReactHelpers } from "@uploadthing/react";
+import { generateReactHelpers, generateUploadButton } from "@uploadthing/react";
 import type { OurFileRouter } from "@/app/api/uploadthing/core";
 
 /**
@@ -7,3 +7,8 @@ import type { OurFileRouter } from "@/app/api/uploadthing/core";
  */
 export const { useUploadThing, uploadFiles } =
   generateReactHelpers<OurFileRouter>();
+
+/**
+ * UploadButton component for hero media uploads
+ */
+export const UploadButton = generateUploadButton<OurFileRouter>();

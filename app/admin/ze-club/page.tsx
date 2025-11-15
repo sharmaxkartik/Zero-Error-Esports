@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import SubmissionVerifier from '@/components/admin/SubmissionVerifier'
+import HeroMediaManager from '@/components/admin/HeroMediaManager'
 import { motion } from 'framer-motion'
 import { Shield, Zap } from 'lucide-react'
 
@@ -73,7 +74,25 @@ export default function AdminZEClubPage() {
         </motion.div>
 
         {/* Main Content */}
-        <SubmissionVerifier />
+        <div className="space-y-8">
+          {/* Hero Media Manager */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <HeroMediaManager />
+          </motion.div>
+
+          {/* Mission Submissions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <SubmissionVerifier />
+          </motion.div>
+        </div>
       </div>
     </div>
   )
