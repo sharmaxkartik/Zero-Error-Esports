@@ -12,6 +12,8 @@ declare module 'next-auth' {
       points: number
       rank: string
       zeClubId: string
+      zeTag?: string
+      profilePhotoUrl?: string
     }
   }
 
@@ -24,6 +26,8 @@ declare module 'next-auth' {
     points: number
     rank: string
     zeClubId: string
+    zeTag?: string
+    profilePhotoUrl?: string
   }
 }
 
@@ -34,5 +38,7 @@ declare module 'next-auth/jwt' {
     points: number
     rank: string
     zeClubId: string
+    zeTag?: string
+    profilePhotoUrl?: string
   }
 }

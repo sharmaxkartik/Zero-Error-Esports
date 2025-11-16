@@ -17,6 +17,13 @@ export interface IUser extends Document {
   progressToNextRank: number
   nextRankPoints: number
   currentRankPoints: number
+  zeTag?: string
+  bio?: string
+  profilePhotoUrl?: string
+  hashedPassword?: string
+  passwordUpdatedAt?: Date
+  accountCreatedAt?: Date
+  lastLoginAt?: Date
 }
 
 const UserSchema: Schema = new Schema({
@@ -36,6 +43,24 @@ const UserSchema: Schema = new Schema({
   progressToNextRank: { type: Number, default: 0 },
   nextRankPoints: { type: Number, default: 500 },
   currentRankPoints: { type: Number, default: 0 },
+  // Phase 4: Profile system
+  zeTag: {
+    type: String,
+    unique: true,
+    sparse: true,
+    validate: {
+      validator: function (v: string) {
+        return /^[a-zA-Z0-9_]{3,20}$/.test(v)
+      },
+      message: 'ZE Tag must be 3-20 characters (alphanumeric and underscore only)',
+    },
+  },
+  bio: { type: String, maxlength: 200 },
+  profilePhotoUrl: { type: String },
+  hashedPassword: { type: String },
+  passwordUpdatedAt: { type: Date },
+  accountCreatedAt: { type: Date, default: Date.now },
+  lastLoginAt: { type: Date },
 })
 
 export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema)

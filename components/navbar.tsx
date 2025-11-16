@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, ChevronRight, LogOut } from "lucide-react";
+import { Menu, X, ChevronRight, LogOut, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -127,7 +127,10 @@ export default function Navbar() {
               className="cursor-pointer"
             >
               <Avatar>
-                <AvatarImage src={session.user?.image ?? undefined} alt={session.user?.name ?? "User"} />
+                <AvatarImage 
+                  src={session.user?.profilePhotoUrl || session.user?.image || undefined} 
+                  alt={session.user?.name ?? "User"} 
+                />
                 <AvatarFallback>
                   {session.user?.name?.charAt(0).toUpperCase()}
                 </AvatarFallback>
@@ -137,6 +140,12 @@ export default function Navbar() {
           <DropdownMenuContent className="w-56 bg-black/80 border-red-500/30 text-white">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-red-500/30" />
+            <DropdownMenuItem asChild>
+              <Link href="/profile">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => signOut()}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import dbConnect from "@/lib/mongodb";
 import Event from "@/models/event";
+import User from "@/models/user";
 import { revalidatePath } from "next/cache";
 
 const f = createUploadthing();
@@ -12,6 +13,47 @@ const f = createUploadthing();
  * Defines upload endpoints with authentication and file validation
  */
 export const ourFileRouter = {
+  // Profile photo uploader endpoint
+  profilePhotoUploader: f({
+    image: { maxFileSize: "5MB", maxFileCount: 1 },
+  })
+    .middleware(async () => {
+      // Authenticate user via NextAuth
+      const session = await auth();
+
+      if (!session?.user?.email) {
+        throw new Error("Unauthorized");
+      }
+
+      // Return user data to be available in onUploadComplete
+      return {
+        userEmail: session.user.email,
+        userId: session.user.id
+      };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      // This code runs on the server after upload completes
+      console.log("Upload complete for user:", metadata.userEmail);
+      console.log("File URL:", file.url);
+
+      await dbConnect();
+      await User.findByIdAndUpdate(
+        metadata.userId,
+        { $set: { profilePhotoUrl: file.url } }
+      );
+
+      // Revalidate paths to refresh the photo everywhere
+      revalidatePath('/profile');
+      revalidatePath('/ze-club');
+      revalidatePath('/', 'layout');
+
+      // Return data to the client
+      return {
+        uploadedBy: metadata.userEmail,
+        fileUrl: file.url
+      };
+    }),
+
   // Mission proof uploader endpoint
   missionProofUploader: f({
     image: { maxFileSize: "32MB", maxFileCount: 1 },

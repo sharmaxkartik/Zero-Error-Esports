@@ -35,6 +35,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: "/ze-club", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/profile", label: "Profile", icon: User },
     { href: "/ze-club/leaderboard", label: "Leaderboard", icon: Trophy },
     { href: "/ze-club/rewards", label: "Rewards", icon: Gift },
     { href: "/ze-club/missions", label: "Missions", icon: Target },

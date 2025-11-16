@@ -56,10 +56,12 @@ const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.points = token.points as number
         session.user.rank = token.rank as string
         session.user.zeClubId = token.zeClubId as string
+        session.user.zeTag = token.zeTag as string | undefined
+        session.user.profilePhotoUrl = token.profilePhotoUrl as string | undefined
       }
       return session
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger }) {
       if (user) {
         await dbConnect()
         const dbUser = await User.findOne({ email: user.email })
@@ -75,13 +77,31 @@ const { handlers, auth, signIn, signOut } = NextAuth({
             dbUser.points = 100
             dbUser.rank = 'Rookie'
             dbUser.roles = ['user']
+            // Initialize default zeTag
+            dbUser.zeTag = `ZE_${nanoid(8)}`
             await dbUser.save()
           }
+          // Update last login
+          dbUser.lastLoginAt = new Date()
+          await dbUser.save()
+          
           token.id = dbUser._id.toString()
           token.roles = dbUser.roles.join(',') // Convert array to string
           token.points = dbUser.points
           token.rank = dbUser.rank
           token.zeClubId = dbUser.zeClubId
+          token.zeTag = dbUser.zeTag
+          token.profilePhotoUrl = dbUser.profilePhotoUrl
+        }
+      } else if (trigger === 'update' || !token.profilePhotoUrl) {
+        // Refresh profile photo URL from database on token update or if missing
+        await dbConnect()
+        const dbUser = await User.findById(token.id)
+        if (dbUser) {
+          token.profilePhotoUrl = dbUser.profilePhotoUrl
+          token.points = dbUser.points
+          token.rank = dbUser.rank
+          token.zeTag = dbUser.zeTag
         }
       }
       return token
@@ -103,7 +123,9 @@ const { handlers, auth, signIn, signOut } = NextAuth({
             user.points = 100
             user.rank = 'Rookie'
             user.roles = ['user']
+            user.zeTag = `ZE_${nanoid(8)}`
           }
+          user.lastLoginAt = new Date()
           await user.save()
         }
       }

@@ -46,6 +46,7 @@
     "@uploadthing/react": "^7.3.3",
     "autoprefixer": "^10.4.20",
     "aws4": "^1.13.2",
+    "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
@@ -75,6 +76,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/multer-s3": "^3.0.3",
     "@types/node": "^22",
     "@types/react": "^19",
