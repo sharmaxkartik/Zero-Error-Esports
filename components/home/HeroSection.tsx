@@ -27,7 +27,7 @@ const HeroSection = ({
   const [isMobile, setIsMobile] = useState(false);
 
   // Use admin-provided URLs or fallback to defaults
-  const videoSrc = heroVideoUrl || "/images/background.webm"
+  const videoSrc = heroVideoUrl || "/images/background.mp4"
   const posterSrc = heroPosterUrl || "/images/hero-background.jpg"
 
   // Detect if device is mobile
@@ -80,8 +80,10 @@ const HeroSection = ({
             loop
             playsInline
             preload="auto"
+            poster={posterSrc}
           >
-            <source src={videoSrc} type="video/mp4" />
+            <source src="/images/background.mp4" type="video/mp4" />
+            <source src="/images/background.webm" type="video/webm" />
             {/* Fallback image if video fails to load */}
             <Image
               src={posterSrc}
