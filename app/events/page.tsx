@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,10 +9,69 @@ import {
   MapPin,
   Users,
   ArrowRight,
+  ExternalLink,
+  Star,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+interface Event {
+  _id: string
+  title: string
+  description: string
+  eventDate: string
+  eventType: 'upcoming' | 'past'
+  imageUrl?: string
+  location?: string
+  registrationLink?: string
+  featured: boolean
+  games: string[]
+  organizer: string
+}
 
 export default function EventsPage() {
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
+  const [pastEvents, setPastEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+
+  async function fetchEvents() {
+    try {
+      const [upcomingRes, pastRes] = await Promise.all([
+        fetch('/api/events?eventType=upcoming', {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        }),
+        fetch('/api/events?eventType=past', {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        })
+      ])
+      
+      const [upcomingData, pastData] = await Promise.all([
+        upcomingRes.json(),
+        pastRes.json()
+      ])
+      
+      if (upcomingData.success) setUpcomingEvents(upcomingData.events)
+      if (pastData.success) setPastEvents(pastData.events)
+    } catch (error) {
+      console.error('Error fetching events:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,9 +200,114 @@ export default function EventsPage() {
               UPCOMING EVENTS
             </h2>
             <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              Stay Tuned. Many Events are lined up.
+              {upcomingEvents.length > 0 
+                ? "Join us at our next exciting tournaments and events" 
+                : "Stay Tuned. Many Events are lined up."}
             </p>
           </motion.div>
+
+          {loading ? (
+            <div className="text-center text-zinc-500">Loading events...</div>
+          ) : upcomingEvents.length > 0 ? (
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {upcomingEvents.map((event) => (
+                <motion.div
+                  key={event._id}
+                  className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                >
+                  {/* Event Cover Image */}
+                  <div className="relative w-full aspect-square overflow-hidden max-h-80">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                    {event.imageUrl ? (
+                      <Image
+                        key={event.imageUrl}
+                        src={event.imageUrl}
+                        alt={event.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                        <Calendar className="w-20 h-20 text-zinc-700" />
+                      </div>
+                    )}
+                    {event.games.length > 0 && (
+                      <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-red-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                        {event.games[0]}
+                      </div>
+                    )}
+                    {event.featured && (
+                      <div className="absolute top-3 right-3 z-20">
+                        <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                      </div>
+                    )}
+                    <div className="absolute bottom-3 left-3 right-3 z-20">
+                      <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
+                        {event.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Event Details */}
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center gap-3 text-xs text-zinc-400">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3 text-red-500" />
+                        {format(new Date(event.eventDate), 'MMM dd, yyyy')}
+                      </span>
+                      {event.location && (
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-red-500" />
+                          {event.location}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {event.description && (
+                      <p className="text-xs text-zinc-400 line-clamp-2">
+                        {event.description}
+                      </p>
+                    )}
+
+                    {event.registrationLink && (
+                      <Button
+                        size="sm"
+                        className="w-full bg-red-600 hover:bg-red-700"
+                        onClick={() => {
+                          const url = event.registrationLink.startsWith('http') 
+                            ? event.registrationLink 
+                            : `https://${event.registrationLink}`
+                          window.open(url, '_blank')
+                        }}
+                      >
+                        <ExternalLink className="h-3 w-3 mr-2" />
+                        Register Now
+                      </Button>
+                    )}
+
+                    {event.games.length > 1 && (
+                      <div className="flex flex-wrap gap-1">
+                        {event.games.slice(1, 3).map((game) => (
+                          <Badge key={game} variant="secondary" className="text-xs">
+                            {game}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : null}
         </div>
       </section>
 
@@ -175,7 +340,87 @@ export default function EventsPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {/* ZE FACEOFF Invitational */}
+            {/* API Past Events */}
+            {pastEvents.map((event) => (
+              <motion.div
+                key={event._id}
+                className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                {/* Event Cover Image */}
+                <div className="relative w-full aspect-square overflow-hidden max-h-80">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                  {event.imageUrl ? (
+                    <Image
+                      key={event.imageUrl}
+                      src={event.imageUrl}
+                      alt={event.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                      <Calendar className="w-20 h-20 text-zinc-700" />
+                    </div>
+                  )}
+                  {event.games.length > 0 && (
+                    <div className="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-red-700 px-2 py-1 rounded-full text-xs font-bold z-20 shadow-lg">
+                      {event.games[0]}
+                    </div>
+                  )}
+                  {event.featured && (
+                    <div className="absolute top-3 right-3 z-20">
+                      <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                    </div>
+                  )}
+                  <div className="absolute bottom-3 left-3 right-3 z-20">
+                    <h3 className="text-lg font-black uppercase text-white mb-1 drop-shadow-lg leading-tight">
+                      {event.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Event Details */}
+                <div className="p-4 space-y-3">
+                  <div className="flex items-center gap-3 text-xs text-zinc-400">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3 text-red-500" />
+                      {format(new Date(event.eventDate), 'MMM dd, yyyy')}
+                    </span>
+                    {event.location && (
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3 text-red-500" />
+                        {event.location}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {event.description && (
+                    <p className="text-xs text-zinc-400 line-clamp-2">
+                      {event.description}
+                    </p>
+                  )}
+
+                  {event.games.length > 1 && (
+                    <div className="flex flex-wrap gap-1">
+                      {event.games.slice(1, 3).map((game) => (
+                        <Badge key={game} variant="secondary" className="text-xs">
+                          {game}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <div className="flex items-center justify-end">
+                    <ChevronRight className="h-4 w-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Hardcoded Legacy Events */}
             <motion.div
               className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden group hover:border-red-500/50 transition-all duration-300 shadow-2xl"
               variants={itemVariants}

@@ -160,7 +160,7 @@ export default function SubmissionVerifier() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">Total Submissions</p>
+                <p className="text-sm text-gray-300">Total Submissions</p>
                 <p className="text-3xl font-bold text-blue-400">{stats.total}</p>
               </div>
               <Users className="h-10 w-10 text-blue-400 opacity-50" />
@@ -172,7 +172,7 @@ export default function SubmissionVerifier() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">Pending</p>
+                <p className="text-sm text-gray-300">Pending</p>
                 <p className="text-3xl font-bold text-yellow-400">{stats.pending}</p>
               </div>
               <Clock className="h-10 w-10 text-yellow-400 opacity-50" />
@@ -184,7 +184,7 @@ export default function SubmissionVerifier() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">Approved</p>
+                <p className="text-sm text-gray-300">Approved</p>
                 <p className="text-3xl font-bold text-green-400">{stats.approved}</p>
               </div>
               <CheckCircle2 className="h-10 w-10 text-green-400 opacity-50" />
@@ -196,7 +196,7 @@ export default function SubmissionVerifier() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">Rejected</p>
+                <p className="text-sm text-gray-300">Rejected</p>
                 <p className="text-3xl font-bold text-red-400">{stats.rejected}</p>
               </div>
               <XCircle className="h-10 w-10 text-red-400 opacity-50" />
@@ -206,7 +206,7 @@ export default function SubmissionVerifier() {
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className="bg-zinc-900/50 border-zinc-700">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
@@ -215,20 +215,20 @@ export default function SubmissionVerifier() {
                 placeholder="Search by user, email, or mission..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-10 bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500"
               />
             </div>
             <div className="flex gap-2">
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-zinc-800 border-zinc-700 text-white">
                   <Filter className="h-4 w-4 mr-2" />
                   <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="approved">Approved</SelectItem>
-                  <SelectItem value="rejected">Rejected</SelectItem>
+                <SelectContent className="bg-zinc-800 border-zinc-700">
+                  <SelectItem value="all" className="text-white">All Status</SelectItem>
+                  <SelectItem value="pending" className="text-white">Pending</SelectItem>
+                  <SelectItem value="approved" className="text-white">Approved</SelectItem>
+                  <SelectItem value="rejected" className="text-white">Rejected</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -237,24 +237,24 @@ export default function SubmissionVerifier() {
       </Card>
 
       {/* Submissions Table */}
-      <Card>
+      <Card className="bg-zinc-900/50 border-zinc-700">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-white">
             <TrendingUp className="h-5 w-5" />
             Submission Review ({filteredSubmissions.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-md border overflow-x-auto">
+          <div className="rounded-md border border-zinc-700 overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="min-w-[180px]">User</TableHead>
-                  <TableHead className="min-w-[150px]">Mission</TableHead>
-                  <TableHead className="min-w-[100px]">Points</TableHead>
-                  <TableHead className="min-w-[100px]">Proof</TableHead>
-                  <TableHead className="min-w-[100px]">Status</TableHead>
-                  <TableHead className="min-w-[200px]">Actions</TableHead>
+                <TableRow className="border-zinc-700">
+                  <TableHead className="min-w-[180px] text-gray-300">User</TableHead>
+                  <TableHead className="min-w-[150px] text-gray-300">Mission</TableHead>
+                  <TableHead className="min-w-[100px] text-gray-300">Points</TableHead>
+                  <TableHead className="min-w-[100px] text-gray-300">Proof</TableHead>
+                  <TableHead className="min-w-[100px] text-gray-300">Status</TableHead>
+                  <TableHead className="min-w-[200px] text-gray-300">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -265,17 +265,17 @@ export default function SubmissionVerifier() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="border-b transition-colors hover:bg-muted/50"
+                      className="border-b border-zinc-700 transition-colors hover:bg-zinc-800/30"
                     >
                       <TableCell>
                         <div className="space-y-1">
-                          <div className="font-medium text-sm">{submission.user.name}</div>
-                          <div className="text-xs text-muted-foreground break-all">
+                          <div className="font-medium text-sm text-white">{submission.user.name}</div>
+                          <div className="text-xs text-gray-400 break-all">
                             {submission.user.email}
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="text-sm font-medium">
+                      <TableCell className="text-sm font-medium text-gray-300">
                         {submission.mission.name}
                       </TableCell>
                       <TableCell>
@@ -288,7 +288,7 @@ export default function SubmissionVerifier() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handlePreview(submission.proof)}
-                          className="gap-2"
+                          className="gap-2 text-gray-300 hover:text-white hover:bg-zinc-800"
                         >
                           <Eye className="h-4 w-4" />
                           View
@@ -345,7 +345,7 @@ export default function SubmissionVerifier() {
                     <TableCell colSpan={6} className="text-center text-sm py-8">
                       <div className="flex flex-col items-center gap-2">
                         <TrendingUp className="h-12 w-12 text-gray-400" />
-                        <p className="text-gray-500">No submissions found.</p>
+                        <p className="text-gray-300">No submissions found.</p>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -358,19 +358,19 @@ export default function SubmissionVerifier() {
 
       {/* Preview Dialog */}
       <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-4xl bg-zinc-900 border-zinc-700">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+            <DialogTitle className="flex items-center gap-2 text-white">
               <ImageIcon className="h-5 w-5" />
               Proof Preview
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-gray-400">
               Review the submitted proof before verification
             </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
             {previewUrl && (
-              <div className="rounded-lg overflow-hidden bg-gray-100">
+              <div className="rounded-lg overflow-hidden bg-zinc-800">
                 {previewUrl.endsWith('.mp4') ? (
                   <video controls className="w-full max-h-[70vh]">
                     <source src={previewUrl} type="video/mp4" />
@@ -386,10 +386,10 @@ export default function SubmissionVerifier() {
               </div>
             )}
             <div className="mt-4 flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setPreviewOpen(false)}>
+              <Button variant="outline" onClick={() => setPreviewOpen(false)} className="bg-zinc-800 border-zinc-700 text-white hover:bg-zinc-700">
                 Close
               </Button>
-              <Button asChild>
+              <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
                 <a href={previewUrl || '#'} target="_blank" rel="noopener noreferrer">
                   Open in New Tab
                 </a>

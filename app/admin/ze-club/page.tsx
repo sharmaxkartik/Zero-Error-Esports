@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import SubmissionVerifier from '@/components/admin/SubmissionVerifier'
 import HeroMediaManager from '@/components/admin/HeroMediaManager'
+import EventManager from '@/components/admin/EventManager'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { motion } from 'framer-motion'
-import { Shield, Zap } from 'lucide-react'
+import { Shield, Zap, Video, Calendar, ListChecks } from 'lucide-react'
 
 export default function AdminZEClubPage() {
   const router = useRouter()
@@ -75,22 +77,39 @@ export default function AdminZEClubPage() {
 
         {/* Main Content */}
         <div className="space-y-8">
-          {/* Hero Media Manager */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <HeroMediaManager />
-          </motion.div>
+            <Tabs defaultValue="video" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 mb-8 bg-zinc-900 border border-zinc-700">
+                <TabsTrigger value="video" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
+                  <Video className="h-4 w-4" />
+                  Background Video
+                </TabsTrigger>
+                <TabsTrigger value="events" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
+                  <Calendar className="h-4 w-4" />
+                  Events
+                </TabsTrigger>
+                <TabsTrigger value="missions" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
+                  <ListChecks className="h-4 w-4" />
+                  Missions
+                </TabsTrigger>
+              </TabsList>
 
-          {/* Mission Submissions */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <SubmissionVerifier />
+              <TabsContent value="video" className="space-y-4">
+                <HeroMediaManager />
+              </TabsContent>
+
+              <TabsContent value="events" className="space-y-4">
+                <EventManager />
+              </TabsContent>
+
+              <TabsContent value="missions" className="space-y-4">
+                <SubmissionVerifier />
+              </TabsContent>
+            </Tabs>
           </motion.div>
         </div>
       </div>

@@ -19,12 +19,16 @@ export async function GET() {
       settings = await SiteSetting.create({
         heroVideoUrl: '',
         heroPosterUrl: '',
+        previousHeroVideoUrl: '',
+        previousHeroPosterUrl: '',
       })
     }
 
     return NextResponse.json({
       heroVideoUrl: settings.heroVideoUrl || '',
       heroPosterUrl: settings.heroPosterUrl || '',
+      previousHeroVideoUrl: settings.previousHeroVideoUrl || '',
+      previousHeroPosterUrl: settings.previousHeroPosterUrl || '',
       updatedAt: settings.updatedAt,
       updatedBy: settings.updatedBy,
     })
@@ -50,7 +54,7 @@ export async function PATCH(req: NextRequest) {
     const { heroVideoUrl, heroPosterUrl } = body
 
     // Validate at least one field is provided
-    if (!heroVideoUrl && !heroPosterUrl) {
+    if (heroVideoUrl === undefined && heroPosterUrl === undefined) {
       return new NextResponse('At least one URL must be provided', {
         status: 400,
       })
@@ -58,16 +62,26 @@ export async function PATCH(req: NextRequest) {
 
     await dbConnect()
 
+    // Get current settings to save as previous
+    const currentSettings = await SiteSetting.findOne()
+
     // Update or create settings
     const updateData: any = {
       updatedBy: session.user.email || session.user.name,
     }
 
+    // Save current values as previous before updating
     if (heroVideoUrl !== undefined) {
+      if (currentSettings?.heroVideoUrl) {
+        updateData.previousHeroVideoUrl = currentSettings.heroVideoUrl
+      }
       updateData.heroVideoUrl = heroVideoUrl
     }
 
     if (heroPosterUrl !== undefined) {
+      if (currentSettings?.heroPosterUrl) {
+        updateData.previousHeroPosterUrl = currentSettings.heroPosterUrl
+      }
       updateData.heroPosterUrl = heroPosterUrl
     }
 
@@ -84,6 +98,8 @@ export async function PATCH(req: NextRequest) {
       success: true,
       heroVideoUrl: settings.heroVideoUrl,
       heroPosterUrl: settings.heroPosterUrl,
+      previousHeroVideoUrl: settings.previousHeroVideoUrl,
+      previousHeroPosterUrl: settings.previousHeroPosterUrl,
       updatedAt: settings.updatedAt,
       updatedBy: settings.updatedBy,
     })

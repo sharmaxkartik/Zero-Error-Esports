@@ -1,5 +1,9 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { z } from "zod";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
+import dbConnect from "@/lib/mongodb";
+import Event from "@/models/event";
+import { revalidatePath } from "next/cache";
 
 const f = createUploadthing();
 
@@ -67,6 +71,55 @@ export const ourFileRouter = {
       // This code runs on the server after upload completes
       console.log("Hero media upload complete by admin:", metadata.userEmail);
       console.log("File URL:", file.url);
+
+      // Return data to the client
+      return { 
+        uploadedBy: metadata.userEmail,
+        fileUrl: file.url 
+      };
+    }),
+
+  // Event image uploader endpoint (admin-only)
+  eventImageUploader: f({
+    image: { maxFileSize: "10MB", maxFileCount: 1 },
+  })
+    .input(z.object({ eventId: z.string().optional() }))
+    .middleware(async ({ input }) => {
+      // Authenticate and verify admin role
+      const session = await auth();
+
+      if (!session?.user?.email) {
+        throw new Error("Unauthorized");
+      }
+
+      if (!session.user.roles?.includes('admin')) {
+        throw new Error("Admin access required");
+      }
+      
+      // Return admin data and eventId to be available in onUploadComplete
+      return { 
+        userEmail: session.user.email,
+        userId: session.user.id,
+        isAdmin: true,
+        eventId: input.eventId
+      };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      // This code runs on the server after upload completes
+      console.log("Event image upload complete by admin:", metadata.userEmail);
+      console.log("File URL:", file.url);
+
+      if (metadata.eventId) {
+        await dbConnect();
+        await Event.findByIdAndUpdate(metadata.eventId, {
+          $set: { imageUrl: file.url },
+        });
+
+        // Revalidate paths
+        revalidatePath('/events');
+        revalidatePath('/api/events');
+        revalidatePath('/');
+      }
 
       // Return data to the client
       return { 

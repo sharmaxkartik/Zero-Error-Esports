@@ -1,11 +1,51 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronRight, Calendar } from "lucide-react";
+import { ChevronRight, Calendar, MapPin, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
+
+interface Event {
+  _id: string
+  title: string
+  description: string
+  eventDate: string
+  eventType: 'upcoming' | 'past'
+  imageUrl?: string
+  location?: string
+  registrationLink?: string
+  featured: boolean
+  games: string[]
+  organizer: string
+}
 
 const PastEventsSection = () => {
+  const [events, setEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+
+  async function fetchEvents() {
+    try {
+      const response = await fetch('/api/events?eventType=past&limit=3')
+      const data = await response.json()
+      
+      if (data.success) {
+        setEvents(data.events)
+      }
+    } catch (error) {
+      console.error('Error fetching past events:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,21 +65,19 @@ const PastEventsSection = () => {
     },
   };
 
-  const events = [
-    {
-      title: "Past Events",
-      date: "24th May, 2024",
-      location: "Gwalior, Madhya Pradesh",
-      image: {
-        src: "/images/ZE_faceoff.png",
-        width: 800,
-        height: 600,
-        alt: "GAME'O'CON 25 Event",
-      },
-      category: "Past Event",
-      icon: <Calendar className="w-4 h-4" />,
-    },
-  ];
+  if (loading) {
+    return (
+      <section className="py-24 relative bg-transparent">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-zinc-500">Loading past events...</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (events.length === 0) {
+    return null // Don't show section if no past events
+  }
 
   return (
     <section className="py-24 relative bg-transparent">
@@ -80,9 +118,9 @@ const PastEventsSection = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {events.map((event, index) => (
+          {events.map((event) => (
             <motion.div
-              key={index}
+              key={event._id}
               className="group"
               variants={itemVariants}
               whileHover={{ y: -10 }}
@@ -94,55 +132,70 @@ const PastEventsSection = () => {
             >
               <Link href="/events" className="block">
                 <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
-                  <Image
-                    src={event.image.src || "/images/gameocon.png"}
-                    alt={event.image.alt || event.title}
-                    fill
-                    className="object-contain group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                  />
+                  {event.imageUrl ? (
+                    <Image
+                      src={event.imageUrl}
+                      alt={event.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                      <Calendar className="w-20 h-20 text-zinc-700" />
+                    </div>
+                  )}
                   <motion.div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                  
                   <div className="absolute bottom-0 left-0 p-5 w-full">
-                    <div className="flex items-center mb-3">
+                    <div className="flex items-center mb-3 gap-2">
                       <motion.span
-                        className="bg-red-600 p-1.5 rounded-md mr-2 flex items-center justify-center"
+                        className="bg-red-600 p-1.5 rounded-md flex items-center justify-center"
                         whileHover={{ scale: 1.1 }}
                       >
-                        {event.icon}
+                        <Calendar className="w-4 h-4" />
                       </motion.span>
                       <span className="text-xs uppercase text-white font-bold tracking-wider">
-                        {event.category}
+                        Past Event
                       </span>
+                      {event.featured && (
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      )}
                     </div>
+                    
                     <h3 className="text-xl font-bold mb-2 group-hover:text-red-400 transition-colors duration-300">
                       {event.title}
                     </h3>
+                    
                     <div className="flex flex-col text-zinc-400 text-sm space-y-1">
                       <motion.span
                         initial={{ x: 0 }}
                         whileHover={{ x: 3 }}
                         className="flex items-center"
                       >
-                        <Calendar className="w-3 h-3 mr-2 text-zinc-500" />{" "}
-                        {event.date}
+                        <Calendar className="w-3 h-3 mr-2 text-zinc-500" />
+                        {format(new Date(event.eventDate), 'MMM dd, yyyy')}
                       </motion.span>
-                      <motion.span
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 3 }}
-                        className="flex items-center"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="w-3 h-3 mr-2 text-zinc-500"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
+                      {event.location && (
+                        <motion.span
+                          initial={{ x: 0 }}
+                          whileHover={{ x: 3 }}
+                          className="flex items-center"
                         >
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        {event.location}
-                      </motion.span>
+                          <MapPin className="w-3 h-3 mr-2 text-zinc-500" />
+                          {event.location}
+                        </motion.span>
+                      )}
                     </div>
+
+                    {event.games.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {event.games.slice(0, 3).map((game) => (
+                          <Badge key={game} variant="secondary" className="text-xs">
+                            {game}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
 
                     <div className="mt-4 flex items-center text-red-500 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <span>View event gallery</span>
@@ -153,6 +206,21 @@ const PastEventsSection = () => {
               </Link>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* View all events link */}
+        <motion.div
+          className="mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <Link href="/events">
+            <Button variant="outline" className="group">
+              View All Events
+              <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
