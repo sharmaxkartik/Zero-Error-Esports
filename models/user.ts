@@ -32,7 +32,7 @@ const UserSchema: Schema = new Schema({
   progress: { type: Number, default: 0 },
   roles: { type: [String], default: ['user'] },
   // Phase 1: Valorant-style rank system
-  rankIcon: { type: String, default: '/images/ranks/rookie.png' },
+  rankIcon: { type: String, default: '/images/ranks/rookie.svg' },
   progressToNextRank: { type: Number, default: 0 },
   nextRankPoints: { type: Number, default: 500 },
   currentRankPoints: { type: Number, default: 0 },
