@@ -128,17 +128,17 @@ export default function Leaderboard() {
       className="text-white"
     >
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-500 via-red-500 to-orange-500 bg-clip-text text-transparent">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-500 via-red-500 to-orange-500 bg-clip-text text-transparent">
           🏆 Leaderboard
         </h1>
-        <p className="text-gray-400 text-lg">See where you stand among the champions</p>
+        <p className="text-gray-400 text-sm sm:text-base md:text-lg">See where you stand among the champions</p>
       </div>
 
       {/* Search and Filters */}
-      <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl mb-6">
-        <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row gap-4">
+      <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl mb-4 sm:mb-6">
+        <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <Input
@@ -169,8 +169,8 @@ export default function Leaderboard() {
           </div>
           
           {/* Rank Filter */}
-          <div className="flex items-center gap-2 flex-wrap pt-4 border-t border-gray-700/50">
-            <span className="text-sm text-gray-400">Filter by rank:</span>
+          <div className="flex items-center gap-2 flex-wrap pt-3 sm:pt-4 border-t border-gray-700/50">
+            <span className="text-xs sm:text-sm text-gray-400 w-full sm:w-auto mb-1 sm:mb-0">Filter by rank:</span>
             {['all', 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze', 'Rookie'].map((rankType) => (
               <Button
                 key={rankType}
@@ -213,9 +213,9 @@ export default function Leaderboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mb-8"
+              className="mb-6 sm:mb-8"
             >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 {/* 2nd Place */}
                 {topThree[1] && (
                   <motion.div
@@ -320,10 +320,10 @@ export default function Leaderboard() {
 
           {/* Rest of Leaderboard */}
           <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl overflow-hidden">
-            <CardHeader>
-              <CardTitle className="text-2xl text-white">All Rankings</CardTitle>
+            <CardHeader className="px-3 sm:px-6">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl text-white">All Rankings</CardTitle>
             </CardHeader>
-            <CardContent className="overflow-x-auto">
+            <CardContent className="overflow-x-auto p-0 sm:p-6 -mx-3 sm:mx-0">
               {filteredUsers.length === 0 ? (
                 <p className="text-center text-gray-400 py-8">No players found.</p>
               ) : (

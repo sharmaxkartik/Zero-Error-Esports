@@ -132,15 +132,15 @@ function Dashboard() {
     >
       {/* Header */}
       <motion.div 
-        className="mb-8"
+        className="mb-6 sm:mb-8"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
           Welcome Back, Champion! 🎮
         </h1>
-        <p className="text-gray-400 text-lg">Here's your gaming performance overview</p>
+        <p className="text-gray-400 text-sm sm:text-base md:text-lg">Here's your gaming performance overview</p>
       </motion.div>
 
       {/* Phase 1: Valorant-Style Rank Card */}
@@ -156,7 +156,7 @@ function Dashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
         {achievements.map((stat, index) => {
           const Icon = stat.icon
           return (

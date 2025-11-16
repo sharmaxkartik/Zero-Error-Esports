@@ -38,13 +38,13 @@ function AnnouncementManager() {
         <AnnouncementForm announcement={selectedAnnouncement} onSuccess={handleSuccess} onCancel={handleCancel} />
       ) : (
         <>
-          <div className="flex flex-col gap-3 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 shadow-xl shadow-black/30 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 rounded-xl sm:rounded-2xl border border-zinc-800 bg-zinc-950/70 p-4 sm:p-5 shadow-xl shadow-black/30 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-gray-400">
-                <Megaphone className="h-4 w-4 text-red-400" /> Announcement control
+              <p className="flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-wide text-gray-400">
+                <Megaphone className="h-3 w-3 sm:h-4 sm:w-4 text-red-400" /> Announcement control
               </p>
-              <h2 className="mt-2 text-2xl font-bold text-white">Keep the community in the loop</h2>
-              <p className="text-sm text-gray-400">
+              <h2 className="mt-2 text-xl sm:text-2xl font-bold text-white">Keep the community in the loop</h2>
+              <p className="text-xs sm:text-sm text-gray-400">
                 Create time-sensitive callouts for the marketing site and ZE Club dashboard.
               </p>
             </div>

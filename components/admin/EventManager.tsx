@@ -33,7 +33,7 @@ function EventManager() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {isFormOpen ? (
         <EventForm
           event={editingEvent}
@@ -42,14 +42,15 @@ function EventManager() {
         />
       ) : (
         <>
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-white">Manage Events</h2>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">Manage Events</h2>
             <Button
               onClick={handleCreateNew}
-              className="bg-gradient-to-r from-red-600 to-red-700 text-white border border-red-500/30 shadow-lg shadow-red-500/30 hover:from-red-500 hover:to-red-600"
+              className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-700 text-white border border-red-500/30 shadow-lg shadow-red-500/30 hover:from-red-500 hover:to-red-600"
             >
               <PlusCircle className="mr-2 h-4 w-4" />
-              Create New Event
+              <span className="hidden sm:inline">Create New Event</span>
+              <span className="sm:hidden">New Event</span>
             </Button>
           </div>
           <EventList onEdit={handleEdit} refreshTrigger={refreshTrigger} />

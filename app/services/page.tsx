@@ -213,7 +213,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen text-white overflow-hidden">
       {/* Hero Section - Using new design */}
-      <section className="relative h-[400px] overflow-hidden pt-24">
+      <section className="relative h-[350px] sm:h-[400px] overflow-hidden pt-20 sm:pt-24">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.5)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.5)_2px,transparent_2px)] bg-[size:40px_40px] opacity-30 z-10"></div>
 
@@ -238,9 +238,9 @@ export default function ServicesPage() {
         <div className="absolute inset-0 z-10 scan-lines opacity-20"></div>
 
         {/* Hero content */}
-        <div className="container mx-auto relative z-20 h-full flex flex-col justify-center px-6">
+        <div className="container mx-auto relative z-20 h-full flex flex-col justify-center px-4 sm:px-6">
           <motion.h1
-            className="text-4xl md:text-6xl font-black uppercase leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -287,10 +287,10 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid Section */}
-      <section className="relative py-12 pb-32">
-        <div className="container mx-auto px-6 relative z-10">
+      <section className="relative py-8 sm:py-12 pb-20 sm:pb-32">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.h2
-            className="text-3xl font-bold uppercase mb-12"
+            className="text-2xl sm:text-3xl font-bold uppercase mb-8 sm:mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

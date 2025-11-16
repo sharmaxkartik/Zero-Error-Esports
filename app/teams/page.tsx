@@ -86,7 +86,7 @@ export default function TeamsPage() {
       </motion.div>
 
       <motion.div
-        className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -144,7 +144,7 @@ export default function TeamsPage() {
   return (
     <div className="min-h-screen text-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-[400px] overflow-hidden">
+      <section className="relative h-[350px] sm:h-[400px] overflow-hidden">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.5)_2px,transparent_2px),linear-gradient(90deg,rgba(20,20,20,0.5)_2px,transparent_2px)] bg-[size:40px_40px] opacity-30 z-10"></div>
 
@@ -169,9 +169,9 @@ export default function TeamsPage() {
         <div className="absolute inset-0 z-10 scan-lines opacity-20"></div>
 
         {/* Hero content */}
-        <div className="container mx-auto relative z-20 h-full flex flex-col justify-center px-6">
+        <div className="container mx-auto relative z-20 h-full flex flex-col justify-center px-4 sm:px-6">
           <motion.h1
-            className="text-4xl md:text-6xl font-black uppercase leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -241,13 +241,13 @@ export default function TeamsPage() {
       </section>
 
       {/* Team Members Section */}
-      <section id="team-members" className="py-16 relative">
+      <section id="team-members" className="py-12 sm:py-16 relative">
         {/* Background grid effect */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,20,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(20,20,20,0.3)_1px,transparent_1px)] bg-[size:60px_60px] opacity-20"></div>
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 sm:px-6 relative">
           <motion.h2
-            className="text-3xl font-bold uppercase mb-12 flex items-center"
+            className="text-2xl sm:text-3xl font-bold uppercase mb-8 sm:mb-12 flex items-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

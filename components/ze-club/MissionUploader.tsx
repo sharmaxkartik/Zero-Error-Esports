@@ -191,29 +191,29 @@ export default function MissionUploader() {
       transition={{ duration: 0.5 }}
     >
       <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white">
-        <CardHeader>
+        <CardHeader className="px-4 sm:px-6 pt-4 sm:pt-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600">
-              <Upload className="h-6 w-6 text-white" />
+              <Upload className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl text-white">Submit Mission Proof</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardTitle className="text-xl sm:text-2xl text-white">Submit Mission Proof</CardTitle>
+              <CardDescription className="text-xs sm:text-sm text-gray-400">
                 Upload your proof to earn points
               </CardDescription>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             {/* Mission Selection */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <Label htmlFor="mission" className="text-white text-base mb-2 block">
+              <Label htmlFor="mission" className="text-white text-sm sm:text-base mb-2 block">
                 Select Mission
               </Label>
               <Select
@@ -266,11 +266,11 @@ export default function MissionUploader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
-              <Label className="text-white text-base mb-2 block">
+              <Label className="text-white text-sm sm:text-base mb-2 block">
                 Upload Proof
               </Label>
               <div
-                className={`relative border-2 border-dashed rounded-xl p-8 transition-all ${
+                className={`relative border-2 border-dashed rounded-xl p-4 sm:p-6 md:p-8 transition-all ${
                   dragActive
                     ? 'border-red-500 bg-red-500/10'
                     : 'border-gray-700 hover:border-gray-600 bg-gray-800/30'
@@ -354,7 +354,7 @@ export default function MissionUploader() {
               <Button 
                 type="submit" 
                 disabled={isUploading || !file || !selectedMission}
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-6 text-lg shadow-lg hover:shadow-red-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-4 sm:py-6 text-base sm:text-lg shadow-lg hover:shadow-red-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isUploading ? (
                   <span className="flex items-center gap-2">

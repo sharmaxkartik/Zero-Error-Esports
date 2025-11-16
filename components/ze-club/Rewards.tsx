@@ -140,16 +140,16 @@ export default function Rewards() {
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <motion.h1 
-          className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           🎁 Rewards Store
         </motion.h1>
-        <p className="text-gray-400 text-lg">Redeem your hard-earned points for exclusive rewards</p>
+        <p className="text-gray-400 text-sm sm:text-base md:text-lg">Redeem your hard-earned points for exclusive rewards</p>
       </div>
 
       {/* User Points Card */}
@@ -157,11 +157,11 @@ export default function Rewards() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mb-6"
+        className="mb-4 sm:mb-6"
       >
         <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30 backdrop-blur-xl">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-600">
                   <Coins className="h-6 w-6 text-white" />
@@ -195,7 +195,7 @@ export default function Rewards() {
           <p className="text-sm text-gray-500 mt-2">Check back soon for new rewards!</p>
         </motion.div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {rewards.map((reward, index) => {
             const Icon = rewardIcons[index % rewardIcons.length];
             const canAfford = userPoints >= reward.cost;

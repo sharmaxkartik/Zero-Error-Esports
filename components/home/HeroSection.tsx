@@ -98,7 +98,7 @@ const HeroSection = ({
 
       {/* Content with opposite parallax movement */}
       <motion.div
-        className="container max-w-5xl mx-auto relative z-30 h-full flex flex-col justify-center px-6 pt-24 md:pt-32"
+        className="container max-w-5xl mx-auto relative z-30 h-full flex flex-col justify-center px-4 sm:px-6 pt-24 md:pt-32"
         style={{
           y: contentTranslateY,
           opacity: contentOpacity,
@@ -109,7 +109,7 @@ const HeroSection = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-tight max-w-2xl text-shadow-lg">
             <motion.span
               className="text-red-600 inline-block"
               whileHover={{
@@ -142,7 +142,7 @@ const HeroSection = ({
         </motion.div>
 
         <motion.p
-          className="text-xl md:text-2xl text-white mt-6 max-w-xl font-light text-shadow"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mt-4 sm:mt-6 max-w-xl font-light text-shadow"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}

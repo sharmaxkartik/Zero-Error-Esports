@@ -76,7 +76,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-72 backdrop-blur-xl text-white p-6 border-r border-red-500/30 overflow-y-auto z-40 transition-all duration-300",
+          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-full sm:w-80 md:w-72 backdrop-blur-xl text-white p-4 sm:p-6 border-r border-red-500/30 overflow-y-auto z-40 transition-all duration-300",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >
@@ -183,7 +183,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content */}
       <main className={cn(
-        "flex-1 p-4 md:p-8 relative z-10 transition-all duration-300 min-h-screen",
+        "flex-1 p-3 sm:p-4 md:p-6 lg:p-8 relative z-10 transition-all duration-300 min-h-screen pt-16 sm:pt-4",
         !isMobile && "ml-72"
       )}>
         <AnimatePresence mode="wait" initial={false}>

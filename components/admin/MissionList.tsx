@@ -178,7 +178,7 @@ export default function MissionList({ missions, onEdit, onRefresh }: MissionList
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             <div>
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger>
@@ -256,19 +256,19 @@ export default function MissionList({ missions, onEdit, onRefresh }: MissionList
             Missions ({filteredMissions.length})
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="rounded-md border">
-            <Table>
+        <CardContent className="p-0 sm:p-6">
+          <div className="rounded-md border-0 sm:border overflow-x-auto -mx-3 sm:mx-0">
+            <Table className="min-w-[900px]">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Difficulty</TableHead>
-                  <TableHead>Points</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Completions</TableHead>
-                  <TableHead>Time Limit</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead className="min-w-[200px]">Name</TableHead>
+                  <TableHead className="min-w-[100px]">Category</TableHead>
+                  <TableHead className="min-w-[100px]">Difficulty</TableHead>
+                  <TableHead className="min-w-[80px]">Points</TableHead>
+                  <TableHead className="min-w-[100px]">Status</TableHead>
+                  <TableHead className="min-w-[120px]">Completions</TableHead>
+                  <TableHead className="min-w-[120px]">Time Limit</TableHead>
+                  <TableHead className="min-w-[100px]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

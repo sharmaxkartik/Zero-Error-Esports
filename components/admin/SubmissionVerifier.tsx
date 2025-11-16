@@ -155,7 +155,7 @@ export default function SubmissionVerifier() {
       className="space-y-6"
     >
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/30">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
@@ -207,8 +207,8 @@ export default function SubmissionVerifier() {
 
       {/* Filters */}
       <Card className="bg-zinc-900/50 border-zinc-700">
-        <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row gap-4">
+        <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <Input
@@ -239,13 +239,13 @@ export default function SubmissionVerifier() {
       {/* Submissions Table */}
       <Card className="bg-zinc-900/50 border-zinc-700">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <TrendingUp className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-2 text-white text-base sm:text-lg">
+            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
             Submission Review ({filteredSubmissions.length})
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="rounded-md border border-zinc-700 overflow-x-auto">
+        <CardContent className="p-0 sm:p-6">
+          <div className="rounded-md border-0 sm:border border-zinc-700 overflow-x-auto -mx-4 sm:mx-0">
             <Table>
               <TableHeader>
                 <TableRow className="border-zinc-700">

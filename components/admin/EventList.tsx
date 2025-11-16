@@ -246,16 +246,16 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
         </div>
       ) : (
         <>
-          <div className="border border-zinc-700 rounded-lg bg-zinc-900/50">
-            <Table>
+          <div className="border border-zinc-700 rounded-lg bg-zinc-900/50 overflow-x-auto -mx-3 sm:mx-0">
+            <Table className="min-w-[800px]">
               <TableHeader>
                 <TableRow className="border-zinc-700 hover:bg-zinc-800/50">
-                  <TableHead className="text-gray-300">Title</TableHead>
-                  <TableHead className="text-gray-300">Date</TableHead>
-                  <TableHead className="text-gray-300">Type</TableHead>
-                  <TableHead className="text-gray-300">Status</TableHead>
-                  <TableHead className="text-gray-300">Featured</TableHead>
-                  <TableHead className="text-gray-300">Actions</TableHead>
+                  <TableHead className="text-gray-300 min-w-[200px]">Title</TableHead>
+                  <TableHead className="text-gray-300 min-w-[120px]">Date</TableHead>
+                  <TableHead className="text-gray-300 min-w-[100px]">Type</TableHead>
+                  <TableHead className="text-gray-300 min-w-[100px]">Status</TableHead>
+                  <TableHead className="text-gray-300 min-w-[80px]">Featured</TableHead>
+                  <TableHead className="text-gray-300 min-w-[120px]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

@@ -7,10 +7,10 @@ export default function Footer() {
       className="relative z-50 bg-transparent py-16 border-t border-zinc-800"
       aria-label="Footer"
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Social Media Icons */}
         <div
-          className="flex flex-wrap justify-center gap-8 mb-12"
+          className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12"
           aria-label="Social Media Links"
         >
           {/* Instagram */}
@@ -99,13 +99,13 @@ export default function Footer() {
         </div>
 
         {/* Email */}
-        <div className="text-center mb-12">
-          <p className="text-zinc-400 mb-2 text-sm uppercase tracking-wider">
+        <div className="text-center mb-8 sm:mb-12 px-4">
+          <p className="text-zinc-400 mb-2 text-xs sm:text-sm uppercase tracking-wider">
             Contact Us
           </p>
           <a
             href="mailto:zeroerroresports@gmail.com"
-            className="text-xl md:text-2xl font-bold hover:text-red-600 transition-colors"
+            className="text-base sm:text-xl md:text-2xl font-bold hover:text-red-600 transition-colors break-all"
           >
             zeroerroresports@gmail.com
           </a>

@@ -167,13 +167,13 @@ export default function HeroMediaManager() {
 
   return (
     <Card className="bg-zinc-900/50 border-zinc-700">
-      <CardHeader>
-        <CardTitle className="text-white">Hero Media Manager</CardTitle>
-        <CardDescription className="text-gray-400">
+      <CardHeader className="px-4 sm:px-6 pt-4 sm:pt-6">
+        <CardTitle className="text-lg sm:text-xl text-white">Hero Media Manager</CardTitle>
+        <CardDescription className="text-xs sm:text-sm text-gray-400">
           Manage home page hero video and fallback image. Changes will appear immediately after saving.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6 pb-4 sm:pb-6">
         {/* Hero Video Section */}
         <div className="space-y-3">
           <Label htmlFor="heroVideo" className="flex items-center gap-2 text-gray-300">
@@ -200,7 +200,7 @@ export default function HeroMediaManager() {
               className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500"
             />
             
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <UploadButton
                 endpoint="heroMediaUploader"
                 onClientUploadComplete={(res: any) => {
@@ -314,7 +314,7 @@ export default function HeroMediaManager() {
               className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500"
             />
             
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <UploadButton
                 endpoint="heroMediaUploader"
                 onClientUploadComplete={(res: any) => {

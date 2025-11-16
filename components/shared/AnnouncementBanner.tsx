@@ -126,7 +126,7 @@ function AnnouncementBanner() {
         </div>
       )}
 
-      {hasAnnouncements && <div className="h-36 md:h-20" aria-hidden />}
+      {hasAnnouncements && <div className="h-20 md:h-20" aria-hidden />}
     </>
   )
 }

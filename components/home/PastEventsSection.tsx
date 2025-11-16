@@ -80,14 +80,14 @@ const PastEventsSection = () => {
   }
 
   return (
-    <section className="py-24 relative bg-transparent">
+    <section className="py-12 sm:py-16 md:py-24 relative bg-transparent">
       {/* Subtle diagonal pattern background */}
       <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)]"></div>
 
-      <div className="max-w-5xl mx-auto px-6 relative flex flex-col items-center">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative flex flex-col items-center">
         {/* Section header */}
         <motion.div
-          className="flex flex-wrap justify-center items-center mb-16 text-center"
+          className="flex flex-wrap justify-center items-center mb-8 sm:mb-12 md:mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -101,10 +101,10 @@ const PastEventsSection = () => {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="h-0.5 bg-gradient-to-r from-red-600 to-transparent mb-4 max-w-[200px] mx-auto"
             />
-            <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
+            <h2 className="text-2xl sm:text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
               PAST EVENTS
             </h2>
-            <p className="text-zinc-500 mt-2">
+            <p className="text-zinc-500 mt-2 text-sm sm:text-base">
               Check out our previous successful tournaments and events
             </p>
           </div>
@@ -131,7 +131,7 @@ const PastEventsSection = () => {
               }}
             >
               <Link href="/events" className="block">
-                <div className="relative h-[280px] w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
+                <div className="relative h-[200px] sm:h-[240px] md:h-[280px] w-full sm:w-[350px] md:w-[400px] overflow-hidden bg-zinc-900 rounded-xl mb-5 border border-zinc-800 shadow-lg group-hover:border-red-600/50 transition-colors duration-300">
                   {event.imageUrl ? (
                     <Image
                       src={event.imageUrl}
