@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import {
   motion,
   useScroll,
-  useTransform,
   AnimatePresence,
-  useSpring,
 } from "framer-motion";
 
 // Import components
@@ -16,9 +14,7 @@ import AnimatedBackground from "@/components/home/AnimatedBackground";
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import FeaturedGamesSection from "@/components/home/FeaturedGamesSection";
-import SponsorsSection from "@/components/home/SponsorsSection";
 import PastEventsSection from "@/components/home/PastEventsSection";
-import CursorFollower from "@/components/home/CursorFollower";
 
 interface HomeClientProps {
   heroVideoUrl?: string
@@ -26,8 +22,6 @@ interface HomeClientProps {
 }
 
 export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
-  // Add a state for reduced motion preference
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [loading, setLoading] = useState(true);
   const { scrollYProgress } = useScroll();
 
@@ -39,10 +33,6 @@ export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
 
   // For dynamic background color effect
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-
-  // For cursor trailer effect
-  const cursorX = useSpring(0, { stiffness: 100, damping: 20 });
-  const cursorY = useSpring(0, { stiffness: 100, damping: 20 });
 
   useEffect(() => {
     // Fetch hero media settings
@@ -65,31 +55,17 @@ export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
   }, [])
 
   useEffect(() => {
-    // Check user's motion preference
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
     // Track mouse movement for dynamic effects
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX / window.innerWidth,
         y: e.clientY / window.innerHeight,
       });
-
-      // Update cursor trailer position
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [cursorX, cursorY]);
+  }, []);
 
   const handleLoadingComplete = () => {
     setLoading(false);
@@ -124,8 +100,6 @@ export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
             <HeroSection
               scrollYProgress={scrollYProgress}
               mousePosition={mousePosition}
-              cursorX={cursorX}
-              cursorY={cursorY}
               heroVideoUrl={heroMedia.videoUrl}
               heroPosterUrl={heroMedia.posterUrl}
             />
@@ -133,12 +107,8 @@ export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
             <StatsSection />
             {/* Featured Games Section */}
             <FeaturedGamesSection />
-            {/* Sponsors Section - Hidden */}
-            {/* <SponsorsSection /> */}
             {/* Past Events Section */}
             <PastEventsSection />
-            {/* Cursor Follower */}
-            <CursorFollower cursorX={cursorX} cursorY={cursorY} />
           </motion.div>
         )}
       </AnimatePresence>

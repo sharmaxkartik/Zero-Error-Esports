@@ -9,8 +9,6 @@ import Image from "next/image";
 interface HeroSectionProps {
   scrollYProgress: any;
   mousePosition: { x: number; y: number };
-  cursorX: any;
-  cursorY: any;
   heroVideoUrl?: string;
   heroPosterUrl?: string;
 }
