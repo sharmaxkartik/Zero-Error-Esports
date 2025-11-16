@@ -206,7 +206,7 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
             setPage(1)
           }}
         >
-          <SelectTrigger className="w-full sm:w-[150px]">
+          <SelectTrigger className="w-full sm:w-[150px] bg-zinc-900 border-zinc-700 text-white focus:ring-red-500 focus:ring-offset-0">
             <SelectValue placeholder="Event Type" />
           </SelectTrigger>
           <SelectContent>
@@ -223,7 +223,7 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
             setPage(1)
           }}
         >
-          <SelectTrigger className="w-full sm:w-[150px]">
+          <SelectTrigger className="w-full sm:w-[150px] bg-zinc-900 border-zinc-700 text-white focus:ring-red-500 focus:ring-offset-0">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>

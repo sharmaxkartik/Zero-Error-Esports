@@ -44,7 +44,10 @@ function EventManager() {
         <>
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold text-white">Manage Events</h2>
-            <Button onClick={handleCreateNew}>
+            <Button
+              onClick={handleCreateNew}
+              className="bg-gradient-to-r from-red-600 to-red-700 text-white border border-red-500/30 shadow-lg shadow-red-500/30 hover:from-red-500 hover:to-red-600"
+            >
               <PlusCircle className="mr-2 h-4 w-4" />
               Create New Event
             </Button>

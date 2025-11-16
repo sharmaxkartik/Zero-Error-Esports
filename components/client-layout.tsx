@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import PageTransition from "@/components/page-transition";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -16,6 +14,10 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
+  const isAdminRoute = pathname?.startsWith("/admin");
+  const isZeClubRoute = pathname?.startsWith("/ze-club");
+  const shouldHideFooter = isAdminRoute || isZeClubRoute;
+  const shouldOffsetContent = isAdminRoute || isZeClubRoute;
 
   useEffect(() => {
     // Check if we've shown the loader before
@@ -41,8 +43,12 @@ export default function ClientLayout({
   return (
     <SessionProvider>
       {!isLoading && <Navbar />}
-      {children}
-      <Footer />
+      {shouldOffsetContent ? (
+        <div className="pt-28 md:pt-32">{children}</div>
+      ) : (
+        children
+      )}
+      {!shouldHideFooter && <Footer />}
     </SessionProvider>
   );
 }

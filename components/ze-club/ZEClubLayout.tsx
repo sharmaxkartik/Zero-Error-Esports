@@ -48,7 +48,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="relative flex min-h-screen z-10 pt-16 bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+    <div className="relative flex min-h-screen z-10 pt-6 lg:pt-8 bg-gradient-to-br from-gray-950 via-gray-900 to-black">
       {/* Mobile menu button */}
       {isMobile && (
         <Button
