@@ -1,0 +1,56 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="platinumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5E4E2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#BCC6CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#98AFC7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="shine">
+      <stop offset="0%" style="stop-color:#FFF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#E5E4E2;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FD1C5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer glow -->
+  <circle cx="128" cy="128" r="118" fill="#4FD1C5" opacity="0.3" filter="url(#glow)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="128" cy="128" r="110" fill="url(#platinumGrad)" opacity="0.6"/>
+  
+  <!-- Main badge -->
+  <circle cx="128" cy="128" r="90" fill="url(#platinumGrad)" filter="url(#glow)"/>
+  
+  <!-- Shine effect -->
+  <circle cx="105" cy="105" r="35" fill="url(#shine)"/>
+  
+  <!-- Inner details with accent -->
+  <circle cx="128" cy="128" r="75" fill="none" stroke="url(#accentGrad)" stroke-width="4" opacity="1"/>
+  <circle cx="128" cy="128" r="60" fill="none" stroke="#FFF" stroke-width="3" opacity="0.8"/>
+  
+  <!-- Diamond shape in center -->
+  <path d="M128 70 L158 100 L128 130 L98 100 Z" 
+        fill="#FFF" opacity="0.95"/>
+  <path d="M128 80 L148 100 L128 120 L108 100 Z" 
+        fill="url(#accentGrad)" opacity="0.7"/>
+  
+  <!-- Corner accents -->
+  <circle cx="90" cy="90" r="3" fill="#4FD1C5" opacity="0.8"/>
+  <circle cx="166" cy="90" r="3" fill="#4FD1C5" opacity="0.8"/>
+  <circle cx="90" cy="166" r="3" fill="#4FD1C5" opacity="0.8"/>
+  <circle cx="166" cy="166" r="3" fill="#4FD1C5" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="128" y="200" font-family="Arial, sans-serif" font-size="20" font-weight="bold" 
+        fill="#FFF" text-anchor="middle" stroke="#4FD1C5" stroke-width="1">PLATINUM</text>
+</svg>

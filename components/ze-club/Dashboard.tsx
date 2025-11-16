@@ -5,12 +5,18 @@ import { Progress } from "@/components/ui/progress"
 import { motion } from "framer-motion"
 import { TrendingUp, Award, Star, Zap, Target, Clock, Trophy, Medal } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import RankCard from "./RankCard"
 
 interface UserDashboard {
   totalPoints: number
   rank: string
   badge: string
   progress: number
+  // Phase 1: Valorant-style rank system
+  rankIcon: string
+  progressToNextRank: number
+  nextRankPoints: number
+  currentRankPoints: number
 }
 
 /**
@@ -136,6 +142,18 @@ function Dashboard() {
         </h1>
         <p className="text-gray-400 text-lg">Here's your gaming performance overview</p>
       </motion.div>
+
+      {/* Phase 1: Valorant-Style Rank Card */}
+      <div className="mb-8">
+        <RankCard
+          rank={dashboardData.rank}
+          rankIcon={dashboardData.rankIcon}
+          currentPoints={dashboardData.totalPoints}
+          currentRankPoints={dashboardData.currentRankPoints}
+          nextRankPoints={dashboardData.nextRankPoints}
+          progressToNextRank={dashboardData.progressToNextRank}
+        />
+      </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

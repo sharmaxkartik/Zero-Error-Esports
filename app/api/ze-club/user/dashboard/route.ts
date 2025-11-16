@@ -32,6 +32,11 @@ export async function GET() {
       rank: user.rank,
       badge: user.badge,
       progress: user.progress,
+      // Phase 1: Valorant-style rank system
+      rankIcon: user.rankIcon || '/images/ranks/rookie.svg',
+      progressToNextRank: user.progressToNextRank || 0,
+      nextRankPoints: user.nextRankPoints || 500,
+      currentRankPoints: user.currentRankPoints || 0,
     }
 
     return NextResponse.json(dashboardData)

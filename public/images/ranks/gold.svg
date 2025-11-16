@@ -1,0 +1,49 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="shine">
+      <stop offset="0%" style="stop-color:#FFF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Glow effect -->
+  <circle cx="128" cy="128" r="115" fill="#FFD700" opacity="0.2" filter="url(#glow)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="128" cy="128" r="110" fill="url(#goldGrad)" opacity="0.5"/>
+  
+  <!-- Main badge -->
+  <circle cx="128" cy="128" r="90" fill="url(#goldGrad)" filter="url(#glow)"/>
+  
+  <!-- Shine effect -->
+  <circle cx="110" cy="110" r="30" fill="url(#shine)"/>
+  
+  <!-- Inner details -->
+  <circle cx="128" cy="128" r="75" fill="none" stroke="#FFED4E" stroke-width="4" opacity="0.9"/>
+  <circle cx="128" cy="128" r="60" fill="none" stroke="#FFED4E" stroke-width="3" opacity="0.7"/>
+  
+  <!-- Crown shape in center -->
+  <path d="M98 110 L108 90 L118 110 L128 85 L138 110 L148 90 L158 110 L150 135 L106 135 Z" 
+        fill="#FFF" opacity="0.9"/>
+  
+  <!-- Inner decoration -->
+  <circle cx="118" cy="120" r="4" fill="#FFD700"/>
+  <circle cx="128" cy="120" r="4" fill="#FFD700"/>
+  <circle cx="138" cy="120" r="4" fill="#FFD700"/>
+  
+  <!-- Text -->
+  <text x="128" y="200" font-family="Arial, sans-serif" font-size="22" font-weight="bold" 
+        fill="#FFF" text-anchor="middle" stroke="#B8860B" stroke-width="1">GOLD</text>
+</svg>

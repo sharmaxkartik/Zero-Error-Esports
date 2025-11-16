@@ -1,0 +1,33 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bronzeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CD7F32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer ring -->
+  <circle cx="128" cy="128" r="110" fill="url(#bronzeGrad)" opacity="0.3"/>
+  
+  <!-- Main badge -->
+  <circle cx="128" cy="128" r="90" fill="url(#bronzeGrad)" filter="url(#glow)"/>
+  
+  <!-- Inner details -->
+  <circle cx="128" cy="128" r="75" fill="none" stroke="#E09A5F" stroke-width="3" opacity="0.7"/>
+  <circle cx="128" cy="128" r="60" fill="none" stroke="#E09A5F" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Pentagon shape in center -->
+  <path d="M128 60 L165 95 L150 140 L106 140 L91 95 Z" 
+        fill="#FFF" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="128" y="200" font-family="Arial, sans-serif" font-size="20" font-weight="bold" 
+        fill="#FFF" text-anchor="middle">BRONZE</text>
+</svg>

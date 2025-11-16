@@ -1,0 +1,67 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diamondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B9F2FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00CED1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4169E1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="shine">
+      <stop offset="0%" style="stop-color:#FFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B9F2FF;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="sparkle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00CED1;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Multiple glow layers -->
+  <circle cx="128" cy="128" r="120" fill="#00CED1" opacity="0.4" filter="url(#strongGlow)"/>
+  <circle cx="128" cy="128" r="115" fill="#4169E1" opacity="0.2" filter="url(#strongGlow)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="128" cy="128" r="110" fill="url(#diamondGrad)" opacity="0.7"/>
+  
+  <!-- Main badge -->
+  <circle cx="128" cy="128" r="90" fill="url(#diamondGrad)" filter="url(#strongGlow)"/>
+  
+  <!-- Multiple shine effects -->
+  <circle cx="100" cy="100" r="40" fill="url(#shine)"/>
+  <circle cx="145" cy="115" r="20" fill="url(#shine)" opacity="0.6"/>
+  
+  <!-- Inner details -->
+  <circle cx="128" cy="128" r="75" fill="none" stroke="#FFF" stroke-width="5" opacity="1"/>
+  <circle cx="128" cy="128" r="60" fill="none" stroke="#B9F2FF" stroke-width="4" opacity="0.9"/>
+  <circle cx="128" cy="128" r="45" fill="none" stroke="#FFF" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Large diamond shape in center -->
+  <path d="M128 60 L168 100 L128 140 L88 100 Z" 
+        fill="url(#sparkle)" opacity="1"/>
+  <path d="M128 70 L158 100 L128 130 L98 100 Z" 
+        fill="#FFF" opacity="0.8"/>
+  <path d="M128 85 L143 100 L128 115 L113 100 Z" 
+        fill="#00CED1" opacity="0.9"/>
+  
+  <!-- Sparkle points -->
+  <circle cx="75" cy="75" r="4" fill="#FFF" opacity="0.9"/>
+  <circle cx="181" cy="75" r="4" fill="#FFF" opacity="0.9"/>
+  <circle cx="75" cy="181" r="4" fill="#FFF" opacity="0.9"/>
+  <circle cx="181" cy="181" r="4" fill="#FFF" opacity="0.9"/>
+  
+  <!-- Small star accents -->
+  <path d="M60 128 L62 130 L64 128 L62 126 Z" fill="#FFF" opacity="0.8"/>
+  <path d="M192 128 L194 130 L196 128 L194 126 Z" fill="#FFF" opacity="0.8"/>
+  <path d="M128 60 L130 62 L128 64 L126 62 Z" fill="#FFF" opacity="0.8"/>
+  <path d="M128 192 L130 194 L128 196 L126 194 Z" fill="#FFF" opacity="0.8"/>
+  
+  <!-- Text with emphasis -->
+  <text x="128" y="205" font-family="Arial, sans-serif" font-size="24" font-weight="bold" 
+        fill="#FFF" text-anchor="middle" stroke="#00CED1" stroke-width="2">DIAMOND</text>
+</svg>

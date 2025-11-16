@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "db:seed-missions": "ts-node scripts/seed-missions.ts",
-    "db:make-admin": "ts-node scripts/make-admin.ts"
+    "db:make-admin": "ts-node scripts/make-admin.ts",
+    "db:migrate-rank-system": "ts-node scripts/migrate-rank-system.ts"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.1",

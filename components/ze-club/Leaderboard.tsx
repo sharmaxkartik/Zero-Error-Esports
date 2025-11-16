@@ -14,12 +14,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { Trophy, Medal, Crown, TrendingUp, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import RankBadge from './RankBadge';
 
 interface LeaderboardUser {
   _id: string;
   name: string;
   points: number;
   rank: number;
+  userRank: string;
+  rankIcon: string;
 }
 
 export default function Leaderboard() {
@@ -29,6 +32,7 @@ export default function Leaderboard() {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
+  const [rankFilter, setRankFilter] = useState<string>('all');
 
   useEffect(() => {
     async function fetchLeaderboard() {
@@ -59,6 +63,11 @@ export default function Leaderboard() {
         user.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+
+    // Rank tier filter
+    if (rankFilter !== 'all') {
+      filtered = filtered.filter(user => user.userRank === rankFilter);
+    }
     
     // Category filter (can be extended)
     if (activeFilter === 'top10') {
@@ -66,7 +75,7 @@ export default function Leaderboard() {
     }
     
     setFilteredUsers(filtered);
-  }, [searchQuery, activeFilter, users]);
+  }, [searchQuery, activeFilter, rankFilter, users]);
 
   const getRankIcon = (rank: number) => {
     switch (rank) {
@@ -92,6 +101,18 @@ export default function Leaderboard() {
       default:
         return 'hover:bg-gray-800/30';
     }
+  };
+
+  const getRankTierColor = (userRank: string) => {
+    const colors = {
+      Diamond: 'bg-blue-500/10 hover:bg-blue-500/20 border-l-2 border-blue-500/50',
+      Platinum: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-l-2 border-cyan-500/50',
+      Gold: 'bg-yellow-500/10 hover:bg-yellow-500/20 border-l-2 border-yellow-500/50',
+      Silver: 'bg-gray-400/10 hover:bg-gray-400/20 border-l-2 border-gray-400/50',
+      Bronze: 'bg-orange-600/10 hover:bg-orange-600/20 border-l-2 border-orange-600/50',
+      Rookie: 'bg-amber-800/10 hover:bg-amber-800/20 border-l-2 border-amber-800/50',
+    };
+    return colors[userRank as keyof typeof colors] || 'hover:bg-gray-800/30';
   };
 
   const topThree = filteredUsers.slice(0, 3);
@@ -143,6 +164,22 @@ export default function Leaderboard() {
                 Top 10
               </Button>
             </div>
+          </div>
+          
+          {/* Rank Filter */}
+          <div className="flex items-center gap-2 flex-wrap pt-4 border-t border-gray-700/50">
+            <span className="text-sm text-gray-400">Filter by rank:</span>
+            {['all', 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze', 'Rookie'].map((rankType) => (
+              <Button
+                key={rankType}
+                variant={rankFilter === rankType ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setRankFilter(rankType)}
+                className={rankFilter === rankType ? 'bg-red-600 hover:bg-red-700' : ''}
+              >
+                {rankType === 'all' ? 'All Ranks' : rankType}
+              </Button>
+            ))}
           </div>
         </CardContent>
       </Card>
@@ -285,6 +322,7 @@ export default function Leaderboard() {
                       <TableRow className="border-gray-700/50 hover:bg-transparent">
                         <TableHead className="w-[100px] text-gray-400">Rank</TableHead>
                         <TableHead className="text-gray-400">Player</TableHead>
+                        <TableHead className="text-gray-400">Tier</TableHead>
                         <TableHead className="text-right text-gray-400">Points</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -295,7 +333,7 @@ export default function Leaderboard() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: (index + 3) * 0.05 }}
-                          className={`border-gray-700/50 transition-all ${getRankColor(user.rank)}`}
+                          className={`border-gray-700/50 transition-all ${getRankColor(user.rank)} ${getRankTierColor(user.userRank)}`}
                         >
                           <TableCell className="font-medium">
                             <div className="flex items-center gap-2">
@@ -304,6 +342,15 @@ export default function Leaderboard() {
                             </div>
                           </TableCell>
                           <TableCell className="text-white font-medium">{user.name}</TableCell>
+                          <TableCell>
+                            <RankBadge
+                              rank={user.userRank}
+                              rankIcon={user.rankIcon}
+                              size="sm"
+                              showLabel={false}
+                              animated={false}
+                            />
+                          </TableCell>
                           <TableCell className="text-right">
                             <span className="text-red-400 font-bold text-lg">
                               {user.points}

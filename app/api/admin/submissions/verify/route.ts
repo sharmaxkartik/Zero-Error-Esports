@@ -13,34 +13,78 @@ import { revalidatePath } from 'next/cache'
  * TODO: Consider moving these to environment variables or database for easier management.
  */
 const ranks = [
-  { name: 'Rookie', points: 0 },
-  { name: 'Bronze', points: 500 },
-  { name: 'Silver', points: 1000 },
-  { name: 'Gold', points: 5000 },
-  { name: 'Platinum', points: 10000 },
-  { name: 'Diamond', points: 20000 },
+  { name: 'Rookie', points: 0, icon: '/images/ranks/rookie.svg' },
+  { name: 'Bronze', points: 500, icon: '/images/ranks/bronze.svg' },
+  { name: 'Silver', points: 1000, icon: '/images/ranks/silver.svg' },
+  { name: 'Gold', points: 5000, icon: '/images/ranks/gold.svg' },
+  { name: 'Platinum', points: 10000, icon: '/images/ranks/platinum.svg' },
+  { name: 'Diamond', points: 20000, icon: '/images/ranks/diamond.svg' },
 ]
+
+/**
+ * Calculates rank progress for a user
+ * Returns progress percentage and points needed for next rank
+ */
+function calculateRankProgress(currentPoints: number, currentRank: string) {
+  // Find current rank index
+  const currentRankIndex = ranks.findIndex(r => r.name === currentRank)
+  
+  // If at max rank (Diamond), return 100% progress
+  if (currentRankIndex === ranks.length - 1) {
+    return {
+      progressToNextRank: 100,
+      nextRankPoints: ranks[currentRankIndex].points,
+      currentRankPoints: ranks[currentRankIndex].points,
+    }
+  }
+  
+  const currentRankThreshold = ranks[currentRankIndex].points
+  const nextRankThreshold = ranks[currentRankIndex + 1].points
+  
+  // Calculate progress percentage
+  const pointsInCurrentRank = currentPoints - currentRankThreshold
+  const pointsNeededForNextRank = nextRankThreshold - currentRankThreshold
+  const progressPercentage = Math.min(
+    Math.floor((pointsInCurrentRank / pointsNeededForNextRank) * 100),
+    100
+  )
+  
+  return {
+    progressToNextRank: progressPercentage,
+    nextRankPoints: nextRankThreshold,
+    currentRankPoints: currentRankThreshold,
+  }
+}
 
 /**
  * Updates a user's rank based on their current points.
  * Checks against the ranks array and assigns the highest rank the user qualifies for.
+ * Also calculates progress to next rank and assigns appropriate rank icon.
  */
 async function updateUserRank(user: any) {
   let newRank = user.rank
+  let rankIcon = user.rankIcon
   
   // Find the highest rank the user qualifies for
   for (let i = ranks.length - 1; i >= 0; i--) {
     if (user.points >= ranks[i].points) {
       newRank = ranks[i].name
+      rankIcon = ranks[i].icon
       break
     }
   }
 
-  // Only save if rank actually changed
-  if (newRank !== user.rank) {
-    user.rank = newRank
-    await user.save()
-  }
+  // Calculate rank progress
+  const progress = calculateRankProgress(user.points, newRank)
+  
+  // Update user fields
+  user.rank = newRank
+  user.rankIcon = rankIcon
+  user.progressToNextRank = progress.progressToNextRank
+  user.nextRankPoints = progress.nextRankPoints
+  user.currentRankPoints = progress.currentRankPoints
+  
+  await user.save()
 }
 
 /**

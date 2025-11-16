@@ -12,6 +12,11 @@ export interface IUser extends Document {
   badge: string
   progress: number
   roles: string[]
+  // Phase 1: Valorant-style rank system
+  rankIcon: string
+  progressToNextRank: number
+  nextRankPoints: number
+  currentRankPoints: number
 }
 
 const UserSchema: Schema = new Schema({
@@ -26,6 +31,11 @@ const UserSchema: Schema = new Schema({
   badge: { type: String, default: '🥉' },
   progress: { type: Number, default: 0 },
   roles: { type: [String], default: ['user'] },
+  // Phase 1: Valorant-style rank system
+  rankIcon: { type: String, default: '/images/ranks/rookie.png' },
+  progressToNextRank: { type: Number, default: 0 },
+  nextRankPoints: { type: Number, default: 500 },
+  currentRankPoints: { type: Number, default: 0 },
 })
 
 export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema)
