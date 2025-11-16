@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
 import { Trophy, Medal, Crown, TrendingUp, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -23,6 +24,7 @@ interface LeaderboardUser {
   rank: number;
   userRank: string;
   rankIcon: string;
+  profilePhoto?: string | null;
 }
 
 export default function Leaderboard() {
@@ -227,9 +229,12 @@ export default function Leaderboard() {
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
-                            <div className="p-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-500 shadow-xl shadow-gray-400/30">
-                              <Medal className="h-10 w-10 text-white" />
-                            </div>
+                            <Avatar className="h-20 w-20 border-4 border-gray-400 shadow-xl">
+                              <AvatarImage src={topThree[1].profilePhoto || undefined} alt={topThree[1].name} />
+                              <AvatarFallback className="bg-gray-700 text-white text-2xl font-bold">
+                                {topThree[1].name.charAt(0).toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
                             <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-gray-400 text-gray-200">
                               2nd
                             </div>
@@ -257,9 +262,12 @@ export default function Leaderboard() {
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
-                            <div className="p-5 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl shadow-yellow-500/50 animate-pulse">
-                              <Crown className="h-12 w-12 text-white drop-shadow-lg" />
-                            </div>
+                            <Avatar className="h-24 w-24 border-4 border-yellow-400 shadow-2xl shadow-yellow-500/50">
+                              <AvatarImage src={topThree[0].profilePhoto || undefined} alt={topThree[0].name} />
+                              <AvatarFallback className="bg-yellow-600 text-white text-3xl font-bold">
+                                {topThree[0].name.charAt(0).toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
                             <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-sm font-bold border-2 border-yellow-400 text-yellow-300">
                               1st
                             </div>
@@ -287,9 +295,12 @@ export default function Leaderboard() {
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
                           <div className="relative">
-                            <div className="p-4 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 shadow-xl shadow-orange-500/30">
-                              <Medal className="h-10 w-10 text-white" />
-                            </div>
+                            <Avatar className="h-20 w-20 border-4 border-orange-600 shadow-xl shadow-orange-500/30">
+                              <AvatarImage src={topThree[2].profilePhoto || undefined} alt={topThree[2].name} />
+                              <AvatarFallback className="bg-orange-700 text-white text-2xl font-bold">
+                                {topThree[2].name.charAt(0).toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
                             <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-orange-600 text-orange-300">
                               3rd
                             </div>
@@ -341,7 +352,17 @@ export default function Leaderboard() {
                               <span className="text-white font-bold">#{user.rank}</span>
                             </div>
                           </TableCell>
-                          <TableCell className="text-white font-medium">{user.name}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-3">
+                              <Avatar className="h-10 w-10 border-2 border-gray-600">
+                                <AvatarImage src={user.profilePhoto || undefined} alt={user.name} />
+                                <AvatarFallback className="bg-gray-700 text-white font-bold">
+                                  {user.name.charAt(0).toUpperCase()}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span className="text-white font-medium">{user.name}</span>
+                            </div>
+                          </TableCell>
                           <TableCell>
                             <RankBadge
                               rank={user.userRank}
