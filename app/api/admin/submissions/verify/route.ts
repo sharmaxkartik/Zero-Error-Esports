@@ -136,9 +136,12 @@ export async function PATCH(req: Request) {
         
         await user.save()
         
-        // Increment mission completion counter
-        mission.currentCompletions = (mission.currentCompletions || 0) + 1
-        await mission.save()
+        // Increment mission completion counter using findByIdAndUpdate to avoid validation
+        await Mission.findByIdAndUpdate(
+          submission.mission,
+          { $inc: { currentCompletions: 1 } },
+          { runValidators: false }
+        )
       }
     }
 
