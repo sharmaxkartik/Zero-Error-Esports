@@ -51,8 +51,23 @@ export default function ContactUs({
       if (onSubmit) {
         await onSubmit(formData);
       } else {
-        // Default simulation
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // Send email via API
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error('Error response:', data);
+          throw new Error(data.error || 'Failed to send message');
+        }
+
+        console.log('Email sent successfully:', data);
       }
 
       setSubmitStatus("success");
@@ -63,6 +78,7 @@ export default function ContactUs({
         setSubmitStatus("idle");
       }, 3000);
     } catch (error) {
+      console.error('Error sending email:', error);
       setSubmitStatus("error");
       setTimeout(() => {
         setSubmitStatus("idle");

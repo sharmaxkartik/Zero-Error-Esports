@@ -51,8 +51,18 @@ export default function ContactUs({
       if (onSubmit) {
         await onSubmit(formData);
       } else {
-        // Default simulation
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // Send email via API
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
       }
 
       setSubmitStatus("success");
