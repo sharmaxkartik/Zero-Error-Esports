@@ -49,8 +49,8 @@ export default function Navbar() {
 
   const headerVariants = {
     expanded: {
-      maxWidth: "90%",
-      padding: "0.75rem 3rem",
+      maxWidth: "88%",
+      padding: "0.55rem 2.25rem",
       background:
         "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(75,0,0,0.8) 50%, rgba(0,0,0,0.8) 100%)",
       boxShadow: "0 8px 32px rgba(255, 0, 0, 0.25)",
@@ -58,8 +58,8 @@ export default function Navbar() {
       transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] },
     },
     collapsed: {
-      maxWidth: "80%",
-      padding: "0.75rem 1.5rem",
+      maxWidth: "78%",
+      padding: "0.55rem 1.2rem",
       background:
         "linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(75,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%)",
       boxShadow: "0 4px 20px rgba(255, 0, 0, 0.35)",
@@ -211,7 +211,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar - Hidden on mobile */}
-      <div className="fixed top-0 left-0 right-0 flex justify-center z-[100] pt-6 px-4 hidden md:flex">
+      <div className="fixed top-0 left-0 right-0 flex justify-center z-[100] pt-3 px-4 hidden md:flex">
         <motion.header
           className="rounded-full backdrop-blur-md border w-auto"
           variants={headerVariants}
@@ -250,7 +250,7 @@ export default function Navbar() {
             <motion.nav
               className="flex items-center"
               animate={{
-                gap: scrolled ? "1.5rem" : "2.5rem",
+                gap: scrolled ? "1.2rem" : "2rem",
                 transition: { duration: 0.6, ease: "easeInOut" },
               }}
             >
@@ -293,7 +293,7 @@ export default function Navbar() {
             <motion.div
               className="flex items-center"
               animate={{
-                gap: scrolled ? "0.75rem" : "1.25rem",
+                gap: scrolled ? "0.65rem" : "1rem",
                 transition: { duration: 0.6, ease: "easeInOut" },
               }}
             >

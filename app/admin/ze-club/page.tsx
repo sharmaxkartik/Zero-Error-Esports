@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation'
 import SubmissionVerifier from '@/components/admin/SubmissionVerifier'
 import HeroMediaManager from '@/components/admin/HeroMediaManager'
 import EventManager from '@/components/admin/EventManager'
+import AnnouncementManager from '@/components/admin/AnnouncementManager'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { motion } from 'framer-motion'
-import { Shield, Zap, Video, Calendar, ListChecks } from 'lucide-react'
+import { Shield, Zap, Video, Calendar, ListChecks, Megaphone } from 'lucide-react'
 
 export default function AdminZEClubPage() {
   const router = useRouter()
@@ -83,7 +84,7 @@ export default function AdminZEClubPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Tabs defaultValue="video" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8 bg-zinc-900 border border-zinc-700">
+              <TabsList className="grid w-full grid-cols-4 mb-8 bg-zinc-900 border border-zinc-700">
                 <TabsTrigger value="video" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
                   <Video className="h-4 w-4" />
                   Background Video
@@ -95,6 +96,10 @@ export default function AdminZEClubPage() {
                 <TabsTrigger value="missions" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
                   <ListChecks className="h-4 w-4" />
                   Missions
+                </TabsTrigger>
+                <TabsTrigger value="announcements" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
+                  <Megaphone className="h-4 w-4" />
+                  Announcements
                 </TabsTrigger>
               </TabsList>
 
@@ -108,6 +113,10 @@ export default function AdminZEClubPage() {
 
               <TabsContent value="missions" className="space-y-4">
                 <SubmissionVerifier />
+              </TabsContent>
+
+              <TabsContent value="announcements" className="space-y-4">
+                <AnnouncementManager />
               </TabsContent>
             </Tabs>
           </motion.div>

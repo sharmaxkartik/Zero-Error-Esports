@@ -48,13 +48,13 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="relative flex min-h-screen z-10 pt-6 lg:pt-8 bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+    <div className="relative flex min-h-screen z-10">
       {/* Mobile menu button */}
       {isMobile && (
         <Button
           variant="ghost"
           size="icon"
-          className="fixed left-4 top-20 z-50 bg-gradient-to-r from-red-600 to-red-700 backdrop-blur-sm text-white hover:from-red-700 hover:to-red-800 shadow-lg shadow-red-500/50"
+          className="fixed left-4 top-14 z-50 bg-gradient-to-r from-red-600 to-red-700 backdrop-blur-sm text-white hover:from-red-700 hover:to-red-800 shadow-lg shadow-red-500/50"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -67,7 +67,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 top-16"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 top-14"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -75,7 +75,7 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-16 h-[calc(100vh-4rem)] w-72 bg-gradient-to-b from-gray-900/98 via-gray-900/95 to-gray-950/98 backdrop-blur-xl text-white p-6 border-r border-red-500/20 overflow-y-auto z-40 transition-all duration-300 shadow-2xl shadow-red-500/10",
+          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-72 backdrop-blur-xl text-white p-6 border-r border-red-500/30 overflow-y-auto z-40 transition-all duration-300",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >

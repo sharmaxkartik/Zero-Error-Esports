@@ -12,6 +12,7 @@ import ParticlesBackground from "@/components/home/ParticlesBackground";
 import LoadingScreen from "@/components/home/LoadingScreen";
 import AnimatedBackground from "@/components/home/AnimatedBackground";
 import HeroSection from "@/components/home/HeroSection";
+import AnnouncementsSection from "@/components/home/AnnouncementsSection";
 import StatsSection from "@/components/home/StatsSection";
 import FeaturedGamesSection from "@/components/home/FeaturedGamesSection";
 import PastEventsSection from "@/components/home/PastEventsSection";
@@ -103,6 +104,7 @@ export default function Home({ heroVideoUrl, heroPosterUrl }: HomeClientProps) {
               heroVideoUrl={heroMedia.videoUrl}
               heroPosterUrl={heroMedia.posterUrl}
             />
+            <AnnouncementsSection />
             {/* Stats Section */}
             <StatsSection />
             {/* Featured Games Section */}

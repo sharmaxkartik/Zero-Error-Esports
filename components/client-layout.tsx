@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import AnnouncementBanner from "@/components/shared/AnnouncementBanner";
 
 import { SessionProvider } from "next-auth/react";
 
@@ -43,8 +44,9 @@ export default function ClientLayout({
   return (
     <SessionProvider>
       {!isLoading && <Navbar />}
+      {!isLoading && !isAdminRoute && <AnnouncementBanner />}
       {shouldOffsetContent ? (
-        <div className="pt-28 md:pt-32">{children}</div>
+        <div>{children}</div>
       ) : (
         children
       )}
