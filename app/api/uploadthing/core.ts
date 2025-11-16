@@ -169,6 +169,43 @@ export const ourFileRouter = {
         fileUrl: file.url 
       };
     }),
+
+  // Mission example image uploader endpoint (admin-only)
+  missionExampleUploader: f({
+    image: { maxFileSize: "10MB", maxFileCount: 1 },
+  })
+    .input(z.object({ missionId: z.string().optional() }))
+    .middleware(async ({ input }) => {
+      // Authenticate and verify admin role
+      const session = await auth();
+
+      if (!session?.user?.email) {
+        throw new Error("Unauthorized");
+      }
+
+      if (!session.user.roles?.includes('admin')) {
+        throw new Error("Admin access required");
+      }
+      
+      // Return admin data and missionId to be available in onUploadComplete
+      return { 
+        userEmail: session.user.email,
+        userId: session.user.id,
+        isAdmin: true,
+        missionId: input.missionId
+      };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      // This code runs on the server after upload completes
+      console.log("Mission example image upload complete by admin:", metadata.userEmail);
+      console.log("File URL:", file.url);
+
+      // Return data to the client
+      return { 
+        uploadedBy: metadata.userEmail,
+        fileUrl: file.url 
+      };
+    }),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;

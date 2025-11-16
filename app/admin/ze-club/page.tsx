@@ -6,9 +6,10 @@ import SubmissionVerifier from '@/components/admin/SubmissionVerifier'
 import HeroMediaManager from '@/components/admin/HeroMediaManager'
 import EventManager from '@/components/admin/EventManager'
 import AnnouncementManager from '@/components/admin/AnnouncementManager'
+import MissionManager from '@/components/admin/MissionManager'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { motion } from 'framer-motion'
-import { Shield, Zap, Video, Calendar, ListChecks, Megaphone } from 'lucide-react'
+import { Shield, Zap, Video, Calendar, ListChecks, Megaphone, Target } from 'lucide-react'
 
 export default function AdminZEClubPage() {
   const router = useRouter()
@@ -84,7 +85,7 @@ export default function AdminZEClubPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Tabs defaultValue="video" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-8 bg-zinc-900 border border-zinc-700">
+              <TabsList className="grid w-full grid-cols-5 mb-8 bg-zinc-900 border border-zinc-700">
                 <TabsTrigger value="video" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
                   <Video className="h-4 w-4" />
                   Background Video
@@ -93,9 +94,13 @@ export default function AdminZEClubPage() {
                   <Calendar className="h-4 w-4" />
                   Events
                 </TabsTrigger>
+                <TabsTrigger value="mission-management" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
+                  <Target className="h-4 w-4" />
+                  Mission Management
+                </TabsTrigger>
                 <TabsTrigger value="missions" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
                   <ListChecks className="h-4 w-4" />
-                  Missions
+                  Submissions
                 </TabsTrigger>
                 <TabsTrigger value="announcements" className="flex items-center gap-2 text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600">
                   <Megaphone className="h-4 w-4" />
@@ -109,6 +114,10 @@ export default function AdminZEClubPage() {
 
               <TabsContent value="events" className="space-y-4">
                 <EventManager />
+              </TabsContent>
+
+              <TabsContent value="mission-management" className="space-y-4">
+                <MissionManager />
               </TabsContent>
 
               <TabsContent value="missions" className="space-y-4">

@@ -20,9 +20,14 @@ import { useUploadThing } from '@/lib/uploadthing'
 
 interface Mission {
   _id: string
-  title: string
+  name: string
   description?: string
   points: number
+  category?: string
+  difficulty?: string
+  isTimeLimited?: boolean
+  daysRemaining?: number | null
+  isAvailable?: boolean
 }
 
 /**
@@ -223,7 +228,7 @@ export default function MissionUploader() {
                   {missions.map((mission) => (
                     <SelectItem key={mission._id} value={mission._id}>
                       <div className="flex items-center justify-between w-full gap-4">
-                        <span>{mission.title}</span>
+                        <span>{mission.name}</span>
                         <Badge variant="secondary" className="bg-red-600/20 text-red-400">
                           {mission.points} pts
                         </Badge>

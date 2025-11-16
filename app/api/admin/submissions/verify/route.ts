@@ -135,6 +135,10 @@ export async function PATCH(req: Request) {
         await updateUserRank(user)
         
         await user.save()
+        
+        // Increment mission completion counter
+        mission.currentCompletions = (mission.currentCompletions || 0) + 1
+        await mission.save()
       }
     }
 
