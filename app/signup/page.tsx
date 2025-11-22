@@ -144,7 +144,7 @@ export default function SignupPage() {
               transition={{ delay: 0.7, duration: 0.5 }}
             >
               Already have an account?{" "}
-              <Link href="/login" className="text-red-500 hover:text-red-400 font-semibold transition-colors">
+              <Link href="/join-us" className="text-red-500 hover:text-red-400 font-semibold transition-colors">
                 Login here
               </Link>
             </motion.p>

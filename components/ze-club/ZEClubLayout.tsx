@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import PageTransition from "@/components/page-transition"
 import { useState, useEffect } from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import { Menu, X, LayoutDashboard, Trophy, Gift, Target, HeadphonesIcon, User, Sparkles } from "lucide-react"
+import { Menu, X, LayoutDashboard, Trophy, Gift, Target, HeadphonesIcon, User, Sparkles, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useSession } from "next-auth/react"
 
@@ -170,6 +170,32 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
             })}
           </ul>
         </nav>
+
+        {/* Admin Portal Button - Only visible to admins */}
+        {session?.user?.roles?.includes('admin') && (
+          <motion.div
+            className="mt-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Link
+              href="/admin/ze-club"
+              onClick={handleLinkClick}
+              className="group flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg shadow-purple-500/50 hover:shadow-purple-600/60"
+            >
+              <Shield className="h-5 w-5 relative z-10" />
+              <span className="relative z-10 font-medium">Admin Portal</span>
+              <motion.div
+                className="ml-auto"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className="w-2 h-2 bg-white rounded-full" />
+              </motion.div>
+            </Link>
+          </motion.div>
+        )}
 
         {/* Footer Info */}
         <div className="mt-auto pt-6 border-t border-gray-800/50">

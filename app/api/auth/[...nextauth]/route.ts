@@ -32,7 +32,7 @@ const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/login',
+    signIn: '/join-us',
   },
   trustHost: true,
   debug: process.env.NODE_ENV === 'development',

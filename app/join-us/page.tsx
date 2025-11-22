@@ -47,7 +47,7 @@ export default function LoginPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Login to ZE Club
+              Join ZE Club
             </motion.h1>
             <motion.p
               className="text-zinc-400 mb-8"
@@ -55,7 +55,7 @@ export default function LoginPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              Welcome back! Sign in to access your ZE Club account and continue your gaming journey.
+              Sign in to access your ZE Club account and start your gaming journey with us!
             </motion.p>
 
             {/* Discord Login Button */}
@@ -97,30 +97,6 @@ export default function LoginPage() {
               </span>
             </motion.button>
 
-            {/* Divider */}
-            <motion.div
-              className="flex items-center my-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-            >
-              <div className="flex-1 border-t border-zinc-700"></div>
-              <span className="px-4 text-sm text-zinc-500">OR</span>
-              <div className="flex-1 border-t border-zinc-700"></div>
-            </motion.div>
-
-            {/* Sign Up Link */}
-            <motion.p
-              className="text-zinc-400 text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-            >
-              Don't have an account?{" "}
-              <Link href="/signup" className="text-red-500 hover:text-red-400 font-semibold transition-colors">
-                Sign up here
-              </Link>
-            </motion.p>
           </div>
         </motion.div>
 

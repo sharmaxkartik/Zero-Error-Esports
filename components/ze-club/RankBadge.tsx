@@ -71,11 +71,22 @@ function RankBadge({
             className="flex flex-col items-center gap-2"
             initial={animated ? { scale: 0.8, opacity: 0 } : undefined}
             animate={animated ? { scale: 1, opacity: 1 } : undefined}
-            whileHover={animated ? { scale: 1.1, rotate: [0, -5, 5, 0] } : undefined}
+            whileHover={animated ? { 
+              scale: 1.1,
+              rotate: [0, 5],
+            } : undefined}
             transition={animated ? {
-              type: "spring",
-              stiffness: 200,
-              damping: 15
+              scale: {
+                type: "spring",
+                stiffness: 200,
+                damping: 15
+              },
+              rotate: {
+                duration: 0.3,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse"
+              }
             } : undefined}
           >
             {/* Rank Icon */}

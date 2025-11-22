@@ -50,7 +50,7 @@ function mapPathToTarget(pathname: string | null) {
 function AnnouncementBanner() {
   const pathname = usePathname()
   const targetPage = useMemo(() => mapPathToTarget(pathname), [pathname])
-  const shouldHide = pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/signup')
+  const shouldHide = pathname?.startsWith('/admin') || pathname?.startsWith('/join-us') || pathname?.startsWith('/signup')
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>([])
   const [loading, setLoading] = useState(false)
 

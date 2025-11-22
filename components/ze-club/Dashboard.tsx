@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { TrendingUp, Award, Star, Zap, Target, Clock, Trophy, Medal } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import RankCard from "./RankCard"
+import FeaturedMissions from "./FeaturedMissions"
 
 interface UserDashboard {
   totalPoints: number
@@ -153,6 +154,11 @@ function Dashboard() {
           nextRankPoints={dashboardData.nextRankPoints}
           progressToNextRank={dashboardData.progressToNextRank}
         />
+      </div>
+
+      {/* Featured Missions Section */}
+      <div className="mb-8">
+        <FeaturedMissions />
       </div>
 
       {/* Stats Cards */}

@@ -166,12 +166,12 @@ export default function Navbar() {
         }}
       >
         <Link
-          href="/login"
+          href="/join-us"
           className={`px-5 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-red-500/30 ${
             scrolled ? "text-xs" : "text-sm"
           }`}
         >
-          Login
+          Join Us
         </Link>
       </motion.div>
     );
@@ -208,10 +208,10 @@ export default function Navbar() {
         transition={{ duration: 0.4, delay: 0.6 }}
       >
         <Link
-          href="/login"
+          href="/join-us"
           className="block w-full text-center px-6 py-3 rounded-md bg-gradient-to-r from-red-700 to-red-500 text-white text-lg font-medium shadow-lg shadow-red-900/30"
         >
-          Login
+          Join Us
         </Link>
       </motion.div>
     );

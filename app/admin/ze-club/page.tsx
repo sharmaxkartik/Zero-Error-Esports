@@ -22,12 +22,12 @@ export default function AdminZEClubPage() {
       try {
         const res = await fetch('/api/admin/submissions')
         if (res.status === 401 || res.status === 403) {
-          router.push('/login')
+          router.push('/join-us')
         } else if (res.ok) {
           setIsAuthorized(true)
         }
       } catch (error) {
-        router.push('/login')
+        router.push('/join-us')
       } finally {
         setIsLoading(false)
       }
@@ -99,7 +99,7 @@ export default function AdminZEClubPage() {
                   <TabsTrigger value="mission-management" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
                     <Target className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span className="hidden sm:inline">Missions</span>
-                    <span className="sm:hidden">Miss.</span>
+                    <span className="sm:hidden">Missions</span>
                   </TabsTrigger>
                   <TabsTrigger value="missions" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
                     <ListChecks className="h-3 w-3 sm:h-4 sm:w-4" />

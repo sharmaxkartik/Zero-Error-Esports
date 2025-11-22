@@ -15,14 +15,14 @@ export default async function ProfilePage() {
   const session = await auth()
 
   if (!session) {
-    redirect('/login')
+    redirect('/join-us')
   }
 
   await dbConnect()
   const user = await User.findById(session.user.id).lean()
 
   if (!user) {
-    redirect('/login')
+    redirect('/join-us')
   }
 
   // Get statistics
