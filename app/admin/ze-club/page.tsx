@@ -7,14 +7,17 @@ import HeroMediaManager from '@/components/admin/HeroMediaManager'
 import EventManager from '@/components/admin/EventManager'
 import AnnouncementManager from '@/components/admin/AnnouncementManager'
 import MissionManager from '@/components/admin/MissionManager'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { motion } from 'framer-motion'
-import { Shield, Zap, Video, Calendar, ListChecks, Megaphone, Target } from 'lucide-react'
+import UserRoleManager from '@/components/admin/UserRoleManager'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Shield, Zap, Video, Calendar, ListChecks, Megaphone, Target, Users, Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function AdminZEClubPage() {
   const router = useRouter()
   const [isAuthorized, setIsAuthorized] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState('submissions')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     // Check if user has access by trying to fetch submissions
@@ -54,86 +57,164 @@ export default function AdminZEClubPage() {
     return null
   }
 
+  const navItems = [
+    { id: 'submissions', label: 'Submissions', icon: ListChecks, description: 'Verify mission submissions' },
+    { id: 'missions', label: 'Mission Manager', icon: Target, description: 'Create & edit missions' },
+    { id: 'events', label: 'Events', icon: Calendar, description: 'Manage events' },
+    { id: 'announcements', label: 'Announcements', icon: Megaphone, description: 'Post announcements' },
+    { id: 'video', label: 'Background Video', icon: Video, description: 'Update hero video' },
+    { id: 'users', label: 'User Roles', icon: Users, description: 'Manage admin roles' },
+  ]
+
+  function renderContent() {
+    switch (activeTab) {
+      case 'submissions':
+        return <SubmissionVerifier />
+      case 'missions':
+        return <MissionManager />
+      case 'events':
+        return <EventManager />
+      case 'announcements':
+        return <AnnouncementManager />
+      case 'video':
+        return <HeroMediaManager />
+      case 'users':
+        return <UserRoleManager />
+      default:
+        return <SubmissionVerifier />
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
-      <div className="container mx-auto pt-20 sm:pt-24 md:pt-28 pb-4 sm:pb-6 md:pb-8 px-3 sm:px-4 max-w-7xl">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 sm:mb-6 md:mb-8"
-        >
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
-            <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
-              <Shield className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
-                Admin Dashboard
-              </h1>
-              <p className="text-gray-400 text-xs sm:text-sm md:text-base">ZE Club Mission Verification Center</p>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="lg:hidden fixed top-24 left-4 z-50 p-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white hover:bg-zinc-800 transition-colors"
+      >
+        {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </button>
+
+      {/* Sidebar Overlay for Mobile */}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden fixed inset-0 bg-black/60 z-40 pt-20"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar */}
+      <motion.aside
+        initial={{ x: -300 }}
+        animate={{ x: sidebarOpen ? 0 : 0 }}
+        className={cn(
+          "fixed left-0 top-20 bottom-0 w-72 bg-zinc-900/30 backdrop-blur-xl border-r border-zinc-700/30 z-40 transition-transform lg:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        )}
+      >
+        <div className="h-full overflow-y-auto p-6">
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
+                <Shield className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold text-white">Admin Panel</h2>
+                <p className="text-xs text-gray-400">ZE Club Dashboard</p>
+              </div>
             </div>
           </div>
-        </motion.div>
 
-        {/* Main Content */}
-        <div className="space-y-8">
+          {/* Navigation */}
+          <nav className="space-y-2">
+            {navItems.map((item) => {
+              const Icon = item.icon
+              const isActive = activeTab === item.id
+              return (
+                <motion.button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveTab(item.id)
+                    setSidebarOpen(false)
+                  }}
+                  whileHover={{ x: 4 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={cn(
+                    "w-full flex items-start gap-3 p-3 rounded-lg transition-all text-left group",
+                    isActive
+                      ? "bg-red-600 text-white shadow-lg shadow-red-600/30"
+                      : "text-gray-400 hover:text-white hover:bg-zinc-800"
+                  )}
+                >
+                  <Icon className={cn(
+                    "h-5 w-5 mt-0.5 shrink-0",
+                    isActive ? "text-white" : "text-gray-500 group-hover:text-red-500"
+                  )} />
+                  <div className="flex-1 min-w-0">
+                    <div className={cn(
+                      "font-medium text-sm mb-0.5",
+                      isActive ? "text-white" : "text-gray-300 group-hover:text-white"
+                    )}>
+                      {item.label}
+                    </div>
+                    <div className={cn(
+                      "text-xs",
+                      isActive ? "text-red-100" : "text-gray-500 group-hover:text-gray-400"
+                    )}>
+                      {item.description}
+                    </div>
+                  </div>
+                </motion.button>
+              )
+            })}
+          </nav>
+        </div>
+      </motion.aside>
+
+      {/* Main Content */}
+      <div className="lg:ml-72 pt-20">
+        <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
+          {/* Page Header */}
           <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            {navItems.map((item) => {
+              if (item.id === activeTab) {
+                const Icon = item.icon
+                return (
+                  <div key={item.id} className="flex items-center gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="text-3xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                        {item.label}
+                      </h1>
+                      <p className="text-gray-400 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                )
+              }
+              return null
+            })}
+          </motion.div>
+
+          {/* Content Area */}
+          <motion.div
+            key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3 }}
           >
-            <Tabs defaultValue="video" className="w-full">
-              <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
-                <TabsList className="grid w-full grid-cols-5 mb-4 sm:mb-6 md:mb-8 bg-zinc-900 border border-zinc-700 min-w-[640px] sm:min-w-0">
-                  <TabsTrigger value="video" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
-                    <Video className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Background Video</span>
-                    <span className="sm:hidden">Video</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="events" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
-                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                    Events
-                  </TabsTrigger>
-                  <TabsTrigger value="mission-management" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
-                    <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Missions</span>
-                    <span className="sm:hidden">Missions</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="missions" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
-                    <ListChecks className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Submissions</span>
-                    <span className="sm:hidden">Subs</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="announcements" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-300 data-[state=active]:text-white data-[state=active]:bg-red-600 px-2 sm:px-4">
-                    <Megaphone className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Announcements</span>
-                    <span className="sm:hidden">News</span>
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="video" className="space-y-4">
-                <HeroMediaManager />
-              </TabsContent>
-
-              <TabsContent value="events" className="space-y-4">
-                <EventManager />
-              </TabsContent>
-
-              <TabsContent value="mission-management" className="space-y-4">
-                <MissionManager />
-              </TabsContent>
-
-              <TabsContent value="missions" className="space-y-4">
-                <SubmissionVerifier />
-              </TabsContent>
-
-              <TabsContent value="announcements" className="space-y-4">
-                <AnnouncementManager />
-              </TabsContent>
-            </Tabs>
+            {renderContent()}
           </motion.div>
         </div>
       </div>
