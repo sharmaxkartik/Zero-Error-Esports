@@ -279,13 +279,13 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
                         variant="ghost"
                         size="icon"
                         onClick={() => toggleFeatured(event._id, event.featured)}
-                        className="hover:bg-zinc-700"
+                        className="hover:bg-zinc-700 text-gray-400"
                       >
                         <Star
                           className={`h-4 w-4 ${
                             event.featured
                               ? 'fill-yellow-400 text-yellow-400'
-                              : 'text-gray-500 hover:text-yellow-400'
+                              : 'text-gray-400 hover:text-yellow-400'
                           }`}
                         />
                       </Button>
@@ -296,6 +296,7 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
                           variant="outline"
                           size="icon"
                           onClick={() => onEdit(event)}
+                          className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -303,6 +304,7 @@ export function EventList({ onEdit, refreshTrigger }: EventListProps) {
                           variant="destructive"
                           size="icon"
                           onClick={() => setDeleteId(event._id)}
+                          className="bg-red-600/20 border-red-600/50 text-red-400 hover:bg-red-600/30 hover:text-red-300"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>

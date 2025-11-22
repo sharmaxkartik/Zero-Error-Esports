@@ -156,50 +156,50 @@ export default function SubmissionVerifier() {
     >
       {/* Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/30">
+        <Card className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-blue-500/50 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-300">Total Submissions</p>
-                <p className="text-3xl font-bold text-blue-400">{stats.total}</p>
+                <p className="text-sm font-medium text-gray-800">Total Submissions</p>
+                <p className="text-3xl font-bold text-blue-900">{stats.total}</p>
               </div>
-              <Users className="h-10 w-10 text-blue-400 opacity-50" />
+              <Users className="h-10 w-10 text-blue-900 opacity-40" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-yellow-500/30">
+        <Card className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border-yellow-500/50 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-300">Pending</p>
-                <p className="text-3xl font-bold text-yellow-400">{stats.pending}</p>
+                <p className="text-sm font-medium text-gray-800">Pending</p>
+                <p className="text-3xl font-bold text-yellow-900">{stats.pending}</p>
               </div>
-              <Clock className="h-10 w-10 text-yellow-400 opacity-50" />
+              <Clock className="h-10 w-10 text-yellow-900 opacity-40" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500/10 to-green-600/10 border-green-500/30">
+        <Card className="bg-gradient-to-br from-green-500/20 to-green-600/20 border-green-500/50 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-300">Approved</p>
-                <p className="text-3xl font-bold text-green-400">{stats.approved}</p>
+                <p className="text-sm font-medium text-gray-800">Approved</p>
+                <p className="text-3xl font-bold text-green-900">{stats.approved}</p>
               </div>
-              <CheckCircle2 className="h-10 w-10 text-green-400 opacity-50" />
+              <CheckCircle2 className="h-10 w-10 text-green-900 opacity-40" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500/10 to-red-600/10 border-red-500/30">
+        <Card className="bg-gradient-to-br from-red-500/20 to-red-600/20 border-red-500/50 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-300">Rejected</p>
-                <p className="text-3xl font-bold text-red-400">{stats.rejected}</p>
+                <p className="text-sm font-medium text-gray-800">Rejected</p>
+                <p className="text-3xl font-bold text-red-900">{stats.rejected}</p>
               </div>
-              <XCircle className="h-10 w-10 text-red-400 opacity-50" />
+              <XCircle className="h-10 w-10 text-red-900 opacity-40" />
             </div>
           </CardContent>
         </Card>

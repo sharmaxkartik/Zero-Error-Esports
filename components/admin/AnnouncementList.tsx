@@ -182,7 +182,7 @@ function AnnouncementList({ onEdit, refreshTrigger }: AnnouncementListProps) {
               {filter.label}
             </Button>
           ))}
-          <Button variant="ghost" size="icon" onClick={() => setManualRefresh((prev) => prev + 1)}>
+          <Button variant="ghost" size="icon" onClick={() => setManualRefresh((prev) => prev + 1)} className="text-gray-300 hover:text-white hover:bg-zinc-800">
             <RefreshCcw className="h-4 w-4" />
           </Button>
         </div>
@@ -264,10 +264,10 @@ function AnnouncementList({ onEdit, refreshTrigger }: AnnouncementListProps) {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="outline" size="icon" onClick={() => onEdit(item)} className="border-zinc-700 text-gray-200">
+                      <Button variant="outline" size="icon" onClick={() => onEdit(item)} className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700">
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button variant="destructive" size="icon" onClick={() => handleDelete(item._id)}>
+                      <Button variant="destructive" size="icon" onClick={() => handleDelete(item._id)} className="bg-red-600/20 border-red-600/50 text-red-400 hover:bg-red-600/30 hover:text-red-300">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -289,7 +289,7 @@ function AnnouncementList({ onEdit, refreshTrigger }: AnnouncementListProps) {
               variant="outline"
               disabled={page === 1}
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              className="border-zinc-700 text-gray-200"
+              className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
             >
               Previous
             </Button>
@@ -297,7 +297,7 @@ function AnnouncementList({ onEdit, refreshTrigger }: AnnouncementListProps) {
               variant="outline"
               disabled={page === totalPages}
               onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-              className="border-zinc-700 text-gray-200"
+              className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
             >
               Next
             </Button>

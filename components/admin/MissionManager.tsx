@@ -87,12 +87,12 @@ export default function MissionManager() {
             variant="outline"
             onClick={fetchMissions}
             disabled={loading}
-            className="flex-1 sm:flex-none"
+            className="flex-1 sm:flex-none bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
           >
             <RefreshCw className={`h-4 w-4 sm:mr-2 ${loading ? 'animate-spin' : ''}`} />
             <span className="hidden sm:inline">Refresh</span>
           </Button>
-          <Button onClick={handleCreateNew} className="flex-1 sm:flex-none">
+          <Button onClick={handleCreateNew} className="flex-1 sm:flex-none bg-red-600 hover:bg-red-700 text-white">
             <Plus className="h-4 w-4 sm:mr-2" />
             <span className="hidden sm:inline">New Mission</span>
             <span className="sm:hidden">New</span>
@@ -109,49 +109,49 @@ export default function MissionManager() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <Card>
+        <Card className="bg-zinc-900/50 border-zinc-700">
           <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
-            <CardTitle className="text-xs sm:text-sm font-medium">Total Missions</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium text-white">Total Missions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.total}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.total}</div>
+            <p className="text-xs text-gray-400">
               {stats.active} active, {stats.inactive} inactive
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900/50 border-zinc-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium">Time-Limited</CardTitle>
+            <CardTitle className="text-sm font-medium text-white">Time-Limited</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.timeLimited}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.timeLimited}</div>
+            <p className="text-xs text-gray-400">
               {stats.expired} expired
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900/50 border-zinc-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium">Featured</CardTitle>
+            <CardTitle className="text-sm font-medium text-white">Featured</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.featured}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.featured}</div>
+            <p className="text-xs text-gray-400">
               Shown at top of list
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900/50 border-zinc-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium">At Capacity</CardTitle>
+            <CardTitle className="text-sm font-medium text-white">At Capacity</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.maxedOut}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.maxedOut}</div>
+            <p className="text-xs text-gray-400">
               Max completions reached
             </p>
           </CardContent>
@@ -160,18 +160,18 @@ export default function MissionManager() {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="list">Mission List</TabsTrigger>
-          <TabsTrigger value="form">
+        <TabsList className="bg-zinc-900 border border-zinc-700">
+          <TabsTrigger value="list" className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-gray-300">Mission List</TabsTrigger>
+          <TabsTrigger value="form" className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-gray-300">
             {editingMission ? 'Edit Mission' : 'Create Mission'}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="list" className="mt-6">
           {loading && missions.length === 0 ? (
-            <Card>
+            <Card className="bg-zinc-900/50 border-zinc-700">
               <CardContent className="pt-6">
-                <div className="text-center text-muted-foreground">
+                <div className="text-center text-gray-400">
                   Loading missions...
                 </div>
               </CardContent>
@@ -186,12 +186,12 @@ export default function MissionManager() {
         </TabsContent>
 
         <TabsContent value="form" className="mt-6">
-          <Card>
+          <Card className="bg-zinc-900/50 border-zinc-700">
             <CardHeader>
-              <CardTitle>
+              <CardTitle className="text-white">
                 {editingMission ? 'Edit Mission' : 'Create New Mission'}
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-gray-400">
                 {editingMission
                   ? 'Update mission details and settings'
                   : 'Configure a new mission for ZE Club members'}

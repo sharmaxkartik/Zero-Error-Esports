@@ -157,7 +157,7 @@ function EventImageUploader({ eventId, currentImage, onImageUpload }: EventImage
             type="button"
             variant="outline"
             disabled={uploading || !eventId}
-            className="w-full"
+            className="w-full bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
             onClick={() => document.getElementById('event-image')?.click()}
           >
             {uploading ? (

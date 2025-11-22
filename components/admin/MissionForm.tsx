@@ -455,8 +455,8 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
                       <Button
                         variant="outline"
                         className={cn(
-                          'w-full justify-start text-left font-normal',
-                          !formData.startDate && 'text-muted-foreground'
+                          'w-full justify-start text-left font-normal bg-zinc-800 border-zinc-700 hover:bg-zinc-700',
+                          !formData.startDate ? 'text-gray-400' : 'text-white'
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -480,8 +480,8 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
                       <Button
                         variant="outline"
                         className={cn(
-                          'w-full justify-start text-left font-normal',
-                          !formData.endDate && 'text-muted-foreground'
+                          'w-full justify-start text-left font-normal bg-zinc-800 border-zinc-700 hover:bg-zinc-700',
+                          !formData.endDate ? 'text-gray-400' : 'text-white'
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -561,7 +561,7 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
         <Button
           type="submit"
           disabled={loading || uploading}
-          className="flex-1"
+          className="flex-1 bg-red-600 hover:bg-red-700 text-white"
         >
           {loading ? 'Saving...' : mission ? 'Update Mission' : 'Create Mission'}
         </Button>
@@ -571,6 +571,7 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
             variant="outline"
             onClick={onCancel}
             disabled={loading || uploading}
+            className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-700"
           >
             Cancel
           </Button>

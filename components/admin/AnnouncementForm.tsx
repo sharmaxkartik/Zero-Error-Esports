@@ -471,7 +471,7 @@ function AnnouncementForm({ announcement, onSuccess, onCancel }: AnnouncementFor
       </div>
 
       <div className="flex flex-col gap-3 border-t border-zinc-900 pt-4 sm:flex-row sm:justify-end">
-        <Button type="button" variant="outline" onClick={onCancel} className="border-zinc-700 text-gray-200 hover:bg-zinc-800">
+        <Button type="button" variant="outline" onClick={onCancel} className="bg-zinc-800 border-zinc-700 text-gray-300 hover:text-white hover:bg-zinc-800">
           Cancel
         </Button>
         <Button type="submit" disabled={submitting} className="bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg shadow-red-500/40">
