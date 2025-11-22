@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/app/api/auth/[...nextauth]/route'
 import dbConnect from '@/lib/mongodb'
 import Mission from '@/models/mission'
+import { revalidatePath } from 'next/cache'
 
-export async function PATCH(req: NextRequest) {
+async function handleUpdate(req: NextRequest) {
   try {
     const session = await auth()
     
@@ -26,16 +27,36 @@ export async function PATCH(req: NextRequest) {
       )
     }
 
+    // Validate points if provided
+    if (updates.points !== undefined && updates.points < 0) {
+      return NextResponse.json(
+        { error: 'Points must be a positive number' },
+        { status: 400 }
+      )
+    }
+
     // Calculate endDate if daysAvailable is provided
     if (updates.isTimeLimited && updates.daysAvailable && !updates.endDate) {
       const startDate = updates.startDate ? new Date(updates.startDate) : new Date()
       updates.endDate = new Date(startDate.getTime() + updates.daysAvailable * 24 * 60 * 60 * 1000)
     }
 
+    // Validate date range if time limited
+    if (updates.isTimeLimited && updates.startDate && updates.endDate) {
+      const start = new Date(updates.startDate)
+      const end = new Date(updates.endDate)
+      if (end <= start) {
+        return NextResponse.json(
+          { error: 'End date must be after start date' },
+          { status: 400 }
+        )
+      }
+    }
+
     const mission = await Mission.findByIdAndUpdate(
       missionId,
       updates,
-      { new: true, runValidators: false }
+      { new: true, runValidators: true }
     )
 
     if (!mission) {
@@ -45,12 +66,25 @@ export async function PATCH(req: NextRequest) {
       )
     }
 
+    // Revalidate relevant paths
+    revalidatePath('/admin/ze-club')
+    revalidatePath('/ze-club/missions')
+    revalidatePath('/api/ze-club/missions')
+
     return NextResponse.json(mission)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error updating mission:', error)
     return NextResponse.json(
-      { error: 'Failed to update mission' },
+      { error: error.message || 'Failed to update mission' },
       { status: 500 }
     )
   }
+}
+
+export async function PATCH(req: NextRequest) {
+  return handleUpdate(req)
+}
+
+export async function PUT(req: NextRequest) {
+  return handleUpdate(req)
 }

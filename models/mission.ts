@@ -35,39 +35,51 @@ export interface IMission {
 const MissionSchema = new Schema<IMission>({
   name: {
     type: String,
-    required: true,
+    required: [true, 'Mission name is required'],
+    trim: true,
   },
   description: {
     type: String,
-    required: true,
+    required: [true, 'Mission description is required'],
+    trim: true,
   },
   points: {
     type: Number,
-    required: true,
+    required: [true, 'Points are required'],
+    min: [0, 'Points must be a positive number'],
   },
   category: {
     type: String,
-    required: true,
+    required: [true, 'Category is required'],
     default: 'General',
+    trim: true,
   },
   difficulty: {
     type: String,
-    enum: ['Easy', 'Medium', 'Hard'],
+    enum: {
+      values: ['Easy', 'Medium', 'Hard'],
+      message: 'Difficulty must be Easy, Medium, or Hard'
+    },
     default: 'Easy',
   },
   requiredProofType: {
     type: String,
-    enum: ['image', 'video', 'both'],
+    enum: {
+      values: ['image', 'video', 'both'],
+      message: 'Proof type must be image, video, or both'
+    },
     default: 'image',
   },
   maxFileSize: {
     type: Number,
     default: 50, // MB
+    min: [1, 'Max file size must be at least 1MB'],
+    max: [100, 'Max file size cannot exceed 100MB'],
   },
   instructions: {
     type: String,
-    required: true,
-    default: '',
+    required: [true, 'Instructions are required'],
+    trim: true,
   },
   exampleImageUrl: {
     type: String,

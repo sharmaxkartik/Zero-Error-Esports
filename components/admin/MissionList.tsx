@@ -98,14 +98,16 @@ export default function MissionList({ missions, onEdit, onRefresh }: MissionList
         }),
       })
 
+      const data = await res.json()
+
       if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error || 'Failed to toggle status')
+        throw new Error(data.error || 'Failed to toggle status')
       }
 
       onRefresh()
     } catch (err: any) {
-      setError(err.message)
+      console.error('Error toggling mission status:', err)
+      setError(err.message || 'Failed to toggle mission status')
     } finally {
       setLoading(false)
     }
@@ -122,16 +124,18 @@ export default function MissionList({ missions, onEdit, onRefresh }: MissionList
         method: 'DELETE',
       })
 
+      const data = await res.json()
+
       if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error || 'Failed to delete mission')
+        throw new Error(data.error || 'Failed to delete mission')
       }
 
       setDeleteDialogOpen(false)
       setMissionToDelete(null)
       onRefresh()
     } catch (err: any) {
-      setError(err.message)
+      console.error('Error deleting mission:', err)
+      setError(err.message || 'Failed to delete mission')
     } finally {
       setLoading(false)
     }

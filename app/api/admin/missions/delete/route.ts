@@ -3,6 +3,7 @@ import { auth } from '@/app/api/auth/[...nextauth]/route'
 import dbConnect from '@/lib/mongodb'
 import Mission from '@/models/mission'
 import MissionSubmission from '@/models/missionSubmission'
+import { revalidatePath } from 'next/cache'
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -51,6 +52,11 @@ export async function DELETE(req: NextRequest) {
       status: 'pending',
     })
 
+    // Revalidate relevant paths
+    revalidatePath('/admin/ze-club')
+    revalidatePath('/ze-club/missions')
+    revalidatePath('/api/ze-club/missions')
+
     return NextResponse.json({
       mission,
       pendingSubmissions: pendingCount,
@@ -58,10 +64,10 @@ export async function DELETE(req: NextRequest) {
         ? `Mission deactivated. ${pendingCount} pending submissions still need review.`
         : 'Mission deactivated successfully',
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error deleting mission:', error)
     return NextResponse.json(
-      { error: 'Failed to delete mission' },
+      { error: error.message || 'Failed to delete mission' },
       { status: 500 }
     )
   }

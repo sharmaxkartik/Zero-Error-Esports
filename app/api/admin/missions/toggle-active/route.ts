@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/app/api/auth/[...nextauth]/route'
 import dbConnect from '@/lib/mongodb'
 import Mission from '@/models/mission'
+import { revalidatePath } from 'next/cache'
 
 export async function PATCH(req: NextRequest) {
   try {
@@ -50,11 +51,16 @@ export async function PATCH(req: NextRequest) {
       )
     }
 
+    // Revalidate relevant paths
+    revalidatePath('/admin/ze-club')
+    revalidatePath('/ze-club/missions')
+    revalidatePath('/api/ze-club/missions')
+
     return NextResponse.json(mission)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error toggling mission status:', error)
     return NextResponse.json(
-      { error: 'Failed to toggle mission status' },
+      { error: error.message || 'Failed to toggle mission status' },
       { status: 500 }
     )
   }

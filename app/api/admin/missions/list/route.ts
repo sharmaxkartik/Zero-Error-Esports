@@ -90,10 +90,10 @@ export async function GET(req: NextRequest) {
     })
 
     return NextResponse.json(missionsWithMeta)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching missions:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch missions' },
+      { error: error.message || 'Failed to fetch missions' },
       { status: 500 }
     )
   }

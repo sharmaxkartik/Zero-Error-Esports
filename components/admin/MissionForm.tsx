@@ -138,10 +138,35 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
     setLoading(true)
 
     try {
+      // Client-side validation
+      if (!formData.name.trim()) {
+        throw new Error('Mission name is required')
+      }
+      if (!formData.description.trim()) {
+        throw new Error('Mission description is required')
+      }
+      if (!formData.instructions.trim()) {
+        throw new Error('Mission instructions are required')
+      }
+      if (formData.points <= 0) {
+        throw new Error('Points must be greater than 0')
+      }
+      if (formData.isTimeLimited) {
+        if (formData.startDate && formData.endDate) {
+          if (new Date(formData.endDate) <= new Date(formData.startDate)) {
+            throw new Error('End date must be after start date')
+          }
+        }
+      }
+
       // Upload example image if selected
       let exampleImageUrl = formData.exampleImageUrl
       if (exampleImage) {
-        exampleImageUrl = await uploadExampleImage()
+        try {
+          exampleImageUrl = await uploadExampleImage()
+        } catch (uploadError: any) {
+          throw new Error(`Image upload failed: ${uploadError.message}`)
+        }
       }
 
       const url = mission
@@ -165,9 +190,10 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
         body: JSON.stringify(payload),
       })
 
+      const responseData = await res.json()
+
       if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error || 'Failed to save mission')
+        throw new Error(responseData.error || `Failed to ${mission ? 'update' : 'create'} mission`)
       }
 
       setSuccess(`Mission ${mission ? 'updated' : 'created'} successfully!`)
@@ -175,7 +201,8 @@ export default function MissionForm({ mission, onSuccess, onCancel }: MissionFor
         onSuccess?.()
       }, 1500)
     } catch (err: any) {
-      setError(err.message)
+      console.error('Mission form error:', err)
+      setError(err.message || 'An unexpected error occurred')
     } finally {
       setLoading(false)
     }
