@@ -129,7 +129,7 @@ function RankBadge({
             )}
           </motion.div>
         </TooltipTrigger>
-        <TooltipContent className="bg-gray-900 border-gray-700">
+        <TooltipContent className="bg-black/90 border-white/10">
           <p className="font-semibold">{rank} Rank</p>
           <p className="text-xs text-gray-400">Keep grinding to level up!</p>
         </TooltipContent>

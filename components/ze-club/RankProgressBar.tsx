@@ -72,7 +72,7 @@ function RankProgressBar({
                 {displayProgress}%
               </span>
             </TooltipTrigger>
-            <TooltipContent className="bg-gray-900 border-gray-700">
+            <TooltipContent className="bg-black/90 border-white/10">
               <div className="space-y-1 text-xs">
                 <p><span className="text-gray-400">Current:</span> {currentPoints} points</p>
                 <p><span className="text-gray-400">Progress:</span> {pointsEarned} / {pointsNeeded} points</p>
@@ -86,7 +86,7 @@ function RankProgressBar({
       </div>
 
       {/* Progress Bar Container */}
-      <div className="relative h-6 bg-gray-800/50 rounded-full overflow-hidden border border-gray-700/50 shadow-inner">
+      <div className="relative h-6 bg-black/60 rounded-full overflow-hidden border border-white/10 shadow-inner">
         {/* Background shimmer effect */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"

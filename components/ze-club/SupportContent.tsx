@@ -180,7 +180,7 @@ export default function SupportContent() {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500"
+                    className="bg-black/60 border-white/10 text-white placeholder:text-gray-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -193,7 +193,7 @@ export default function SupportContent() {
                     onChange={handleChange}
                     placeholder="your.email@example.com"
                     required
-                    className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500"
+                    className="bg-black/60 border-white/10 text-white placeholder:text-gray-500"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function SupportContent() {
                   onChange={handleChange}
                   placeholder="What do you need help with?"
                   required
-                  className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500"
+                  className="bg-black/60 border-white/10 text-white placeholder:text-gray-500"
                 />
               </div>
               <div className="space-y-2">
@@ -219,7 +219,7 @@ export default function SupportContent() {
                   placeholder="Describe your issue or question in detail..."
                   rows={5}
                   required
-                  className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500"
+                  className="bg-black/60 border-white/10 text-white placeholder:text-gray-500"
                 />
               </div>
               <Button

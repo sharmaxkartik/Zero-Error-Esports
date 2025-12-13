@@ -122,7 +122,7 @@ function Dashboard() {
   const achievements = [
     { icon: Trophy, label: "Total Points", value: dashboardData.totalPoints, gradient: "from-yellow-500 to-orange-600" },
     { icon: Medal, label: "Current Rank", value: dashboardData.rank, gradient: "from-purple-500 to-pink-600" },
-    { icon: Star, label: "Badge", value: dashboardData.badge, gradient: "from-blue-500 to-cyan-600" },
+    { icon: Star, label: "Badge", value: dashboardData.badge, gradient: "from-red-500 to-orange-600" },
   ]
 
   return (
@@ -134,15 +134,15 @@ function Dashboard() {
     >
       {/* Header */}
       <motion.div 
-        className="mb-6 sm:mb-8"
+        className="mb-5 sm:mb-6 md:mb-8"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 leading-tight bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
           Welcome Back, Champion! 🎮
         </h1>
-        <p className="text-gray-400 text-sm sm:text-base md:text-lg">Here's your gaming performance overview</p>
+        <p className="text-gray-400 text-xs sm:text-sm md:text-base lg:text-lg">Here's your gaming performance overview</p>
       </motion.div>
 
       {/* Phase 1: Valorant-Style Rank Card */}
@@ -163,7 +163,7 @@ function Dashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-5 sm:mb-6 md:mb-8">
         {achievements.map((stat, index) => {
           const Icon = stat.icon
           return (
@@ -175,20 +175,20 @@ function Dashboard() {
               whileHover={{ scale: 1.05, y: -8 }}
               className="relative group"
             >
-              <GlassCard variant="intense" hover className="relative overflow-hidden p-6">
+              <GlassCard variant="intense" hover className="relative overflow-hidden p-4 sm:p-5 md:p-6">
                 {/* Gradient overlay */}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.gradient} opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity`} />
+                <div className={`absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br ${stat.gradient} opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity`} />
                 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg`}>
-                      <Icon className="h-6 w-6 text-white" />
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg`}>
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </div>
-                    <TrendingUp className="h-5 w-5 text-green-400" />
+                    <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                   </div>
                   
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">{stat.label}</h3>
-                  <div className="text-3xl md:text-4xl font-bold text-white">
+                  <h3 className="text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">{stat.label}</h3>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                     {typeof stat.value === 'number' ? (
                       <SimpleCounter value={stat.value} />
                     ) : (
@@ -204,22 +204,22 @@ function Dashboard() {
 
       {/* Progress Section */}
       <motion.div 
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         {/* Rank Progress */}
-        <GlassCard variant="intense" gradient="red" className="p-6">
-          <div className="flex items-center gap-3 mb-4">
+        <GlassCard variant="intense" gradient="red" className="p-4 sm:p-5 md:p-6">
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
             <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600">
-              <Target className="h-5 w-5 text-white" />
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
-            <h2 className="text-xl font-bold text-white">Progress to Next Rank</h2>
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-white">Progress to Next Rank</h2>
           </div>
           
-          <div className="space-y-3">
-            <div className="flex justify-between text-sm">
+          <div className="space-y-2.5 sm:space-y-3">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-gray-400">Current: {dashboardData.rank}</span>
               <span className="text-red-400 font-semibold">{dashboardData.progress}%</span>
             </div>
@@ -227,7 +227,7 @@ function Dashboard() {
             <div className="relative">
               <Progress 
                 value={dashboardData.progress} 
-                className="h-4 bg-gray-700/50"
+                className="h-3 sm:h-4 bg-black/50"
               />
               <motion.div
                 className="absolute inset-0 h-4 rounded-full bg-gradient-to-r from-red-500 via-orange-500 to-red-600 opacity-50 blur-sm"
@@ -244,28 +244,28 @@ function Dashboard() {
         </GlassCard>
 
         {/* Quick Stats */}
-        <GlassCard variant="intense" gradient="purple" className="p-6">
-          <div className="flex items-center gap-3 mb-4">
+        <GlassCard variant="intense" gradient="purple" className="p-4 sm:p-5 md:p-6">
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4 md:mb-5">
             <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
-              <Clock className="h-5 w-5 text-white" />
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
-            <h2 className="text-xl font-bold text-white">Recent Activity</h2>
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-white">Your Progress</h2>
           </div>
           
-          <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-              <div className="p-2 rounded-full bg-green-500/20">
-                <Zap className="h-4 w-4 text-green-400" />
+          <div className="space-y-2.5 sm:space-y-3 md:space-y-4">
+            <div className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-black/40 hover:bg-black/60 transition-colors">
+              <div className="p-1.5 sm:p-2 rounded-full bg-green-500/20 shrink-0">
+                <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-400" />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <p className="text-sm text-white font-medium">Mission Completed</p>
                 <p className="text-xs text-gray-400">+50 points earned</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-              <div className="p-2 rounded-full bg-blue-500/20">
-                <Award className="h-4 w-4 text-blue-400" />
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-black/60 transition-colors">
+              <div className="p-2 rounded-full bg-red-500/20">
+                <Award className="h-4 w-4 text-red-400" />
               </div>
               <div className="flex-1">
                 <p className="text-sm text-white font-medium">Rank Updated</p>
@@ -273,7 +273,7 @@ function Dashboard() {
               </div>
             </div>
             
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-black/60 transition-colors">
               <div className="p-2 rounded-full bg-yellow-500/20">
                 <Star className="h-4 w-4 text-yellow-400" />
               </div>

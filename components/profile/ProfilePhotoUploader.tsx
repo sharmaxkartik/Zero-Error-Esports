@@ -99,7 +99,7 @@ export function ProfilePhotoUploader({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-zinc-900 border-zinc-700 text-white shadow-2xl">
+      <DialogContent className="bg-black/95 border-white/10 text-white shadow-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Update Profile Photo</DialogTitle>
           <DialogDescription className="text-gray-400 text-sm">
@@ -110,7 +110,7 @@ export function ProfilePhotoUploader({
         <div className="space-y-6 py-4">
           {/* Preview */}
           <div className="flex justify-center">
-            <div className="relative w-56 h-56 rounded-2xl overflow-hidden border-4 border-red-500 shadow-lg shadow-red-500/20 bg-zinc-800">
+            <div className="relative w-56 h-56 rounded-2xl overflow-hidden border-4 border-red-500 shadow-lg shadow-red-500/20 bg-black/80">
               <Image
                 src={preview || currentPhotoUrl}
                 alt="Profile preview"
@@ -134,7 +134,7 @@ export function ProfilePhotoUploader({
             <Button
               onClick={() => document.getElementById('photo-upload-input')?.click()}
               variant="outline"
-              className="w-full border-zinc-700 hover:bg-zinc-800 text-white h-11"
+              className="w-full border-white/10 hover:bg-black/60 text-white h-11"
               disabled={isUploading}
             >
               <Upload className="mr-2 h-5 w-5" />
@@ -146,7 +146,7 @@ export function ProfilePhotoUploader({
                 <Button
                   variant="outline"
                   onClick={handleClose}
-                  className="flex-1 border-zinc-700 hover:bg-zinc-800 text-white h-11"
+                  className="flex-1 border-white/10 hover:bg-black/60 text-white h-11"
                   disabled={isUploading}
                 >
                   Cancel

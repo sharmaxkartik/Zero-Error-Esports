@@ -42,7 +42,7 @@ async function UserSubmissions() {
   if (submissions.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/50 mb-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-black/60 mb-4">
           <span className="text-3xl">📋</span>
         </div>
         <p className="text-gray-400 text-lg">You have no submissions yet.</p>
@@ -52,9 +52,9 @@ async function UserSubmissions() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {submissions.map((submission) => (
-        <GlassCard key={submission._id} variant="intense" hover className="text-white p-6">
+        <GlassCard key={submission._id} variant="intense" hover className="text-white p-4 sm:p-5 md:p-6">
           <div className="mb-4">
             <div className="flex items-start justify-between">
               <div>
@@ -100,7 +100,7 @@ async function UserSubmissions() {
               </svg>
             </a>
             {submission.remarks && (
-              <div className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10">
+              <div className="mt-4 p-3 rounded-lg bg-black/40 border border-white/10">
                 <p className="text-sm text-gray-300">
                   <span className="font-semibold text-gray-200">Admin Remarks:</span> {submission.remarks}
                 </p>
@@ -117,7 +117,7 @@ export default function MissionsPage() {
   return (
     <ZEClubLayout>
       <div className="text-white">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
           🎯 Missions
         </h1>
         <p className="text-gray-400 text-lg mb-8">Complete missions to earn points and rewards</p>

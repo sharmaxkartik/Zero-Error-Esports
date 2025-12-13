@@ -77,45 +77,45 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-full sm:w-80 md:w-72 backdrop-blur-xl text-white p-4 sm:p-6 border-r border-red-500/30 overflow-hidden z-40 transition-all duration-300 flex flex-col",
+          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-[85vw] sm:w-80 md:w-72 lg:w-64 backdrop-blur-xl text-white p-4 sm:p-5 md:p-6 border-r border-red-500/30 overflow-hidden z-40 transition-all duration-300 flex flex-col shadow-2xl",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >
         {/* Scrollable container */}
         <div className="overflow-y-auto flex-1 pr-2 scrollbar-thin scrollbar-thumb-red-500/50 scrollbar-track-transparent hover:scrollbar-thumb-red-500/70">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="bg-gradient-to-br from-red-500 to-red-700 p-2 rounded-lg shadow-lg shadow-red-500/50">
-              <Sparkles className="h-6 w-6 text-white" />
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="bg-gradient-to-br from-red-500 to-red-700 p-2 sm:p-2.5 rounded-lg shadow-lg shadow-red-500/50">
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
+            <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
               ZE Club
             </h2>
           </div>
-          <p className="text-xs text-gray-400 ml-14">Your Gaming Hub</p>
+          <p className="text-xs text-gray-400 ml-12 sm:ml-14">Your Gaming Hub</p>
         </div>
 
         {/* User Profile Card */}
         {session?.user && (
-          <GlassCard variant="intense" gradient="red" hover className="mb-6 p-4">
+          <GlassCard variant="intense" gradient="red" hover className="mb-5 sm:mb-6 p-3.5 sm:p-4">
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="bg-gradient-to-br from-red-500 to-orange-600 p-2 rounded-full">
-                <User className="h-5 w-5 text-white" />
+            <div className="flex items-center gap-2.5 sm:gap-3 mb-3">
+              <div className="bg-gradient-to-br from-red-500 to-orange-600 p-2 rounded-full shrink-0">
+                <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{session.user.name}</p>
-                <p className="text-xs text-gray-400 truncate">{session.user.email}</p>
+                <p className="text-xs sm:text-sm font-semibold text-white truncate leading-tight">{session.user.name}</p>
+                <p className="text-[10px] sm:text-xs text-gray-400 truncate mt-0.5">{session.user.email}</p>
               </div>
             </div>
-            <div className="flex items-center justify-between pt-3 border-t border-gray-700/50">
+            <div className="flex items-center justify-between pt-2.5 sm:pt-3 border-t border-gray-700/50">
               <span className="text-xs text-gray-400">Total Points</span>
-              <span className="text-lg font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+              <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
                 {userPoints}
               </span>
             </div>
@@ -140,10 +140,10 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
                     href={item.href}
                     onClick={handleLinkClick}
                     className={cn(
-                      "group flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 relative overflow-hidden",
+                      "group flex items-center gap-2.5 sm:gap-3 py-3 sm:py-3.5 px-3.5 sm:px-4 rounded-xl transition-all duration-200 relative overflow-hidden touch-manipulation active:scale-95",
                       isActive
                         ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/50"
-                        : "hover:bg-gray-800/60 hover:text-red-400 text-gray-300"
+                        : "hover:bg-black/60 hover:text-red-400 text-gray-300"
                     )}
                   >
                     {isActive && (

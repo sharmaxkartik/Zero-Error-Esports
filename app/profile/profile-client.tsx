@@ -134,7 +134,7 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
                     type="password"
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
+                    className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
                     placeholder="Enter current password"
                   />
                 </div>
@@ -148,7 +148,7 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
                     type="password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
+                    className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
                     placeholder="Enter new password (min 8 characters)"
                   />
                 </div>
@@ -162,7 +162,7 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
+                    className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
                     placeholder="Confirm new password"
                   />
                 </div>
@@ -185,15 +185,15 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
                 <h3 className="font-semibold text-white text-lg">Coming Soon</h3>
               </div>
               <div className="grid grid-cols-1 gap-3">
-                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-black/40 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Two-factor authentication (2FA)</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-black/40 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Session management & device tracking</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-black/40 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Login history & activity logs</span>
                 </div>

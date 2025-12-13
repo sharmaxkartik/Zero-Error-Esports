@@ -137,14 +137,14 @@ export default function Leaderboard() {
       {/* Search and Filters */}
       <GlassCard variant="intense" className="mb-4 sm:mb-6">
         <div className="pt-4 sm:pt-6 px-3 sm:px-6 pb-4 sm:pb-6">
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 md:gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
               <Input
                 placeholder="Search players..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
+                className="pl-9 sm:pl-10 bg-black/60 border-white/10 text-white placeholder:text-gray-500 h-10 sm:h-11 text-sm sm:text-base"
               />
             </div>
             <div className="flex flex-wrap gap-2">
@@ -152,7 +152,7 @@ export default function Leaderboard() {
                 variant={activeFilter === 'all' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setActiveFilter('all')}
-                className={activeFilter === 'all' ? 'bg-red-600 hover:bg-red-700' : ''}
+                className={`h-10 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm touch-manipulation active:scale-95 ${activeFilter === 'all' ? 'bg-red-600 hover:bg-red-700' : 'bg-black/60 border-white/10 hover:bg-black/80 text-white'}`}
               >
                 All Players
               </Button>
@@ -160,7 +160,7 @@ export default function Leaderboard() {
                 variant={activeFilter === 'top10' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setActiveFilter('top10')}
-                className={activeFilter === 'top10' ? 'bg-red-600 hover:bg-red-700' : ''}
+                className={`h-10 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm touch-manipulation active:scale-95 ${activeFilter === 'top10' ? 'bg-red-600 hover:bg-red-700' : 'bg-black/60 border-white/10 hover:bg-black/80 text-white'}`}
               >
                 Top 10
               </Button>
@@ -168,7 +168,7 @@ export default function Leaderboard() {
           </div>
           
           {/* Rank Filter */}
-          <div className="flex items-center gap-2 flex-wrap pt-3 sm:pt-4 border-t border-gray-700/50">
+          <div className="flex items-start sm:items-center gap-2 flex-wrap pt-3 sm:pt-4 border-t border-gray-700/50">
             <span className="text-xs sm:text-sm text-gray-400 w-full sm:w-auto mb-1 sm:mb-0">Filter by rank:</span>
             {['all', 'Errorless Legend', 'Vanguard', 'Gladiator', 'Contender', 'Rookie'].map((rankType) => (
               <Button
@@ -176,7 +176,7 @@ export default function Leaderboard() {
                 variant={rankFilter === rankType ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setRankFilter(rankType)}
-                className={rankFilter === rankType ? 'bg-red-600 hover:bg-red-700' : ''}
+                className={`h-9 sm:h-8 px-2.5 sm:px-3 text-xs touch-manipulation active:scale-95 ${rankFilter === rankType ? 'bg-red-600 hover:bg-red-700' : 'bg-black/60 border-white/10 hover:bg-black/80 text-white'}`}
               >
                 {rankType === 'all' ? 'All Ranks' : rankType}
               </Button>
@@ -231,11 +231,11 @@ export default function Leaderboard() {
                           <div className="relative">
                             <Avatar className="h-20 w-20 border-4 border-gray-400 shadow-xl">
                               <AvatarImage src={topThree[1].profilePhoto || undefined} alt={topThree[1].name} />
-                              <AvatarFallback className="bg-gray-700 text-white text-2xl font-bold">
+                              <AvatarFallback className="bg-black/70 text-white text-2xl font-bold">
                                 {topThree[1].name.charAt(0).toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-gray-400 text-gray-200">
+                            <div className="absolute -bottom-2 -right-2 bg-black/90 rounded-full px-3 py-1 text-xs font-bold border-2 border-gray-400 text-gray-200">
                               2nd
                             </div>
                           </div>
@@ -268,7 +268,7 @@ export default function Leaderboard() {
                                 {topThree[0].name.charAt(0).toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-sm font-bold border-2 border-yellow-400 text-yellow-300">
+                            <div className="absolute -bottom-2 -right-2 bg-black/90 rounded-full px-3 py-1 text-sm font-bold border-2 border-yellow-400 text-yellow-300">
                               1st
                             </div>
                           </div>
@@ -301,7 +301,7 @@ export default function Leaderboard() {
                                 {topThree[2].name.charAt(0).toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
-                            <div className="absolute -bottom-2 -right-2 bg-gray-900 rounded-full px-3 py-1 text-xs font-bold border-2 border-orange-600 text-orange-300">
+                            <div className="absolute -bottom-2 -right-2 bg-black/90 rounded-full px-3 py-1 text-xs font-bold border-2 border-orange-600 text-orange-300">
                               3rd
                             </div>
                           </div>
@@ -354,9 +354,9 @@ export default function Leaderboard() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-3">
-                              <Avatar className="h-10 w-10 border-2 border-gray-600">
+                              <Avatar className="h-10 w-10 border-2 border-white/20">
                                 <AvatarImage src={user.profilePhoto || undefined} alt={user.name} />
-                                <AvatarFallback className="bg-gray-700 text-white font-bold">
+                                <AvatarFallback className="bg-black/70 text-white font-bold">
                                   {user.name.charAt(0).toUpperCase()}
                                 </AvatarFallback>
                               </Avatar>

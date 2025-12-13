@@ -190,10 +190,10 @@ export default function MissionUploader() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white">
+      <Card className="bg-gradient-to-br from-black/90 to-black/80 border-white/10 backdrop-blur-xl text-white">
         <CardHeader className="px-4 sm:px-6 pt-4 sm:pt-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600">
               <Upload className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
             <div>
@@ -221,7 +221,7 @@ export default function MissionUploader() {
                 onValueChange={setSelectedMission}
                 required
               >
-                <SelectTrigger id="mission" className="bg-gray-800/50 border-gray-700 text-white">
+                <SelectTrigger id="mission" className="bg-black/60 border-white/10 text-white">
                   <SelectValue placeholder="Choose a mission to complete" />
                 </SelectTrigger>
                 <SelectContent>
@@ -242,7 +242,7 @@ export default function MissionUploader() {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  className="mt-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/30"
+                  className="mt-3 p-4 rounded-lg bg-red-500/10 border border-red-500/30"
                 >
                   <div className="flex items-start gap-3">
                     <Target className="h-5 w-5 text-blue-400 mt-0.5" />
@@ -273,7 +273,7 @@ export default function MissionUploader() {
                 className={`relative border-2 border-dashed rounded-xl p-4 sm:p-6 md:p-8 transition-all ${
                   dragActive
                     ? 'border-red-500 bg-red-500/10'
-                    : 'border-gray-700 hover:border-gray-600 bg-gray-800/30'
+                    : 'border-white/10 hover:border-red-400 bg-black/30'
                 }`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
@@ -322,7 +322,7 @@ export default function MissionUploader() {
                         />
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3 p-4 bg-gray-800/50 rounded-lg">
+                      <div className="flex items-center gap-3 p-4 bg-black/60 rounded-lg">
                         <FileVideo className="h-10 w-10 text-purple-400" />
                         <div className="flex-1">
                           <p className="text-sm font-medium text-white">{file.name}</p>

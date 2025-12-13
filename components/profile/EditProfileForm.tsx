@@ -92,7 +92,7 @@ export function EditProfileForm({ profile, onSuccess }: EditProfileFormProps) {
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
-                      className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
+                      className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11"
                       {...field}
                     />
                   </FormControl>
@@ -110,7 +110,7 @@ export function EditProfileForm({ profile, onSuccess }: EditProfileFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="Tell us about yourself..."
-                      className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 resize-none"
+                      className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 resize-none"
                       rows={4}
                       {...field}
                     />
@@ -123,12 +123,12 @@ export function EditProfileForm({ profile, onSuccess }: EditProfileFormProps) {
               )}
             />
 
-            <div className="bg-zinc-800/50 p-4 rounded-lg border border-zinc-700">
+            <div className="bg-black/40 p-4 rounded-lg border border-white/10">
               <FormLabel className="text-white font-semibold">Email Address</FormLabel>
               <Input
                 value={profile.email}
                 disabled
-                className="bg-zinc-900 border-zinc-700 text-gray-400 cursor-not-allowed mt-2 h-11"
+                className="bg-black/60 border-white/10 text-gray-400 cursor-not-allowed mt-2 h-11"
               />
               <p className="text-xs text-gray-500 mt-2">Email address cannot be changed</p>
             </div>

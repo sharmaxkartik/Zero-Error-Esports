@@ -26,9 +26,9 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     const baseStyles = "rounded-xl border transition-all duration-300 ease-out"
     
     const variantStyles = {
-      default: "bg-[rgba(15,23,42,0.55)] backdrop-blur-md border-white/8",
-      subtle: "bg-[rgba(17,25,40,0.4)] backdrop-blur-sm border-white/5",
-      intense: "bg-[rgba(15,23,42,0.7)] backdrop-blur-lg border-white/10",
+      default: "bg-[rgba(0,0,0,0.55)] backdrop-blur-md border-white/8",
+      subtle: "bg-[rgba(10,10,10,0.4)] backdrop-blur-sm border-white/5",
+      intense: "bg-[rgba(0,0,0,0.7)] backdrop-blur-lg border-white/10",
     }
     
     const hoverStyles = hover

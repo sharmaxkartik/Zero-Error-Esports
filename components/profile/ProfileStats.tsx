@@ -38,7 +38,7 @@ export function ProfileStats({ stats }: ProfileStatsProps) {
       label: 'Pending Missions',
       value: stats.pendingMissions,
       color: 'text-blue-400',
-      bgGradient: 'from-blue-500/10 to-blue-600/5',
+      bgGradient: 'from-red-500/10 to-red-600/5',
       borderColor: 'border-blue-500/30',
       iconBg: 'bg-blue-500/10',
     },

@@ -164,7 +164,7 @@ function FeaturedMissions() {
                   <div className="flex items-center gap-2 mb-3">
                     <Badge 
                       variant="outline" 
-                      className="text-xs bg-gray-800/50 border-gray-600/50 text-gray-300"
+                      className="text-xs bg-black/60 border-white/10 text-gray-300"
                     >
                       {mission.category}
                     </Badge>

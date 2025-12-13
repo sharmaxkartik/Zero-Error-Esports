@@ -65,7 +65,7 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
                     </div>
                   </button>
                 </div>
-                <div className="absolute -bottom-3 -right-3 bg-zinc-900 rounded-full p-2 border-2 border-red-500">
+                <div className="absolute -bottom-3 -right-3 bg-black/90 rounded-full p-2 border-2 border-red-500">
                   <Image
                     src={profile.rankIcon}
                     alt={profile.rank}
@@ -103,13 +103,13 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
               {/* Info Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* ZE Club ID */}
-                <div className="bg-zinc-800/50 rounded-lg p-4 border border-zinc-700/50">
+                <div className="bg-black/50 rounded-lg p-4 border border-white/10">
                   <div className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">ZE Club ID</div>
                   <div className="text-red-400 font-mono text-lg font-bold">{profile.zeClubId}</div>
                 </div>
 
                 {/* ZE Tag */}
-                <div className="bg-zinc-800/50 rounded-lg p-4 border border-zinc-700/50">
+                <div className="bg-black/50 rounded-lg p-4 border border-white/10">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">ZE Tag</div>
                     <Button
@@ -128,7 +128,7 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
                 </div>
 
                 {/* Email */}
-                <div className="bg-zinc-800/50 rounded-lg p-4 border border-zinc-700/50">
+                <div className="bg-black/50 rounded-lg p-4 border border-white/10">
                   <div className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold flex items-center gap-2">
                     <Mail className="w-3 h-3" />
                     Email
@@ -137,7 +137,7 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
                 </div>
 
                 {/* Member Since */}
-                <div className="bg-zinc-800/50 rounded-lg p-4 border border-zinc-700/50">
+                <div className="bg-black/50 rounded-lg p-4 border border-white/10">
                   <div className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold flex items-center gap-2">
                     <Calendar className="w-3 h-3" />
                     Member Since

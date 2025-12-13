@@ -93,7 +93,7 @@ export function ChangeZeTagModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-zinc-900 border-zinc-700 text-white shadow-2xl">
+      <DialogContent className="bg-black/95 border-white/10 text-white shadow-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Change ZE Tag</DialogTitle>
           <DialogDescription className="text-gray-400 text-sm">
@@ -110,13 +110,13 @@ export function ChangeZeTagModal({
               placeholder="Enter new ZE Tag"
               value={zeTag}
               onChange={(e) => setZeTag(e.target.value)}
-              className="bg-zinc-800 border-zinc-700 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11 font-mono"
+              className="bg-black/60 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/20 h-11 font-mono"
               maxLength={20}
             />
           </div>
 
           {/* Availability Status */}
-          <div className="min-h-[32px] bg-zinc-800/50 rounded-lg p-3 border border-zinc-700">
+          <div className="min-h-[32px] bg-black/60 rounded-lg p-3 border border-white/10">
             {isChecking && debouncedZeTag.length >= 3 && (
               <div className="flex items-center gap-2 text-gray-300">
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -152,7 +152,7 @@ export function ChangeZeTagModal({
           <Button
             variant="outline"
             onClick={onClose}
-            className="flex-1 border-zinc-700 hover:bg-zinc-800 text-white h-11"
+            className="flex-1 border-white/10 hover:bg-black/60 text-white h-11"
           >
             Cancel
           </Button>

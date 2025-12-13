@@ -124,7 +124,7 @@ function RankCard({
 
             {/* Quick stats indicator */}
             <motion.div
-              className="flex items-center gap-1 bg-gray-800/50 px-3 py-1.5 rounded-full border border-gray-700/50"
+              className="flex items-center gap-1 bg-black/60 px-3 py-1.5 rounded-full border border-white/10"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
@@ -186,7 +186,7 @@ function RankCard({
               {getRankBenefits(rank).map((benefit, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-start gap-2 text-xs text-gray-400 bg-gray-800/30 p-2 rounded-lg"
+                  className="flex items-start gap-2 text-xs text-gray-400 bg-black/40 p-2 rounded-lg"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.9 + index * 0.1 }}
