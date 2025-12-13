@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
@@ -123,9 +123,9 @@ export default function Rewards() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-red-900/20 border border-red-500/50 rounded-xl p-6 backdrop-blur-sm">
+        <GlassCard variant="intense" gradient="red" className="p-6">
           <p className="text-xl text-red-400">Error: {error}</p>
-        </div>
+        </GlassCard>
       </motion.div>
     );
   }
@@ -159,9 +159,8 @@ export default function Rewards() {
         transition={{ delay: 0.3 }}
         className="mb-4 sm:mb-6"
       >
-        <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30 backdrop-blur-xl">
-          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <GlassCard variant="intense" gradient="purple" className="pt-4 sm:pt-6 px-3 sm:px-6 pb-4 sm:pb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-600">
                   <Coins className="h-6 w-6 text-white" />
@@ -178,8 +177,7 @@ export default function Rewards() {
                 <p className="text-2xl font-bold text-white">{rewards.length}</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </GlassCard>
       </motion.div>
 
       {/* Rewards Grid */}
@@ -210,7 +208,7 @@ export default function Rewards() {
                 whileHover={{ scale: 1.03, y: -8 }}
                 className="h-full"
               >
-                <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white h-full flex flex-col relative overflow-hidden group">
+                <GlassCard variant="intense" hover className="text-white h-full flex flex-col relative overflow-hidden group">
                   {/* Gradient overlay */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500 to-orange-600 opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500" />
                   
@@ -223,19 +221,19 @@ export default function Rewards() {
                     </div>
                   )}
 
-                  <CardHeader className="relative z-10">
+                  <div className="relative z-10 p-6">
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg">
                         <Icon className="h-8 w-8 text-white" />
                       </div>
                     </div>
-                    <CardTitle className="text-white text-xl font-bold">{reward.name}</CardTitle>
-                    <CardDescription className="text-gray-300 text-sm">
+                    <h3 className="text-white text-xl font-bold mb-2">{reward.name}</h3>
+                    <p className="text-gray-300 text-sm mb-4">
                       {reward.description}
-                    </CardDescription>
-                  </CardHeader>
+                    </p>
+                  </div>
 
-                  <CardContent className="flex-1 relative z-10">
+                  <div className="flex-1 relative z-10 px-6">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Coins className="h-5 w-5 text-yellow-400" />
@@ -256,9 +254,9 @@ export default function Rewards() {
                         {reward.stock} {reward.stock === 1 ? 'item' : 'items'} remaining
                       </span>
                     </div>
-                  </CardContent>
+                  </div>
 
-                  <CardFooter className="relative z-10">
+                  <div className="relative z-10 p-6 pt-0">
                     <Button 
                       onClick={() => handleRedeem(reward._id, reward.cost)} 
                       disabled={reward.stock <= 0 || !canAfford}
@@ -270,8 +268,8 @@ export default function Rewards() {
                     >
                       {reward.stock <= 0 ? '❌ Out of Stock' : canAfford ? '🎁 Redeem Now' : '🔒 Not Enough Points'}
                     </Button>
-                  </CardFooter>
-                </Card>
+                  </div>
+                </GlassCard>
               </motion.div>
             );
           })}

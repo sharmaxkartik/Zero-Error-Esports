@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Camera, Edit2, Mail, Calendar, Award } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { format } from 'date-fns'
@@ -39,9 +39,8 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
 
   return (
     <>
-      <Card className="border-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-black shadow-2xl">
-        <CardContent className="p-8">
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
+      <GlassCard variant="intense" className="p-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
             {/* Profile Photo Section */}
             <div className="flex flex-col items-center gap-4">
               <motion.div
@@ -148,8 +147,7 @@ export function ProfileHeader({ profile, onUpdate }: ProfileHeaderProps) {
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+      </GlassCard>
 
       <ChangeZeTagModal
         isOpen={showZeTagModal}

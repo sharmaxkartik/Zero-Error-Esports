@@ -10,7 +10,7 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { GlassCard } from '@/components/ui/GlassCard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
 import { Trophy, Medal, Crown, TrendingUp, Search } from 'lucide-react';
@@ -107,12 +107,11 @@ export default function Leaderboard() {
 
   const getRankTierColor = (userRank: string) => {
     const colors = {
-      Diamond: 'bg-blue-500/10 hover:bg-blue-500/20 border-l-2 border-blue-500/50',
-      Platinum: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-l-2 border-cyan-500/50',
-      Gold: 'bg-yellow-500/10 hover:bg-yellow-500/20 border-l-2 border-yellow-500/50',
-      Silver: 'bg-gray-400/10 hover:bg-gray-400/20 border-l-2 border-gray-400/50',
-      Bronze: 'bg-orange-600/10 hover:bg-orange-600/20 border-l-2 border-orange-600/50',
-      Rookie: 'bg-amber-800/10 hover:bg-amber-800/20 border-l-2 border-amber-800/50',
+      "Errorless Legend": 'bg-yellow-500/10 hover:bg-yellow-500/20 border-l-2 border-yellow-500/50',
+      Vanguard: 'bg-red-400/10 hover:bg-red-400/20 border-l-2 border-red-400/50',
+      Gladiator: 'bg-red-500/10 hover:bg-red-500/20 border-l-2 border-red-500/50',
+      Contender: 'bg-red-600/10 hover:bg-red-600/20 border-l-2 border-red-600/50',
+      Rookie: 'bg-red-700/10 hover:bg-red-700/20 border-l-2 border-red-700/50',
     };
     return colors[userRank as keyof typeof colors] || 'hover:bg-gray-800/30';
   };
@@ -136,8 +135,8 @@ export default function Leaderboard() {
       </div>
 
       {/* Search and Filters */}
-      <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl mb-4 sm:mb-6">
-        <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+      <GlassCard variant="intense" className="mb-4 sm:mb-6">
+        <div className="pt-4 sm:pt-6 px-3 sm:px-6 pb-4 sm:pb-6">
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -171,7 +170,7 @@ export default function Leaderboard() {
           {/* Rank Filter */}
           <div className="flex items-center gap-2 flex-wrap pt-3 sm:pt-4 border-t border-gray-700/50">
             <span className="text-xs sm:text-sm text-gray-400 w-full sm:w-auto mb-1 sm:mb-0">Filter by rank:</span>
-            {['all', 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze', 'Rookie'].map((rankType) => (
+            {['all', 'Errorless Legend', 'Vanguard', 'Gladiator', 'Contender', 'Rookie'].map((rankType) => (
               <Button
                 key={rankType}
                 variant={rankFilter === rankType ? 'default' : 'outline'}
@@ -183,8 +182,8 @@ export default function Leaderboard() {
               </Button>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </GlassCard>
 
       {loading ? (
         <motion.div
@@ -201,9 +200,10 @@ export default function Leaderboard() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-red-900/20 border border-red-500/50 rounded-xl p-6 backdrop-blur-sm"
         >
-          <p className="text-red-400">Error: {error}</p>
+          <GlassCard variant="intense" gradient="red" className="p-6">
+            <p className="text-red-400">Error: {error}</p>
+          </GlassCard>
         </motion.div>
       ) : (
         <>
@@ -224,7 +224,7 @@ export default function Leaderboard() {
                     transition={{ delay: 0.3 }}
                     className="md:order-1"
                   >
-                    <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-gray-400/50 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
+                    <GlassCard variant="intense" className="text-center p-6 h-full relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-400 to-gray-500 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
@@ -245,7 +245,7 @@ export default function Leaderboard() {
                           {topThree[1].points} pts
                         </p>
                       </div>
-                    </Card>
+                    </GlassCard>
                   </motion.div>
                 )}
 
@@ -257,7 +257,7 @@ export default function Leaderboard() {
                     transition={{ delay: 0.4 }}
                     className="md:order-2"
                   >
-                    <Card className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 border-yellow-500/60 backdrop-blur-xl text-center p-6 md:scale-110 h-full relative overflow-hidden shadow-2xl shadow-yellow-500/20">
+                    <GlassCard variant="intense" gradient="orange" className="text-center p-6 md:scale-110 h-full relative overflow-hidden border-yellow-500/60 shadow-2xl shadow-yellow-500/20">
                       <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400 to-orange-500 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
@@ -278,7 +278,7 @@ export default function Leaderboard() {
                           {topThree[0].points} pts
                         </p>
                       </div>
-                    </Card>
+                    </GlassCard>
                   </motion.div>
                 )}
 
@@ -290,7 +290,7 @@ export default function Leaderboard() {
                     transition={{ delay: 0.5 }}
                     className="md:order-3"
                   >
-                    <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-orange-600/50 backdrop-blur-xl text-center p-6 h-full relative overflow-hidden">
+                    <GlassCard variant="intense" className="text-center p-6 h-full relative overflow-hidden border-orange-600/50">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500 to-orange-600 opacity-20 blur-3xl" />
                       <div className="relative z-10">
                         <div className="flex justify-center mb-4">
@@ -311,7 +311,7 @@ export default function Leaderboard() {
                           {topThree[2].points} pts
                         </p>
                       </div>
-                    </Card>
+                    </GlassCard>
                   </motion.div>
                 )}
               </div>
@@ -319,11 +319,11 @@ export default function Leaderboard() {
           )}
 
           {/* Rest of Leaderboard */}
-          <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl overflow-hidden">
-            <CardHeader className="px-3 sm:px-6">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl text-white">All Rankings</CardTitle>
-            </CardHeader>
-            <CardContent className="overflow-x-auto p-0 sm:p-6 -mx-3 sm:mx-0">
+          <GlassCard variant="intense" className="overflow-hidden">
+            <div className="px-3 sm:px-6 pt-4 sm:pt-6">
+              <h3 className="text-lg sm:text-xl md:text-2xl text-white font-bold">All Rankings</h3>
+            </div>
+            <div className="overflow-x-auto p-0 sm:p-6 -mx-3 sm:mx-0">
               {filteredUsers.length === 0 ? (
                 <p className="text-center text-gray-400 py-8">No players found.</p>
               ) : (
@@ -383,8 +383,8 @@ export default function Leaderboard() {
                   </Table>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </GlassCard>
         </>
       )}
     </motion.div>

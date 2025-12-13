@@ -35,17 +35,15 @@ function RankBadge({
   const getRankColor = (rank: string) => {
     switch (rank) {
       case "Rookie":
-        return "from-amber-800 to-amber-950"
-      case "Bronze":
-        return "from-orange-700 to-amber-900"
-      case "Silver":
-        return "from-gray-300 to-gray-500"
-      case "Gold":
-        return "from-yellow-400 to-orange-500"
-      case "Platinum":
-        return "from-cyan-400 to-blue-500"
-      case "Diamond":
-        return "from-blue-400 to-purple-600"
+        return "from-red-600 to-red-800"
+      case "Contender":
+        return "from-red-500 to-red-700"
+      case "Gladiator":
+        return "from-red-500 to-orange-600"
+      case "Vanguard":
+        return "from-red-400 to-red-600"
+      case "Errorless Legend":
+        return "from-red-400 to-yellow-500"
       default:
         return "from-gray-400 to-gray-600"
     }
@@ -53,12 +51,11 @@ function RankBadge({
 
   const getRankGlow = (rank: string) => {
     const glows = {
-      Rookie: "shadow-amber-800/50",
-      Bronze: "shadow-orange-600/50",
-      Silver: "shadow-gray-400/50",
-      Gold: "shadow-yellow-500/70",
-      Platinum: "shadow-cyan-500/70",
-      Diamond: "shadow-blue-500/80",
+      Rookie: "shadow-red-700/50",
+      Contender: "shadow-red-600/50",
+      Gladiator: "shadow-red-500/60",
+      Vanguard: "shadow-red-400/70",
+      "Errorless Legend": "shadow-yellow-500/80",
     }
     return glows[rank as keyof typeof glows] || "shadow-gray-500/50"
   }
@@ -92,7 +89,7 @@ function RankBadge({
             {/* Rank Icon */}
             <div className={`relative ${container}`}>
               {/* Glow effect for higher ranks */}
-              {["Gold", "Platinum", "Diamond"].includes(rank) && (
+            {["Gladiator", "Vanguard", "Errorless Legend"].includes(rank) && (
                 <motion.div
                   className={`absolute inset-0 rounded-full bg-gradient-to-br ${getRankColor(rank)} opacity-40 blur-xl ${getRankGlow(rank)}`}
                   animate={{

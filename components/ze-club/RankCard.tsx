@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
+import { GlassCard } from "@/components/ui/GlassCard"
 import RankBadge from "./RankBadge"
 import RankProgressBar from "./RankProgressBar"
 import { Trophy, TrendingUp, Award } from "lucide-react"
@@ -29,49 +29,46 @@ function RankCard({
   progressToNextRank
 }: RankCardProps) {
   // Calculate next rank
-  const rankOrder = ["Rookie", "Bronze", "Silver", "Gold", "Platinum", "Diamond"]
+  const rankOrder = ["Rookie", "Contender", "Gladiator", "Vanguard", "Errorless Legend"]
   const currentRankIndex = rankOrder.indexOf(rank)
   const nextRank = currentRankIndex < rankOrder.length - 1 
     ? rankOrder[currentRankIndex + 1] 
-    : "Diamond"
+    : "Errorless Legend"
 
   const getRankGradient = (rank: string) => {
     const gradients = {
-      Rookie: "from-amber-900/20 to-amber-950/20",
-      Bronze: "from-orange-900/20 to-amber-900/20",
-      Silver: "from-gray-700/20 to-gray-800/20",
-      Gold: "from-yellow-600/20 to-orange-600/20",
-      Platinum: "from-cyan-600/20 to-blue-600/20",
-      Diamond: "from-blue-600/20 to-purple-600/20",
+      Rookie: "from-red-900/20 to-red-950/20",
+      Contender: "from-red-800/20 to-red-900/20",
+      Gladiator: "from-red-700/20 to-orange-800/20",
+      Vanguard: "from-red-600/20 to-red-700/20",
+      "Errorless Legend": "from-red-600/20 to-yellow-600/20",
     }
     return gradients[rank as keyof typeof gradients] || gradients.Rookie
   }
 
   const getRankBorder = (rank: string) => {
     const borders = {
-      Rookie: "border-amber-800/30",
-      Bronze: "border-orange-700/30",
-      Silver: "border-gray-500/30",
-      Gold: "border-yellow-500/50",
-      Platinum: "border-cyan-500/50",
-      Diamond: "border-blue-500/60",
+      Rookie: "border-red-800/30",
+      Contender: "border-red-700/40",
+      Gladiator: "border-red-600/50",
+      Vanguard: "border-red-500/60",
+      "Errorless Legend": "border-yellow-500/70",
     }
     return borders[rank as keyof typeof borders] || borders.Rookie
   }
 
   const getRankAccent = (rank: string) => {
     const accents = {
-      Rookie: "#8B7355",
-      Bronze: "#CD7F32",
-      Silver: "#C0C0C0",
-      Gold: "#FFD700",
-      Platinum: "#4FD1C5",
-      Diamond: "#00CED1",
+      Rookie: "#DC2626",
+      Contender: "#EF4444",
+      Gladiator: "#F97316",
+      Vanguard: "#FB923C",
+      "Errorless Legend": "#EAB308",
     }
     return accents[rank as keyof typeof accents] || accents.Rookie
   }
 
-  const isMaxRank = rank === "Diamond" && progressToNextRank === 100
+  const isMaxRank = rank === "Errorless Legend" && progressToNextRank === 100
 
   return (
     <motion.div
@@ -79,7 +76,11 @@ function RankCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className={`relative overflow-hidden bg-gradient-to-br from-gray-900/95 to-gray-800/95 ${getRankBorder(rank)} border-2 backdrop-blur-xl shadow-2xl`}>
+      <GlassCard 
+        variant="intense" 
+        gradient="red" 
+        className={`relative overflow-hidden ${getRankBorder(rank)} border-2`}
+      >
         {/* Animated background gradient */}
         <motion.div
           className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${getRankGradient(rank)} blur-3xl opacity-40`}
@@ -202,7 +203,7 @@ function RankCard({
             </div>
           </motion.div>
         </div>
-      </Card>
+      </GlassCard>
     </motion.div>
   )
 }
@@ -216,25 +217,21 @@ function getRankBenefits(rank: string) {
       { icon: "🎮", text: "Access to basic missions" },
       { icon: "🏆", text: "Community member badge" },
     ],
-    Bronze: [
-      { icon: "⭐", text: "Exclusive Bronze missions" },
+    Contender: [
+      { icon: "⭐", text: "Exclusive Contender missions" },
       { icon: "💬", text: "Priority support access" },
     ],
-    Silver: [
+    Gladiator: [
       { icon: "🎁", text: "Monthly reward drops" },
       { icon: "🔥", text: "Higher point multipliers" },
     ],
-    Gold: [
+    Vanguard: [
       { icon: "👑", text: "VIP mission access" },
       { icon: "🎯", text: "Early event registration" },
     ],
-    Platinum: [
-      { icon: "💎", text: "Premium rewards unlock" },
-      { icon: "🌟", text: "Leaderboard priority" },
-    ],
-    Diamond: [
+    "Errorless Legend": [
       { icon: "🏅", text: "Ultimate prestige status" },
-      { icon: "✨", text: "Exclusive Diamond perks" },
+      { icon: "✨", text: "Exclusive Legend perks" },
     ],
   }
   return benefits[rank as keyof typeof benefits] || benefits.Rookie

@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GlassCard } from '@/components/ui/GlassCard';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -92,7 +92,7 @@ export default function SupportContent() {
     },
     {
       question: 'How do ranks work?',
-      answer: 'Your rank is determined by your total ZE Points. As you accumulate more points, you progress through ranks like Bronze, Silver, Gold, Platinum, and Diamond. Higher ranks may unlock exclusive benefits.',
+      answer: 'Your rank is determined by your total ZE Points. As you accumulate more points, you progress through ranks like Contender, Gladiator, Vanguard, and Errorless Legend. Higher ranks may unlock exclusive benefits.',
     },
     {
       question: 'Can I transfer my points to someone else?',
@@ -131,14 +131,14 @@ export default function SupportContent() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className="mb-8 md:mb-12"
       >
-        <Card className="bg-gray-800/80 backdrop-blur-sm border-red-900/20">
-          <CardHeader>
-            <CardTitle className="text-xl md:text-2xl text-white">Frequently Asked Questions</CardTitle>
-            <CardDescription className="text-sm md:text-base text-gray-400">
+        <GlassCard variant="intense" className="p-6">
+          <div className="mb-6">
+            <h2 className="text-xl md:text-2xl text-white font-bold mb-2">Frequently Asked Questions</h2>
+            <p className="text-sm md:text-base text-gray-400">
               Find answers to common questions about ZE Club
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+            </p>
+          </div>
+          <div>
             <Accordion type="single" collapsible className="w-full">
               {faqData.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
@@ -151,8 +151,8 @@ export default function SupportContent() {
                 </AccordionItem>
               ))}
             </Accordion>
-          </CardContent>
-        </Card>
+          </div>
+        </GlassCard>
       </motion.div>
 
       {/* Contact Form Section */}
@@ -161,14 +161,14 @@ export default function SupportContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <Card className="bg-gray-800/80 backdrop-blur-sm border-red-900/20">
-          <CardHeader>
-            <CardTitle className="text-xl md:text-2xl text-white">Contact Support</CardTitle>
-            <CardDescription className="text-sm md:text-base text-gray-400">
+        <GlassCard variant="intense" gradient="red" className="p-6">
+          <div className="mb-6">
+            <h2 className="text-xl md:text-2xl text-white font-bold mb-2">Contact Support</h2>
+            <p className="text-sm md:text-base text-gray-400">
               Can't find what you're looking for? Send us a message!
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+            </p>
+          </div>
+          <div>
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -230,8 +230,8 @@ export default function SupportContent() {
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </GlassCard>
       </motion.div>
     </motion.div>
   );

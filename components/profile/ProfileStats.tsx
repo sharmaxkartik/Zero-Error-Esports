@@ -1,7 +1,7 @@
 'use client'
 
 import { Trophy, Target, Gift, TrendingUp } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { motion } from 'framer-motion'
 
 interface ProfileStatsProps {
@@ -54,13 +54,12 @@ export function ProfileStats({ stats }: ProfileStatsProps) {
   ]
 
   return (
-    <Card className="border-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-black shadow-2xl">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-white">Performance Statistics</CardTitle>
+    <GlassCard variant="intense" className="p-6">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-white">Performance Statistics</h2>
         <p className="text-sm text-gray-400 mt-1">Your ZE Club achievements and progress</p>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {statItems.map((item, index) => (
             <motion.div
               key={item.label}
@@ -80,7 +79,6 @@ export function ProfileStats({ stats }: ProfileStatsProps) {
             </motion.div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+    </GlassCard>
   )
 }

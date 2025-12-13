@@ -43,18 +43,17 @@ function RankProgressBar({
 
   const getRankColor = (rank: string) => {
     const colors = {
-      Rookie: { from: "#8B7355", to: "#5C4033" },
-      Bronze: { from: "#CD7F32", to: "#8B4513" },
-      Silver: { from: "#C0C0C0", to: "#A8A8A8" },
-      Gold: { from: "#FFD700", to: "#FF8C00" },
-      Platinum: { from: "#4FD1C5", to: "#06B6D4" },
-      Diamond: { from: "#00CED1", to: "#4169E1" },
+      Rookie: { from: "#DC2626", to: "#991B1B" },
+      Contender: { from: "#EF4444", to: "#DC2626" },
+      Gladiator: { from: "#F97316", to: "#EA580C" },
+      Vanguard: { from: "#FB923C", to: "#F97316" },
+      "Errorless Legend": { from: "#EAB308", to: "#F59E0B" },
     }
     return colors[rank as keyof typeof colors] || colors.Rookie
   }
 
   const color = getRankColor(currentRank)
-  const isMaxRank = progressToNextRank === 100 && currentRank === "Diamond"
+  const isMaxRank = progressToNextRank === 100 && currentRank === "Errorless Legend"
 
   return (
     <div className="w-full space-y-3">

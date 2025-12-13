@@ -10,6 +10,7 @@
     "db:seed-missions": "ts-node scripts/seed-missions.ts",
     "db:make-admin": "ts-node scripts/make-admin.ts",
     "db:migrate-rank-system": "ts-node scripts/migrate-rank-system.ts",
+    "db:migrate-to-new-ranks": "ts-node scripts/migrate-to-new-ranks.ts",
     "db:fix-indexes": "ts-node scripts/fix-mission-indexes.ts",
     "test:mission-crud": "ts-node scripts/test-mission-crud.ts"
   },

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
+import { GlassCard } from "@/components/ui/GlassCard"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { 
@@ -63,7 +63,7 @@ function FeaturedMissions() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="bg-gray-800/50 border-gray-700/50 p-6 h-48 animate-pulse" />
+            <GlassCard key={i} className="p-6 h-48 animate-pulse" />
           ))}
         </div>
       </div>
@@ -81,11 +81,11 @@ function FeaturedMissions() {
           <Flame className="h-6 w-6 text-orange-500" />
           Featured Missions
         </h2>
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-8 text-center">
+        <GlassCard variant="intense" className="p-8 text-center">
           <Trophy className="h-12 w-12 text-gray-600 mx-auto mb-3" />
           <p className="text-gray-400">No featured missions available right now.</p>
           <p className="text-gray-500 text-sm mt-2">Check back soon for exciting challenges!</p>
-        </Card>
+        </GlassCard>
       </motion.div>
     )
   }
@@ -147,7 +147,7 @@ function FeaturedMissions() {
               whileHover={{ y: -8, scale: 1.02 }}
               className="group"
             >
-              <Card className="relative overflow-hidden bg-gradient-to-br from-gray-900/95 to-gray-800/95 border-gray-700/50 backdrop-blur-xl hover:border-red-500/50 transition-all duration-300 h-full">
+              <GlassCard variant="intense" hover className="relative overflow-hidden h-full">
                 {/* Animated gradient overlay */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-red-500/20 via-orange-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-3xl rounded-full transition-opacity duration-500" />
                 
@@ -229,7 +229,7 @@ function FeaturedMissions() {
                     </Link>
                   </motion.div>
                 </div>
-              </Card>
+              </GlassCard>
             </motion.div>
           )
         })}

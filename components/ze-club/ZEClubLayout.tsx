@@ -10,6 +10,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { Menu, X, LayoutDashboard, Trophy, Gift, Target, HeadphonesIcon, User, Sparkles, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useSession } from "next-auth/react"
+import { GlassCard } from "@/components/ui/GlassCard"
 
 function ZEClubLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -76,10 +77,12 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-full sm:w-80 md:w-72 backdrop-blur-xl text-white p-4 sm:p-6 border-r border-red-500/30 overflow-y-auto z-40 transition-all duration-300",
+          "fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-full sm:w-80 md:w-72 backdrop-blur-xl text-white p-4 sm:p-6 border-r border-red-500/30 overflow-hidden z-40 transition-all duration-300 flex flex-col",
           isMobile && !sidebarOpen && "-translate-x-full"
         )}
       >
+        {/* Scrollable container */}
+        <div className="overflow-y-auto flex-1 pr-2 scrollbar-thin scrollbar-thumb-red-500/50 scrollbar-track-transparent hover:scrollbar-thumb-red-500/70">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
@@ -95,12 +98,12 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
 
         {/* User Profile Card */}
         {session?.user && (
-          <motion.div 
-            className="mb-6 p-4 rounded-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-red-500/30 shadow-lg"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <GlassCard variant="intense" gradient="red" hover className="mb-6 p-4">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-gradient-to-br from-red-500 to-orange-600 p-2 rounded-full">
                 <User className="h-5 w-5 text-white" />
@@ -116,7 +119,8 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
                 {userPoints}
               </span>
             </div>
-          </motion.div>
+            </motion.div>
+          </GlassCard>
         )}
 
         {/* Navigation */}
@@ -205,12 +209,14 @@ function ZEClubLayout({ children }: { children: React.ReactNode }) {
             <p>🎁 Redeem exclusive rewards</p>
           </div>
         </div>
+        </div>
       </aside>
 
       {/* Main content */}
       <main className={cn(
-        "flex-1 p-3 sm:p-4 md:p-6 lg:p-8 relative z-10 transition-all duration-300 min-h-screen pt-16 sm:pt-4",
-        !isMobile && "ml-72"
+        "flex-1 relative z-10 transition-all duration-300 min-h-screen overflow-y-auto",
+        !isMobile && "ml-72",
+        "p-3 sm:p-4 md:p-6 lg:p-8 pt-16 sm:pt-4"
       )}>
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={pathname}>{children}</PageTransition>

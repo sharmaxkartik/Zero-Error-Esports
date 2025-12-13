@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ProfileHeader } from '@/components/profile/ProfileHeader'
 import { ProfileStats } from '@/components/profile/ProfileStats'
 import { EditProfileForm } from '@/components/profile/EditProfileForm'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -102,21 +102,21 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
         <EditProfileForm profile={profile} onSuccess={handleUpdate} />
 
         {/* Security Card */}
-        <Card className="border-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-black shadow-2xl">
-          <CardHeader>
+        <GlassCard variant="intense" gradient="red" className="p-6">
+          <div className="mb-6">
             <div className="flex items-center gap-3">
               <div className="bg-red-500/10 p-2 rounded-lg">
                 <Shield className="w-5 h-5 text-red-500" />
               </div>
               <div>
-                <CardTitle className="text-2xl font-bold text-white">Security Settings</CardTitle>
-                <CardDescription className="text-gray-400 text-sm mt-1">
+                <h2 className="text-2xl font-bold text-white">Security Settings</h2>
+                <p className="text-gray-400 text-sm mt-1">
                   Manage your account security and authentication
-                </CardDescription>
+                </p>
               </div>
             </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
+          </div>
+          <div className="space-y-6">
             {/* Change Password */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
@@ -185,22 +185,22 @@ export function ProfileClient({ profile, stats }: ProfileClientProps) {
                 <h3 className="font-semibold text-white text-lg">Coming Soon</h3>
               </div>
               <div className="grid grid-cols-1 gap-3">
-                <div className="flex items-center gap-3 text-gray-300 bg-zinc-800/50 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Two-factor authentication (2FA)</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300 bg-zinc-800/50 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Session management & device tracking</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300 bg-zinc-800/50 p-3 rounded-lg">
+                <div className="flex items-center gap-3 text-gray-300 bg-white/5 p-3 rounded-lg">
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <span className="text-sm">Login history & activity logs</span>
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </GlassCard>
       </div>
     </div>
   )

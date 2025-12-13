@@ -5,13 +5,7 @@ import dbConnect from '@/lib/mongodb'
 import User from '@/models/user'
 import MissionSubmission from '@/models/missionSubmission'
 import Mission from '@/models/mission'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { Badge } from '@/components/ui/badge'
 import ZEClubLayout from '@/components/ze-club/ZEClubLayout'
 
@@ -60,18 +54,18 @@ async function UserSubmissions() {
   return (
     <div className="space-y-4">
       {submissions.map((submission) => (
-        <Card key={submission._id} className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl text-white hover:border-gray-600/50 transition-all">
-          <CardHeader>
+        <GlassCard key={submission._id} variant="intense" hover className="text-white p-6">
+          <div className="mb-4">
             <div className="flex items-start justify-between">
               <div>
-                <CardTitle className="text-white text-lg">{submission.mission.name}</CardTitle>
-                <CardDescription className="text-gray-400">
+                <h3 className="text-white text-lg font-bold mb-1">{submission.mission.name}</h3>
+                <p className="text-gray-400 text-sm">
                   Submitted on {new Date(submission.submittedAt).toLocaleDateString('en-US', { 
                     year: 'numeric', 
                     month: 'long', 
                     day: 'numeric' 
                   })}
-                </CardDescription>
+                </p>
               </div>
               <Badge
                 variant={
@@ -92,8 +86,8 @@ async function UserSubmissions() {
                 {submission.status}
               </Badge>
             </div>
-          </CardHeader>
-          <CardContent>
+          </div>
+          <div>
             <a
               href={submission.proof}
               target="_blank"
@@ -106,14 +100,14 @@ async function UserSubmissions() {
               </svg>
             </a>
             {submission.remarks && (
-              <div className="mt-4 p-3 rounded-lg bg-gray-800/50 border border-gray-700/50">
+              <div className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10">
                 <p className="text-sm text-gray-300">
                   <span className="font-semibold text-gray-200">Admin Remarks:</span> {submission.remarks}
                 </p>
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </GlassCard>
       ))}
     </div>
   )

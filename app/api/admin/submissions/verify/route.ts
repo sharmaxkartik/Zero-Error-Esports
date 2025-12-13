@@ -10,15 +10,19 @@ import { revalidatePath } from 'next/cache'
 /**
  * Rank thresholds - defines the points required for each rank.
  * Users automatically progress through ranks as they accumulate points.
- * TODO: Consider moving these to environment variables or database for easier management.
+ * Based on ZE Club Points system:
+ * - Rookie: 0-99 points
+ * - Contender: 100-249 points
+ * - Gladiator: 250-499 points
+ * - Vanguard: 500-999 points
+ * - Errorless Legend: 1000+ points
  */
 const ranks = [
-  { name: 'Rookie', points: 0, icon: '/images/ranks/rookie.svg' },
-  { name: 'Bronze', points: 500, icon: '/images/ranks/bronze.svg' },
-  { name: 'Silver', points: 1000, icon: '/images/ranks/silver.svg' },
-  { name: 'Gold', points: 5000, icon: '/images/ranks/gold.svg' },
-  { name: 'Platinum', points: 10000, icon: '/images/ranks/platinum.svg' },
-  { name: 'Diamond', points: 20000, icon: '/images/ranks/diamond.svg' },
+  { name: 'Rookie', points: 0, icon: '/images/ranks/rookie.png' },
+  { name: 'Contender', points: 100, icon: '/images/ranks/contender.png' },
+  { name: 'Gladiator', points: 250, icon: '/images/ranks/gladiator.png' },
+  { name: 'Vanguard', points: 500, icon: '/images/ranks/vanguard.png' },
+  { name: 'Errorless Legend', points: 1000, icon: '/images/ranks/errorless-legend.png' },
 ]
 
 /**
@@ -29,7 +33,7 @@ function calculateRankProgress(currentPoints: number, currentRank: string) {
   // Find current rank index
   const currentRankIndex = ranks.findIndex(r => r.name === currentRank)
   
-  // If at max rank (Diamond), return 100% progress
+  // If at max rank (Errorless Legend), return 100% progress
   if (currentRankIndex === ranks.length - 1) {
     return {
       progressToNextRank: 100,

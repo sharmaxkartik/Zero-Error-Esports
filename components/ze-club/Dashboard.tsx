@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Progress } from "@/components/ui/progress"
 import { motion } from "framer-motion"
 import { TrendingUp, Award, Star, Zap, Target, Clock, Trophy, Medal } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import { GlassCard } from "@/components/ui/GlassCard"
 import RankCard from "./RankCard"
 import FeaturedMissions from "./FeaturedMissions"
 
@@ -97,24 +97,25 @@ function Dashboard() {
 
   if (error) {
     return (
-      <motion.div 
-        className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-500/50 rounded-xl p-6 backdrop-blur-sm"
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <div className="text-red-400 flex items-center gap-2">
-          <span className="text-2xl">⚠️</span>
-          <span>Error: {error}</span>
-        </div>
+        <GlassCard variant="intense" gradient="red" className="p-6">
+          <div className="text-red-400 flex items-center gap-2">
+            <span className="text-2xl">⚠️</span>
+            <span>Error: {error}</span>
+          </div>
+        </GlassCard>
       </motion.div>
     )
   }
 
   if (!dashboardData) {
     return (
-      <div className="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm">
+      <GlassCard className="p-6">
         <div className="text-gray-400">No data available.</div>
-      </div>
+      </GlassCard>
     )
   }
 
@@ -174,7 +175,7 @@ function Dashboard() {
               whileHover={{ scale: 1.05, y: -8 }}
               className="relative group"
             >
-              <Card className="relative overflow-hidden bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl hover:shadow-red-500/20 transition-all duration-300">
+              <GlassCard variant="intense" hover className="relative overflow-hidden p-6">
                 {/* Gradient overlay */}
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.gradient} opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity`} />
                 
@@ -195,7 +196,7 @@ function Dashboard() {
                     )}
                   </div>
                 </div>
-              </Card>
+              </GlassCard>
             </motion.div>
           )
         })}
@@ -209,7 +210,7 @@ function Dashboard() {
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         {/* Rank Progress */}
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl">
+        <GlassCard variant="intense" gradient="red" className="p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600">
               <Target className="h-5 w-5 text-white" />
@@ -240,10 +241,10 @@ function Dashboard() {
               Keep completing missions to level up! 🚀
             </p>
           </div>
-        </Card>
+        </GlassCard>
 
         {/* Quick Stats */}
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-xl p-6 shadow-2xl">
+        <GlassCard variant="intense" gradient="purple" className="p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
               <Clock className="h-5 w-5 text-white" />
@@ -252,7 +253,7 @@ function Dashboard() {
           </div>
           
           <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
               <div className="p-2 rounded-full bg-green-500/20">
                 <Zap className="h-4 w-4 text-green-400" />
               </div>
@@ -262,7 +263,7 @@ function Dashboard() {
               </div>
             </div>
             
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
               <div className="p-2 rounded-full bg-blue-500/20">
                 <Award className="h-4 w-4 text-blue-400" />
               </div>
@@ -272,7 +273,7 @@ function Dashboard() {
               </div>
             </div>
             
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/80 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
               <div className="p-2 rounded-full bg-yellow-500/20">
                 <Star className="h-4 w-4 text-yellow-400" />
               </div>
@@ -282,7 +283,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
-        </Card>
+        </GlassCard>
       </motion.div>
     </motion.div>
   )
